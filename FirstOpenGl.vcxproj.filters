@@ -21,5 +21,11 @@
     <ClCompile Include="glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="shaders.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="shaders.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
