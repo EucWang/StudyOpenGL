@@ -1,13 +1,39 @@
 #include "shaders.h"
 #include <stdio.h>
 
+GLFWwindow* createGlWindow(int width, int height, const char* title) {
+
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif // __APPLE__
+
+	GLFWwindow* window = glfwCreateWindow(width, height,  title, NULL, NULL);
+	if (window == NULL) {
+		printf("%s\n", "Failed to create GLFW window");
+		glfwTerminate();
+		return NULL;
+	}
+	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		printf("%s\n", "Failed to initialize GLAD.");
+		return NULL;
+	}
+	return window;
+}
+
 //片段着色器所做的是计算像素最后的颜色输出。
 //返回 着色器的id， 如果小于0： 小时创建失败
-int makeFragmentShader(char* fragShaderSource) {
+int makeFragmentShader(const char* tfragShaderSource) {
 	unsigned int fragmentShader;
 
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);    //创建片段着色器
-	glShaderSource(fragmentShader, 1, &fragShaderSource, NULL);  //输入片段着色器的源码
+	glShaderSource(fragmentShader, 1, &tfragShaderSource, NULL);  //输入片段着色器的源码
 	glCompileShader(fragmentShader);                      //编译片段着色器
 
 	//检测在调用glCompileShader后编译是否成功了
@@ -24,7 +50,7 @@ int makeFragmentShader(char* fragShaderSource) {
 
 //编译创建着色器
 //返回 着色器的id， 如果小于0： 小时创建失败
-int makeVertexShader(char* vertexShaderSource) {
+int makeVertexShader(const char* tvertexShaderSource) {
 	unsigned int vertexShader;
 
 	//编译，创建顶点着色器
@@ -35,7 +61,7 @@ int makeVertexShader(char* vertexShaderSource) {
 	//第一个参数是要编译的着色器对象
 	//第二参数指定了传递的源码字符串数量，这里只有一个
 	//第三个参数是顶点着色器真正的源码
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glShaderSource(vertexShader, 1, &tvertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
 	//检测在调用glCompileShader后编译是否成功了
@@ -52,17 +78,16 @@ int makeVertexShader(char* vertexShaderSource) {
 	return vertexShader;
 }
 
-
 //链接生成最终的着色器程序对象
 //返回着色器程序对象id， 如果小于0： 小时创建失败
-int makeShaderProgram(char * vertexShaderSource, char * fragShaderSource) {
+int makeShaderProgram(const char * tvertexShaderSource, const char * tfragShaderSource) {
 	unsigned int shaderProgram;
 
 	//glCreateProgram函数创建一个程序，并返回新创建程序对象的ID引用。
 	shaderProgram = glCreateProgram();
 
-	int mVertexShader = makeVertexShader(vertexShaderSource);
-	int mFragmentShader = makeFragmentShader(fragShaderSource);
+	int mVertexShader = makeVertexShader(tvertexShaderSource);
+	int mFragmentShader = makeFragmentShader(tfragShaderSource);
 
 	if (mVertexShader < 0 || mFragmentShader < 0) {
 		return -1;

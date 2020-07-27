@@ -2,17 +2,18 @@
 //#include <GLFW/glfw3.h>
 #include "shaders.h"
 #include <stdio.h>
+#include "test.h"
 
 unsigned int VBO;
 unsigned int VAO;
 
-char* fragmentShaderSource = "#version 330 core\n"     //版本声明 OpenGl3.3 core核心模式
+const char* fragmentShaderSource = "#version 330 core\n"     //版本声明 OpenGl3.3 core核心模式
 "out vec4 FragColor;"            //片段着色器只需要一个输出变量，这个变量是一个4分量向量，它表示的是最终的输出颜色，
 "void main(){"                     //类似于C语言的main函数
 "\tFragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);"   //我们将一个alpha值为1.0(1.0代表完全不透明)的橘黄色的vec4赋值给颜色输出。
 "}";
 
-char* vertexShaderSource = "#version 330 core\n"   //版本声明 OpenGl3.3 core核心模式
+const char* vertexShaderSource = "#version 330 core\n"   //版本声明 OpenGl3.3 core核心模式
 "layout (location = 0) in vec3 aPos;\n"            //layout(location = 0) 设定了输入变量的位置值；in 关键字； vec3 类型3d坐标； aPos 输入变量；
 "void main() {\n"                                  //类似于C语言的main函数
 "\tgl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"   //gl_Position变量  预定义的变量，vec4类型的， 在main函数最后默认将gl_Position的值作为顶点着色器的输出
@@ -26,31 +27,19 @@ float vertices[] = {
 
 int linkVertexAttribute();
 
-int main() {
-	//printf("%s\n", "Hello glad.");
-	//return 0;
+//自定义的循环体中的渲染方法
+void render(unsigned int shaderProgram);
 
+int drawTriangle() {
 	glfwInit();  //初始化GLFW
-
-	//使用glfwWindowHint函数来配置GLFW
-	// glfwWindowHint函数的第一个参数代表选项的名称，
-	// 我们可以从很多以GLFW_开头的枚举值中选择；
-	// 第二个参数接受一个整型，用来设置这个选项的值。
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  //我们将主版本号(Major)和次版本号(Minor)都设为3。
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-
-	// 这样明确告诉GLFW我们使用的是核心模式(Core-profile),
-	// 明确告诉GLFW我们需要使用核心模式意味着我们只能使用OpenGL功能的一个子集（没有我们已不再需要的向后兼容特性）
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);// 这样明确告诉GLFW我们使用的是核心模式(Core-profile)
 	//如果使用的是Mac OS X系统，你还需要加下面这行代码到你的初始化代码中这些配置才能起作用
 #ifdef __APPLE__
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-
-	// glfwCreateWindow函数需要窗口的宽和高作为它的前两个参数。
-	// 第三个参数表示这个窗口的名称（标题），
-	// 这里我们使用"LearnOpenGL"，当然你也可以使用你喜欢的名称。
+	// glfwCreateWindow函数需要窗口的宽和高作为它的前两个参数， 第三个参数表示这个窗口的名称（标题）
 	GLFWwindow * window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 	if (window == NULL) {
 		printf("%s\n", "Failed to create GLFW window.");
@@ -60,7 +49,7 @@ int main() {
 
 	glfwMakeContextCurrent(window);
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {  //初始化GLAD
 		printf("%s\n", "Failed to initialize GLAD");
 		return -1;
 	}
@@ -70,27 +59,23 @@ int main() {
 	//注册这个回调函数，告诉GLFW我们希望每当窗口调整大小的时候调用这个函数：
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	int shaderProgram = makeShaderProgram(vertexShaderSource, fragmentShaderSource);
+	////创建2个着色器， 顶点着色器， 片段着色器
+	int shaderProgram = makeShaderProgram(vertexShaderSource, fragmentShaderSource); 
 	if (shaderProgram < 0) {
 		return -1;
 	}
 	linkVertexAttribute(shaderProgram);
 
-
 	//渲染循环(Render Loop)，它能在我们让GLFW退出前一直保持运行。
 	//glfwWindowShouldClose函数在我们每次循环的开始前检查一次GLFW是否被要求退出，如果是的话该函数返回true然后渲染循环便结束了，之后为我们就可以关闭应用程序了。
 	while (!glfwWindowShouldClose(window)){
-		//输入
-		processInput(window);
+		processInput(window);  //输入
 
 		// 渲染指令
-		//render(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);  //画背景
 		glClear(GL_COLOR_BUFFER_BIT);   
 
-		glUseProgram(shaderProgram);  //使用当前激活的着色器
-		glBindVertexArray(VAO);       //之前定义的顶点属性配置，和VBO的顶点数据（通过VAO间接绑定）来绘制图元
-		glDrawArrays(GL_TRIANGLES, 0, 3);  //绘制三角形
+		render(shaderProgram);
 
 		// glfwSwapBuffers函数会交换颜色缓冲（它是一个储存着GLFW窗口每一个像素颜色值的大缓冲），
 		// 它在这一迭代中被用来绘制，并且将会作为输出显示在屏幕上。
@@ -171,4 +156,10 @@ int linkVertexAttribute(unsigned int shaderProgram) {
 	glBindVertexArray(0);
 
 	return 1;
+}
+
+void render(unsigned int shaderProgram) {
+	glUseProgram(shaderProgram);  //使用当前激活的着色器
+	glBindVertexArray(VAO);       //之前定义的顶点属性配置，和VBO的顶点数据（通过VAO间接绑定）来绘制图元
+	glDrawArrays(GL_TRIANGLES, 0, 3);  //绘制三角形
 }
