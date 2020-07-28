@@ -24,6 +24,7 @@
     <ProjectGuid>{f549b866-83c6-4037-8661-08496a7e92ae}</ProjectGuid>
     <RootNamespace>testOpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>FirstOpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -152,9 +153,11 @@
     <ClCompile Include="src\testPractiseDrawTriangle2.c" />
     <ClCompile Include="src\testPractiseDrawTriangle3.c" />
     <ClCompile Include="src\testPractiseDrawTriangle4.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle5.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shaders.h" />
+    <ClInclude Include="src\shaderSource.h" />
     <ClInclude Include="src\test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
