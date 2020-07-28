@@ -29,7 +29,7 @@ static void render(int shaderProgram);
 static void onDestroy(int shaderProgram);
 
 int drawRectangle() {
-	GLFWwindow* window = createGlWindow(SCR_WIDTH, SCR_HEIGHT, "Learn_Opengl");
+	GLFWwindow* window = createGLWindow(SCR_WIDTH, SCR_HEIGHT, "Learn_Opengl");
 	if (window == NULL)	{
 		return -1;
 	}
@@ -94,11 +94,9 @@ void prepareData() {
 }
 
 void render(int shaderProgram) {
-
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 }
 
 void onDestroy(int shaderProgram) {

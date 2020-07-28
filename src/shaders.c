@@ -1,7 +1,7 @@
 #include "shaders.h"
 #include <stdio.h>
 
-GLFWwindow* createGlWindow(int width, int height, const char* title) {
+GLFWwindow* createGLWindow(int width, int height, const char* title) {
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -18,12 +18,17 @@ GLFWwindow* createGlWindow(int width, int height, const char* title) {
 		return NULL;
 	}
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		printf("%s\n", "Failed to initialize GLAD.");
 		return NULL;
 	}
+
+	//两个参数控制窗口左下角的位置。第三个和第四个参数控制渲染窗口的宽度和高度（像素）。
+	glViewport(0, 0, width, height);
+	//注册这个回调函数，告诉GLFW我们希望每当窗口调整大小的时候调用这个函数： 
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
 	return window;
 }
 

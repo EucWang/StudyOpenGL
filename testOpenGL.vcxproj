@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{05177356-4854-44f0-a2c5-fbef010f6346}</ProjectGuid>
-    <RootNamespace>FirstOpenGl</RootNamespace>
+    <ProjectGuid>{f549b866-83c6-4037-8661-08496a7e92ae}</ProjectGuid>
+    <RootNamespace>testOpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\include;D:\ProgramFiles\VisualStudioSDK\MyLibs\glad\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\lib</LibraryPath>
+    <IncludePath>D:\ProgramFiles\VisualStudioSDK\MyLibs\glad\include;D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib; glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,10 +142,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="shaders.c" />
-    <ClCompile Include="test.c" />
-    <ClCompile Include="shaders.h" />
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\shaders.c" />
+    <ClCompile Include="src\testDrawRectangle.c" />
+    <ClCompile Include="src\testDrawTriangle.c" />
+    <ClCompile Include="src\testDrawUnfillRectangle.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle1.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle2.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle3.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle4.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\shaders.h" />
+    <ClInclude Include="src\test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

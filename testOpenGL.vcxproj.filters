@@ -15,17 +15,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.c">
+    <ClCompile Include="src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="glad.c">
+    <ClCompile Include="src\main.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="shaders.c">
+    <ClCompile Include="src\shaders.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="shaders.h">
+    <ClCompile Include="src\testDrawRectangle.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testDrawTriangle.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testDrawUnfillRectangle.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle1.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle3.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle4.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\shaders.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\test.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

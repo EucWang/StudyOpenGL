@@ -1,8 +1,7 @@
-//#include "glad/glad.h"
-//#include <GLFW/glfw3.h>
 #include "shaders.h"
-#include <stdio.h>
 #include "test.h"
+#include <stdio.h>
+
 
 unsigned int VBO;
 unsigned int VAO;

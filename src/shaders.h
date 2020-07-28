@@ -9,8 +9,7 @@
 #define false 0
 #define FALSE 0
 
-
-GLFWwindow* createGlWindow(int width, int height, const char* title);
+GLFWwindow* createGLWindow(int width, int height, const char* title);
 
 //着色器程序对象(Shader Program Object)是多个着色器合并之后并最终链接完成的版本。
 //如果要使用刚才编译的着色器我们必须把它们链接(Link)为一个着色器程序对象，然后在渲染对象的时候激活这个着色器程序。
@@ -23,8 +22,6 @@ int makeVertexShader(const char* tvertexShaderSource);
 
 //编译创建片段着色器
 int makeFragmentShader(const char* tfragShaderSource);
-
-
 
 //当用户改变窗口的大小的时候，视口也应该被调整。我们可以对窗口注册一个回调函数(Callback Function)，
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
