@@ -9,6 +9,7 @@
 #define false 0
 #define FALSE 0
 
+
 GLFWwindow* createGLWindow(int width, int height, const char* title);
 
 //着色器程序对象(Shader Program Object)是多个着色器合并之后并最终链接完成的版本。
