@@ -42,4 +42,21 @@ static const char* eFragmentShaderSource = "#version 330 core\n"     //版本声明 
 "void main(){"                     //类似于C语言的main函数
 "\tFragColor = ourColor;"   //我们将一个alpha值为1.0(1.0代表完全不透明)的黄色的vec4赋值给颜色输出。
 "}";
+
+static const char* fVertexShaderSource = "#version 330 core\n"
+"layout (location = 0) in vec3 aPos;\n"
+"layout (location = 1) in vec3 aColor;\n"
+"out vec3 ourColor;\n"
+"void main(){\n"
+"\tgl_Position = vec4(aPos, 1.0);\n"
+"\tourColor = aColor;\n"
+"}\n";
+
+static const char* fFragmentShaderSource = "#version 330 core\n"
+"out vec4 FragColor;\n"
+"in vec3 ourColor;\n"
+"void main(){\n"
+"FragColor = vec4(ourColor, 1.0f);\n"
+"}\n";
+
 #endif // !SHADER_SOURCE_H_

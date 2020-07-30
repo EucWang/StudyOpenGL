@@ -51,6 +51,9 @@
     <ClCompile Include="src\testPractiseDrawTriangle6.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle7.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shaders.h">

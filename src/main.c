@@ -9,6 +9,7 @@ int main() {
 	//practiseDrawTriangles2();
 	//practiseDrawTriangles4();
 	//practiseDrawTriangles5();
-	practiseDrawTriangle6();
+	//practiseDrawTriangle6();
+	practiseDrawTriangle7();
 	return 0;
 }

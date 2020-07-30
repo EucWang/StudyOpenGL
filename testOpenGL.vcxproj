@@ -158,6 +158,7 @@
     <ClCompile Include="src\testPractiseDrawTriangle4.c" />
     <ClCompile Include="src\testPractiseDrawTriangle5.c" />
     <ClCompile Include="src\testPractiseDrawTriangle6.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle7.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shaders.h" />
