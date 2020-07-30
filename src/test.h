@@ -20,5 +20,6 @@ int practiseDrawTriangles4();
 
 int practiseDrawTriangles5();
 
+int practiseDrawTriangle6();
 
 #endif

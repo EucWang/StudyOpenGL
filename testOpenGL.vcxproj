@@ -73,14 +73,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\ProgramFiles\VisualStudioSDK\MyLibs\glad\include;D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\ProgramFiles\VisualStudioSDK\MyLibs\glfw3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\ProgramFiles\vs\OtherLibs\glad\include;D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\ProgramFiles\vs\OtherLibs\glad\include;D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,7 +97,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib; glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,6 +126,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,6 +157,7 @@
     <ClCompile Include="src\testPractiseDrawTriangle3.c" />
     <ClCompile Include="src\testPractiseDrawTriangle4.c" />
     <ClCompile Include="src\testPractiseDrawTriangle5.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle6.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shaders.h" />
