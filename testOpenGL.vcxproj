@@ -146,9 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\shaders.c" />
+    <ClCompile Include="src\shaderSource.c" />
     <ClCompile Include="src\testDrawRectangle.c" />
     <ClCompile Include="src\testDrawTriangle.c" />
     <ClCompile Include="src\testDrawUnfillRectangle.c" />
@@ -159,11 +162,19 @@
     <ClCompile Include="src\testPractiseDrawTriangle5.c" />
     <ClCompile Include="src\testPractiseDrawTriangle6.c" />
     <ClCompile Include="src\testPractiseDrawTriangle7.c" />
+    <ClCompile Include="src\testPractiseDrawTriangle8.c" />
+    <ClCompile Include="src\testPractiseReadFile.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\fileUtil.h" />
+    <ClInclude Include="src\list.h" />
     <ClInclude Include="src\shaders.h" />
     <ClInclude Include="src\shaderSource.h" />
     <ClInclude Include="src\test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader_triangle_test8.fs" />
+    <None Include="shader_triangle_test8.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

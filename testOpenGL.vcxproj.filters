@@ -54,6 +54,21 @@
     <ClCompile Include="src\testPractiseDrawTriangle7.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\list.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaderSource.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseReadFile.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fileUtil.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawTriangle8.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shaders.h">
@@ -65,5 +80,19 @@
     <ClInclude Include="src\shaderSource.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\list.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fileUtil.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader_triangle_test8.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader_triangle_test8.vs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

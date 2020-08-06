@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "test.h"
 #include "shaders.h"
+#include "shaderSource.h"
 
 static void prepare();
 static void render(unsigned int shaderProgram);

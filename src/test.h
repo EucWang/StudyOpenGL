@@ -24,4 +24,8 @@ int practiseDrawTriangle6();
 
 int practiseDrawTriangle7();
 
+void testReadFile();
+
+int practiseDrawTriangle8();
+
 #endif

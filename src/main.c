@@ -10,6 +10,8 @@ int main() {
 	//practiseDrawTriangles4();
 	//practiseDrawTriangles5();
 	//practiseDrawTriangle6();
-	practiseDrawTriangle7();
+	//practiseDrawTriangle7();
+	//testReadFile();
+	practiseDrawTriangle8();
 	return 0;
 }

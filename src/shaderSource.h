@@ -2,17 +2,12 @@
 #define SHADER_SOURCE_H_
 
 #include <vadefs.h>
+#include <stdbool.h>
 
-typedef struct _ShaderProgram {
-	unsigned int ID;
-	char* vertexPath;
-	char* fragmentPath;
+bool createShaderProgram(const char * vertexPath, const char * fragmentPath, int * shaderId);
 
-	int (*makeShaderProgram)();
-	void (*useProgram)();
-}ShaderProgram;
+int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource);
 
-ShaderProgram* createShaderProgram(const char * vertexPath, const char * fragmentPath);
 
 static const char* cFragmentShaderSource ="#version 330 core\n"     //版本声明 OpenGl3.3 core核心模式
 "out vec4 FragColor;"            //片段着色器只需要一个输出变量，这个变量是一个4分量向量，它表示的是最终的输出颜色，

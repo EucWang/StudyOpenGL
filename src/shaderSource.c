@@ -1,59 +1,32 @@
-#ifndef SHADER_SOURCE_H_
-#define SHADER_SOURCE_H_
-
 #include "shaders.h"
 #include "shaderSource.h"
 #include "list.h"
+#include "fileUtil.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define LineMaxLen 2048
-#define KeyMaxLen 64
 
-struct ShaderProgram* createShaderProgram(const char* vertexPath, const char* fragmentPath) {
-	
-}
+bool createShaderProgram(const char* vertexPath, const char* fragmentPath, int * shaderId) {
+	char* vertexStr;
+	char* fragStr;
+	bool readVertexSuccess = readStrFromFile(vertexPath, &vertexStr);
+	bool readFragSuccess = readStrFromFile(fragmentPath, &fragStr);
 
-static char* readStrFromFile(const char* filePath) {
-	FILE* file = NULL;
-
-	char filebuf[1024 * 16] = { 0 };
-	char lineBuf[LineMaxLen];
-
-	file = fopen(filePath, "r");
-	if (file == NULL) {
-		return NULL;
-	}
-	char* pTmp;
-	List  list;
-	list_init(&list, NULL);
-	while (!feof(file)) {
-		memset(lineBuf, 0, sizeof(lineBuf));  //情况buf
-		pTmp = fgets(lineBuf, LineMaxLen, file);
-		if (pTmp == NULL) {
-			break;
-		}
-
-		int len = strlen(lineBuf);
-		char* str = malloc((len + 1) + sizeof(char));
-		memset(str, 0, (len + 1) + sizeof(char));
-		strcpy(str, lineBuf);
-		list_add(&list, str);
+	if (vertexStr == NULL) {
+		printf("%s%s\n", "failed to read from file, file path is ", vertexPath);
+		return false;
 	}
 
-	int listSize = list_size(&list);
-	if (listSize <= 0)	{
-		return NULL;
+	if (fragStr == NULL) {
+		printf("%s%s\n", "failed to read from file, file path is ", fragmentPath);
+		return false;
 	}
 
-	//char* tmp;
-	//list_resetIterator(&list);
-	//while (list_hasNext(&list)) {
-		//list_moveToNext(&list);
-		//list_iterator(vertices, (void**)(&tmp));
-		//TODO
-	//}
+	*shaderId = makeShaderProgram(vertexStr, fragStr);
+
+	return true;
 }
 
 
@@ -110,7 +83,7 @@ int makeVertexShader(const char* tvertexShaderSource) {
 
 //链接生成最终的着色器程序对象
 //返回着色器程序对象id， 如果小于0： 小时创建失败
-static int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource) {
+int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource) {
 	unsigned int shaderProgram;
 
 	//glCreateProgram函数创建一个程序，并返回新创建程序对象的ID引用。
@@ -150,5 +123,3 @@ static int makeShaderProgram(const char* tvertexShaderSource, const char* tfragS
 
 	return shaderProgram;
 }
-
-#endif // !SHADER_SOURCE_H_

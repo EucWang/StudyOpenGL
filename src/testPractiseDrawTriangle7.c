@@ -1,5 +1,6 @@
 #include "shaders.h"
 #include "test.h"
+#include "shaderSource.h"
 #include <stdio.h>
 
 static void prepare();
