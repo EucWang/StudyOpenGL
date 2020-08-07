@@ -18,9 +18,6 @@
     <ClCompile Include="src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\shaders.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -69,30 +66,56 @@
     <ClCompile Include="src\testPractiseDrawTriangle8.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\main.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testLoadStbImage.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testPractiseDrawWithTexure9.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\shaders.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\test.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaderSource.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="src\fileUtil.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\list.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\fileUtil.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="src\shaders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shaderSource.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader_triangle_test8.fs">
+    <Image Include="src\container.jpg">
       <Filter>资源文件</Filter>
-    </None>
-    <None Include="shader_triangle_test8.vs">
+    </Image>
+    <Image Include="src\wall.jpg">
       <Filter>资源文件</Filter>
-    </None>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shader_texture_test9_fragment.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_texture_test9_vertex.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_triangle_test8_frag.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_triangle_test8_vertex.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

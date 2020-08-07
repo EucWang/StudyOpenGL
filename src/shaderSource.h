@@ -4,8 +4,20 @@
 #include <vadefs.h>
 #include <stdbool.h>
 
-bool createShaderProgram(const char * vertexPath, const char * fragmentPath, int * shaderId);
 
+/**
+* @param vertexPath       顶点着色器的文件路径
+* @param fragmentPath  片段插值器的文件路径
+* @shaderId  : int *  输出参数，
+* @return bool  是否创建成功
+*/
+bool createShaderProgram(char * vertexPath, char * fragmentPath, int * shaderId);
+
+/**
+* @param tvertexShaderSource  输入参数， 顶点着色器的程序的字符串
+* @param tfragShaderSource  输入参数， 片段着色器的程序字符串
+* @return int  返回创建的shaderProgram的id值
+*/
 int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource);
 
 

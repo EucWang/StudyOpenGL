@@ -8,7 +8,13 @@
 #include <string.h>
 
 
-bool createShaderProgram(const char* vertexPath, const char* fragmentPath, int * shaderId) {
+/**
+* @param vertexPath       顶点着色器的文件路径
+* @param fragmentPath  片段插值器的文件路径
+* @shaderId  : int *  输出参数，
+* @return bool  是否创建成功
+*/
+bool createShaderProgram(char* vertexPath, char* fragmentPath, int * shaderId) {
 	char* vertexStr;
 	char* fragStr;
 	bool readVertexSuccess = readStrFromFile(vertexPath, &vertexStr);
@@ -24,7 +30,12 @@ bool createShaderProgram(const char* vertexPath, const char* fragmentPath, int *
 		return false;
 	}
 
-	*shaderId = makeShaderProgram(vertexStr, fragStr);
+	int tShader = makeShaderProgram(vertexStr, fragStr);
+	if (tShader < 0) {
+		return false;
+	}
+
+	*shaderId = tShader;
 
 	return true;
 }
@@ -83,6 +94,11 @@ int makeVertexShader(const char* tvertexShaderSource) {
 
 //链接生成最终的着色器程序对象
 //返回着色器程序对象id， 如果小于0： 小时创建失败
+/**
+* @param tvertexShaderSource  输入参数， 顶点着色器的程序的字符串
+* @param tfragShaderSource  输入参数， 片段着色器的程序字符串
+* @return int  返回创建的shaderProgram的id值
+*/
 int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource) {
 	unsigned int shaderProgram;
 

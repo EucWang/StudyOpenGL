@@ -155,6 +155,7 @@
     <ClCompile Include="src\testDrawRectangle.c" />
     <ClCompile Include="src\testDrawTriangle.c" />
     <ClCompile Include="src\testDrawUnfillRectangle.c" />
+    <ClCompile Include="src\testLoadStbImage.c" />
     <ClCompile Include="src\testPractiseDrawTriangle1.c" />
     <ClCompile Include="src\testPractiseDrawTriangle2.c" />
     <ClCompile Include="src\testPractiseDrawTriangle3.c" />
@@ -163,6 +164,7 @@
     <ClCompile Include="src\testPractiseDrawTriangle6.c" />
     <ClCompile Include="src\testPractiseDrawTriangle7.c" />
     <ClCompile Include="src\testPractiseDrawTriangle8.c" />
+    <ClCompile Include="src\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="src\testPractiseReadFile.c" />
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +172,18 @@
     <ClInclude Include="src\list.h" />
     <ClInclude Include="src\shaders.h" />
     <ClInclude Include="src\shaderSource.h" />
+    <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\test.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader_triangle_test8.fs" />
-    <None Include="shader_triangle_test8.vs" />
+    <Image Include="src\container.jpg" />
+    <Image Include="src\wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shader_texture_test9_fragment.txt" />
+    <Text Include="shader_texture_test9_vertex.txt" />
+    <Text Include="shader_triangle_test8_frag.txt" />
+    <Text Include="shader_triangle_test8_vertex.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

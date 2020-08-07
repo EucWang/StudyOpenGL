@@ -1,6 +1,7 @@
 #include "test.h"
 #include "shaderSource.h"
 #include "shaders.h"
+#include <stdio.h>
 
 static void prepare();
 
@@ -15,8 +16,8 @@ int practiseDrawTriangle8() {
 		return -1;
 	}
 
-	char* vertexPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_triangle_test8.vs";
-	char* fragPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_triangle_test8.fs";
+	char* vertexPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_triangle_test8_vertex.txt";
+	char* fragPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_triangle_test8_frag.txt";
 
 	int shaderId;
 	if (!createShaderProgram(vertexPath, fragPath, &shaderId)) {
