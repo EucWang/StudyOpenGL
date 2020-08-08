@@ -32,6 +32,9 @@ int practiseDrawTriangle8();
 
 void testLoadStbImage();
 
-int testPractiseDrawWithTexure9();
+int testPractiseDrawWithTexure9(char * projectDir);
 
+int testGetParentDir();
+
+int testGetChildPath();
 #endif

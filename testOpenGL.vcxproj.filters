@@ -75,6 +75,9 @@
     <ClCompile Include="src\testPractiseDrawWithTexure9.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testGetParentDir.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\fileUtil.h">

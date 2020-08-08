@@ -155,6 +155,7 @@
     <ClCompile Include="src\testDrawRectangle.c" />
     <ClCompile Include="src\testDrawTriangle.c" />
     <ClCompile Include="src\testDrawUnfillRectangle.c" />
+    <ClCompile Include="src\testGetParentDir.c" />
     <ClCompile Include="src\testLoadStbImage.c" />
     <ClCompile Include="src\testPractiseDrawTriangle1.c" />
     <ClCompile Include="src\testPractiseDrawTriangle2.c" />

@@ -1,25 +1,41 @@
 #include "test.h"
 #include "shaders.h"
 #include "shaderSource.h"
+#include <string.h>
 #include <stdio.h>
 #include <stdbool.h> 
+#include "fileUtil.h"
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
 #include "stb_image.h"
 
-static void prepare();
+static void prepare(char* projectDir);
 static void render();
 static void destroy();
 
 unsigned int VAO, VBO, EBO, texture, shaderId;
 
-static char* vertexPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_texture_test9_vertex.txt";
-static char* fragPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_texture_test9_fragment.txt";
-static char* imagePath = "D:/workspace/cppWorkspace/StudyOpenGL/container.jpg";
+//static char* vertexPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_texture_test9_vertex.txt";
+//static char* fragPath = "D:/workspace/cppWorkspace/StudyOpenGL/shader_texture_test9_fragment.txt";
+//static char* imagePath = "D:/workspace/cppWorkspace/StudyOpenGL/container.jpg";
+static char* vertexfile = "shader_texture_test9_vertex.txt";
+static char* fragfile = "shader_texture_test9_fragment.txt";
+static char* imagefile = "container.jpg";
 
-int testPractiseDrawWithTexure9() {
+int testPractiseDrawWithTexure9(char* projectDir) {
 	GLFWwindow * window = createGLWindow(800, 640, "Draw Triangle With Texure");
 	if (window == NULL) {
+		return -1;
+	}
+
+	char* vertexPath;
+	char* fragPath;
+	if (!getChildPath(&vertexPath, projectDir, vertexfile)) {
+		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(vertexPath) called failed.");
+		return -1;
+	}
+	if (!getChildPath(&fragPath, projectDir, fragfile)) {
+		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(fragPath) called failed.");
 		return -1;
 	}
 
@@ -27,7 +43,7 @@ int testPractiseDrawWithTexure9() {
 		return -1;
 	}
 	
-	prepare(); 
+	prepare(projectDir); 
 	
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
@@ -43,10 +59,14 @@ int testPractiseDrawWithTexure9() {
 
 	destroy();
 	glfwTerminate();
+
+	free(vertexPath);
+	free(fragPath);
+
 	return 1;
 }
 
-void prepare() {
+void prepare(char* projectDir) {
 	float vertices[] = {
 	//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
 			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
@@ -100,6 +120,11 @@ void prepare() {
 	//加载图片
 	int width, height, nrChannels;
 
+	char* imagePath;
+	if (!getChildPath(&imagePath, projectDir, imagefile)) {
+		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(fragPath) called failed.");
+		return;
+	}
 	unsigned char* data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
 	if (data) {
 		//用图片数据产生一个纹理
@@ -119,10 +144,11 @@ void prepare() {
 		glGenerateMipmap(GL_TEXTURE_2D);
 	} else {
 		printf("%s\n", "failed to load texture.");
-		return -1;
+		return;
 	}
 
 	stbi_image_free(data);
+	free(imagePath);
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//glBindVertexArray(0);
 }

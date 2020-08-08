@@ -1,9 +1,20 @@
 #include "shaders.h"
 #include "test.h"
+#include "fileUtil.h"
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
 
-int main() {
+int main(int argc, char * argv[]) {
+	char* debugDir;
+	char * projectDir;
+	//argv[0] 是当前运行的exe程序的路径
+	//首先得到debug路径
+	//然后得到项目路径
+	if(!(getParentDir(argv[0], &debugDir) && getParentDir(debugDir, &projectDir))){
+		printf("%s\n", "main() failed, because getParentDir() call failed, cannot get projectDir");
+		return -1;
+	}
+
 	//drawTriangle();
 	//drawRectangle();
 	//drawUnfillRectangle();
@@ -16,6 +27,11 @@ int main() {
 	//testReadFile();
 	//practiseDrawTriangle8();
 	//testLoadStbImage();
-	testPractiseDrawWithTexure9();
+	testPractiseDrawWithTexure9(projectDir);
+	//testGetParentDir();
+	//testGetChildPath();
+
+	free(debugDir);
+	free(projectDir);
 	return 0;
 }
