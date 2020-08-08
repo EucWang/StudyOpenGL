@@ -9,6 +9,9 @@
 #define false 0
 #define FALSE 0
 
+#define SMALL_SCREEN_WIDTH 800
+#define SMALL_SCREEN_HEIGHT 640
+
 GLFWwindow* createGLWindow(int width, int height, const char* title);
 
 //当用户改变窗口的大小的时候，视口也应该被调整。我们可以对窗口注册一个回调函数(Callback Function)，

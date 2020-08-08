@@ -27,9 +27,10 @@ int main(int argc, char * argv[]) {
 	//testReadFile();
 	//practiseDrawTriangle8();
 	//testLoadStbImage();
-	testPractiseDrawWithTexure9(projectDir);
+	//testPractiseDrawWithTexure9(projectDir);
 	//testGetParentDir();
 	//testGetChildPath();
+	practiseDrawWithTexture10(projectDir);
 
 	free(debugDir);
 	free(projectDir);

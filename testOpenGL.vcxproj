@@ -165,6 +165,7 @@
     <ClCompile Include="src\testPractiseDrawTriangle6.c" />
     <ClCompile Include="src\testPractiseDrawTriangle7.c" />
     <ClCompile Include="src\testPractiseDrawTriangle8.c" />
+    <ClCompile Include="src\testPractiseDrawWithTexture10.c" />
     <ClCompile Include="src\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="src\testPractiseReadFile.c" />
   </ItemGroup>
@@ -177,10 +178,13 @@
     <ClInclude Include="src\test.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="awesomeface.png" />
     <Image Include="src\container.jpg" />
     <Image Include="src\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="shader_texture_test10_fragment.txt" />
+    <Text Include="shader_texture_test10_vertex.txt" />
     <Text Include="shader_texture_test9_fragment.txt" />
     <Text Include="shader_texture_test9_vertex.txt" />
     <Text Include="shader_triangle_test8_frag.txt" />

@@ -2,9 +2,8 @@
 #define TEST_H_
 
 //包含渲染的着色器的字符串头文件
+#include "shaders.h"
 #include "shaderSource.h"
-
-
 
 int drawTriangle();
 

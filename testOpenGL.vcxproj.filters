@@ -78,6 +78,9 @@
     <ClCompile Include="src\testGetParentDir.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testPractiseDrawWithTexture10.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\fileUtil.h">
@@ -106,6 +109,9 @@
     <Image Include="src\wall.jpg">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader_texture_test9_fragment.txt">
@@ -118,6 +124,12 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="shader_triangle_test8_vertex.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_texture_test10_vertex.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_texture_test10_fragment.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
