@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#ifdef __cplusplus    //__cplusplus是cpp中自定义的一个宏
+extern "C" {          //告诉编译器，这部分代码按C语言的格式进行编译，而不是C++的
+#endif
+
+
 /**
 	从文件中读取全部字符串
 	@param filePath : 输入参数， 文件路径
@@ -29,4 +34,7 @@ bool getParentDir(/*in*/const char * path, /*out*/char ** parentPath);
 */
 bool getChildPath(/*out*/char** desPath, /*in*/const char* parentPath, /*in*/const char* fileName);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // ! FILE_UTIL_H

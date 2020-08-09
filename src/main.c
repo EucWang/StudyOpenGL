@@ -3,8 +3,10 @@
 #include "fileUtil.h"
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, char * argv[]) {
+int main1(int argc, char * argv[]) {
 	char* debugDir;
 	char * projectDir;
 	//argv[0] 是当前运行的exe程序的路径
@@ -30,7 +32,7 @@ int main(int argc, char * argv[]) {
 	//testPractiseDrawWithTexure9(projectDir);
 	//testGetParentDir();
 	//testGetChildPath();
-	practiseDrawWithTexture10(projectDir);
+	//practiseDrawWithTexture10(projectDir);
 
 	free(debugDir);
 	free(projectDir);

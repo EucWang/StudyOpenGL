@@ -3,6 +3,13 @@
 //
 //#include <stdlib.h>
 
+
+#ifdef __cplusplus    //__cplusplus是cpp中自定义的一个宏
+extern "C" {          //告诉编译器，这部分代码按C语言的格式进行编译，而不是C++的
+#endif
+
+
+
 /*单链表结构*/
 
 typedef struct ListElmt_{
@@ -105,4 +112,7 @@ void list_iterator(List *plist, void **data);
 /*重置指示器*/
 void list_resetIterator(List *plist);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // LIST_H_INCLUDED

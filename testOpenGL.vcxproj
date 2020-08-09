@@ -73,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\ProgramFiles\vs\OtherLibs\glad\include;D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\ProgramFiles\vs\OtherLibs\glm-0.9.9.8;D:\ProgramFiles\vs\OtherLibs\glad\include;D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\ProgramFiles\vs\OtherLibs\glfw-3.3.2.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +150,7 @@
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\shaders.c" />
     <ClCompile Include="src\shaderSource.c" />
     <ClCompile Include="src\testDrawRectangle.c" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\testPractiseDrawTriangle8.c" />
     <ClCompile Include="src\testPractiseDrawWithTexture10.c" />
     <ClCompile Include="src\testPractiseDrawWithTexure9.c" />
+    <ClCompile Include="src\testPractiseDrawWithTransform11.cpp" />
     <ClCompile Include="src\testPractiseReadFile.c" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +189,8 @@
     <Text Include="shader_texture_test10_vertex.txt" />
     <Text Include="shader_texture_test9_fragment.txt" />
     <Text Include="shader_texture_test9_vertex.txt" />
+    <Text Include="shader_transform_test11_fragment.txt" />
+    <Text Include="shader_transform_test11_vertex.txt" />
     <Text Include="shader_triangle_test8_frag.txt" />
     <Text Include="shader_triangle_test8_vertex.txt" />
   </ItemGroup>

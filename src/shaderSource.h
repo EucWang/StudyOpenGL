@@ -1,6 +1,11 @@
 #ifndef SHADER_SOURCE_H_
 #define SHADER_SOURCE_H_
 
+#ifdef __cplusplus    //__cplusplus是cpp中自定义的一个宏
+extern "C" {          //告诉编译器，这部分代码按C语言的格式进行编译，而不是C++的
+#endif
+
+
 #include <vadefs.h>
 #include <stdbool.h>
 
@@ -79,4 +84,7 @@ static const char* fFragmentShaderSource = "#version 330 core\n"
 "FragColor = vec4(ourColor, 1.0f);\n"
 "}\n";
 
+#ifdef __cplusplus
+}
+#endif
 #endif // !SHADER_SOURCE_H_
