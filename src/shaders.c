@@ -83,6 +83,7 @@ bool textureLoadImg(const char * parentDir, const char * imgName, int rgbType) {
 		return FALSE;
 	}
 
+	stbi_set_flip_vertically_on_load(true);
 	unsigned char* data = stbi_load(imagePath, &width, &height, &channel, 0);
 	if (data == NULL) {
 		//std::cout << "load image2 failed" << std::endl;

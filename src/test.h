@@ -43,6 +43,8 @@ int testGetChildPath();
 
 int practiseDrawWithTransform11(const char* projectDir);
 
+int practiseDrawWithPerspective12(const char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif

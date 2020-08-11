@@ -87,6 +87,9 @@
     <ClCompile Include="src\testPractiseDrawWithTransform11.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testPractiseDrawWithPerspective12.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\fileUtil.h">
@@ -142,6 +145,12 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="shader_transform_test11_fragment.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_perspective_test12_vertex.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_perspective_test12_fragment.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

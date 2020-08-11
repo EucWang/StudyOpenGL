@@ -39,7 +39,8 @@ int main(int argc, char* argv[]) {
 	printf("%s\n", "cpp main() run..");
 	//testMovePos();
 	//testScale();
-	practiseDrawWithTransform11(projectDir);
+	//practiseDrawWithTransform11(projectDir);
+	practiseDrawWithPerspective12(projectDir);
 
 	free(debugDir);
 	free(projectDir);
