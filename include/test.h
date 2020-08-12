@@ -59,7 +59,16 @@ int practiseDrawWithPerspective13(const char* projectDir);
 
 int practiseDrawWithPerspective14(const char* projectDir);
 
+/**
+* 视角矩自动旋转
+*/
 int practiseDrawWithPerspective15(const char* projectDir);
+
+/**
+* 练习
+* 可以用上下左右 来控制 镜头视角
+*/
+int practiseDrawWithPerspective16(const char* projectDir);
 
 #ifdef __cplusplus
 }
