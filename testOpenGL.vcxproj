@@ -169,6 +169,7 @@
     <ClCompile Include="src\testPractiseDrawWithPerspective12.cpp" />
     <ClCompile Include="src\testPractiseDrawWithPerspective14.cpp" />
     <ClCompile Include="src\testPractiseDrawWithPerspective13.cpp" />
+    <ClCompile Include="src\testPractiseDrawWithPerspective15.cpp" />
     <ClCompile Include="src\testPractiseDrawWithTexture10.c" />
     <ClCompile Include="src\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="src\testPractiseDrawWithTransform11.cpp" />
@@ -194,6 +195,8 @@
     <Text Include="shader_perspective_test12_vertex.txt" />
     <Text Include="shader_perspective_test13_fragment.txt" />
     <Text Include="shader_perspective_test13_vertex.txt" />
+    <Text Include="shader_perspective_test15_fragment.txt" />
+    <Text Include="shader_perspective_test15_vertex.txt" />
     <Text Include="shader_texture_test10_fragment.txt" />
     <Text Include="shader_texture_test10_vertex.txt" />
     <Text Include="shader_texture_test9_fragment.txt" />

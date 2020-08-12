@@ -52,12 +52,15 @@ int practiseDrawWithTransform11(const char* projectDir);
 */
 int practiseDrawWithPerspective12(const char* projectDir);
 
+<<<<<<< HEAD
 /**
 * 渲染一个旋转的立方体箱子
 */
 int practiseDrawWithPerspective13(const char* projectDir);
 
 int practiseDrawWithPerspective14(const char* projectDir);
+
+int practiseDrawWithPerspective15(const char* projectDir);
 
 #ifdef __cplusplus
 }
