@@ -90,6 +90,9 @@
     <ClCompile Include="src\testPractiseDrawWithPerspective12.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\testPractiseDrawWithPerspective15.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\fileUtil.h">
@@ -151,6 +154,12 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="shader_perspective_test12_fragment.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_perspective_test15_fragment.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="shader_perspective_test15_vertex.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

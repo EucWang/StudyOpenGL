@@ -40,7 +40,8 @@ int main(int argc, char* argv[]) {
 	//testMovePos();
 	//testScale();
 	//practiseDrawWithTransform11(projectDir);
-	practiseDrawWithPerspective12(projectDir);
+	//practiseDrawWithPerspective12(projectDir);
+	practiseDrawWithPerspective15(projectDir);
 
 	free(debugDir);
 	free(projectDir);
