@@ -13,8 +13,9 @@ using namespace std;
 static const char* vertextFile = "shader_perspective_test12_vertex.txt";
 static const char* fragFile = "shader_perspective_test12_fragment.txt";
 static const char* imageFile = "container.jpg";
+static const char* imageFile2 = "awesomeface.png";
 
-static GLuint VAO, VBO, EBO, TEX;
+static GLuint VAO, VBO, EBO, TEX, TEX2;
 static int shaderProgram;
 
 static bool prepare(const char* projectDir);
@@ -95,12 +96,18 @@ bool prepare(const char* projectDir) {
 	textureGenSet(&TEX);
 	if (!textureLoadImg(projectDir, imageFile, GL_RGB)) { return false; }
 
+	textureGenSet(&TEX2);
+	if (!textureLoadImg(projectDir, imageFile2, GL_RGBA)) { return false; }
+
 	//-----------------------------下面设置变换矩阵-----------------------------------
 
 	glUseProgram(shaderProgram);
 
-	int locTexture = glGetUniformLocation(shaderProgram, "texture");
+	int locTexture = glGetUniformLocation(shaderProgram, "texture1");
 	glUniform1i(locTexture, 0);
+
+	int locTexture2 = glGetUniformLocation(shaderProgram, "texture2");
+	glUniform1i(locTexture2, 1);
 
 	int locUniformModel = glGetUniformLocation(shaderProgram, "model");
 	int locUniformView = glGetUniformLocation(shaderProgram, "view");
@@ -129,6 +136,9 @@ void render() {
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, TEX);
+	
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, TEX2);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

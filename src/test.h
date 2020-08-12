@@ -41,9 +41,23 @@ int testGetParentDir();
 
 int testGetChildPath();
 
+/**
+* 
+*/
 int practiseDrawWithTransform11(const char* projectDir);
 
+/**
+*  利用坐标系变换矩阵， 
+* 将一面面子立体化的平放到地面
+*/
 int practiseDrawWithPerspective12(const char* projectDir);
+
+/**
+* 渲染一个旋转的立方体箱子
+*/
+int practiseDrawWithPerspective13(const char* projectDir);
+
+int practiseDrawWithPerspective14(const char* projectDir);
 
 #ifdef __cplusplus
 }

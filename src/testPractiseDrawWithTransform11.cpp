@@ -2,6 +2,7 @@
 #include "fileUtil.h"
 #include "shaders.h"
 #include "shaderSource.h"
+#include "util.h"
 
 #define STB_IMAGE_STATIC
 #define STB_IMAGE_IMPLEMENTATION
@@ -32,14 +33,6 @@ static void render();
 
 static void destroy();
 
-/**
-* 根据系统时间，获取的数值在0.0 - 1.0之间变化
-*/
-float getFVal() {
-	float retVal = (float)(sin((float)glfwGetTime()) / 2.0f + 0.5f);
-	std::cout << "retVal  = " << retVal << std::endl;
-	return retVal;
-}
 
 
 int practiseDrawWithTransform11(const char *projectDir) {
