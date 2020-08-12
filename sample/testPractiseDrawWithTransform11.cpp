@@ -1,12 +1,12 @@
-#include "test.h"
-#include "fileUtil.h"
-#include "shaders.h"
-#include "shaderSource.h"
-#include "util.h"
+#include "../include/test.h"
+#include "../include/fileUtil.h"
+#include "../include/shaders.h"
+#include "../include/shaderSource.h"
+#include "../include/util.h"
 
 #define STB_IMAGE_STATIC
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../include/stb_image.h"
 
 #include <iostream>
 using namespace std;
@@ -34,8 +34,18 @@ static void render();
 static void destroy();
 
 
+static const char* shaderDirName = "shader";
+static char* shaderDir;
+
+static const char* imagesDirName = "images";
+static char* imagesDir;
 
 int practiseDrawWithTransform11(const char *projectDir) {
+
+	//初始化获取 opengl的shader目录和 图片目录
+	if (!getChildPath(&shaderDir, projectDir, shaderDirName)) { return -1; }
+	if (!getChildPath(&imagesDir, projectDir, imagesDirName)) { return -1; }
+
 	std::cout << "practiseDrawWithTransform11() run...." << std::endl;
 
 	GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw with Transform");
@@ -45,10 +55,10 @@ int practiseDrawWithTransform11(const char *projectDir) {
 
 	char* vertexPath;
 	char* fragPath;
-	if (!getChildPath(&vertexPath, projectDir, vertextFile)) {
+	if (!getChildPath(&vertexPath, shaderDir, vertextFile)) {
 		return -1;
 	}
-	if (!getChildPath(&fragPath, projectDir, fragFile)) {
+	if (!getChildPath(&fragPath, shaderDir, fragFile)) {
 		return -1;
 	}
 
@@ -117,11 +127,11 @@ int prepare(const char* projectDir) {
 
 	//第一个纹理
 	textureGenSets(&TEX1, GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR); 
-	textureLoadImg(projectDir, imageFile1, GL_RGB);
+	textureLoadImg(imagesDir, imageFile1, GL_RGB);
 	 
 	//第二个纹理
 	textureGenSets(&TEX2, GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR); 
-	textureLoadImg(projectDir, imageFile2, GL_RGBA);
+	textureLoadImg(imagesDir, imageFile2, GL_RGBA);
 	 
 	glUseProgram(shaderProgram);
 

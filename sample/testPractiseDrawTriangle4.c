@@ -1,6 +1,6 @@
-#include "test.h"
-#include "shaders.h"
-#include "shaderSource.h"
+#include "../include/test.h"
+#include "../include/shaders.h"
+#include "../include/shaderSource.h"
 #include <stdio.h>
 
 

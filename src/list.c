@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stddef.h>
-#include "list.h"
+#include "../include/list.h"
 
 /**
 * 初始化链表

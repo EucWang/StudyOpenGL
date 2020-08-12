@@ -1,4 +1,4 @@
-#include "util.h"
+#include "../include/util.h"
 
 /**
 * 根据系统时间，获取的数值在0.0 - 1.0之间变化

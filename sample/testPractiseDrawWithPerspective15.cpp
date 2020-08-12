@@ -1,7 +1,7 @@
-#include "test.h"
-#include "shaders.h"
-#include "fileUtil.h"
-#include "shaderSource.h"
+#include "../include/test.h"
+#include "../include/shaders.h"
+#include "../include/fileUtil.h"
+#include "../include/shaderSource.h"
 
 #include <math.h>
 
@@ -20,7 +20,7 @@ static const char* imageFile2 = "awesomeface.png";
 static GLuint VAO, VBO, TEX1,TEX2;
 static int shaderProgram;
 
-static bool prepare(const char* projectDir);
+static bool prepare();
 
 static void render();
 
@@ -78,17 +78,28 @@ static float vertices[] = {
 	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
+static const char* shaderDirName = "shader";
+static char* shaderDir;
+
+static const char* imagesDirName = "images";
+static char* imagesDir;
+
 int practiseDrawWithPerspective15(const char * projectDir) {
+
+	//初始化获取 opengl的shader目录和 图片目录
+	if (!getChildPath(&shaderDir, projectDir, shaderDirName)) { return -1; }
+	if (!getChildPath(&imagesDir, projectDir, imagesDirName)) { return -1; }
+
 	GLFWwindow *window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw with Perspective");
 	if (window == NULL){ return -1;}
 
 	char* vertexPath;
 	char* fragPath;
-	if (!getChildPath(&vertexPath, projectDir, vertextFile)) {return -1;}
-	if (!getChildPath(&fragPath, projectDir, fragFile)) {return -1;	}
+	if (!getChildPath(&vertexPath, shaderDir, vertextFile)) {return -1;}
+	if (!getChildPath(&fragPath, shaderDir, fragFile)) {return -1;	}
 	if (!createShaderProgram(vertexPath, fragPath, &shaderProgram)) { return -1;}
 
-	if (!prepare(projectDir)) { return -1; }
+	if (!prepare()) { return -1; }
 
 	glEnable(GL_DEPTH_TEST);  //启用深度测试；它默认是关闭的。
 	while (!glfwWindowShouldClose(window))
@@ -112,7 +123,7 @@ int practiseDrawWithPerspective15(const char * projectDir) {
 	return 1;
 }
 
-bool prepare(const char* projectDir) {
+bool prepare() {
 
 	glGenVertexArrays(1, &VAO);
 
@@ -130,10 +141,10 @@ bool prepare(const char* projectDir) {
 	glEnableVertexAttribArray(1);
 
 	textureGenSet(&TEX1);
-	if (!textureLoadImg(projectDir, imageFile1, GL_RGB)) { return false; }
+	if (!textureLoadImg(imagesDir, imageFile1, GL_RGB)) { return false; }
 
 	textureGenSet(&TEX2);
-	if (!textureLoadImg(projectDir, imageFile2, GL_RGBA)) { return false; }
+	if (!textureLoadImg(imagesDir, imageFile2, GL_RGBA)) { return false; }
 
 	//-----------------------------下面设置变换矩阵-----------------------------------
 

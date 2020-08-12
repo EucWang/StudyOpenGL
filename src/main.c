@@ -1,6 +1,6 @@
-#include "shaders.h"
-#include "test.h"
-#include "fileUtil.h"
+#include "../include/shaders.h"
+#include "../include/test.h"
+#include "../include/fileUtil.h"
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
 #include <stdio.h>

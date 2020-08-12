@@ -1,6 +1,6 @@
-#include "test.h"
-#include "shaderSource.h"
-#include "fileUtil.h"
+#include "../include/test.h"
+#include "../include/shaderSource.h"
+#include "../include/fileUtil.h"
 #include <stdio.h>
 
 void testReadFile() {

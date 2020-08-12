@@ -18,13 +18,74 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\fileUtil.h" />
+    <ClInclude Include="include\list.h" />
+    <ClInclude Include="include\shaders.h" />
+    <ClInclude Include="include\shaderSource.h" />
+    <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sample\testDrawRectangle.c" />
+    <ClCompile Include="sample\testDrawTriangle.c" />
+    <ClCompile Include="sample\testDrawUnfillRectangle.c" />
+    <ClCompile Include="sample\testGetParentDir.c" />
+    <ClCompile Include="sample\testLoadStbImage.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle1.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle2.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle3.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle4.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle5.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle6.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle7.c" />
+    <ClCompile Include="sample\testPractiseDrawTriangle8.c" />
+    <ClCompile Include="sample\testPractiseDrawWithPerspective12.cpp" />
+    <ClCompile Include="sample\testPractiseDrawWithPerspective13.cpp" />
+    <ClCompile Include="sample\testPractiseDrawWithPerspective14.cpp" />
+    <ClCompile Include="sample\testPractiseDrawWithPerspective15.cpp" />
+    <ClCompile Include="sample\testPractiseDrawWithTexture10.c" />
+    <ClCompile Include="sample\testPractiseDrawWithTexure9.c" />
+    <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp" />
+    <ClCompile Include="sample\testPractiseReadFile.c" />
+    <ClCompile Include="src\fileUtil.c" />
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\list.c" />
+    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\shaders.c" />
+    <ClCompile Include="src\shaderSource.c" />
+    <ClCompile Include="src\util.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shader\shader_perspective_test12_fragment.txt" />
+    <Text Include="shader\shader_perspective_test12_vertex.txt" />
+    <Text Include="shader\shader_perspective_test13_fragment.txt" />
+    <Text Include="shader\shader_perspective_test13_vertex.txt" />
+    <Text Include="shader\shader_perspective_test15_fragment.txt" />
+    <Text Include="shader\shader_perspective_test15_vertex.txt" />
+    <Text Include="shader\shader_texture_test10_fragment.txt" />
+    <Text Include="shader\shader_texture_test10_vertex.txt" />
+    <Text Include="shader\shader_texture_test9_fragment.txt" />
+    <Text Include="shader\shader_texture_test9_vertex.txt" />
+    <Text Include="shader\shader_transform_test11_fragment.txt" />
+    <Text Include="shader\shader_transform_test11_vertex.txt" />
+    <Text Include="shader\shader_triangle_test8_frag.txt" />
+    <Text Include="shader\shader_triangle_test8_vertex.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\awesomeface.png" />
+    <Image Include="images\container.jpg" />
+    <Image Include="images\wall.jpg" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{f549b866-83c6-4037-8661-08496a7e92ae}</ProjectGuid>
     <RootNamespace>testOpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>FirstOpenGL</ProjectName>
+    <ProjectName>StudyOpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,67 +206,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\fileUtil.c" />
-    <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\list.c" />
-    <ClCompile Include="src\main.c" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\shaders.c" />
-    <ClCompile Include="src\shaderSource.c" />
-    <ClCompile Include="src\testDrawRectangle.c" />
-    <ClCompile Include="src\testDrawTriangle.c" />
-    <ClCompile Include="src\testDrawUnfillRectangle.c" />
-    <ClCompile Include="src\testGetParentDir.c" />
-    <ClCompile Include="src\testLoadStbImage.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle1.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle2.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle3.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle4.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle5.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle6.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle7.c" />
-    <ClCompile Include="src\testPractiseDrawTriangle8.c" />
-    <ClCompile Include="src\testPractiseDrawWithPerspective12.cpp" />
-    <ClCompile Include="src\testPractiseDrawWithPerspective14.cpp" />
-    <ClCompile Include="src\testPractiseDrawWithPerspective13.cpp" />
-    <ClCompile Include="src\testPractiseDrawWithPerspective15.cpp" />
-    <ClCompile Include="src\testPractiseDrawWithTexture10.c" />
-    <ClCompile Include="src\testPractiseDrawWithTexure9.c" />
-    <ClCompile Include="src\testPractiseDrawWithTransform11.cpp" />
-    <ClCompile Include="src\testPractiseReadFile.c" />
-    <ClCompile Include="src\util.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\fileUtil.h" />
-    <ClInclude Include="src\list.h" />
-    <ClInclude Include="src\shaders.h" />
-    <ClInclude Include="src\shaderSource.h" />
-    <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\test.h" />
-    <ClInclude Include="src\util.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="awesomeface.png" />
-    <Image Include="src\container.jpg" />
-    <Image Include="src\wall.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="shader_perspective_test12_fragment.txt" />
-    <Text Include="shader_perspective_test12_vertex.txt" />
-    <Text Include="shader_perspective_test13_fragment.txt" />
-    <Text Include="shader_perspective_test13_vertex.txt" />
-    <Text Include="shader_perspective_test15_fragment.txt" />
-    <Text Include="shader_perspective_test15_vertex.txt" />
-    <Text Include="shader_texture_test10_fragment.txt" />
-    <Text Include="shader_texture_test10_vertex.txt" />
-    <Text Include="shader_texture_test9_fragment.txt" />
-    <Text Include="shader_texture_test9_vertex.txt" />
-    <Text Include="shader_transform_test11_fragment.txt" />
-    <Text Include="shader_transform_test11_vertex.txt" />
-    <Text Include="shader_triangle_test8_frag.txt" />
-    <Text Include="shader_triangle_test8_vertex.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

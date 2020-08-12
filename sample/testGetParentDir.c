@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "test.h"
-#include "fileUtil.h"
+#include "../include/fileUtil.h"
+
+#include "../include/shaders.h"
+#include "../include/test.h"
+#include "../include/shaderSource.h"
 
 int testGetParentDir() {
 	//char* exePath = "D:/workspace/cppWorkspace/StudyOpenGL/Debug/FirstOpenGL.exe";

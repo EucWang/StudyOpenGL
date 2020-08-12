@@ -1,7 +1,7 @@
-#include "test.h"
-#include "shaders.h"
-#include "fileUtil.h"
-#include "shaderSource.h"
+#include "../include/test.h"
+#include "../include/shaders.h"
+#include "../include/fileUtil.h"
+#include "../include/shaderSource.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -37,14 +37,26 @@ static unsigned int slices[] = {
 	1, 2, 3,
 };
 
+
+static const char* shaderDirName = "shader";
+static char* shaderDir;
+
+static const char* imagesDirName = "images";
+static char* imagesDir;
+
 int practiseDrawWithPerspective12(const char * projectDir) {
+
+	//初始化获取 opengl的shader目录和 图片目录
+	if (!getChildPath(&shaderDir, projectDir, shaderDirName)) { return -1; }
+	if (!getChildPath(&imagesDir, projectDir, imagesDirName)) { return -1; }
+
 	GLFWwindow *window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw with Perspective");
 	if (window == NULL){ return -1;}
 
 	char* vertexPath;
 	char* fragPath;
-	if (!getChildPath(&vertexPath, projectDir, vertextFile)) {return -1;}
-	if (!getChildPath(&fragPath, projectDir, fragFile)) {return -1;	}
+	if (!getChildPath(&vertexPath, shaderDir, vertextFile)) {return -1;}
+	if (!getChildPath(&fragPath, shaderDir, fragFile)) {return -1;	}
 	if (!createShaderProgram(vertexPath, fragPath, &shaderProgram)) { return -1;}
 
 	if (!prepare(projectDir)) { return -1; }
@@ -94,10 +106,10 @@ bool prepare(const char* projectDir) {
 	glEnableVertexAttribArray(2);
 
 	textureGenSet(&TEX);
-	if (!textureLoadImg(projectDir, imageFile, GL_RGB)) { return false; }
+	if (!textureLoadImg(imagesDir, imageFile, GL_RGB)) { return false; }
 
 	textureGenSet(&TEX2);
-	if (!textureLoadImg(projectDir, imageFile2, GL_RGBA)) { return false; }
+	if (!textureLoadImg(imagesDir, imageFile2, GL_RGBA)) { return false; }
 
 	//-----------------------------下面设置变换矩阵-----------------------------------
 

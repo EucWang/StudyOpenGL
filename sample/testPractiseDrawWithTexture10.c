@@ -2,12 +2,12 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "test.h" 
-#include "fileUtil.h"
+#include "../include/test.h" 
+#include "../include/fileUtil.h"
 
 #define STB_IMAGE_STATIC
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../include/stb_image.h"
 
 static char * vertextFile = "shader_texture_test10_vertex.txt";
 static char* fragFile = "shader_texture_test10_fragment.txt";
@@ -26,15 +26,27 @@ static void render();
 
 static void destroy();
 
+
+static const char* shaderDirName = "shader";
+static char* shaderDir;
+
+static const char* imagesDirName = "images";
+static char* imagesDir;
+
 int practiseDrawWithTexture10(char * projectDir) {
+
+	//初始化获取 opengl的shader目录和 图片目录
+	if (!getChildPath(&shaderDir, projectDir, shaderDirName)) { return -1; }
+	if (!getChildPath(&imagesDir, projectDir, imagesDirName)) { return -1; }
+
 	GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw WIth Texture 10");
 	if (window == NULL) {
 		return -1;
 	}
 	char* vertexPath;
 	char* fragPath;
-	if (!getChildPath(&vertexPath, projectDir, vertextFile) ||
-		!getChildPath(&fragPath, projectDir, fragFile)) {
+	if (!getChildPath(&vertexPath, shaderDir, vertextFile) ||
+		!getChildPath(&fragPath, shaderDir, fragFile)) {
 		return -1;
 	}
 
@@ -138,8 +150,8 @@ int prepare(char* projectDir) {
 	//加载2个图片
 	char* imagePath1;
 	char* imagePath2;
-	if (!getChildPath(&imagePath1, projectDir, imageFile1) ||
-		!getChildPath(&imagePath2, projectDir, imageFile2)) {
+	if (!getChildPath(&imagePath1, imagesDir, imageFile1) ||
+		!getChildPath(&imagePath2, imagesDir, imageFile2)) {
 		printf("%s\n", "prepare() call failed, because getChildPath() failed, cannot get imagePath1 or imagePath2");
 		return -1;
 	}

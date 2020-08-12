@@ -52,7 +52,6 @@ int practiseDrawWithTransform11(const char* projectDir);
 */
 int practiseDrawWithPerspective12(const char* projectDir);
 
-<<<<<<< HEAD
 /**
 * 渲染一个旋转的立方体箱子
 */

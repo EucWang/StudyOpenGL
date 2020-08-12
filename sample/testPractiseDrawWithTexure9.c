@@ -1,13 +1,13 @@
-#include "test.h"
-#include "shaders.h"
-#include "shaderSource.h"
+#include "../include/test.h"
+#include "../include/shaders.h"
+#include "../include/shaderSource.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h> 
-#include "fileUtil.h"
+#include "../include/fileUtil.h"
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
-#include "stb_image.h"
+#include "../include/stb_image.h"
 
 static void prepare(char* projectDir);
 static void render();
@@ -22,7 +22,19 @@ static char* vertexfile = "shader_texture_test9_vertex.txt";
 static char* fragfile = "shader_texture_test9_fragment.txt";
 static char* imagefile = "container.jpg";
 
+
+static const char* shaderDirName = "shader";
+static char* shaderDir;
+
+static const char* imagesDirName = "images";
+static char* imagesDir;
+
 int testPractiseDrawWithTexure9(char* projectDir) {
+
+	//初始化获取 opengl的shader目录和 图片目录
+	if (!getChildPath(&shaderDir, projectDir, shaderDirName)) { return -1; }
+	if (!getChildPath(&imagesDir, projectDir, imagesDirName)) { return -1; }
+
 	GLFWwindow * window = createGLWindow(800, 640, "Draw Triangle With Texure");
 	if (window == NULL) {
 		return -1;
@@ -30,11 +42,11 @@ int testPractiseDrawWithTexure9(char* projectDir) {
 
 	char* vertexPath;
 	char* fragPath;
-	if (!getChildPath(&vertexPath, projectDir, vertexfile)) {
+	if (!getChildPath(&vertexPath, shaderDir, vertexfile)) {
 		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(vertexPath) called failed.");
 		return -1;
 	}
-	if (!getChildPath(&fragPath, projectDir, fragfile)) {
+	if (!getChildPath(&fragPath, shaderDir, fragfile)) {
 		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(fragPath) called failed.");
 		return -1;
 	}
@@ -137,7 +149,7 @@ void prepare(char* projectDir) {
 	int width, height, nrChannels;
 
 	char* imagePath;
-	if (!getChildPath(&imagePath, projectDir, imagefile)) {
+	if (!getChildPath(&imagePath, imagesDir, imagefile)) {
 		printf("%s\n", "testPractiseDrawWithTexure9() call failed, because getChildPath(fragPath) called failed.");
 		return;
 	}

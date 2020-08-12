@@ -1,6 +1,6 @@
-#include "test.h"
-#include "shaderSource.h"
-#include "shaders.h"
+#include "../include/test.h"
+#include "../include/shaderSource.h"
+#include "../include/shaders.h"
 #include <stdio.h>
 
 static void prepare();

@@ -1,6 +1,6 @@
-#include "shaders.h"
-#include "test.h"
-#include "shaderSource.h"
+#include "../include/shaders.h"
+#include "../include/test.h"
+#include "../include/shaderSource.h"
 #include <stdio.h>
 
 const char* vertexShaderSource2 = "#version 330 core\n"

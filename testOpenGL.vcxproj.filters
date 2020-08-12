@@ -1,180 +1,187 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{084ba3b1-6a32-43a6-ac4c-69b5768ee471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="include">
+      <UniqueIdentifier>{1ab2a71b-366f-48b7-a9a5-fe7ceae73ef3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="sample">
+      <UniqueIdentifier>{089290d3-12c8-4cc2-81e5-680787868995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{228e773b-4f70-4417-a10e-62abd189d3f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images">
+      <UniqueIdentifier>{44ddf96f-20a0-4ecb-9fcc-d2c16883f0b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\fileUtil.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\list.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shaders.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shaderSource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb_image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\test.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\util.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\fileUtil.c">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\glad.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testDrawRectangle.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testDrawTriangle.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testDrawUnfillRectangle.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle1.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle2.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle3.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle4.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle5.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle6.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle7.c">
-      <Filter>源文件</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\list.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaderSource.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseReadFile.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\fileUtil.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawTriangle8.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testLoadStbImage.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithTexure9.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testGetParentDir.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithTexture10.c">
-      <Filter>源文件</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\main.c">
-      <Filter>源文件</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>源文件</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithTransform11.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\shaders.c">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithPerspective12.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithPerspective13.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\testPractiseDrawWithPerspective14.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\shaderSource.c">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\util.c">
-    <ClCompile Include="src\testPractiseDrawWithPerspective15.cpp">
-      <Filter>源文件</Filter>
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testDrawRectangle.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testDrawTriangle.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testDrawUnfillRectangle.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testGetParentDir.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testLoadStbImage.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle1.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle2.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle3.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle4.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle5.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle6.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle7.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawTriangle8.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithPerspective12.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithPerspective13.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithPerspective14.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithPerspective15.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithTexture10.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithTexure9.c">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\testPractiseReadFile.c">
+      <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\fileUtil.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\list.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaders.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stb_image.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\test.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaderSource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <Text Include="shader\shader_perspective_test12_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_perspective_test12_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_perspective_test13_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_perspective_test13_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_perspective_test15_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_perspective_test15_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_texture_test9_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_texture_test9_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_texture_test10_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_texture_test10_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_transform_test11_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_transform_test11_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_triangle_test8_frag.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_triangle_test8_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="src\container.jpg">
-      <Filter>资源文件</Filter>
+    <Image Include="images\awesomeface.png">
+      <Filter>images</Filter>
     </Image>
-    <Image Include="src\wall.jpg">
-      <Filter>资源文件</Filter>
+    <Image Include="images\container.jpg">
+      <Filter>images</Filter>
     </Image>
-    <Image Include="awesomeface.png">
-      <Filter>资源文件</Filter>
+    <Image Include="images\wall.jpg">
+      <Filter>images</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="shader_texture_test9_fragment.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_texture_test9_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_triangle_test8_frag.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_triangle_test8_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_texture_test10_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_texture_test10_fragment.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_transform_test11_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_transform_test11_fragment.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_perspective_test12_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_perspective_test12_fragment.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_perspective_test13_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_perspective_test13_fragment.txt">
-    <Text Include="shader_perspective_test15_fragment.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader_perspective_test15_vertex.txt">
-      <Filter>资源文件</Filter>
-    </Text>
   </ItemGroup>
 </Project>

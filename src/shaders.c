@@ -1,13 +1,13 @@
-#include "shaders.h"
+#include "../include/shaders.h"
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "fileUtil.h"
+#include "../include/fileUtil.h"
 
 
 #define STB_IMAGE_STATIC
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../include/stb_image.h"
 
 GLFWwindow* createGLWindow(int width, int height, const char* title) {
 

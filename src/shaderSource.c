@@ -1,7 +1,7 @@
-#include "shaders.h"
-#include "shaderSource.h"
-#include "list.h"
-#include "fileUtil.h"
+#include "../include/shaders.h"
+#include "../include/shaderSource.h"
+#include "../include/list.h"
+#include "../include/fileUtil.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,6 +1,6 @@
-#include "fileUtil.h"
+#include "../include/fileUtil.h"
 
-#include "list.h"
+#include "../include/list.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
