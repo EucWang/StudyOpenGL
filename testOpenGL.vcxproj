@@ -45,6 +45,7 @@
     <ClCompile Include="sample\testPractiseDrawWithPerspective13.cpp" />
     <ClCompile Include="sample\testPractiseDrawWithPerspective14.cpp" />
     <ClCompile Include="sample\testPractiseDrawWithPerspective15.cpp" />
+    <ClCompile Include="sample\testPractiseDrawWithPerspective16.cpp" />
     <ClCompile Include="sample\testPractiseDrawWithTexture10.c" />
     <ClCompile Include="sample\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp" />

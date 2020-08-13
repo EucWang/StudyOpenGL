@@ -84,7 +84,6 @@ static char* shaderDir;
 static const char* imagesDirName = "images";
 static char* imagesDir;
 
-
 static float cameraSpeed = 0.005f;  //控制按键时，view的镜头的移动速率
 
 static float deltaTime = 0.0f;   //当前帧与上一帧的时间差
