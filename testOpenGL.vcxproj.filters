@@ -39,6 +39,9 @@
     <ClInclude Include="include\util.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\camera.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -131,6 +134,9 @@
     <ClCompile Include="sample\testPractiseDrawWithPerspective16.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\testPractiseDrawWithCamera17.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -173,6 +179,12 @@
       <Filter>shader</Filter>
     </Text>
     <Text Include="shader\shader_triangle_test8_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_camera_test17_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_camera_test17_fragment.txt">
       <Filter>shader</Filter>
     </Text>
   </ItemGroup>

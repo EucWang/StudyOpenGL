@@ -70,6 +70,12 @@ int practiseDrawWithPerspective15(const char* projectDir);
 */
 int practiseDrawWithPerspective16(const char* projectDir);
 
+/**
+* 练习
+* 通过新增的Camera类对象来控制镜头视角
+*/
+int practiseDrawWithCamera(char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif
