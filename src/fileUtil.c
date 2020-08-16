@@ -13,6 +13,8 @@
 * 从文件中读取全部文本字符
 */
 bool readStrFromFile(const char* filePath, char** desStr) {
+	if (filePath == NULL) { return false;	}
+
 	FILE* file = NULL;
 
 	char filebuf[1024 * 16] = { 0 };

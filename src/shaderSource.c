@@ -19,21 +19,16 @@ bool createShaderProgram(char* vertexPath, char* fragmentPath, int * shaderId) {
 	char* fragStr;
 	bool readVertexSuccess = readStrFromFile(vertexPath, &vertexStr);
 	bool readFragSuccess = readStrFromFile(fragmentPath, &fragStr);
-
-	if (vertexStr == NULL) {
-		printf("%s%s\n", "failed to read from file, file path is ", vertexPath);
+	if (!readVertexSuccess && !readFragSuccess) {
 		return false;
 	}
 
-	if (fragStr == NULL) {
-		printf("%s%s\n", "failed to read from file, file path is ", fragmentPath);
-		return false;
-	}
+	if (vertexStr == NULL) { printf("%s%s\n", "failed to read from vertexPath file, file path is ", vertexPath);	}
+
+	if (fragStr == NULL) { printf("%s%s\n", "failed to read from fragmentPath file, file path is ", fragmentPath);	}
 
 	int tShader = makeShaderProgram(vertexStr, fragStr);
-	if (tShader < 0) {
-		return false;
-	}
+	if (tShader < 0) { return false;	}
 
 	*shaderId = tShader;
 
@@ -100,21 +95,27 @@ int makeVertexShader(const char* tvertexShaderSource) {
 * @return int  返回创建的shaderProgram的id值
 */
 int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSource) {
+	if (tvertexShaderSource == NULL && tfragShaderSource == NULL)	{ return -1; }
+	
 	unsigned int shaderProgram;
+	int mVertexShader = -1; 
+	int mFragmentShader = -1;
 
 	//glCreateProgram函数创建一个程序，并返回新创建程序对象的ID引用。
 	shaderProgram = glCreateProgram();
-
-	int mVertexShader = makeVertexShader(tvertexShaderSource);
-	int mFragmentShader = makeFragmentShader(tfragShaderSource);
-
-	if (mVertexShader < 0 || mFragmentShader < 0) {
-		return -1;
+	if (tvertexShaderSource != NULL){
+		mVertexShader = makeVertexShader(tvertexShaderSource);
+		if (mVertexShader < 0) { return -1;	 }
+		//把之前编译的着色器附加到程序对象上
+		glAttachShader(shaderProgram, mVertexShader);
 	}
 
-	//把之前编译的着色器附加到程序对象上
-	glAttachShader(shaderProgram, mVertexShader);
-	glAttachShader(shaderProgram, mFragmentShader);
+	if (tfragShaderSource != NULL)	{
+		mFragmentShader = makeFragmentShader(tfragShaderSource);
+		if (mFragmentShader < 0) { return -1; }
+		//把之前编译的着色器附加到程序对象上
+		glAttachShader(shaderProgram, mFragmentShader);
+	}
 
 	//用glLinkProgram链接它们
 	glLinkProgram(shaderProgram);
@@ -129,13 +130,9 @@ int makeShaderProgram(const char* tvertexShaderSource, const char* tfragShaderSo
 		return -1;
 	}
 
-	//调用glUseProgram函数，用刚创建的程序对象作为它的参数，以激活这个程序对象
-	//在glUseProgram函数调用之后，每个着色器调用和渲染调用都会使用这个程序对象（也就是之前写的着色器)了。
-	//glUseProgram(shaderProgram);  
-
 	//在把着色器对象链接到程序对象以后，记得删除着色器对象，我们不再需要它们了
-	glDeleteShader(mVertexShader);
-	glDeleteShader(mFragmentShader);
+	if (mVertexShader != -1)	{ glDeleteShader(mVertexShader);	}
+	if (mFragmentShader != -1){ glDeleteShader(mFragmentShader); }
 
 	return shaderProgram;
 }

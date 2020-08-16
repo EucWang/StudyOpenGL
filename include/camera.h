@@ -23,7 +23,7 @@ const float PITCH = 0.0f;          // 偏航角 默认值
 
 const float SPEED = 2.5f;          // 键盘操作移动时，控制移动的速率
 
-const float SENSITIVITY = 0.001f;    //鼠标控制移动时， 控制移动的速率
+const float SENSITIVITY = 0.1f;    //鼠标控制移动时， 控制移动的速率
 
 const float ZOOM = 45.0f;		   //鼠标滚轮控制时， 控制缩放的角度 ， 等同于 透视方法glm::perspective(glm::radians(fov), width/height, 0/1f. 100.0f); 这个方法中的fov
 
@@ -167,9 +167,9 @@ private:
 		
 		glm::vec3 front;
 
-		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		front.y = sin(glm::radians(Yaw));
-		front.z = cos(glm::radians(Yaw)) * sin(glm::radians(Pitch));
+		front.x = cos(glm::radians(Pitch)) * cos(glm::radians(Yaw));
+		front.y = sin(glm::radians(Pitch));
+		front.z = cos(glm::radians(Pitch)) * sin(glm::radians(Yaw));
 
 		Front = glm::normalize(front);
 

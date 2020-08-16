@@ -4,6 +4,7 @@
 #include "../include/fileUtil.h"
 #include "../include/shaders.h"
 #include "../include/shaderSource.h"
+#include "../include/util.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -153,9 +154,9 @@ int practiseDrawWithCamera(char * projectDir) {
 }
 
 //坐标系转换中间变量
-glm::mat4 model;
-glm::mat4 view;
-glm::mat4 projection;
+//glm::mat4 model;
+//glm::mat4 view;
+//glm::mat4 projection;
 
 //控制坐标系转换在着色器中的3个uniform单元
 static int uniformLocModel;
@@ -168,6 +169,9 @@ static Camera camera;   //相机镜头对象
 static double lastFrameTime = 0.0f;          //上一帧绘制的时间
 static GLboolean isMouseFirstMove = true;   //是否是第一次鼠标移动进入窗口
 static double deltaTime = 0.0f;              //和上一帧绘制的时间差
+
+static int index = 0;
+static double lastX, lastY;
 
 bool prepare() {
 
@@ -201,12 +205,15 @@ bool prepare() {
     uniformLocView = glGetUniformLocation(shaderId, "view");
     uniformLocProjection = glGetUniformLocation(shaderId, "projection");
 
-    camera = Camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //创建Camera对象
+    //camera = Camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //创建Camera对象
+    camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    lastX = SMALL_SCREEN_WIDTH / 2.0f;
+    lastY = SMALL_SCREEN_HEIGHT / 2.0f;
+
+    std::cout << "sizeof(vertices) / sizeof(vertices[0])  = " << sizeof(vertices) / sizeof(vertices[0]) << std::endl;
 
     return true;
 }
-
-static int index = 0;
 
 void render() {
 
@@ -219,24 +226,24 @@ void render() {
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
 
-    view = glm::mat4(1.0f);
-    view = camera.GetViewMatrix();
-    //view = glm::rotate(view, glm::radians(50.0f), glm::vec3(0.2f, 0.5f, 0.9f));
+    glm::mat4 view = camera.GetViewMatrix();
+    glUniformMatrix4fv(uniformLocView, 1, GL_FALSE, glm::value_ptr(view));
+    
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), SMALL_SCREEN_WIDTH / SMALL_SCREEN_HEIGHT * 1.0f, 0.1f, 100.0f);
+    glUniformMatrix4fv(uniformLocProjection, 1, GL_FALSE, glm::value_ptr(projection));
 
-    projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(camera.Zoom), SMALL_SCREEN_WIDTH / SMALL_SCREEN_HEIGHT * 1.0f, 0.1f, 100.0f);
-    //projection = glm::perspective(glm::radians(45.0f), SMALL_SCREEN_WIDTH / SMALL_SCREEN_HEIGHT * 1.0f, 0.1f, 100.0f);
-
-    for (index = 0; index < sizeof(cubePositions) / sizeof(cubePositions[0]); index++){
-    //for (index = 0; index < 10; index++){
-        model = glm::mat4(1.0f);
+   for (index = 0; index < sizeof(cubePositions) / sizeof(cubePositions[0]); index++){
+        glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, cubePositions[index]);
 
+        float angle = 20.0f * index;
+        model = glm::rotate(model, getFVal() * glm::radians(angle), glm::vec3(1.0f, 0.3f,  0.3f));
+
         glUniformMatrix4fv(uniformLocModel,1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix4fv(uniformLocView,1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(uniformLocProjection,1, GL_FALSE, glm::value_ptr(projection));
-    
-        glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(vertices[0]) );
+
+        glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / ( 5 * sizeof(vertices[0]) ));
+
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
 }
@@ -248,7 +255,7 @@ void render() {
 void processInput(GLFWwindow* window) {
     //获取绘制每帧的时间间隔
     double currentTime = glfwGetTime();
-    deltaTime = currentTime = lastFrameTime;
+    deltaTime = currentTime - lastFrameTime;
     lastFrameTime = currentTime;
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -264,8 +271,6 @@ void processInput(GLFWwindow* window) {
     }
 }
 
-static double lastX, lastY;
-
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos) {
     if (isMouseFirstMove) { 
         isMouseFirstMove = false;
@@ -278,9 +283,9 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xpos, ypos);
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-    camera.ProcessMouseScroll(yoffset);
+    camera.ProcessMouseScroll((float)yoffset);
 }

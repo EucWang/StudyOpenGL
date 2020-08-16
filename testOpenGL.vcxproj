@@ -29,6 +29,7 @@
     <ClInclude Include="include\util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
     <ClCompile Include="sample\testDrawTriangle.c" />
     <ClCompile Include="sample\testDrawUnfillRectangle.c" />
@@ -64,6 +65,9 @@
   <ItemGroup>
     <Text Include="shader\shader_camera_test17_fragment.txt" />
     <Text Include="shader\shader_camera_test17_vertex.txt" />
+    <Text Include="shader\shader_light_test18_fragment.txt" />
+    <Text Include="shader\shader_light_test18_fragment_light.txt" />
+    <Text Include="shader\shader_light_test18_vertex.txt" />
     <Text Include="shader\shader_perspective_test12_fragment.txt" />
     <Text Include="shader\shader_perspective_test12_vertex.txt" />
     <Text Include="shader\shader_perspective_test13_fragment.txt" />

@@ -76,6 +76,11 @@ int practiseDrawWithPerspective16(const char* projectDir);
 */
 int practiseDrawWithCamera(char* projectDir);
 
+/**
+*  ÁªÏµ¹âÕÕ
+*/
+int practise2Light(const char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif
