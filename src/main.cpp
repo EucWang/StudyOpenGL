@@ -46,7 +46,8 @@ int main(int argc, char* argv[]) {
 	//practiseDrawWithPerspective15(projectDir);
 	//practiseDrawWithPerspective16(projectDir);
 	//practiseDrawWithCamera(projectDir);
-	practise2Light(projectDir);
+	//practise2Light(projectDir);
+	practiseLight19(projectDir);
 
 	free(debugDir);
 	free(projectDir);

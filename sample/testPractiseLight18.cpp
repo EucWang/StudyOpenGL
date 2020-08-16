@@ -27,15 +27,15 @@ static GLuint VAO, VBO;
 static int shaderId, shaderLightId;
 static GLuint lightVAO;
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+static Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
  
 static double deltaTime;
 static float lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH/2, lastY = SMALL_SCREEN_HEIGHT/2;
-bool isMouseFirstIn = true;
+static bool isMouseFirstIn = true;
 
 //表示光源在场景的世界空间坐标中的位置
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+static glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 static float vertices[] = {
 	// ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -

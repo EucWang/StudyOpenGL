@@ -52,6 +52,7 @@
     <ClCompile Include="sample\testPractiseDrawWithTexture10.c" />
     <ClCompile Include="sample\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp" />
+    <ClCompile Include="sample\testPractiseLight19.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -68,6 +69,9 @@
     <Text Include="shader\shader_light_test18_fragment.txt" />
     <Text Include="shader\shader_light_test18_fragment_light.txt" />
     <Text Include="shader\shader_light_test18_vertex.txt" />
+    <Text Include="shader\shader_light_test19_fragment.txt" />
+    <Text Include="shader\shader_light_test19_fragment_light.txt" />
+    <Text Include="shader\shader_light_test19_vertex.txt" />
     <Text Include="shader\shader_perspective_test12_fragment.txt" />
     <Text Include="shader\shader_perspective_test12_vertex.txt" />
     <Text Include="shader\shader_perspective_test13_fragment.txt" />

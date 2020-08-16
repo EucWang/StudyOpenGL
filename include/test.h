@@ -81,6 +81,8 @@ int practiseDrawWithCamera(char* projectDir);
 */
 int practise2Light(const char* projectDir);
 
+int practiseLight19(const char * projectDir);
+
 #ifdef __cplusplus
 }
 #endif

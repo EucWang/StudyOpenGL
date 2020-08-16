@@ -8,3 +8,9 @@ float getFVal() {
 	//std::cout << "retVal  = " << retVal << std::endl;
 	return retVal;
 }
+
+float getFValCos() {
+	float retVal = (float)(cos((float)glfwGetTime()) / 2.0f + 0.5f);
+	//std::cout << "retVal  = " << retVal << std::endl;
+	return retVal;
+}

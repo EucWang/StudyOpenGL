@@ -140,6 +140,9 @@
     <ClCompile Include="sample\testPractiseLight18.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\testPractiseLight19.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -197,6 +200,15 @@
       <Filter>shader</Filter>
     </Text>
     <Text Include="shader\shader_light_test18_fragment_light.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_light_test19_vertex.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_light_test19_fragment.txt">
+      <Filter>shader</Filter>
+    </Text>
+    <Text Include="shader\shader_light_test19_fragment_light.txt">
       <Filter>shader</Filter>
     </Text>
   </ItemGroup>
