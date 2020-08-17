@@ -27,7 +27,7 @@ static GLuint VAO, VBO;
 static int shaderId, shaderLightId;
 static GLuint lightVAO;
 
-static Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+static Camera camera(glm::vec3(0.0f, 1.5f, 3.0f));
 
 static double deltaTime;
 static float lastFrame;
