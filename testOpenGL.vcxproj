@@ -53,6 +53,7 @@
     <ClCompile Include="sample\testPractiseDrawWithTexure9.c" />
     <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp" />
     <ClCompile Include="sample\testPractiseLight19.cpp" />
+    <ClCompile Include="sample\testPractiseLight20.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -91,6 +92,11 @@
     <Image Include="images\awesomeface.png" />
     <Image Include="images\container.jpg" />
     <Image Include="images\wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\shader_light_test20.frag" />
+    <None Include="shader\shader_light_test20.vert" />
+    <None Include="shader\shader_light_test20_light.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -167,6 +173,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
