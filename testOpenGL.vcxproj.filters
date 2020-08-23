@@ -16,6 +16,9 @@
     <Filter Include="images">
       <UniqueIdentifier>{44ddf96f-20a0-4ecb-9fcc-d2c16883f0b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{d2a0ffc1-bd90-4e54-bc1c-72d54a725878}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">

@@ -6,16 +6,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main1(int argc, char * argv[]) {
-	char* debugDir;
-	char * projectDir;
+//int main1(int argc, char * argv[]) {
+int main1() {
+	//char* debugDir;
+	//char * projectDir;
 	//argv[0] 是当前运行的exe程序的路径
 	//首先得到debug路径
 	//然后得到项目路径
-	if(!(getParentDir(argv[0], &debugDir) && getParentDir(debugDir, &projectDir))){
-		printf("%s\n", "main() failed, because getParentDir() call failed, cannot get projectDir");
-		return -1;
-	}
+	//if(!(getParentDir(argv[0], &debugDir) && getParentDir(debugDir, &projectDir))){
+	//	printf("%s\n", "main() failed, because getParentDir() call failed, cannot get projectDir");
+	//	return -1;
+	//}
 
 	//drawTriangle();
 	//drawRectangle();
@@ -34,7 +35,7 @@ int main1(int argc, char * argv[]) {
 	//testGetChildPath();
 	//practiseDrawWithTexture10(projectDir);
 
-	free(debugDir);
-	free(projectDir);
+	//free(debugDir);
+	//free(projectDir);
 	return 0;
 }

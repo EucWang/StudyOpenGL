@@ -44,8 +44,8 @@ int practiseDrawTriangle8() {
 	return 1;
 }
 
-int VAO;
-int VBO;
+static unsigned int VAO;
+static unsigned int VBO;
 
 
 void prepare() {
