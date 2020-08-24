@@ -54,6 +54,7 @@
     <ClCompile Include="sample\testPractiseDrawWithTransform11.cpp" />
     <ClCompile Include="sample\testPractiseLight19.cpp" />
     <ClCompile Include="sample\testPractiseLight20.cpp" />
+    <ClCompile Include="sample\testPractiseLight21.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -97,6 +98,10 @@
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />
+    <None Include="shader\shader_light_test21.frag" />
+    <None Include="shader\shader_light_test21.vert" />
+    <None Include="shader\shader_light_test21_2.frag" />
+    <None Include="shader\shader_light_test21_light.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
