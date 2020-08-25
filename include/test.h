@@ -87,6 +87,8 @@ int practiseLight20(const char * projectDir);
 
 int practiseLight21(const char* projectDir);
 
+int practiseLight22(const char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif
