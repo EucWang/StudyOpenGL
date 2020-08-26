@@ -234,6 +234,18 @@
     <Image Include="images\wall.jpg">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\container2.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\container2_specular.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\lighting_maps_specular_color.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\matrix.jpg">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader\shader_light_test20.vert">
@@ -264,6 +276,9 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_light_test22_light.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_light_test22_light.vert">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

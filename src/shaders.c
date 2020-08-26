@@ -100,3 +100,27 @@ bool textureLoadImg(const char * parentDir, const char * imgName, int rgbType) {
 
 	return TRUE;
 }
+
+/**
+* 在 调用 textureGenSets() 和 textureLoadImg()之后
+* 可以将 纹理对象绑定到 着色器中对用的 sampler2D变量上了
+* 
+* @param shaderProgream   着色器程序
+* @param sampler2dName   片段着色器中需要绑定的sampler2D数据的字符串名称
+* @param index                     纹理对象的index， 从0开始计数
+*/
+void textureBind(GLuint shaderProgram, const char * sampler2dName, int index) {
+	glUseProgram(shaderProgram);
+	glUniform1i(glGetUniformLocation(shaderProgram, sampler2dName), index);
+}
+
+/**
+* 在render()循环中使用纹理对象
+* 
+* @param texture  已经绑定过了的纹理对象
+* @param index   绑定的纹理对象的index
+*/
+void textureUse(GLuint texture, int index) {
+	glActiveTexture(GL_TEXTURE0 + index);
+	glBindTexture(GL_TEXTURE_2D, texture);
+}

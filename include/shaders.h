@@ -57,6 +57,11 @@ void textureGenSets(/*in,out*/GLuint* texture, /*in*/int wrapS, /*in*/int wrapT,
 *																 GL_RGBA (png图片取值，有透明通道)
 */
 bool textureLoadImg(/*in*/const char* parentDir, /*in*/const char* imgName, /*in*/int rgbType);
+
+void textureBind(GLuint shaderProgram, const char* sampler2dName, int index);
+
+void textureUse(GLuint texture, int index);
+
 #ifdef __cplusplus
 }
 #endif
