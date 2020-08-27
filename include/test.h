@@ -77,7 +77,7 @@ int practiseDrawWithPerspective16(const char* projectDir);
 int practiseDrawWithCamera(char* projectDir);
 
 /**
-*  联系光照
+*  练习光照
 */
 int practise2Light(const char* projectDir);
 
@@ -88,6 +88,8 @@ int practiseLight20(const char * projectDir);
 int practiseLight21(const char* projectDir);
 
 int practiseLight22(const char* projectDir);
+
+int practiseLight23(const char* projectDir);
 
 #ifdef __cplusplus
 }
