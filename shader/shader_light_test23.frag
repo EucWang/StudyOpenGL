@@ -42,7 +42,7 @@ void main(){
 	vec3 viewDir = normalize(viewPos - fragPos);  //йс╫гоРа©
 	vec3 reflectDir = reflect(-lightDir, norm);
 
-	diff = max(dot(reflectDir, viewDir), 1.0);
+	diff = max(dot(reflectDir, viewDir), 0.0);
 	float spec = pow(diff, material.shininess);
 	vec3 specular = light.specular * (spec * vec3(texture(material.specular, fragTexCoord)));
 

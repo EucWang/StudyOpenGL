@@ -10,8 +10,6 @@ struct Material {
 };
 uniform Material material;
 
-in vec2 ourTexCoord;
-
 struct Light {
 	vec3 ambient;
 	vec3 diffuse;
@@ -24,6 +22,7 @@ uniform vec3 viewPos;
 
 in vec3 fragPos;
 in vec3 fragNorm;
+in vec2 ourTexCoord;
 
 out vec4 fragColor;
 

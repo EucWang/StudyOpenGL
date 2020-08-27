@@ -167,7 +167,7 @@ int prepare(const char* projectDir) {
     textureBind(shaderId, "material.diffuse", 0);
 
     textureGenSet(&texture2);
-    if (!textureLoadImg(projectDir, imageContainer2SpecularFile, GL_RGB)) { return -1; }
+    if (!textureLoadImg(projectDir, imageContainer2SpecularFile, GL_RGBA)) { return -1; }
     textureBind(shaderId, "material.specular", 1);
 
     glGenVertexArrays(1, &lightVAO);
