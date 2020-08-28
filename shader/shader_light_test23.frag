@@ -16,7 +16,8 @@ struct Light {
 	vec3 diffuse;
 	vec3 specular;
 
-	vec3 position;
+	//vec3 position;
+	vec3 direction; //平行光， 使用方向向量来替换position向量, 
 };
 
 uniform Light light;
@@ -34,7 +35,11 @@ void main(){
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse,fragTexCoord));  //环境光线分量
 
 	vec3 norm = normalize(fragNorm);
-	vec3 lightDir = normalize(light.position - fragPos);
+	//vec3 lightDir = normalize(light.position - fragPos);
+
+	//这里对light.direction取反，我们计算的时候需求一个从片段至光源的光线方向，而且需要标准化
+	//而我们习惯定义的光为一个从光源出发的全局方向。
+	vec3 lightDir = normalize(-light.direction);  
 
 	float diff = max(dot(lightDir, norm), 0.0);   //光线向量和法线向量点乘，得到夹角cos比值
 	vec3 diffuse = light.diffuse * (diff * vec3(texture(material.diffuse, fragTexCoord)));  //漫反射光线分量
