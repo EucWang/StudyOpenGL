@@ -91,7 +91,12 @@ bool textureLoadImg(const char * parentDir, const char * imgName, int rgbType) {
 		return FALSE;
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, rgbType, GL_UNSIGNED_BYTE, data);
+	GLenum format;
+	if (channel == 1) { format = GL_RED; }
+	else if (channel == 2) { format = GL_RGB; }
+	else if (channel == 4) { format = GL_RGBA; }
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -99,6 +104,56 @@ bool textureLoadImg(const char * parentDir, const char * imgName, int rgbType) {
 	free(imagePath);
 
 	return TRUE;
+}
+
+/**
+* 加载图片纹理，
+* 绑定并生成图片纹理id
+* 
+* 可以替代上面的  textureGenSet(), textureGenSets(), textureLoadImg() 三个方法
+* 
+* @return  -1：表示加载失败， >=0 表示加载成功
+*/
+int textureLoad(const char * parentDir, const char * imgName) {
+	unsigned int textureId;
+	glGenTextures(1, &textureId);
+
+	int width, height, channel;
+	char* imagePath;
+	if (!getChildPath(&imagePath, parentDir, imgName)) {
+		//std::cout << "get imagePath2 failed." << std::endl;
+		printf("%s\n", "textureLoadImg() load failed, because getChildPath() failed.");
+		return -1;
+	}
+
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char* data = stbi_load(imagePath, &width, &height, &channel, 0);
+	if (data == NULL) {
+		//std::cout << "load image2 failed" << std::endl;
+		printf("%s\n", "textureLoadImg() load failed,  because stbi_load() failed.");
+		stbi_image_free(data);
+		return -1;
+	}
+
+	GLenum format;
+	if (channel == 1) { format = GL_RED; }
+	else if (channel == 2) { format = GL_RGB; }
+	else if (channel == 4) { format = GL_RGBA; }
+
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	stbi_image_free(data);
+	free(imagePath);
+
+	return textureId;
 }
 
 /**
@@ -124,3 +179,4 @@ void textureUse(GLuint texture, int index) {
 	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
+

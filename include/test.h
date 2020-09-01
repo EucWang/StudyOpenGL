@@ -89,7 +89,15 @@ int practiseLight21(const char* projectDir);
 
 int practiseLight22(const char* projectDir);
 
+/**
+* 平行光， 模拟太阳光
+*/
 int practiseLight23(const char* projectDir);
+
+/**
+* 点光源， 在以前讲话的点光源基础上，增加 强度，范围，衰减
+*/
+int practiseLight24(const char* projectDir);
 
 #ifdef __cplusplus
 }

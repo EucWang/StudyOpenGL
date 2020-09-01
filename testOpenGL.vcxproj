@@ -57,6 +57,7 @@
     <ClCompile Include="sample\testPractiseLight21.cpp" />
     <ClCompile Include="sample\testPractiseLight22.cpp" />
     <ClCompile Include="sample\testPractiseLight23.cpp" />
+    <ClCompile Include="sample\testPractiseLight24.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -116,6 +117,10 @@
     <None Include="shader\shader_light_test23.vert" />
     <None Include="shader\shader_light_test23_light.frag" />
     <None Include="shader\shader_light_test23_light.vert" />
+    <None Include="shader\shader_light_test24.frag" />
+    <None Include="shader\shader_light_test24.vert" />
+    <None Include="shader\shader_light_test24_light.frag" />
+    <None Include="shader\shader_light_test24_light.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

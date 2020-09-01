@@ -18,6 +18,8 @@ extern "C" {          //告诉编译器，这部分代码按C语言的格式进行编译，而不是C++的
 #define SMALL_SCREEN_WIDTH 800
 #define SMALL_SCREEN_HEIGHT 640
 
+#define textureActiveAndBind(tex,index) textureUse((tex),(index));
+
 GLFWwindow* createGLWindow(int width, int height, const char* title);
 
 //当用户改变窗口的大小的时候，视口也应该被调整。我们可以对窗口注册一个回调函数(Callback Function)，
@@ -61,6 +63,16 @@ bool textureLoadImg(/*in*/const char* parentDir, /*in*/const char* imgName, /*in
 void textureBind(GLuint shaderProgram, const char* sampler2dName, int index);
 
 void textureUse(GLuint texture, int index);
+
+/**
+* 加载图片纹理，
+* 绑定并生成图片纹理id
+*
+* 可以替代上面的  textureGenSet(), textureGenSets(), textureLoadImg() 三个方法
+*
+* @return  -1：表示加载失败， >=0 表示加载成功
+*/
+int textureLoad(const char* parentDir, const char* imgName);
 
 #ifdef __cplusplus
 }

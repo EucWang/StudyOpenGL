@@ -231,9 +231,9 @@ void render() {
     glm::mat4 model2(1.0f);
     model2 = glm::translate(model2, lightPos);
     model2 = glm::scale(model2, glm::vec3(0.1f, 0.1f, 0.1f));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model2));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "model"), 1, GL_FALSE, glm::value_ptr(model2));
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

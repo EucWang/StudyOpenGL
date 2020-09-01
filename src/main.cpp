@@ -51,7 +51,8 @@ int main(int argc, char* argv[]) {
 	//practiseLight20(projectDir);
 	//practiseLight21(projectDir);
 	//practiseLight22(projectDir);
-	practiseLight23(projectDir);
+	//practiseLight23(projectDir);
+	practiseLight24(projectDir);
 
 	free(debugDir);
 	free(projectDir);

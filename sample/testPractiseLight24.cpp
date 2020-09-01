@@ -13,15 +13,15 @@
 #include <iostream>
 using namespace std;
 
-static const char* vertextFile = "shader/shader_light_test23.vert";
-static const char* fragFile = "shader/shader_light_test23.frag";
-static const char* lightVertFile = "shader/shader_light_test23_light.vert";
-static const char* lightFragFile = "shader/shader_light_test23_light.frag";
+static const char* vertextFile = "shader/shader_light_test24.vert";
+static const char* fragFile = "shader/shader_light_test24.frag";
+static const char* lightVertFile = "shader/shader_light_test24_light.vert";
+static const char* lightFragFile = "shader/shader_light_test24_light.frag";
 
 static const char* imageContainer2File = "images/container2.png";
 static const char* imageContainer2SpecularFile = "images/container2_specular.png";
-static const char* imageContainer2ColorSpecularFile = "images/lighting_maps_specular_color.png";
-static const char* imageContainer2MatrixSpecularFile = "images/matrix.jpg";
+//static const char* imageContainer2ColorSpecularFile = "images/lighting_maps_specular_color.png";
+//static const char* imageContainer2MatrixSpecularFile = "images/matrix.jpg";
 
 static char* vertextFilePath;
 static char* fragFilePath;
@@ -40,6 +40,7 @@ static bool isMouseFirstIn = true;
 
 static Camera camera(glm::vec3(0.0f, 2.0f, 3.0f));
 //表示光源在场景的世界空间坐标中的位置
+//static glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 static glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 static float vertices[] = {
@@ -101,7 +102,7 @@ static glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
-static int prepare(const char* projectDir);
+static bool prepare(const char* projectDir);
 
 static void render();
 
@@ -111,149 +112,154 @@ static void mouse_move_callback(GLFWwindow* window, double posX, double posY);
 
 static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY);
 
-
-/**
-* 学习平行光  
-**/
-int practiseLight23(const char * projectDir) {
+int practiseLight24(const char * projectDir) {
 
     if (!getChildPath(&vertextFilePath, projectDir, vertextFile)) { return -1; }
-    if (!getChildPath(&fragFilePath, projectDir, fragFile)) { return -1; }
+    if (!getChildPath(&fragFilePath, projectDir,fragFile)) { return -1; }
     if (!getChildPath(&lightVertFilePath, projectDir, lightVertFile)) { return -1; }
     if (!getChildPath(&lightFragFilePath, projectDir, lightFragFile)) { return -1; }
 
-    GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw iron side box with light maps");
-    if (window == NULL) { return -1; }
+   GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw boxes with dot light.");
+   if (window == NULL)   {       return -1;   }
 
-    if (!createShaderProgram(vertextFilePath, fragFilePath, &shaderId)) { return -1; }
-    if (!createShaderProgram(lightVertFilePath, lightFragFilePath, &shaderLightId)) { return -1; }
+   if (!createShaderProgram(vertextFilePath, fragFilePath, &shaderId)) { return -1; }
+   if (!createShaderProgram(lightVertFilePath, lightFragFilePath, &shaderLightId)) { return -1; }
+   std::cout << "shaderId = " << shaderId << std::endl;
+   std::cout << "shaderLightId = " << shaderLightId << std::endl;
 
-    prepare(projectDir);
+   if (!prepare(projectDir)) { return -1; }
 
-    glEnable(GL_DEPTH_TEST);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetScrollCallback(window, mouse_scroll_callback);
-    glfwSetCursorPosCallback(window, mouse_move_callback);
+   glEnable(GL_DEPTH_TEST);
+   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+   glfwSetScrollCallback(window, mouse_scroll_callback);
+   glfwSetCursorPosCallback(window, mouse_move_callback);
 
-    while (!glfwWindowShouldClose(window)) {
-        double curFrame = glfwGetTime();
-        deltaTime = curFrame - lastFrame;
-        lastFrame = curFrame;
+   while (!glfwWindowShouldClose(window)) {
+       double curFrame = glfwGetTime();
+       deltaTime =curFrame - lastFrame;
+       lastFrame = curFrame;
 
-        processInput(window);
+       processInput(window);
+       glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glClearColor(0.2f, 0.3f,0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+       render();
 
-        render();
+       glfwPollEvents();
+       glfwSwapBuffers(window);
+   }
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
+   glfwTerminate();
+   free(vertextFilePath);
+   free(fragFilePath);
+   free(lightVertFilePath);
+   free(lightFragFilePath);
+   glDeleteVertexArrays(1, &VAO);
+   glDeleteBuffers(1, &VBO);
 
-    glfwTerminate();
-    free(vertextFilePath);
-    free(fragFilePath);
-    free(lightVertFilePath);
-    free(lightFragFilePath);
-    glDeleteProgram(shaderId);
-    glDeleteProgram(shaderLightId);
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    return 1;
+   glDeleteProgram(shaderId);
+   glDeleteProgram(shaderLightId);
+
+   return 1;
 }
 
-
-int prepare(const char* projectDir) {
+bool prepare(const char* projectDir) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
     glBindVertexArray(VAO);
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)( 3 *sizeof(float)));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)( 6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    textureGenSet(&texture1);
-    if (!textureLoadImg(projectDir, imageContainer2File, GL_RGBA)) { return -1; }
-    textureBind(shaderId, "material.diffuse", 0);
+    texture1 = textureLoad(projectDir, imageContainer2File);
+    std::cout << "texture1 = " << texture1 << std::endl;
+    if(texture1 < 0){ return false; }
 
-    textureGenSet(&texture2);
-    if (!textureLoadImg(projectDir, imageContainer2SpecularFile, GL_RGBA)) { return -1; }
-    textureBind(shaderId, "material.specular", 1);
+    texture2 = textureLoad(projectDir, imageContainer2SpecularFile);
+    std::cout << "texture2 = " << texture2 << std::endl;
+    if (texture2 < 0) { return false; }
+
+    glUseProgram(shaderId);
+    glUniform1i(glGetUniformLocation(shaderId, "material.diffuse"), 0);
+    glUniform1i(glGetUniformLocation(shaderId, "material.specular"), 1);
 
     glGenVertexArrays(1, &lightVAO);
     glBindVertexArray(lightVAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    return 1;
+    return true;
 }
 
 void render() {
-
     glUseProgram(shaderId);
     glBindVertexArray(VAO);
-    textureUse(texture1, 0);
-    textureUse(texture2, 1);
+
+    textureActiveAndBind(texture1, 0);
+    textureActiveAndBind(texture2, 1);
 
     glm::mat4 view(1.0);
     glm::mat4 projection(1.0);
 
     view = camera.GetViewMatrix();
-
     projection = glm::perspective(glm::radians(camera.Zoom), 
         SMALL_SCREEN_WIDTH * 1.0f / SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
 
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"),
-        1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 
-        1, GL_FALSE, glm::value_ptr(projection));
-
-    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), 
-        camera.Position.x, camera.Position.y, camera.Position.z);
-
-
-    glUniform1f(glGetUniformLocation(shaderId, "material.shininess"), 32.0f);
-
-    //glUniform3f(glGetUniformLocation(shaderId, "light.ambient"), 1.0f, 1.0f, 1.0f);
-    //glUniform3f(glGetUniformLocation(shaderId, "light.diffuse"), 1.0f, 1.0f, 1.0f);
-    //glUniform3f(glGetUniformLocation(shaderId, "light.specular"), 1.0f, 1.0f, 1.0f);
     glUniform3f(glGetUniformLocation(shaderId, "light.ambient"), 0.2f, 0.2f, 0.2f);
     glUniform3f(glGetUniformLocation(shaderId, "light.diffuse"), 0.5f, 0.5f, 0.5f);
     glUniform3f(glGetUniformLocation(shaderId, "light.specular"), 1.0f, 1.0f, 1.0f);
-    //glUniform3f(glGetUniformLocation(shaderId, "light.position"), lightPos.x, lightPos.y, lightPos.z);
-    glUniform3f(glGetUniformLocation(shaderId, "light.direction"), -0.2f, -1.0f, -0.3f);
+    glUniform3f(glGetUniformLocation(shaderId, "light.position"), lightPos.x, lightPos.y, lightPos.z);
 
-    for (unsigned int i = 0; i < 10; i++) {  //画10个箱子
-        glm::mat4 model(1.0);
-        model = glm::translate(model, cubePositions[i]);
-        model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * i + 10), glm::vec3(0.0f, 0.3f, 0.5f));
-        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniform1f(glGetUniformLocation(shaderId, "material.shininess"), 32.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), 
+        camera.Position.x, camera.Position.y, camera.Position.z);
+
+    glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"),
+        1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"),
+        1, GL_FALSE, glm::value_ptr(projection));
+
+    for (size_t i = 0; i < 10; i++) {
+        glm::mat4 model(1.0f);
+        model = glm::translate(model, cubePositions[0]);
+        model = glm::rotate(model, 
+            ((float)glfwGetTime()) * glm::radians(1 * 20.0f + 10.0f), 
+            glm::vec3(0.0f, 0.1f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"),
+            1, GL_FALSE, glm::value_ptr(model));
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    //glUseProgram(shaderLightId);
-    //glBindVertexArray(lightVAO);
+    ///////////////////// ///////////////////
 
-    //glm::mat4 model2(1.0f);
-    //model2 = glm::translate(model2, lightPos);
-    //model2 = glm::scale(model2, glm::vec3(0.1f, 0.1f, 0.1f));
-    //glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model2)); 
-    //glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    //glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUseProgram(shaderLightId);
+    glBindVertexArray(lightVAO);
 
-    //glDrawArrays(GL_TRIANGLES, 0, 36);
+    glm::mat4 model2(1.0f);
+    model2 = glm::translate(model2, lightPos);
+    model2 = glm::scale(model2, glm::vec3(0.1f, 0.1f, 0.1f));
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "model"),
+        1, GL_FALSE, glm::value_ptr(model2));
+
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "view"),
+        1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "projection"),
+        1, GL_FALSE, glm::value_ptr(projection));
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 void processInput(GLFWwindow* window) {
-
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
@@ -275,21 +281,19 @@ void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
     if (isMouseFirstIn)
     {
         isMouseFirstIn = false;
-
         lastX = posX;
         lastY = posY;
     }
 
     double offsetX = posX - lastX;
-    double offsetY = lastY - posY;
+    double offsetY =  lastY - posY;
 
     lastX = posX;
     lastY = posY;
 
-    camera.ProcessMouseMovement(offsetX, offsetY);
+   camera.ProcessMouseMovement(offsetX, offsetY);
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY) {
     camera.ProcessMouseScroll(offsetY);
 }
-
