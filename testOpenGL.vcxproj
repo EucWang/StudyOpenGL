@@ -58,6 +58,7 @@
     <ClCompile Include="sample\testPractiseLight22.cpp" />
     <ClCompile Include="sample\testPractiseLight23.cpp" />
     <ClCompile Include="sample\testPractiseLight24.cpp" />
+    <ClCompile Include="sample\testPractiseLight25.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -102,6 +103,9 @@
     <Image Include="images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="helper\lightAttenuation.md" />
+    <None Include="helper\OpenGL_VRML_Materials.md" />
+    <None Include="README.md" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />
@@ -121,6 +125,10 @@
     <None Include="shader\shader_light_test24.vert" />
     <None Include="shader\shader_light_test24_light.frag" />
     <None Include="shader\shader_light_test24_light.vert" />
+    <None Include="shader\shader_light_test25.frag" />
+    <None Include="shader\shader_light_test25.vert" />
+    <None Include="shader\shader_light_test25_light.frag" />
+    <None Include="shader\shader_light_test25_light.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

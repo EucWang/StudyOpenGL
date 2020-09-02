@@ -99,6 +99,11 @@ int practiseLight23(const char* projectDir);
 */
 int practiseLight24(const char* projectDir);
 
+/**
+* พÛนโ
+**/
+int practiseLight25(const char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif
