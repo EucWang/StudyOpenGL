@@ -13,15 +13,13 @@
 #include <iostream>
 using namespace std;
 
-static const char* vertextFile = "shader/shader_light_test25.vert";
-static const char* fragFile = "shader/shader_light_test25.frag";
+static const char* vertextFile = "shader/shader_light_test26.vert";
+static const char* fragFile = "shader/shader_light_test26.frag";
 static const char* lightVertFile = "shader/shader_light_test25_light.vert";
 static const char* lightFragFile = "shader/shader_light_test25_light.frag";
 
 static const char* imageContainer2File = "images/container2.png";
 static const char* imageContainer2SpecularFile = "images/container2_specular.png";
-//static const char* imageContainer2ColorSpecularFile = "images/lighting_maps_specular_color.png";
-//static const char* imageContainer2MatrixSpecularFile = "images/matrix.jpg";
 
 static char* vertextFilePath;
 static char* fragFilePath;
@@ -40,7 +38,6 @@ static bool isMouseFirstIn = true;
 
 static Camera camera(glm::vec3(0.0f, 2.0f, 3.0f));
 //表示光源在场景的世界空间坐标中的位置
-//static glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 static glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 static float vertices[] = {
@@ -157,8 +154,17 @@ static void mouse_move_callback(GLFWwindow* window, double posX, double posY);
 
 static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY);
 
-
-int practiseLight25(const char* projectDir) {
+/// <summary>
+/// 多光源
+/// 我们将结合之前学过的所有知识，创建一个包含六个光源的场景。我们将模拟一个类似太阳的定向光(Directional Light)光源，
+/// 四个分散在场景中的点光源(Point Light)，以及一个手电筒(Flashlight)。
+/// 为了在场景中使用多个光源，我们希望将光照计算封装到GLSL函数中。
+/// 这样做的原因是，每一种光源都需要一种不同的计算方法，而一旦我们想对多个光源进行光照计算时，代码很快就会变得非常复杂。
+/// 如果我们只在main函数中进行所有的这些计算，代码很快就会变得难以理解。
+/// </summary>
+/// <param name="projectDir">当前工程所在目录</param>
+/// <returns>1：成功；-1：失败</returns>
+int practiseLight26(const char* projectDir) {
     if (!getChildPath(&vertextFilePath, projectDir, vertextFile)) { return -1; }
     if (!getChildPath(&fragFilePath, projectDir, fragFile)) { return -1; }
     if (!getChildPath(&lightVertFilePath, projectDir, lightVertFile)) { return -1; }
@@ -208,7 +214,6 @@ int practiseLight25(const char* projectDir) {
     glDeleteProgram(shaderLightId);
 
     return 1;
-
 }
 
 bool prepare(const char* projectDir) {
@@ -229,8 +234,7 @@ bool prepare(const char* projectDir) {
     texture1 = textureLoad(projectDir, imageContainer2File);
     if (texture1 < 0) { return false; }
     texture2 = textureLoad(projectDir, imageContainer2SpecularFile);
-    if (texture2 < 0)    { return false; }
-    
+    if (texture2 < 0) { return false; }
 
     glUseProgram(shaderId);
     glUniform1i(glGetUniformLocation(shaderId, "material.diffuse"), 0);
@@ -252,7 +256,6 @@ bool prepare(const char* projectDir) {
 }
 
 void render() {
-
     glUseProgram(shaderId);
     glBindVertexArray(VAO);
 
@@ -260,30 +263,23 @@ void render() {
     glm::mat4 projection(1.0);
 
     view = camera.GetViewMatrix();
-    projection = glm::perspective(glm::radians(camera.Zoom),
-        SMALL_SCREEN_WIDTH * 1.0f / SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(camera.Zoom), 
+        SMALL_SCREEN_WIDTH * 1.0f/SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
 
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
-    glUniform3f(glGetUniformLocation(shaderId, "light.ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "light.diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "light.specular"), 1.0f, 1.0f, 1.0f);
-    //glUniform3f(glGetUniformLocation(shaderId, "light.position"), lightPos.x, lightPos.y, lightPos.z);
-    glUniform3f(glGetUniformLocation(shaderId, "light.position"), 
-        camera.Position.x, camera.Position.y, camera.Position.z);
-    glUniform3f(glGetUniformLocation(shaderId, "light.direction"), 
-        camera.Front.x, camera.Front.y, camera.Front.z);
-    glUniform1f(glGetUniformLocation(shaderId, "light.cutoff"),glm::cos(glm::radians(12.5f)));
-    glUniform1f(glGetUniformLocation(shaderId, "light.outerCutoff"),glm::cos(glm::radians(17.5f)));
-
+    glUniform3f(glGetUniformLocation(shaderId, "light.ambient"), 0.2f, 0.2f, 0.2f );
+    glUniform3f(glGetUniformLocation(shaderId, "light.diffuse"), 0.5f, 0.5f, 0.5f );
+    glUniform3f(glGetUniformLocation(shaderId, "light.specular"), 1.0f, 1.0f, 1.0f );
+    glUniform3f(glGetUniformLocation(shaderId, "light.position"), lightPos.x, lightPos.y, lightPos.z);
+    
     glUniform1f(glGetUniformLocation(shaderId, "light.constant"), 1.0f);
     glUniform1f(glGetUniformLocation(shaderId, "light.linear"), 0.045f);
     glUniform1f(glGetUniformLocation(shaderId, "light.quadratic"), 0.0075f);
+    
+    glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), 
-        camera.Position.x, camera.Position.y, camera.Position.z);
-
+    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+    
     glUniform1f(glGetUniformLocation(shaderId, "material.shininess"), 32.0f);
     textureActiveAndBind(texture1, 0);
     textureActiveAndBind(texture2, 1);
@@ -291,22 +287,22 @@ void render() {
     for (size_t i = 0; i < 10; i++) {
         glm::mat4 model(1.0);
         model = glm::translate(model, cubePositions[i]);
-        model = glm::rotate(model, ((float)glfwGetTime()) * glm::radians(i * 10.0f + 10.0f), 
-            glm::vec3(0.1, 0.2, 0.3));
-        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"),1, GL_FALSE, glm::value_ptr(model));
+        model = glm::rotate(model, ((float)glfwGetTime()) * glm::radians(i * 10.0f + 10.0f), glm::vec3(0.0f, 0.2f, 0.0f));
 
+        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    glUseProgram(shaderLightId);
+
     glBindVertexArray(lightVAO);
+    glUseProgram(shaderLightId);
 
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glm::mat4 model2(1.0);
-    model2 = glm::translate(model2, lightPos);
-    model2 = glm::scale(model2, glm::vec3(0.1f, 0.1f,0.1f));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model2));
+    glm::mat4 model(1.0);
+    model = glm::translate(model, lightPos);
+    model = glm::scale(model, glm::vec3(0.1));
+    glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
@@ -330,8 +326,7 @@ void processInput(GLFWwindow* window) {
 }
 
 void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
-    if (isMouseFirstIn)
-    {
+    if (isMouseFirstIn) {
         isMouseFirstIn = false;
         lastX = posX;
         lastY = posY;

@@ -104,6 +104,11 @@ int practiseLight24(const char* projectDir);
 **/
 int practiseLight25(const char* projectDir);
 
+/**
+* 多光源混合的场景
+**/
+int practiseLight26(const char* projectDir);
+
 #ifdef __cplusplus
 }
 #endif

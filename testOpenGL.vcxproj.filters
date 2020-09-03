@@ -164,6 +164,9 @@
     <ClCompile Include="sample\testPractiseLight25.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\testPractiseLight26.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -327,6 +330,13 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_light_test25_light.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="helper\smollSplitLightEdge.md" />
+    <None Include="shader\shader_light_test26.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_light_test26.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
