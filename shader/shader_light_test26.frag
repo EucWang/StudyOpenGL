@@ -13,6 +13,41 @@ struct Material {
 	float shininess;
 };
 
+//全局的定向光
+struct DirLight {
+	vec3 direciton;  //方向
+	
+	vec3 ambient;//光照3分量	
+	vec3 diffuse;
+	vec3 specular;
+};
+
+// 点光源
+struct PointLight {
+	vec3 ambient;//光照3分量	
+	vec3 diffuse;
+	vec3 specular;
+	
+	vec3 position;//光源位置
+
+	float constant;//光衰减公式的系数
+	float linear;
+	float quadratic;
+};
+
+//聚光
+struct SpotLight {
+	vec3 ambient;  //光照3分量
+	vec3 diffuse;
+	vec3 specular;
+	
+	vec3 position;   //光源位置
+	vec3 direction;  //光源方向
+
+	float cutoff;       //光源的切光角度
+	float outerCutoff;   //光源的外切光角度
+};
+
 struct Light {
 
 	//光照3分量	
@@ -34,6 +69,14 @@ uniform Light light;
 
 uniform vec3 viewPos;
 
+//计算定向光对物体产生颜色分量
+vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir);
+
+//计算点光源对物体产生的颜色分量
+vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir);
+
+//计算聚光对物体产生的颜色分量
+vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir);
 
 void main(){
 	
