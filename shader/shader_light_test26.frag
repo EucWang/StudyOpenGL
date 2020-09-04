@@ -15,7 +15,7 @@ struct Material {
 
 //全局的定向光
 struct DirLight {
-	vec3 direciton;  //方向
+	vec3 direction;  //方向
 	
 	vec3 ambient;//光照3分量	
 	vec3 diffuse;
@@ -65,18 +65,23 @@ struct Light {
 };
 
 uniform Material material;
-uniform Light light;
+//uniform Light light;
+
+uniform DirLight dirlight;
+#define NR_POINT_LIGHTS 4
+uniform PointLight[NR_POINT_LIGHTS] pointlights;
+uniform SpotLight spotlight;
 
 uniform vec3 viewPos;
 
 //计算定向光对物体产生颜色分量
-vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir);
+vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2);
 
 //计算点光源对物体产生的颜色分量
-vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir);
+vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
 
 //计算聚光对物体产生的颜色分量
-vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir);
+vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
 
 void main(){
 	
@@ -86,26 +91,113 @@ void main(){
 
 	//4个向量, 法线向量,到物体表面的光线向量, 到物体表面的视角向量,从物体表面反射出去的光线向量
 	vec3 norm = normalize(fragNorm);
-	vec3 lightDir = normalize(light.position - fragPos);
 	vec3 viewDir = normalize(viewPos - fragPos);
-	vec3 reflectLightDir = reflect(-lightDir, norm);
 
-	float distance = length(light.position - fragPos);  //光到物体表面的距离
+	//vec3 lightDir = normalize(light.position - fragPos);
+	//vec3 reflectLightDir = reflect(-lightDir, norm);
+
+	//float distance = length(light.position - fragPos);  //光到物体表面的距离
 	//光到物体表面的衰减量
-	float attenuation = 1.0 / (light.constant + light.linear * distance
-		+ light.quadratic * (distance * distance));	
+	//float attenuation = 1.0 / (light.constant + light.linear * distance
+	//+ light.quadratic * (distance * distance));	
 
  
-	vec3 ambient = light.ambient * fragTex1;
+	//vec3 ambient = light.ambient * fragTex1;
 
+	//float diff = max(dot(lightDir, norm), 0.0);
+	//vec3 diffuse = light.diffuse * (diff * fragTex1);
+	//
+	//float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
+	//float spec = pow(diff2, material.shininess);
+	//vec3 specular = light.specular * (spec * fragTex2);
+	//
+	//vec3 result = ambient + diffuse + specular;
+	//result *= attenuation;
+	//fragColor = vec4(result, 1.0);
+
+	vec3 result = calcDirLight(dirlight, norm, viewDir, fragTex1, fragTex2);
+	for(int i = 0; i < NR_POINT_LIGHTS;i++) {
+		result += calcPointLight(pointlights[i], norm, fragPos, viewDir, fragTex1, fragTex2);
+	}
+	result += calcSpotLight(spotlight, norm, fragPos, viewDir, fragTex1, fragTex2);
+
+	fragColor = vec4(result, 1.0);
+}
+
+//计算定向光对物体产生颜色分量
+vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2) {
+	vec3 result;
+
+	vec3 lightDir = normalize(dlight.direction);
+	vec3 reflectLightDir = reflect(-lightDir, norm);
+	
+	vec3 ambient = dlight.ambient * tex1;
+	
 	float diff = max(dot(lightDir, norm), 0.0);
-	vec3 diffuse = light.diffuse * (diff * fragTex1);
+	vec3 diffuse = dlight.diffuse * (diff * tex1);
 
 	float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
 	float spec = pow(diff2, material.shininess);
-	vec3 specular = light.specular * (spec * fragTex2);
+	vec3 specular = dlight.specular * (spec * tex2);
 
-	vec3 result = ambient + diffuse + specular;
+	result = ambient + diffuse + specular;
+	return result;
+}
+
+//计算点光源对物体产生的颜色分量
+vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2) {
+	vec3 result;
+
+	vec3 lightDir = normalize(plight.position - fragPos);
+	vec3 reflectLightDir = reflect(-lightDir, norm);
+
+
+ 	vec3 ambient = plight.ambient * tex1;
+
+	float diff = max(dot(lightDir, norm), 0.0);
+	vec3 diffuse = plight.diffuse * (diff * tex1);
+	
+	float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
+	float spec = pow(diff2, material.shininess);
+	vec3 specular = plight.specular * (spec * tex2);
+	
+	result = ambient + diffuse + specular;
+
+	float distance = length(plight.position - fragPos);  //光到物体表面的距离
+	//光到物体表面的衰减量
+	float attenuation = 1.0 / (plight.constant + plight.linear * distance
+		+ plight.quadratic * (distance * distance));	
+
 	result *= attenuation;
 	fragColor = vec4(result, 1.0);
+
+	return result;
+}
+
+//计算聚光对物体产生的颜色分量
+vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2) {
+	vec3 result;
+	
+	vec3 lightDir = normalize(slight.position - fragPos);
+	vec3 reflectLightDir = reflect(-lightDir, norm);
+	
+ 	vec3 ambient = slight.ambient * tex1;
+
+	float diff = max(dot(lightDir, norm), 0.0);
+	vec3 diffuse = slight.diffuse * (diff * tex1);
+	
+	float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
+	float spec = pow(diff2, material.shininess);
+	vec3 specular = slight.specular * (spec * tex2);
+	
+	//聚光的切角
+	float theta = dot(lightDir, normalize(-slight.direction));  //光线到物体表面的向量与聚光的方向之间的夹角
+	float epsilon = slight.cutoff - slight.outerCutoff;
+	float intense = (theta - slight.outerCutoff) / epsilon;
+	float intensity = clamp(intense, 0.0, 1.0);
+	
+	result = ambient + diffuse + specular;
+	result *= intensity;
+
+	return result;
 }

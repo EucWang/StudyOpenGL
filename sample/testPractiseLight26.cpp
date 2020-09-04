@@ -144,6 +144,14 @@ static glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
+//4个点光源的位置
+glm::vec3 pointLightPositions[] = {
+    glm::vec3(0.7f,  0.2f,  2.0f),
+    glm::vec3(2.3f, -3.3f, -4.0f),
+    glm::vec3(-4.0f,  2.0f, -12.0f),
+    glm::vec3(0.0f,  0.0f, -3.0f)
+};
+
 static bool prepare(const char* projectDir);
 
 static void render();
@@ -191,7 +199,7 @@ int practiseLight26(const char* projectDir) {
         lastFrame = curFrame;
 
         processInput(window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         render();
@@ -263,23 +271,77 @@ void render() {
     glm::mat4 projection(1.0);
 
     view = camera.GetViewMatrix();
-    projection = glm::perspective(glm::radians(camera.Zoom), 
-        SMALL_SCREEN_WIDTH * 1.0f/SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(camera.Zoom),
+        SMALL_SCREEN_WIDTH * 1.0f / SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
 
-    glUniform3f(glGetUniformLocation(shaderId, "light.ambient"), 0.2f, 0.2f, 0.2f );
-    glUniform3f(glGetUniformLocation(shaderId, "light.diffuse"), 0.5f, 0.5f, 0.5f );
-    glUniform3f(glGetUniformLocation(shaderId, "light.specular"), 1.0f, 1.0f, 1.0f );
-    glUniform3f(glGetUniformLocation(shaderId, "light.position"), lightPos.x, lightPos.y, lightPos.z);
-    
-    glUniform1f(glGetUniformLocation(shaderId, "light.constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(shaderId, "light.linear"), 0.045f);
-    glUniform1f(glGetUniformLocation(shaderId, "light.quadratic"), 0.0075f);
-    
+    //定向光
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.specular"), 1.0f, 1.0f, 1.0f);
+    //glUniform3f(glGetUniformLocation(shaderId, "dirlight.direction"), -0.2f, -1.0f, -0.3f);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.direction"), -0.2f, 1.0f, -0.3f);
+
+    //4个点光源
+    //------------------------1
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].position"),
+        pointLightPositions[0].x, pointLightPositions[0].y, pointLightPositions[0].z);
+
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].constant"), 1.0f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].linear"), 0.045f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].quadratic"), 0.0075f);
+    //------------------------2
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].position"),
+        pointLightPositions[1].x, pointLightPositions[1].y, pointLightPositions[1].z);
+
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].constant"), 1.0f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].linear"), 0.045f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].quadratic"), 0.0075f);
+    //------------------------3
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].position"),
+        pointLightPositions[2].x, pointLightPositions[2].y, pointLightPositions[2].z);
+
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].constant"), 1.0f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].linear"), 0.045f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].quadratic"), 0.0075f);
+    //------------------------4
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].position"),
+        pointLightPositions[3].x, pointLightPositions[3].y, pointLightPositions[3].z);
+
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].constant"), 1.0f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].linear"), 0.045f);
+    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].quadratic"), 0.0075f);
+
+    //1个聚光
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.ambient"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.diffuse"), 0.5f, 0.5f, 0.5f);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.position"),
+        camera.Position.x, camera.Position.y, camera.Position.z);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.direction"),
+        camera.Front.x, camera.Front.y, camera.Front.z);
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.cutoff"), glm::cos(glm::radians(12.5f)));
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.outCutoff"), glm::cos(glm::radians(17.5f)));
+
+    //世界坐标矩阵
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-    
+    //视角位置
+    glUniform3f(glGetUniformLocation(shaderId, "viewPos"), 
+        camera.Position.x, camera.Position.y, camera.Position.z);
+    //材质高光系数    
     glUniform1f(glGetUniformLocation(shaderId, "material.shininess"), 32.0f);
     textureActiveAndBind(texture1, 0);
     textureActiveAndBind(texture2, 1);
@@ -293,18 +355,22 @@ void render() {
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
+    //------------------------------------------------------------------------------------------------------
 
     glBindVertexArray(lightVAO);
     glUseProgram(shaderLightId);
 
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glm::mat4 model(1.0);
-    model = glm::translate(model, lightPos);
-    model = glm::scale(model, glm::vec3(0.1));
-    glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    for (int i = 0; i < 4; i++) {
+        glm::mat4 model(1.0);
+        model = glm::translate(model, pointLightPositions[i]);
+        model = glm::scale(model, glm::vec3(0.1));
+        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
 }
 
 void processInput(GLFWwindow* window) {
