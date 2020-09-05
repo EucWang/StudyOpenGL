@@ -16,7 +16,7 @@ using namespace std;
 static const char* vertextFile = "shader/shader_light_test26.vert";
 static const char* fragFile = "shader/shader_light_test26.frag";
 static const char* lightVertFile = "shader/shader_light_test25_light.vert";
-static const char* lightFragFile = "shader/shader_light_test25_light.frag";
+static const char* lightFragFile = "shader/shader_light_test26_light.frag";
 
 static const char* imageContainer2File = "images/container2.png";
 static const char* imageContainer2SpecularFile = "images/container2_specular.png";
@@ -152,6 +152,170 @@ glm::vec3 pointLightPositions[] = {
     glm::vec3(0.0f,  0.0f, -3.0f)
 };
 
+
+//----------------普通场景------------------------------
+//定向光的4个数据
+//glm::vec3 dirLightArgs[4] = {
+//    glm::vec3(0.05f, 0.05f, 0.05f),  //ambient
+//    glm::vec3(0.4f, 0.4f, 0.4f),     //diffuse
+//    glm::vec3(0.5f, 0.5f, 0.5f),     //specular
+//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+//};
+//
+////点光源的6个数据
+//glm::vec3 pointLightArgs[] = {
+//    glm::vec3(0.05f, 0.05f, 0.05f),  //ambient
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+////聚光的6个数据
+//glm::vec3 spotlightArgs[] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+//    glm::vec3(0.8f, 0.8f, 0.8f),     //diffuse
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+
+//----------------沙漠场景------------------------------
+//定向光的4个数据
+//static glm::vec3 dirLightArgs[4] = {
+//    glm::vec3(0.3f, 0.24f, 0.14f),  //ambient
+//    glm::vec3(0.7f, 0.42f, 0.26f),     //diffuse
+//    glm::vec3(0.5f, 0.5f, 0.5f),     //specular
+//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+//};
+//
+////点光源的6个数据
+//glm::vec3 pointLightColors[] = {
+//    glm::vec3(1.0f, 0.6f, 0.0f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+//    glm::vec3(1.0f, 0.0f, 0.0f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+//    glm::vec3(1.0f, 1.0, 0.0),    //第三个点光源的 (ambient, diffuse, specular)  黄色
+//    glm::vec3(0.2f, 0.2f, 1.0f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+//
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+////聚光的6个数据
+//static glm::vec3 spotlightArgs[] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+//    glm::vec3(0.8f, 0.8f, 0.8f),     //diffuse
+//    glm::vec3(0.8f, 0.8f, 0.8f),     //specular
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+//static glm::vec3 clearColor(0.75f, 0.52f, 0.3f);   //背景颜色
+//
+//static glm::vec2 spotlight_cutoff(12.5f, 13.0f);  //聚光的切角和外切角
+//
+//--------------------------------------------------------------------------//
+
+
+//----------------工厂场景------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>
+//定向光的4个数据
+//static glm::vec3 dirLightArgs[4] = {
+//    glm::vec3(0.05f, 0.05f, 0.1f),  //ambient
+//    glm::vec3(0.2f, 0.2f, 0.7f),     //diffuse
+//    glm::vec3(0.7f, 0.7f, 0.7f),     //specular
+//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+//};
+//
+////点光源的6个数据
+//glm::vec3 pointLightColors[] = {
+//    glm::vec3(0.2f, 0.2f, 0.6f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+//    glm::vec3(0.3f, 0.3f, 0.7f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+//    glm::vec3(0.0f, 0.0f, 0.3f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+//    glm::vec3(0.4f, 0.4f, 0.4f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+//
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+////聚光的6个数据
+//static glm::vec3 spotlightArgs[] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+//static glm::vec3 clearColor(0.1f, 0.1f, 0.1f);   //背景颜色
+//
+//static glm::vec2 spotlight_cutoff(10.0f, 12.5f);  //聚光的切角和外切角
+//
+//---------------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+//----------------恐怖场景------------------------------------------>>>>>>>>>>>>
+//定向光的4个数据
+//static glm::vec3 dirLightArgs[4] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),  //ambient
+//    glm::vec3(0.05f, 0.05f, 0.05),     //diffuse
+//    glm::vec3(0.2f, 0.2f, 0.2f),     //specular
+//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+//};
+//
+////点光源的6个数据
+//glm::vec3 pointLightColors[] = {
+//    glm::vec3(0.1f, 0.1f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+//    glm::vec3(0.1f, 0.1f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+//    glm::vec3(0.1f, 0.1f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+//    glm::vec3(0.3f, 0.1f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+//
+//    glm::vec3(1.0f, 0.14f, 0.07f),   //constant,linear, quadratic
+//};
+//
+////聚光的6个数据
+//static glm::vec3 spotlightArgs[] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
+//};
+//
+//static glm::vec3 clearColor(0.0f, 0.0f, 0.0f);   //背景颜色
+//
+//static glm::vec2 spotlight_cutoff(10.0f, 15.0f);  //聚光的切角和外切角
+//
+//-----------------------------------------------------------------<<<<<<<<<<<<<<
+
+
+
+//----------------化学实验室场景------------------------------------------>>>>>>>>>>>>
+//定向光的4个数据
+static glm::vec3 dirLightArgs[4] = {
+    glm::vec3(0.5f, 0.5f, 0.5f),  //ambient
+    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+};
+
+//点光源的6个数据
+glm::vec3 pointLightColors[] = {
+    glm::vec3(0.4f, 0.7f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+    glm::vec3(0.4f, 0.7f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+    glm::vec3(0.4f, 0.7f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+    glm::vec3(0.4f, 0.7f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+
+    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+};
+
+//聚光的6个数据
+static glm::vec3 spotlightArgs[] = {
+    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+    glm::vec3(0.0f, 1.0f, 0.0f),     //diffuse
+    glm::vec3(0.0f, 1.0f, 0.0f),     //specular
+    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+};
+
+static glm::vec3 clearColor(0.9f, 0.9f, 0.9f);   //背景颜色
+
+static glm::vec2 spotlight_cutoff(7.0f, 10.0f);  //聚光的切角和外切角
+
+//-----------------------------------------------------------------<<<<<<<<<<<<<<
+
+
 static bool prepare(const char* projectDir);
 
 static void render();
@@ -199,7 +363,7 @@ int practiseLight26(const char* projectDir) {
         lastFrame = curFrame;
 
         processInput(window);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(clearColor.x, clearColor.y, clearColor.z, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         render();
@@ -266,7 +430,7 @@ bool prepare(const char* projectDir) {
 void render() {
     glUseProgram(shaderId);
     glBindVertexArray(VAO);
-
+    
     glm::mat4 view(1.0);
     glm::mat4 projection(1.0);
 
@@ -275,64 +439,59 @@ void render() {
         SMALL_SCREEN_WIDTH * 1.0f / SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
 
     //定向光
-    glUniform3f(glGetUniformLocation(shaderId, "dirlight.ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "dirlight.diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "dirlight.specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.ambient"), dirLightArgs[0].x, dirLightArgs[0].y, dirLightArgs[0].z);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.diffuse"), dirLightArgs[1].x, dirLightArgs[1].y, dirLightArgs[1].z);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.specular"), dirLightArgs[2].x, dirLightArgs[2].y, dirLightArgs[2].z);
     //glUniform3f(glGetUniformLocation(shaderId, "dirlight.direction"), -0.2f, -1.0f, -0.3f);
-    glUniform3f(glGetUniformLocation(shaderId, "dirlight.direction"), -0.2f, 1.0f, -0.3f);
+    glUniform3f(glGetUniformLocation(shaderId, "dirlight.direction"), dirLightArgs[3].x, dirLightArgs[3].y, dirLightArgs[3].z);
 
     //4个点光源
     //------------------------1
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].specular"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[0].position"),
-        pointLightPositions[0].x, pointLightPositions[0].y, pointLightPositions[0].z);
+    for (int i = 0; i < 4; i++) {
+        char ambient[23]{ 0 };
+        char diffuse[23]{ 0 };
+        char specular[24]{ 0 };
+             
+        char position[24]{ 0 };
+        char constant[24]{ 0 };
+        char linear[22]{ 0 };
+        char quadratic[25]{ 0 };
 
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].linear"), 0.045f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[0].quadratic"), 0.0075f);
-    //------------------------2
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].specular"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[1].position"),
-        pointLightPositions[1].x, pointLightPositions[1].y, pointLightPositions[1].z);
+        sprintf_s(ambient, 23, "pointlights[%d].ambient", i);
+        sprintf_s(diffuse, 23, "pointlights[%d].diffuse", i);
+        sprintf_s(specular, 24,"pointlights[%d].specular", i);
+               
+        sprintf_s(position,24, "pointlights[%d].position", i);
+               
+        sprintf_s(constant,24, "pointlights[%d].constant", i);
+        sprintf_s(linear, 22, "pointlights[%d].linear", i);
+        sprintf_s(quadratic, 25, "pointlights[%d].quadratic", i);
+        glUniform3f(glGetUniformLocation(shaderId, position), pointLightPositions[i].x, pointLightPositions[i].y, pointLightPositions[i].z);
 
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].linear"), 0.045f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[1].quadratic"), 0.0075f);
-    //------------------------3
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].specular"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[2].position"),
-        pointLightPositions[2].x, pointLightPositions[2].y, pointLightPositions[2].z);
+        glUniform3f(glGetUniformLocation(shaderId, ambient),  pointLightColors[i].x * 0.1f, pointLightColors[i].y * 0.1f, pointLightColors[i].z * 0.1f);
+        glUniform3f(glGetUniformLocation(shaderId, diffuse),  pointLightColors[i].x, pointLightColors[i].y, pointLightColors[i].z);
+        glUniform3f(glGetUniformLocation(shaderId, specular), pointLightColors[i].x, pointLightColors[i].y, pointLightColors[i].z);
 
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].linear"), 0.045f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[2].quadratic"), 0.0075f);
-    //------------------------4
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].specular"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(shaderId, "pointlights[3].position"),
-        pointLightPositions[3].x, pointLightPositions[3].y, pointLightPositions[3].z);
-
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].linear"), 0.045f);
-    glUniform1f(glGetUniformLocation(shaderId, "pointlights[3].quadratic"), 0.0075f);
+        glUniform1f(glGetUniformLocation(shaderId, constant), pointLightColors[4].x);
+        glUniform1f(glGetUniformLocation(shaderId, linear), pointLightColors[4].y);
+        glUniform1f(glGetUniformLocation(shaderId, quadratic), pointLightColors[4].z);
+    }
 
     //1个聚光
-    glUniform3f(glGetUniformLocation(shaderId, "spotlight.ambient"), 0.2f, 0.2f, 0.2f);
-    glUniform3f(glGetUniformLocation(shaderId, "spotlight.diffuse"), 0.5f, 0.5f, 0.5f);
-    glUniform3f(glGetUniformLocation(shaderId, "spotlight.specular"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.ambient"), spotlightArgs[0].x, spotlightArgs[0].y, spotlightArgs[0].z);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.diffuse"), spotlightArgs[1].x, spotlightArgs[1].y, spotlightArgs[1].z);
+    glUniform3f(glGetUniformLocation(shaderId, "spotlight.specular"), spotlightArgs[2].x, spotlightArgs[2].y, spotlightArgs[2].z);
     glUniform3f(glGetUniformLocation(shaderId, "spotlight.position"),
         camera.Position.x, camera.Position.y, camera.Position.z);
     glUniform3f(glGetUniformLocation(shaderId, "spotlight.direction"),
         camera.Front.x, camera.Front.y, camera.Front.z);
-    glUniform1f(glGetUniformLocation(shaderId, "spotlight.cutoff"), glm::cos(glm::radians(12.5f)));
-    glUniform1f(glGetUniformLocation(shaderId, "spotlight.outCutoff"), glm::cos(glm::radians(17.5f)));
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.cutoff"), glm::cos(glm::radians(spotlight_cutoff.x)));
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.outCutoff"), glm::cos(glm::radians(spotlight_cutoff.y)));
+
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.constant"), spotlightArgs[3].x);
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.linear"), spotlightArgs[3].y);
+    glUniform1f(glGetUniformLocation(shaderId, "spotlight.quadratic"), spotlightArgs[3].z);
+
 
     //世界坐标矩阵
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(view));
@@ -349,7 +508,7 @@ void render() {
     for (size_t i = 0; i < 10; i++) {
         glm::mat4 model(1.0);
         model = glm::translate(model, cubePositions[i]);
-        model = glm::rotate(model, ((float)glfwGetTime()) * glm::radians(i * 10.0f + 10.0f), glm::vec3(0.0f, 0.2f, 0.0f));
+        model = glm::rotate(model, ((float)glfwGetTime()) * glm::radians(i * 10.0f), glm::vec3(0.0f, 0.2f, 0.0f));
 
         glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -367,7 +526,10 @@ void render() {
         glm::mat4 model(1.0);
         model = glm::translate(model, pointLightPositions[i]);
         model = glm::scale(model, glm::vec3(0.1));
-        glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+        glUniform3f(glGetUniformLocation(shaderLightId, "lightColor"), 
+            pointLightColors[i].x, pointLightColors[i].y, pointLightColors[i].z);
 
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }

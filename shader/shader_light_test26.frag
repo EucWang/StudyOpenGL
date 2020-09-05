@@ -46,6 +46,10 @@ struct SpotLight {
 
 	float cutoff;       //光源的切光角度
 	float outerCutoff;   //光源的外切光角度
+
+	float constant;//光衰减公式的系数
+	float linear;
+	float quadratic;
 };
 
 struct Light {
@@ -195,8 +199,15 @@ vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3
 	float epsilon = slight.cutoff - slight.outerCutoff;
 	float intense = (theta - slight.outerCutoff) / epsilon;
 	float intensity = clamp(intense, 0.0, 1.0);
+
+	float distance = length(slight.position - fragPos);  //光到物体表面的距离
+	//光到物体表面的衰减量
+	float attenuation = 1.0 / (slight.constant + slight.linear * distance
+		+ slight.quadratic * (distance * distance));	
+
 	
 	result = ambient + diffuse + specular;
+	result *= attenuation;
 	result *= intensity;
 
 	return result;
