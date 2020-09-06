@@ -45,6 +45,15 @@
     <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\mesh.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\model.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -166,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="sample\testPractiseLight26.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

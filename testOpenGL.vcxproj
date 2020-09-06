@@ -22,6 +22,9 @@
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\fileUtil.h" />
     <ClInclude Include="include\list.h" />
+    <ClInclude Include="include\mesh.h" />
+    <ClInclude Include="include\model.h" />
+    <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
@@ -66,6 +69,9 @@
     <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mesh.cpp" />
+    <ClCompile Include="src\model.cpp" />
+    <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\shaders.c" />
     <ClCompile Include="src\shaderSource.c" />
     <ClCompile Include="src\util.c" />
@@ -195,8 +201,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)\libs\glm-0.9.9.8;$(ProjectDir)\libs\glad\include;$(ProjectDir)\libs\glfw-3.3.2.bin.WIN32\include;$(IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(ProjectDir)\libs\glfw-3.3.2.bin.WIN32\lib-vc2019;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>$(ProjectDir)\libs\assimp\include;$(ProjectDir)\libs\glm-0.9.9.8;$(ProjectDir)\libs\glad\include;$(ProjectDir)\libs\glfw-3.3.2.bin.WIN32\include;$(IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)\libs\assimp\lib;$(ProjectDir)\libs\glfw-3.3.2.bin.WIN32\lib-vc2019;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -235,7 +241,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc142-mt.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
