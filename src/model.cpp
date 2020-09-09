@@ -7,7 +7,7 @@
 #include <assimp/postprocess.h>
 #include <assimp/material.h>
 
-using namespace Assimp;
+//using namespace Assimp;
 
 void  Model::draw(Shader & shader) {
 	for (size_t i = 0; i < meshes.size(); i++)
@@ -26,7 +26,7 @@ void  Model::draw(Shader & shader) {
 /// </summary>
 /// <param name="path">模型文件的路径</param>
 void  Model::loadModel(string const &path) {
-	Importer importer;
+	Assimp::Importer importer;
 	//ReadFile()的第二个参数是一些后期处理(Post-processing)的选项。
 	//设定aiProcess_Triangulate，如果模型不是（全部）由三角形组成，它会将模型所有的图元形状变换为三角形。
 	//aiProcess_FlipUVs将在处理的时候翻转y轴的纹理坐标（
