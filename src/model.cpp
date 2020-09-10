@@ -90,8 +90,7 @@ void Model::loadModel(string const& path) {
 	const aiScene* scene = importer.ReadFile(path,
 		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
-	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-	{
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)	{
 		cout << "ERROR:ASSIMP::" << importer.GetErrorString() << std::endl;
 		return;
 	}

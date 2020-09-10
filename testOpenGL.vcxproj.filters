@@ -19,9 +19,6 @@
     <Filter Include="libs">
       <UniqueIdentifier>{d2a0ffc1-bd90-4e54-bc1c-72d54a725878}</UniqueIdentifier>
     </Filter>
-    <Filter Include="images\nanosuit">
-      <UniqueIdentifier>{7d6d64b9-16db-496c-95d5-03c3cb120c5e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -265,9 +262,6 @@
     <Text Include="shader\shader_light_test19_fragment_light.txt">
       <Filter>shader</Filter>
     </Text>
-    <Text Include="images\nanosuit\LICENSE.txt">
-      <Filter>images\nanosuit</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\awesomeface.png">
@@ -290,57 +284,6 @@
     </Image>
     <Image Include="images\matrix.jpg">
       <Filter>images</Filter>
-    </Image>
-    <Image Include="images\nanosuit\arm_dif.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\arm_showroom_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\arm_showroom_spec.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\body_dif.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\body_showroom_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\body_showroom_spec.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\glass_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\glass_dif.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\hand_dif.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\hand_showroom_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\hand_showroom_spec.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\helmet_diff.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\helmet_showroom_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\helmet_showroom_spec.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\leg_dif.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\leg_showroom_ddn.png">
-      <Filter>images\nanosuit</Filter>
-    </Image>
-    <Image Include="images\nanosuit\leg_showroom_spec.png">
-      <Filter>images\nanosuit</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -432,16 +375,5 @@
     <None Include="shader\shader_light_test27.frag">
       <Filter>shader</Filter>
     </None>
-    <None Include="images\nanosuit\nanosuit.blend">
-      <Filter>images\nanosuit</Filter>
-    </None>
-    <None Include="images\nanosuit\nanosuit.mtl">
-      <Filter>images\nanosuit</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="images\nanosuit\nanosuit.obj">
-      <Filter>images\nanosuit</Filter>
-    </Object>
   </ItemGroup>
 </Project>

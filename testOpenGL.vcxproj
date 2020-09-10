@@ -80,7 +80,6 @@
     <ClCompile Include="src\util.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="images\nanosuit\LICENSE.txt" />
     <Text Include="shader\shader_camera_test17_fragment.txt" />
     <Text Include="shader\shader_camera_test17_vertex.txt" />
     <Text Include="shader\shader_light_test18_fragment.txt" />
@@ -111,31 +110,12 @@
     <Image Include="images\container2_specular.png" />
     <Image Include="images\lighting_maps_specular_color.png" />
     <Image Include="images\matrix.jpg" />
-    <Image Include="images\nanosuit\arm_dif.png" />
-    <Image Include="images\nanosuit\arm_showroom_ddn.png" />
-    <Image Include="images\nanosuit\arm_showroom_spec.png" />
-    <Image Include="images\nanosuit\body_dif.png" />
-    <Image Include="images\nanosuit\body_showroom_ddn.png" />
-    <Image Include="images\nanosuit\body_showroom_spec.png" />
-    <Image Include="images\nanosuit\glass_ddn.png" />
-    <Image Include="images\nanosuit\glass_dif.png" />
-    <Image Include="images\nanosuit\hand_dif.png" />
-    <Image Include="images\nanosuit\hand_showroom_ddn.png" />
-    <Image Include="images\nanosuit\hand_showroom_spec.png" />
-    <Image Include="images\nanosuit\helmet_diff.png" />
-    <Image Include="images\nanosuit\helmet_showroom_ddn.png" />
-    <Image Include="images\nanosuit\helmet_showroom_spec.png" />
-    <Image Include="images\nanosuit\leg_dif.png" />
-    <Image Include="images\nanosuit\leg_showroom_ddn.png" />
-    <Image Include="images\nanosuit\leg_showroom_spec.png" />
     <Image Include="images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
-    <None Include="images\nanosuit\nanosuit.blend" />
-    <None Include="images\nanosuit\nanosuit.mtl" />
     <None Include="README.md" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
@@ -165,9 +145,6 @@
     <None Include="shader\shader_light_test26_light.frag" />
     <None Include="shader\shader_light_test27.frag" />
     <None Include="shader\shader_light_test27.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="images\nanosuit\nanosuit.obj" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

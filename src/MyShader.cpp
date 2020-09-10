@@ -30,6 +30,7 @@ MyShader::MyShader(const GLchar* vertexPath, const GLchar* fragmentPath) {
 		return;
 	}
 
+	id = -1;
 	// 2. 编译着色器
 	if (!compileShader(vShaderCode, fShaderCode)) {
 		std::cout << "Shader constructor() failed." << std::endl;
@@ -61,6 +62,7 @@ MyShader::MyShader(const char* projectDir, const char* vertexSubPath, const char
 		return;
 	}
 	
+	id = -1;
 	// 2. 编译着色器
 	if (!compileShader(vShaderCode, fShaderCode)) {
 		std::cout << "Shader constructor() failed." << std::endl;
