@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 
 #include "../include/test.h"
 #include "../include/fileUtil.h"
@@ -33,13 +33,31 @@ int main(int argc, char* argv[]) {
 	//首先得到debug路径
 	//然后得到项目路径
 	if (!(getParentDir(argv[0], &debugDir) && getParentDir(debugDir, &projectDir))) {
-		printf("%s\n", "main() failed, because getParentDir() call failed, cannot get projectDir");
+		//printf("%s\n", "main() failed, because getParentDir() call failed, cannot get projectDir");
 		return -1;
 	}
 
-	printf("%s\n", "cpp main() run..");
+	//printf("%s\n", "cpp main() run..");
 	//testMovePos();
 	//testScale();
+
+	//drawTriangle();
+	//drawRectangle();
+	//drawUnfillRectangle();
+	//practiseDrawTriangles1();
+	//practiseDrawTriangles2();
+	//practiseDrawTriangles4();
+	//practiseDrawTriangles5();
+	//practiseDrawTriangle6();
+	//practiseDrawTriangle7();
+	//testReadFile();
+	//practiseDrawTriangle8();
+	//testLoadStbImage();
+	//testPractiseDrawWithTexure9(projectDir);
+	//testGetParentDir();
+	//testGetChildPath();
+	//practiseDrawWithTexture10(projectDir);
+
 	//practiseDrawWithTransform11(projectDir);
 	//practiseDrawWithPerspective12(projectDir);
 	//practiseDrawWithPerspective13(projectDir);
@@ -60,8 +78,8 @@ int main(int argc, char* argv[]) {
 	TestPractiseLight27 practise = TestPractiseLight27();
 	practise.practiseLight27(projectDir);
 
-	free(debugDir);
-	free(projectDir);
+	//free(debugDir);
+	//free(projectDir);
 	return 0;
 }
 

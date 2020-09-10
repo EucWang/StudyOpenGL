@@ -53,8 +53,8 @@ public:
 private:
 	bool compileShader(const char* vShaderCode, const char* fShaderCode);
 
-	bool getVertexCode(const char** targetVertexCode, const char* vertexPath);
-	bool getFragmentCode(const char** targetFragmentCode, const char* fragmentPath);
+	//string getVertexCode(const char* vertexPath);
+	//string getFragmentCode(const char* fragmentPath);
 };
 
 #endif // !SHADER_H_

@@ -12,23 +12,14 @@
 
 using namespace std;
 
-
-MyShader::MyShader(const GLchar* vertexPath, const GLchar* fragmentPath) {
+MyShader::MyShader(const GLchar* vertexPath, const GLchar* fragPath) {
 	// 1. 从文件路径中获取顶点/片段着色器
-	const char* vShaderCode;
-	const char* fShaderCode;
-	const char* vPath = vertexPath;
-	const char* fPath = fragmentPath;
+	char* vShaderCode;
+	char* fShaderCode;
 	//读取顶点着色器文件中的文本资源
-	if (!getVertexCode(&vShaderCode, vPath)) {
-		std::cout << "Shader constructor() failed." << std::endl;
-		return;
-	}
+	if (!readStrFromFile(vertexPath, &vShaderCode)) { return; }
 	//读取片段着色器文件中的文本资源
-	if (!getFragmentCode(&fShaderCode, fPath)) {
-		std::cout << "Shader constructor() failed." << std::endl;
-		return;
-	}
+	if (!readStrFromFile(fragPath, &fShaderCode)) { return; }
 
 	id = -1;
 	// 2. 编译着色器
@@ -49,19 +40,13 @@ MyShader::MyShader(const char* projectDir, const char* vertexSubPath, const char
 		std::cout << "Shader constructor() failed." << std::endl;
 		return;
 	}
-	const char* vShaderCode;
-	const char* fShaderCode;
+	char* vShaderCode;
+	char* fShaderCode;
 	//读取顶点着色器文件中的文本资源
-	if (!getVertexCode(&vShaderCode, vertexPath)) {
-		std::cout << "Shader constructor() failed." << std::endl;
-		return;
-	}
+	if (!readStrFromFile(vertexPath, &vShaderCode)) { return; }
 	//读取片段着色器文件中的文本资源
-	if (!getFragmentCode(&fShaderCode, fragPath)) {
-		std::cout << "Shader constructor() failed." << std::endl;
-		return;
-	}
-	
+	if (!readStrFromFile(fragPath, &fShaderCode)) { return; }
+	 
 	id = -1;
 	// 2. 编译着色器
 	if (!compileShader(vShaderCode, fShaderCode)) {
@@ -181,59 +166,57 @@ bool MyShader::compileShader(const char* vShaderCode, const char* fShaderCode) {
 	return true;
 }
 
-bool MyShader::getVertexCode(const char** targetVertexCode, const char* vertexPath) {
+//string MyShader::getCode(const char* vertexPath) {
+//
+//	std::string vertexCode;          //解析获得的顶点着色器文本代码
+//	std::ifstream vShaderFile;
+//	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+//
+//	try {
+//		vShaderFile.open(vertexPath);
+//		// 读取文件的缓冲内容到数据流中
+//		std::stringstream vShaderStream;
+//		vShaderStream << vShaderFile.rdbuf();
+//		// 关闭文件处理器
+//		vShaderFile.close();
+//
+//		// 转换数据流到string
+//		vertexCode = vShaderStream.str();
+//	}
+//	catch (std::ifstream::failure e) {
+//		std::cout << "ERROR::SHADER::VERTEX_FILE_NOT_SUCCESFULLY_READ" << ", filePath = " << vertexPath << std::endl;
+//		return NULL;
+//	}
+//
+//	// 转换成c语言的字符串
+//
+//	return vertexCode;
+//}
 
-	std::string vertexCode;          //解析获得的顶点着色器文本代码
-	std::ifstream vShaderFile;
-	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-	try {
-		vShaderFile.open(vertexPath);
-		// 读取文件的缓冲内容到数据流中
-		std::stringstream vShaderStream;
-		vShaderStream << vShaderFile.rdbuf();
-		// 关闭文件处理器
-		vShaderFile.close();
-
-		// 转换数据流到string
-		vertexCode = vShaderStream.str();
-	}
-	catch (std::ifstream::failure e) {
-		std::cout << "ERROR::SHADER::VERTEX_FILE_NOT_SUCCESFULLY_READ" << ", filePath = " << vertexPath << std::endl;
-		return false;
-	}
-
-	// 转换成c语言的字符串
-	const char* vShaderCode = vertexCode.c_str();
-	*targetVertexCode = vShaderCode;
-	return true;
-}
-bool MyShader::getFragmentCode(const char** targetFragmentCode, const char* fragmentPath) {
-
-	std::string fragmentCode;		//解析获得的颜色着色器文本代码
-	std::ifstream fShaderFile;
-	// 保证ifstream对象可以抛出异常：
-	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-	try {
-		fShaderFile.open(fragmentPath);
-		// 读取文件的缓冲内容到数据流中
-		std::stringstream vShaderStream, fShaderStream;
-		fShaderStream << fShaderStream.rdbuf();
-		// 关闭文件处理器
-		fShaderFile.close();
-
-		// 转换数据流到string
-		fragmentCode = fShaderStream.str();
-	}
-	catch (std::ifstream::failure e) {
-		std::cout << "ERROR::SHADER::FRAGMENT_FILE_NOT_SUCCESFULLY_READ" << ", file path = " << fragmentPath << std::endl;
-		return false;
-	}
-
-	// 转换成c语言的字符串
-	const char* fShaderCode = fragmentCode.c_str();
-	*targetFragmentCode = fShaderCode;
-	return true;
-}
+//string MyShader::getFragmentCode(const char* fragmentPath) {
+//
+//	std::string fragmentCode;		//解析获得的颜色着色器文本代码
+//	std::ifstream fShaderFile;
+//	// 保证ifstream对象可以抛出异常：
+//	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+//
+//	try {
+//		fShaderFile.open(fragmentPath);
+//		// 读取文件的缓冲内容到数据流中
+//		std::stringstream fShaderStream;
+//		fShaderStream << fShaderFile.rdbuf();
+//		// 关闭文件处理器
+//		fShaderFile.close();
+//
+//		// 转换数据流到string
+//		fragmentCode = fShaderStream.str();
+//	}
+//	catch (std::ifstream::failure e) {
+//		std::cout << "ERROR::SHADER::FRAGMENT_FILE_NOT_SUCCESFULLY_READ" << ", file path = " << fragmentPath << std::endl;
+//		return NULL;
+//	}
+//
+//	// 转换成c语言的字符串
+//	return fragmentCode;
+//}
 
