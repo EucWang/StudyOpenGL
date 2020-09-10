@@ -1,32 +1,83 @@
-#include "../include/model.h"
-#include "../include/shaders.h"
+#include "../include/Model.h"
+#include "../include/MyShader.h"
+#include "../include/Mesh.h"
 #include "../include/stb_image.h"
+#include <vector>
+#include <assimp/scene.h>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <assimp/material.h>
+#include <iostream>
+#include <string>
 
-//using namespace Assimp;
+using namespace std;
+using namespace Assimp;
 
-void  Model::draw(Shader & shader) {
+/// <summary>
+/// 工具方法， 根据directory 和path 从文件系统中加载一个图片纹理，并返回纹理对象的id
+/// </summary>
+/// <param name="path">const char*</param>
+/// <param name="directory">const string &</param>
+/// <param name="gamma">bool gamma = false</param>
+/// <returns>unsigned int</returns>
+unsigned int TextureFromFile(const char* path, const string& directory, bool gamma) {
+	string filename = string(path);
+	filename = directory + "/" + filename;
+
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+
+	int width, height, nrComponents;
+	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+	if (data)
+	{
+		GLenum format;
+		if (nrComponents == 1)
+		{
+			format = GL_RED;
+		}
+		else if (nrComponents == 3) {
+			format = GL_RGB;
+		}
+		else if (nrComponents == 4) {
+			format = GL_RGBA;
+		}
+
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		stbi_image_free(data);
+	}
+	else {
+		std::cout << "Texture failed to load at path: " << path << std::endl;
+		stbi_image_free(data);
+	}
+
+	return textureID;
+}
+ 
+
+Model::Model(string const& path, bool gamma) : gammaCorrection(gamma) {
+		loadModel(path);
+	}
+
+void Model::draw(MyShader* shader) {
 	for (size_t i = 0; i < meshes.size(); i++)
 	{
 		meshes[i].draw(shader);
 	}
 }
 
-/// <summary>
-/// 导入3D模型到OpenGL
-/// 
-/// 在loadModel中，我们使用Assimp来加载模型至Assimp的一个叫做scene的数据结构中。
-/// scene是Assimp数据接口的根对象。
-/// 
-/// 一旦我们有了这个场景对象，我们就能访问到加载后的模型中所有所需的数据了。
-/// </summary>
-/// <param name="path">模型文件的路径</param>
-void  Model::loadModel(string const &path) {
-	Assimp::Importer importer;
+
+void Model::loadModel(string const& path) {
+	Importer importer;
 	//ReadFile()的第二个参数是一些后期处理(Post-processing)的选项。
 	//设定aiProcess_Triangulate，如果模型不是（全部）由三角形组成，它会将模型所有的图元形状变换为三角形。
 	//aiProcess_FlipUVs将在处理的时候翻转y轴的纹理坐标（
@@ -36,7 +87,7 @@ void  Model::loadModel(string const &path) {
 	//	aiProcess_SplitLargeMeshes：将比较大的网格分割成更小的子网格，如果你的渲染有最大顶点数限制，只能渲染较小的网格，那么它会非常有用。
 	//	aiProcess_OptimizeMeshes：和上个选项相反，它会将多个小网格拼接为一个大的网格，减少绘制调用从而进行优化。
 	// 参考: http://assimp.sourceforge.net/lib_html/postprocess_8h.html
-	const aiScene * scene = importer.ReadFile(path,
+	const aiScene* scene = importer.ReadFile(path,
 		aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -51,12 +102,6 @@ void  Model::loadModel(string const &path) {
 
 }
 
-/// <summary>
-/// 递归函数
-/// 因为每个节点（可能）包含有多个子节点，我们希望首先处理参数中的节点，再继续处理该节点所有的子节点，以此类推。
-/// </summary>
-/// <param name="node"></param>
-/// <param name="scene"></param>
 void Model::processNode(aiNode* node, const aiScene* scene) {
 	//处理结点中所有的网格,如果有的话
 	for (size_t i = 0; i < node->mNumMeshes; i++) {
@@ -73,17 +118,18 @@ void Model::processNode(aiNode* node, const aiScene* scene) {
 }
 
 /// <summary>
-/// 将一个aiMesh对象转化为我们自己的网格对象不是那么困难。我们要做的只是访问网格的相关属性并将它们储存到我们自己的对象中
+/// 将一个aiMesh对象转化为我们自己的网格对象不是那么困难。
+/// 我们要做的只是访问网格的相关属性并将它们储存到我们自己的对象中
 /// </summary>
 /// <param name="mesh"></param>
 /// <param name="scene"></param>
 /// <returns></returns>
-Mesh  Model::processMesh(aiMesh* mesh, const aiScene* scene) {
+Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 	vector<Vertex> vectices;
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 
-	for (size_t i = 0; i < mesh->mNumVertices; i++)	{
+	for (size_t i = 0; i < mesh->mNumVertices; i++) {
 		Vertex vertex;
 		// 处理顶点位置、法线和纹理坐标
 		aiVector3D aiVector = mesh->mVertices[i];
@@ -104,7 +150,7 @@ Mesh  Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 		//  Assimp允许一个模型在一个顶点上有最多8个不同的纹理坐标，我们只关心第一组纹理坐标。
 		//  我们同样也想检查网格是否真的包含了纹理坐标（可能并不会一直如此）
-		if (mesh->mTextureCoords[0]){ //判断网格是否有纹理坐标
+		if (mesh->mTextureCoords[0]) { //判断网格是否有纹理坐标
 			glm::vec2 tex;
 			tex.x = mesh->mTextureCoords[0][i].x;
 			tex.y = mesh->mTextureCoords[0][i].y;
@@ -123,7 +169,8 @@ Mesh  Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 			bitangent.y = mesh->mBitangents[i].y;
 			bitangent.z = mesh->mBitangents[i].z;
 			vertex.Bitangent = bitangent;
-		} else {
+		}
+		else {
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 		}
 
@@ -148,7 +195,7 @@ Mesh  Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 	//如果想要获取网格真正的材质，我们还需要索引场景的mMaterials数组。
 	//网格材质索引位于它的mMaterialIndex属性中，我们同样可以用它来检测一个网格是否包含有材质：
 	if (mesh->mMaterialIndex >= 0) {
-		aiMaterial * material = scene->mMaterials[mesh->mMaterialIndex];
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 		//我们使用一个叫做loadMaterialTextures的工具函数来从材质中获取纹理。
 		//这个函数将会返回一个Texture结构体的vector，我们将在模型的textures vector的尾部之后存储它。
@@ -171,15 +218,6 @@ Mesh  Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 }
 
-/// <summary>
-/// loadMaterialTextures函数遍历了给定纹理类型的所有纹理位置，获取了纹理的文件位置，
-/// 并加载并和生成了纹理，将信息储存在了一个Vertex结构体中。它看起来会像这样：
-/// 
-/// </summary>
-/// <param name="material">aiMaterial*</param>
-/// <param name="type">类型aiTextureType 取值: aiTextureType_DIFFUSE / aiTextureType_SPECULAR</param>
-/// <param name="typeName">类型string, 取值: "texture_diffuse"/"texture_specular"</param>
-/// <returns>vector<Texture></returns>
 vector<Texture> Model::loadMaterialTexture(aiMaterial* material, aiTextureType type, string typeName) {
 	vector<Texture> textures;
 
@@ -203,61 +241,11 @@ vector<Texture> Model::loadMaterialTexture(aiMaterial* material, aiTextureType t
 			texture.id = TextureFromFile(str.C_Str(), directory);
 			texture.type = typeName;
 			texture.path = str.C_Str();
-		    textures.push_back(texture);
+			textures.push_back(texture);
 			textures_loaded.push_back(texture); // 添加到已加载的纹理中
 		}
-		
+
 	}
 
 	return textures;
-}
-
-
-/// <summary>
-/// 工具方法， 根据directory 和path 从文件系统中加载一个图片纹理，并返回纹理对象的id
-/// </summary>
-/// <param name="path"></param>
-/// <param name="directory"></param>
-/// <param name="gamma"></param>
-/// <returns></returns>
-unsigned int TextureFromFile(const char* path, const string& directory, bool gamma) {
-	string filename = string(path);
-	filename = directory + "/" + filename;
-
-	unsigned int textureID;
-	glGenTextures(1, &textureID);
-
-	int width, height, nrComponents;
-	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-	if (data)
-	{
-		GLenum format;
-		if (nrComponents == 1)
-		{
-			format = GL_RED;
-		}
-		else if(nrComponents == 3) {
-			format = GL_RGB;
-		}
-		else if (nrComponents == 4) {
-			format = GL_RGBA;
-		}
-
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		stbi_image_free(data);
-	}
-	else {
-		std::cout << "Texture failed to load at path: " << path << std::endl;
-		stbi_image_free(data);
-	}
-
-	return textureID;
 }

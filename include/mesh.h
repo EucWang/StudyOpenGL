@@ -1,11 +1,12 @@
 #ifndef MESH_H_
 #define MESH_H_
 
+#include "MyShader.h"
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
 
-#include "../include/shader.h"
+class MyShader;
 
 using namespace std;
 
@@ -33,6 +34,7 @@ struct Texture {
 	string path;
 };
 
+
 class Mesh
 {
 public:
@@ -45,7 +47,6 @@ public:
 	* 在构造器中，我们将所有必须的数据赋予了网格
 	*/
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
-
 
 	/**
 	* 最终使用Draw函数来绘制网格。
@@ -62,7 +63,7 @@ public:
 	*		uniform sampler2D texture_specular1;
 	*		uniform sampler2D texture_specular2;
 	*/
-	void draw(Shader & shader);
+	void draw(MyShader* shader);
 
 	//~Mesh();
 
@@ -76,7 +77,4 @@ private:
 	void setupMesh();
 };
  
-
-
 #endif // !MESH_H_
-

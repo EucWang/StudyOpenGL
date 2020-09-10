@@ -242,76 +242,76 @@ glm::vec3 pointLightPositions[] = {
 //static glm::vec3 clearColor(0.1f, 0.1f, 0.1f);   //背景颜色
 //
 //static glm::vec2 spotlight_cutoff(10.0f, 12.5f);  //聚光的切角和外切角
-//
-//---------------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<
 
+//---------------------------------------------------------<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 //----------------恐怖场景------------------------------------------>>>>>>>>>>>>
 //定向光的4个数据
-//static glm::vec3 dirLightArgs[4] = {
-//    glm::vec3(0.0f, 0.0f, 0.0f),  //ambient
-//    glm::vec3(0.05f, 0.05f, 0.05),     //diffuse
-//    glm::vec3(0.2f, 0.2f, 0.2f),     //specular
-//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
-//};
-//
-////点光源的6个数据
-//glm::vec3 pointLightColors[] = {
-//    glm::vec3(0.1f, 0.1f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
-//    glm::vec3(0.1f, 0.1f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
-//    glm::vec3(0.1f, 0.1f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
-//    glm::vec3(0.3f, 0.1f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
-//
-//    glm::vec3(1.0f, 0.14f, 0.07f),   //constant,linear, quadratic
-//};
-//
-////聚光的6个数据
-//static glm::vec3 spotlightArgs[] = {
-//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
-//    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
-//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
-//    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
-//};
-//
-//static glm::vec3 clearColor(0.0f, 0.0f, 0.0f);   //背景颜色
-//
-//static glm::vec2 spotlight_cutoff(10.0f, 15.0f);  //聚光的切角和外切角
-//
-//-----------------------------------------------------------------<<<<<<<<<<<<<<
-
-
-
-//----------------化学实验室场景------------------------------------------>>>>>>>>>>>>
-//定向光的4个数据
 static glm::vec3 dirLightArgs[4] = {
-    glm::vec3(0.5f, 0.5f, 0.5f),  //ambient
-    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
-    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+    glm::vec3(0.0f, 0.0f, 0.0f),  //ambient
+    glm::vec3(0.05f, 0.05f, 0.05),     //diffuse
+    glm::vec3(0.2f, 0.2f, 0.2f),     //specular
     glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
 };
 
 //点光源的6个数据
 glm::vec3 pointLightColors[] = {
-    glm::vec3(0.4f, 0.7f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
-    glm::vec3(0.4f, 0.7f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
-    glm::vec3(0.4f, 0.7f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
-    glm::vec3(0.4f, 0.7f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+    glm::vec3(0.1f, 0.1f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+    glm::vec3(0.1f, 0.1f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+    glm::vec3(0.1f, 0.1f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+    glm::vec3(0.3f, 0.1f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
 
-    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+    glm::vec3(1.0f, 0.14f, 0.07f),   //constant,linear, quadratic
 };
 
 //聚光的6个数据
 static glm::vec3 spotlightArgs[] = {
     glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
-    glm::vec3(0.0f, 1.0f, 0.0f),     //diffuse
-    glm::vec3(0.0f, 1.0f, 0.0f),     //specular
-    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+    glm::vec3(1.0f, 0.09f, 0.032f),   //constant,linear, quadratic
 };
 
-static glm::vec3 clearColor(0.9f, 0.9f, 0.9f);   //背景颜色
+static glm::vec3 clearColor(0.0f, 0.0f, 0.0f);   //背景颜色
 
-static glm::vec2 spotlight_cutoff(7.0f, 10.0f);  //聚光的切角和外切角
+static glm::vec2 spotlight_cutoff(10.0f, 15.0f);  //聚光的切角和外切角
+
+//-----------------------------------------------------------------<<<<<<<<<<<<<<
+
+
+
+
+//----------------化学实验室场景------------------------------------------>>>>>>>>>>>>
+//定向光的4个数据
+//static glm::vec3 dirLightArgs[4] = {
+//    glm::vec3(0.5f, 0.5f, 0.5f),  //ambient
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
+//    glm::vec3(1.0f, 1.0f, 1.0f),     //specular
+//    glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
+//};
+//
+////点光源的6个数据
+//glm::vec3 pointLightColors[] = {
+//    glm::vec3(0.4f, 0.7f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+//    glm::vec3(0.4f, 0.7f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+//    glm::vec3(0.4f, 0.7f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+//    glm::vec3(0.4f, 0.7f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+//
+//    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+//};
+//
+////聚光的6个数据
+//static glm::vec3 spotlightArgs[] = {
+//    glm::vec3(0.0f, 0.0f, 0.0f),     //ambient
+//    glm::vec3(0.0f, 1.0f, 0.0f),     //diffuse
+//    glm::vec3(0.0f, 1.0f, 0.0f),     //specular
+//    glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+//};
+//
+//static glm::vec3 clearColor(0.9f, 0.9f, 0.9f);   //背景颜色
+//
+//static glm::vec2 spotlight_cutoff(7.0f, 10.0f);  //聚光的切角和外切角
 
 //-----------------------------------------------------------------<<<<<<<<<<<<<<
 

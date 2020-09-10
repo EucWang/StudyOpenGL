@@ -3,6 +3,7 @@
 
 #include "../include/test.h"
 #include "../include/fileUtil.h"
+#include "../include/TestPractiseLight27.h"
 
 //#include <glm/glm.hpp>
 //#include <glm/gtc/matrix_transform.hpp>
@@ -54,7 +55,10 @@ int main(int argc, char* argv[]) {
 	//practiseLight23(projectDir);
 	//practiseLight24(projectDir);
 	//practiseLight25(projectDir);
-	practiseLight26(projectDir);
+	//practiseLight26(projectDir);
+	//practiseLight27(projectDir);
+	TestPractiseLight27 practise = TestPractiseLight27();
+	practise.practiseLight27(projectDir);
 
 	free(debugDir);
 	free(projectDir);

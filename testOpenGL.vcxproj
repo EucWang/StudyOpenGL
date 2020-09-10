@@ -19,16 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\fileUtil.h" />
     <ClInclude Include="include\list.h" />
-    <ClInclude Include="include\mesh.h" />
-    <ClInclude Include="include\model.h" />
-    <ClInclude Include="include\shader.h" />
+    <ClInclude Include="include\Mesh.h" />
+    <ClInclude Include="include\Model.h" />
+    <ClInclude Include="include\MyShader.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\TestPractiseLight27.h" />
     <ClInclude Include="include\util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -63,20 +64,23 @@
     <ClCompile Include="sample\testPractiseLight24.cpp" />
     <ClCompile Include="sample\testPractiseLight25.cpp" />
     <ClCompile Include="sample\testPractiseLight26.cpp" />
+    <ClCompile Include="sample\TestPractiseLight27.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\list.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\mesh.cpp" />
-    <ClCompile Include="src\model.cpp" />
-    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\MyShader.cpp" />
     <ClCompile Include="src\shaders.c" />
     <ClCompile Include="src\shaderSource.c" />
     <ClCompile Include="src\util.c" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="images\nanosuit\LICENSE.txt" />
     <Text Include="shader\shader_camera_test17_fragment.txt" />
     <Text Include="shader\shader_camera_test17_vertex.txt" />
     <Text Include="shader\shader_light_test18_fragment.txt" />
@@ -107,12 +111,31 @@
     <Image Include="images\container2_specular.png" />
     <Image Include="images\lighting_maps_specular_color.png" />
     <Image Include="images\matrix.jpg" />
+    <Image Include="images\nanosuit\arm_dif.png" />
+    <Image Include="images\nanosuit\arm_showroom_ddn.png" />
+    <Image Include="images\nanosuit\arm_showroom_spec.png" />
+    <Image Include="images\nanosuit\body_dif.png" />
+    <Image Include="images\nanosuit\body_showroom_ddn.png" />
+    <Image Include="images\nanosuit\body_showroom_spec.png" />
+    <Image Include="images\nanosuit\glass_ddn.png" />
+    <Image Include="images\nanosuit\glass_dif.png" />
+    <Image Include="images\nanosuit\hand_dif.png" />
+    <Image Include="images\nanosuit\hand_showroom_ddn.png" />
+    <Image Include="images\nanosuit\hand_showroom_spec.png" />
+    <Image Include="images\nanosuit\helmet_diff.png" />
+    <Image Include="images\nanosuit\helmet_showroom_ddn.png" />
+    <Image Include="images\nanosuit\helmet_showroom_spec.png" />
+    <Image Include="images\nanosuit\leg_dif.png" />
+    <Image Include="images\nanosuit\leg_showroom_ddn.png" />
+    <Image Include="images\nanosuit\leg_showroom_spec.png" />
     <Image Include="images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
+    <None Include="images\nanosuit\nanosuit.blend" />
+    <None Include="images\nanosuit\nanosuit.mtl" />
     <None Include="README.md" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
@@ -140,6 +163,11 @@
     <None Include="shader\shader_light_test26.frag" />
     <None Include="shader\shader_light_test26.vert" />
     <None Include="shader\shader_light_test26_light.frag" />
+    <None Include="shader\shader_light_test27.frag" />
+    <None Include="shader\shader_light_test27.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="images\nanosuit\nanosuit.obj" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -235,13 +263,14 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc142-mtd.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc142-mt.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>

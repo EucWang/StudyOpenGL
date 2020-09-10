@@ -1,12 +1,20 @@
-#pragma once
+#ifndef  MODEL_H_
+#define MODEL_H_
 
-
+#include "MyShader.h"
+#include "Mesh.h"
 #include <vector>
 #include <assimp/scene.h>
-#include "shader.h"
-#include "mesh.h"
+#include "stb_image.h"
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <iostream>
 
 using namespace std;
+using namespace Assimp;
+class MyShader;
 
 /// <summary>
 /// 工具方法， 根据directory 和path 从文件系统中加载一个图片纹理，并返回纹理对象的id
@@ -18,7 +26,6 @@ using namespace std;
 unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
 
 class Model {
-
 public:
 
 	/*已经加载过的纹理集合, 但需要加载新的纹理时,首先在此集合中遍历查找是否已经加载过相同的*/
@@ -32,14 +39,13 @@ public:
 
 	bool gammaCorrection;
 
-	Model(string const & path, bool gamma = false) : gammaCorrection(gamma){
-		loadModel(path);
-	}
-	void draw(Shader &shader);
+	Model(string const& path, bool gamma = false);
+
+	void draw(MyShader* shader);
 
 private:
 
-	void loadModel(string const & path);
+	void loadModel(string const& path);
 
 	void processNode(aiNode* node, const aiScene* scene);
 
@@ -52,6 +58,8 @@ private:
 	/// <returns></returns>
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
-	vector<Texture> loadMaterialTexture(aiMaterial* mat, aiTextureType type, string typeName);
+	vector<Texture> loadMaterialTexture(aiMaterial* material, aiTextureType type, string typeName);
 
 };
+
+#endif // ! MODEL_H_
