@@ -373,5 +373,11 @@
       <Filter>shader</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="shader\shader_light_test27_light.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_light_test27_light.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

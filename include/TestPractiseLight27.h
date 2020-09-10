@@ -24,6 +24,10 @@ public:
 	const char* fragFile = "shader/shader_light_test27.frag";
 	const char* modelFile = "images/nanosuit/nanosuit.obj";
 
+	const char* lightVertFile = "shader/shader_light_test27_light.vert";
+	const char* lightFragFile = "shader/shader_light_test27_light.frag";
+
+
 	int practiseLight27(const char* projectDir);
 };
 

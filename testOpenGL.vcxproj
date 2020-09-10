@@ -145,6 +145,8 @@
     <None Include="shader\shader_light_test26_light.frag" />
     <None Include="shader\shader_light_test27.frag" />
     <None Include="shader\shader_light_test27.vert" />
+    <None Include="shader\shader_light_test27_light.frag" />
+    <None Include="shader\shader_light_test27_light.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
