@@ -10,6 +10,7 @@
 //#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <TestPractiseDepth28.h>
 
 using namespace std;
 
@@ -75,8 +76,12 @@ int main(int argc, char* argv[]) {
 	//practiseLight25(projectDir);
 	//practiseLight26(projectDir);
 	//practiseLight27(projectDir);
-	TestPractiseLight27 practise = TestPractiseLight27();
-	practise.practiseLight27(projectDir);
+
+	//TestPractiseLight27 practise = TestPractiseLight27();
+	//practise.practiseLight27(projectDir);
+
+	TestPractiseDepth28 test = TestPractiseDepth28();
+	test.practiseDepth28(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);

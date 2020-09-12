@@ -29,10 +29,12 @@
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\TestPractiseDepth28.h" />
     <ClInclude Include="include\TestPractiseLight27.h" />
     <ClInclude Include="include\util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
     <ClCompile Include="sample\testDrawTriangle.c" />
@@ -108,7 +110,9 @@
     <Image Include="images\container2.png" />
     <Image Include="images\container2_specular.png" />
     <Image Include="images\lighting_maps_specular_color.png" />
+    <Image Include="images\marble.jpg" />
     <Image Include="images\matrix.jpg" />
+    <Image Include="images\metal.png" />
     <Image Include="images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +121,9 @@
     <None Include="helper\smollSplitLightEdge.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
+    <None Include="shader\shader_depth_test28.frag" />
+    <None Include="shader\shader_depth_test28.vert" />
+    <None Include="shader\shader_depth_test28_light.frag" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />

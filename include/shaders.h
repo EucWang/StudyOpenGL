@@ -74,6 +74,28 @@ void textureUse(GLuint texture, int index);
 */
 int textureLoad(const char* parentDir, const char* imgName);
 
+/**
+* 加载图片纹理，
+* 绑定并生成图片纹理id
+*
+* 可以替代上面的  textureGenSet(), textureGenSets(), textureLoadImg() 三个方法
+*
+* @param wrapS  取值为 GL_REPEAT ,  对纹理的默认行为。重复纹理图像。
+										GL_MIRRORED_REPEAT, 和GL_REPEAT一样，但每次重复图片是镜像放置的。
+										GL_CLAMP_TO_EDGE, 纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。
+										GL_CLAMP_TO_BORDER, 超出的坐标为用户指定的边缘颜色。
+* @param wrapT 取值为同 wrapS
+* @param minFilter  取值为  GL_NEAREST  （也叫邻近过滤，Nearest Neighbor Filtering）是OpenGL默认的纹理过滤方式。
+*																		设置为GL_NEAREST的时候，OpenGL会选择中心点最接近纹理坐标的那个像素。
+*																		GL_NEAREST产生了颗粒状的图案，我们能够清晰看到组成纹理的像素，
+*											  GL_LINEAR      （也叫线性过滤，(Bi)linear Filtering）它会基于纹理坐标附近的纹理像素，计算出一个插值，近似出这些纹理像素之间的颜色。
+*																		 GL_LINEAR能够产生更平滑的图案，很难看出单个的纹理像素。
+
+* @return  -1：表示加载失败， >=0 表示加载成功
+*/
+int textureLoad2(const char* parentDir, const char* imgName,
+	int wrapS, int wrapT, int minFilter, int magFilter);
+
 #ifdef __cplusplus
 }
 #endif

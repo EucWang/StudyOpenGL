@@ -57,6 +57,9 @@
     <ClInclude Include="include\MyShader.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\TestPractiseDepth28.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -191,6 +194,9 @@
     <ClCompile Include="src\MyShader.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="sample\TestPractiseDepth28.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -280,6 +286,12 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\matrix.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\marble.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\metal.png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
@@ -377,6 +389,15 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_light_test27_light.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_depth_test28.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_depth_test28.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_depth_test28_light.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
