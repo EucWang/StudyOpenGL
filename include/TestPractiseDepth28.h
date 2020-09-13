@@ -23,6 +23,7 @@ public:
 	const char* fragFile = "shader/shader_depth_test28.frag";
 
 	const char* fragFileLight = "shader/shader_depth_test28_light.frag";
+	const char* fragFileOutlining = "shader/shader_depth_test28_outlining.frag";
 
 	const char* img1 = "images/marble.jpg";
 	//const char* img1 = "images/container2.png";

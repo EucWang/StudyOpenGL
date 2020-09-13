@@ -1,21 +1,10 @@
 #version 330 core
 
-out vec4 fragColor;
-
-uniform sampler2D texture1;
-
-in vec2 TexCoords;
+in vec2 texCoords;
 in vec3 fragNorm;
 in vec3 fragPos;
 
-//float near = 0.1;
-//float far = 100.0;
-//
-//float linearizeDepth(float depth){
-//	float z = depth * 2.0 - 1.0;  //back to NDC
-//	return (2 * far * near) / (far + near - z * (far - near));
-//}
-
+uniform sampler2D texture1;
 
 //全局的定向光
 struct DirLight {
@@ -73,29 +62,21 @@ vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, ve
 //计算聚光对物体产生的颜色分量
 vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
 
+out vec4 fragColor;
+
 void main(){
-
-//fragColor = texture(texture1, TexCoords); 
-//fragColor = vec4(vec3(gl_FragCoord.z), 1.0);
-
-	//fragColor = vec4(vec3(linearizeDepth(gl_FragCoord.z)), 1.0);
-
-	//---------------------
 	
-	//2个箱子贴图
-	vec3 fragTex1 = vec3(texture(texture1, TexCoords));
-	//vec3 fragTex2 = vec3(texture(material.specular, fragTexCoord));
-
-	//4个向量, 法线向量,到物体表面的光线向量, 到物体表面的视角向量,从物体表面反射出去的光线向量
+	vec3 text1 = vec3(texture(texture1, texCoords));
 	vec3 norm = normalize(fragNorm);
 	vec3 viewDir = normalize(viewPos - fragPos);
 
-	vec3 result = calcDirLight(dirlight, norm, viewDir, fragTex1, vec3(1.0));
-	result += calcPointLight(pointlight, norm, fragPos,  viewDir, fragTex1, vec3(1.0));
-	result += calcSpotLight(spotlight, norm, fragPos, viewDir, fragTex1, vec3(1.0));
+	vec3 result = calcDirLight(dirlight, norm, viewDir, text1, vec3(1.0));
+	result += calcPointLight(pointlight, norm, fragPos, viewDir, text1, vec3(1.0));
+	result += calcSpotLight(spotlight, norm, fragPos, viewDir, text1, vec3(1.0));
 
 	fragColor = vec4(result, 1.0);
 }
+
 
 //计算定向光对物体产生颜色分量
 vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2) {
@@ -146,6 +127,7 @@ vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, ve
 		+ plight.quadratic * (distance * distance));	
 
 	result *= attenuation;
+	//fragColor = vec4(result, 1.0);
 
 	return result;
 }

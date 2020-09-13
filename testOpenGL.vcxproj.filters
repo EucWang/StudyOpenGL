@@ -60,6 +60,9 @@
     <ClInclude Include="include\TestPractiseDepth28.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseBlending29.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -195,6 +198,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="sample\TestPractiseDepth28.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseBlending29.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -398,6 +404,21 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_depth_test28_light.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_depth_test28_outlining.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29_light.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29_outlining.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
