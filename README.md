@@ -9,7 +9,7 @@
 - VisualStudio 2019
 
 ### use package: 
-- glfw, glad
+- glfw, glad, glm, assimp
 
 ### basic set:
 1. downlaod package: 
