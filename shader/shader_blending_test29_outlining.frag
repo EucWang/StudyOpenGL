@@ -4,5 +4,6 @@ out vec4 fragColor;
 
 void main(){
 
-	fragColor = vec4(0.3, 0.4, 0.5, 1.0);
+	//固定轮廓的输出颜色
+	fragColor = vec4(0.04, 0.28, 0.26, 1.0);
 }

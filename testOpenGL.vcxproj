@@ -111,6 +111,7 @@
     <Image Include="images\container.jpg" />
     <Image Include="images\container2.png" />
     <Image Include="images\container2_specular.png" />
+    <Image Include="images\grass.png" />
     <Image Include="images\lighting_maps_specular_color.png" />
     <Image Include="images\marble.jpg" />
     <Image Include="images\matrix.jpg" />
@@ -125,6 +126,8 @@
     <None Include="README.md" />
     <None Include="shader\shader_blending_test29.frag" />
     <None Include="shader\shader_blending_test29.vert" />
+    <None Include="shader\shader_blending_test29_grass.frag" />
+    <None Include="shader\shader_blending_test29_grass.vert" />
     <None Include="shader\shader_blending_test29_light.frag" />
     <None Include="shader\shader_blending_test29_outlining.frag" />
     <None Include="shader\shader_depth_test28.frag" />

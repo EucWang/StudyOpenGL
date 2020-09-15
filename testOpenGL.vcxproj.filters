@@ -300,6 +300,9 @@
     <Image Include="images\metal.png">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\grass.png">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader\shader_light_test20.vert">
@@ -419,6 +422,12 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_blending_test29_outlining.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29_grass.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test29_grass.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

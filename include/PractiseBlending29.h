@@ -20,6 +20,9 @@ public:
 	const char* fragFileLight = "shader/shader_blending_test29_light.frag";
 	const char* fragFileOutlining = "shader/shader_blending_test29_outlining.frag";
 
+	const char* vertFileGrass = "shader/shader_blending_test29_grass.vert";
+	const char* fragFileGrass = "shader/shader_blending_test29_grass.frag";
+
 	const char* img1 = "images/marble.jpg";
 	//const char* img1 = "images/container2.png";
 	const char* img2 = "images/metal.png";
