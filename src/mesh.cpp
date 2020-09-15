@@ -71,7 +71,6 @@ void Mesh::draw(MyShader* shader) {
 	glActiveTexture(GL_TEXTURE0);
 }
 
-
 /**
 * 在setupMesh函数中初始化缓冲
 */

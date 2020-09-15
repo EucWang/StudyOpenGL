@@ -26,6 +26,7 @@
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\MyShader.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
+    <ClInclude Include="include\PractiseBlending30.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
@@ -36,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\PractiseBlending29.cpp" />
+    <ClCompile Include="sample\PractiseBlending30.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -108,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\awesomeface.png" />
+    <Image Include="images\blending_transparent_window.png" />
     <Image Include="images\container.jpg" />
     <Image Include="images\container2.png" />
     <Image Include="images\container2_specular.png" />
@@ -122,6 +125,7 @@
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
+    <None Include="images\Bee.glb" />
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="shader\shader_blending_test29.frag" />
@@ -130,6 +134,8 @@
     <None Include="shader\shader_blending_test29_grass.vert" />
     <None Include="shader\shader_blending_test29_light.frag" />
     <None Include="shader\shader_blending_test29_outlining.frag" />
+    <None Include="shader\shader_blending_test30.frag" />
+    <None Include="shader\shader_blending_test30.vert" />
     <None Include="shader\shader_depth_test28.frag" />
     <None Include="shader\shader_depth_test28.vert" />
     <None Include="shader\shader_depth_test28_light.frag" />

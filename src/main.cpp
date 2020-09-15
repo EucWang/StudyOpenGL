@@ -12,6 +12,7 @@
 #include <iostream>
 #include <TestPractiseDepth28.h>
 #include <PractiseBlending29.h>
+#include "PractiseBlending30.h"
 
 using namespace std;
 
@@ -84,8 +85,11 @@ int main(int argc, char* argv[]) {
 	//TestPractiseDepth28 test = TestPractiseDepth28();
 	//test.practiseDepth28(projectDir);
 
-	PractiseBlending29 practise = PractiseBlending29();
-	practise.practiseDepth29(projectDir);
+	//PractiseBlending29 practise = PractiseBlending29();
+	//practise.practiseDepth29(projectDir);
+
+	PractiseBlending30 practise = PractiseBlending30();
+	practise.practise(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);

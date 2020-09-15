@@ -66,6 +66,9 @@ unsigned int TextureFromFile(const char* path, const string& directory, bool gam
 
 Model::Model(string const& path, bool gamma) : gammaCorrection(gamma) {
 		loadModel(path);
+		std::cout << "Model loadModel() finished()." << std::endl;
+		std::cout << "Model meshes size is " << this->meshes.size() << std::endl;
+		std::cout << "Model textures size is " << this->textures_loaded.size() << std::endl;
 	}
 
 void Model::draw(MyShader* shader) {
@@ -95,7 +98,8 @@ void Model::loadModel(string const& path) {
 		return;
 	}
 
-	directory = path.substr(0, path.find_last_of('/'));
+	string dir = path.substr(0, path.find_last_of('/'));
+	directory = string(dir);
 
 	processNode(scene->mRootNode, scene);
 

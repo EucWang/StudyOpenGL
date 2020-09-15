@@ -63,6 +63,9 @@
     <ClInclude Include="include\PractiseBlending29.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseBlending30.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -203,6 +206,9 @@
     <ClCompile Include="sample\PractiseBlending29.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\PractiseBlending30.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -301,6 +307,9 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\grass.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\blending_transparent_window.png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
@@ -428,6 +437,15 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_blending_test29_grass.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="images\Bee.glb">
+      <Filter>images</Filter>
+    </None>
+    <None Include="shader\shader_blending_test30.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_blending_test30.vert">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
