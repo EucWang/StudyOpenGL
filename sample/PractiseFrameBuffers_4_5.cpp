@@ -126,7 +126,9 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 	if (window == NULL) { return -1; }
 
 	MyShader shader(projectDir, vertFile, fragFile);
-	MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);
+	//MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);
+	//MyShader screenReverseColorShader(projectDir, vertFileScreen, fragFileReverseColor);
+	MyShader screenGrayShader(projectDir, vertFileScreen, fragFileGray);
 
 	GLuint quadVAO, quadVBO;
 	makeVAOVBO(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
@@ -142,8 +144,12 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 
 	shader.use();
 	shader.setInt("texture1", 0);
-	screenshader.use();
-	screenshader.setInt("screenTexture", 0);
+	//screenshader.use();
+	//screenshader.setInt("screenTexture", 0);
+	//screenReverseColorShader.use();
+	//screenReverseColorShader.setInt("screenTexture", 0);
+	screenGrayShader.use();
+	screenGrayShader.setInt("screenTexture", 0);
 
 	//---------------------------------------------------------------------
 	unsigned int framebuffer;   //一个帧缓冲对象
@@ -207,21 +213,21 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		glBindTexture(GL_TEXTURE_2D, cubTexture);
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 1.0f));
-		model = glm::rotate(model, (float)curFrame * glm::radians(10.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+		//model = glm::rotate(model, (float)curFrame * glm::radians(10.0f), glm::vec3(0.0f, 0.1f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		glm::mat4 model2 = glm::mat4(1.0);
-		model2 = glm::translate(model2, glm::vec3(-1.0f, 0.0f, 1.0f));
-		model2 = glm::rotate(model2, (float)curFrame * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-		shader.setMat4("model", model2);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
-		model2 = glm::mat4(1.0);
-		model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, -1.0f));
+		//glm::mat4 model2 = glm::mat4(1.0);
+		//model2 = glm::translate(model2, glm::vec3(-1.0f, 0.0f, 1.0f));
 		//model2 = glm::rotate(model2, (float)curFrame * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-		shader.setMat4("model", model2);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//shader.setMat4("model", model2);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		//
+		//model2 = glm::mat4(1.0);
+		//model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, -1.0f));
+		////model2 = glm::rotate(model2, (float)curFrame * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+		//shader.setMat4("model", model2);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//渲染地板
 		glBindVertexArray(planeVAO);
@@ -238,7 +244,9 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		//--------------------------render to framebuffer
 
 		//------------------render framebuffer to default screen 
-		screenshader.use();
+		//screenshader.use();
+		//screenReverseColorShader.use();
+		screenGrayShader.use();
 		glBindVertexArray(quadVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texColorBuffer);

@@ -150,6 +150,7 @@
     <None Include="shader\shader_faceculling_test4_4_grass.vert" />
     <None Include="shader\shader_frame_buffer_test_4_5.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5.vert" />
+    <None Include="shader\shader_frame_buffer_test_4_5_gray.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5_screen.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5_screen.vert" />
     <None Include="shader\shader_light_test20.frag" />
@@ -182,6 +183,7 @@
     <None Include="shader\shader_light_test27.vert" />
     <None Include="shader\shader_light_test27_light.frag" />
     <None Include="shader\shader_light_test27_light.vert" />
+    <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -484,5 +484,11 @@
     <None Include="shader\shader_frame_buffer_test_4_5.frag">
       <Filter>shader</Filter>
     </None>
+    <None Include="shader_frame_buffer_test_4_5_reverse_color.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_test_4_5_gray.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
