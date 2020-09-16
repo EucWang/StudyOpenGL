@@ -16,6 +16,7 @@
 
 //#include "../include/PractiseFaceCulling_4_4.h"
 #include "PractiseFaceCulling_4_4.h"
+#include "PractiseFrameBuffers_4_5.h"
 
 using namespace std;
 
@@ -94,7 +95,10 @@ int main(int argc, char* argv[]) {
 	//PractiseBlending30 practise = PractiseBlending30();
 	//practise.practise(projectDir);
 
-	PractiseFaceCulling_4_4 practise = PractiseFaceCulling_4_4();
+	//PractiseFaceCulling_4_4 practise = PractiseFaceCulling_4_4();
+	//practise.practise(projectDir);
+
+	PractiseFrameBuffers_4_5 practise = PractiseFrameBuffers_4_5();
 	practise.practise(projectDir);
 
 	//free(debugDir);

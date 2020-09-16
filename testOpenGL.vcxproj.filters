@@ -69,6 +69,9 @@
     <ClInclude Include="include\PractiseFaceCulling_4_4.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseFrameBuffers_4_5.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -213,6 +216,9 @@
       <Filter>sample</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
