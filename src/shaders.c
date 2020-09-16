@@ -245,3 +245,34 @@ void textureUse(GLuint texture, int index) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
+
+/// <summary>
+/// ´´½¨ VAO VBO 
+/// </summary>
+/// <param name="vao"> in/out </param>
+/// <param name="dataArr"> float data array </param>
+/// <param name="dataArrSize"> float data array size </param>
+/// <param name="layoutSize"> vertex file layout size , must be values of 3/5/8</param>
+void makeVAOVBO(GLuint* vao, const float* dataArr, int dataArrSize, int layoutSize) {
+	GLuint vbo;
+	printf("dataArrSize = %d, layoutSize = %d\n", dataArrSize, layoutSize);
+	glGenVertexArrays(1, vao);
+	glGenBuffers(1, &vbo);
+	printf("generate vao = %d, vbo = %d\n", *vao, vbo);
+
+	glBindVertexArray(*vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, dataArrSize, dataArr, GL_STATIC_DRAW);
+
+	int len = layoutSize / 3;
+	printf("len = %d", len);
+	for (size_t i = 0; i <= len; i++) {
+		glEnableVertexAttribArray(i);
+
+		int size = 3;
+		if (i == len) { size = layoutSize % 3; }
+		printf("i  = %d, size = %d\n", i, size);
+		glVertexAttribPointer(i, size, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)( i * 3 * sizeof(float)));
+	}
+}
+ 

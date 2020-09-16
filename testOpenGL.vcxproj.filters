@@ -66,6 +66,9 @@
     <ClInclude Include="include\PractiseBlending30.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseFaceCulling_4_4.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -207,6 +210,9 @@
       <Filter>sample</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseBlending30.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -446,6 +452,18 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_blending_test30.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_faceculling_test4_4.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_faceculling_test4_4.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_faceculling_test4_4_grass.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_faceculling_test4_4_grass.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

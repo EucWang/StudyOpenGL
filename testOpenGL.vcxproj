@@ -27,6 +27,7 @@
     <ClInclude Include="include\MyShader.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
+    <ClInclude Include="include\PractiseFaceCulling_4_4.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
@@ -38,6 +39,7 @@
   <ItemGroup>
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
+    <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -140,6 +142,10 @@
     <None Include="shader\shader_depth_test28.vert" />
     <None Include="shader\shader_depth_test28_light.frag" />
     <None Include="shader\shader_depth_test28_outlining.frag" />
+    <None Include="shader\shader_faceculling_test4_4.frag" />
+    <None Include="shader\shader_faceculling_test4_4.vert" />
+    <None Include="shader\shader_faceculling_test4_4_grass.frag" />
+    <None Include="shader\shader_faceculling_test4_4_grass.vert" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />

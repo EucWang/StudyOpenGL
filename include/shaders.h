@@ -96,6 +96,17 @@ int textureLoad(const char* parentDir, const char* imgName);
 int textureLoad2(const char* parentDir, const char* imgName,
 	int wrapS, int wrapT, int minFilter, int magFilter);
 
+
+
+/// <summary>
+/// ´´½¨ VAO VBO 
+/// </summary>
+/// <param name="vao"> in/out </param>
+/// <param name="vbo"> in/out </param>
+/// <param name="dataArr"> float data array </param>
+/// <param name="layoutSize"> vertex file layout size , must be values of 3/5/8</param>
+void makeVAOVBO(GLuint* vao, float* dataArr, int dataArrSize, int layoutSize);
+
 #ifdef __cplusplus
 }
 #endif

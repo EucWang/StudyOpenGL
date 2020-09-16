@@ -14,6 +14,9 @@
 #include <PractiseBlending29.h>
 #include "PractiseBlending30.h"
 
+//#include "../include/PractiseFaceCulling_4_4.h"
+#include "PractiseFaceCulling_4_4.h"
+
 using namespace std;
 
 static void testMovePos();
@@ -88,7 +91,10 @@ int main(int argc, char* argv[]) {
 	//PractiseBlending29 practise = PractiseBlending29();
 	//practise.practiseDepth29(projectDir);
 
-	PractiseBlending30 practise = PractiseBlending30();
+	//PractiseBlending30 practise = PractiseBlending30();
+	//practise.practise(projectDir);
+
+	PractiseFaceCulling_4_4 practise = PractiseFaceCulling_4_4();
 	practise.practise(projectDir);
 
 	//free(debugDir);

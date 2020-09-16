@@ -42,3 +42,8 @@
 
 4. copy:
 - copy glad.c to Project's directory
+
+
+5. run:
+
+- select [Release] [x86], other type has problem 
