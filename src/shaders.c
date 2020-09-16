@@ -253,26 +253,33 @@ void textureUse(GLuint texture, int index) {
 /// <param name="dataArr"> float data array </param>
 /// <param name="dataArrSize"> float data array size </param>
 /// <param name="layoutSize"> vertex file layout size , must be values of 3/5/8</param>
-void makeVAOVBO(GLuint* vao, const float* dataArr, int dataArrSize, int layoutSize) {
-	GLuint vbo;
+void makeVAOVBO(GLuint* vao, GLuint* vbo, const float* dataArr, int dataArrSize, int layoutSize) {
 	printf("dataArrSize = %d, layoutSize = %d\n", dataArrSize, layoutSize);
 	glGenVertexArrays(1, vao);
-	glGenBuffers(1, &vbo);
-	printf("generate vao = %d, vbo = %d\n", *vao, vbo);
+	glGenBuffers(1, vbo);
+	printf("generate vao = %d, vbo = %d\n", *vao, *vbo);
 
 	glBindVertexArray(*vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 	glBufferData(GL_ARRAY_BUFFER, dataArrSize, dataArr, GL_STATIC_DRAW);
 
-	int len = layoutSize / 3;
-	printf("len = %d", len);
-	for (size_t i = 0; i <= len; i++) {
-		glEnableVertexAttribArray(i);
+	if (layoutSize == 3 || layoutSize == 5 || layoutSize == 8) {
+		int len = layoutSize / 3;
+		printf("len = %d", len);
+		for (size_t i = 0; i <= len; i++) {
+			glEnableVertexAttribArray(i);
 
-		int size = 3;
-		if (i == len) { size = layoutSize % 3; }
-		printf("i  = %d, size = %d\n", i, size);
-		glVertexAttribPointer(i, size, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)( i * 3 * sizeof(float)));
+			int size = 3;
+			if (i == len) { size = layoutSize % 3; }
+			printf("i  = %d, size = %d\n", i, size);
+			glVertexAttribPointer(i, size, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)( i * 3 * sizeof(float)));
+		}
+	} else if (layoutSize == 4) {  //特殊情况, 这样写是有问题的, 有待优化
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)(2 * sizeof(float)));
 	}
 }
  

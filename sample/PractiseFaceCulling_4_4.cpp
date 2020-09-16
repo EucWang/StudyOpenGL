@@ -123,14 +123,14 @@ int PractiseFaceCulling_4_4::practise(const char* projectDir) {
 
 	MyShader cubeshader(projectDir, vertFile, fragFile);
 	MyShader grassshader(projectDir, grassVertFile, grassFragFile);
-	GLuint cubeVAO=0;
-	makeVAOVBO(&cubeVAO, cubeVertices, sizeof(cubeVertices), 8);
+	GLuint cubeVAO=0, cubeVBO;
+	makeVAOVBO(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
 
-	GLuint planeVAO;
-	makeVAOVBO(&planeVAO, planeVertices, sizeof(planeVertices), 8);
+	GLuint planeVAO, planeVBO;
+	makeVAOVBO(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
 
-	GLuint grassVAO;
-	makeVAOVBO(&grassVAO, grassVertices, sizeof(grassVertices), 5);
+	GLuint grassVAO, grassVBO;
+	makeVAOVBO(&grassVAO, &grassVBO, grassVertices, sizeof(grassVertices), 5);
 
 	cubeshader.use();
  	int tex1 = textureLoad(projectDir, imgFileCube);

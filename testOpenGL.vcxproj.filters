@@ -472,5 +472,17 @@
     <None Include="shader\shader_faceculling_test4_4_grass.frag">
       <Filter>shader</Filter>
     </None>
+    <None Include="shader\shader_frame_buffer_test_4_5_screen.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_test_4_5_screen.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_test_4_5.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_test_4_5.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

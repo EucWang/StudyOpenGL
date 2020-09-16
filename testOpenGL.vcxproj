@@ -148,6 +148,10 @@
     <None Include="shader\shader_faceculling_test4_4.vert" />
     <None Include="shader\shader_faceculling_test4_4_grass.frag" />
     <None Include="shader\shader_faceculling_test4_4_grass.vert" />
+    <None Include="shader\shader_frame_buffer_test_4_5.frag" />
+    <None Include="shader\shader_frame_buffer_test_4_5.vert" />
+    <None Include="shader\shader_frame_buffer_test_4_5_screen.frag" />
+    <None Include="shader\shader_frame_buffer_test_4_5_screen.vert" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />

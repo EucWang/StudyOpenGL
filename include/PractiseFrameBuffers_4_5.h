@@ -17,14 +17,18 @@
 #include <iostream>
 using namespace std;
 
-class PractiseFrameBuffers_4_5
-{
-
+class PractiseFrameBuffers_4_5 {
 public:
 	PractiseFrameBuffers_4_5() {}
 
-	const char* vertFile = "shader/shader_frame_buffer.vert";
-	const char* vertFile = "shader/shader_frame_buffer.frag";
+	const char* vertFile = "shader/shader_frame_buffer_test_4_5.vert";
+	const char* fragFile = "shader/shader_frame_buffer_test_4_5.frag";
+
+	const char* vertFileScreen = "shader/shader_frame_buffer_test_4_5_screen.vert";
+	const char* fragFileScreen = "shader/shader_frame_buffer_test_4_5_screen.frag";
+
+	const char* imgContainer = "images/container.jpg";
+	const char* imgPlane = "images/metal.png";
 
 	int practise(const char * projectDir);
 };
