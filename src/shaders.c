@@ -263,7 +263,16 @@ void makeVAOVBO(GLuint* vao, GLuint* vbo, const float* dataArr, int dataArrSize,
 	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 	glBufferData(GL_ARRAY_BUFFER, dataArrSize, dataArr, GL_STATIC_DRAW);
 
-	if (layoutSize == 3 || layoutSize == 5 || layoutSize == 8) {
+	if (layoutSize == 3) {
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)0);
+	} else if (layoutSize == 4) {  //特殊情况, 这样写是有问题的, 有待优化
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)(2 * sizeof(float)));
+	} else if(layoutSize == 5 || layoutSize == 8) {
 		int len = layoutSize / 3;
 		printf("len = %d", len);
 		for (size_t i = 0; i <= len; i++) {
@@ -274,12 +283,6 @@ void makeVAOVBO(GLuint* vao, GLuint* vbo, const float* dataArr, int dataArrSize,
 			printf("i  = %d, size = %d\n", i, size);
 			glVertexAttribPointer(i, size, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)( i * 3 * sizeof(float)));
 		}
-	} else if (layoutSize == 4) {  //特殊情况, 这样写是有问题的, 有待优化
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)0);
-
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)(2 * sizeof(float)));
-	}
+	} 
 }
  

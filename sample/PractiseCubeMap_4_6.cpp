@@ -1,10 +1,65 @@
 #include "PractiseCubeMap_4_6.h"
 
-
 static double deltaTime;
 static float lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH / 2, lastY = SMALL_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
+
+static float cubeVertices[] = {
+	// Back face
+	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		0.0f, 0.0f, // Bottom-left
+	 0.5f,  0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		1.0f, 1.0f, // top-right
+	 0.5f, -0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		1.0f, 0.0f, // bottom-right         
+	 0.5f,  0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		1.0f, 1.0f, // top-right
+	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		0.0f, 0.0f, // bottom-left
+	-0.5f,  0.5f, -0.5f,	0.0f, 0.0f, -1.0f,		0.0f, 1.0f, // top-left
+	// Front face
+	-0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 0.0f, // bottom-left
+	 0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 0.0f, // bottom-right
+	 0.5f,  0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 1.0f, // top-right
+	 0.5f,  0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		1.0f, 1.0f, // top-right
+	-0.5f,  0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 1.0f, // top-left
+	-0.5f, -0.5f,  0.5f,	0.0f, 0.0f, 1.0f,		0.0f, 0.0f, // bottom-left
+	// Left face
+	-0.5f,  0.5f,  0.5f,	-1.0f, 0.0f, 0.0f,		 1.0f, 0.0f, // top-right
+	-0.5f,  0.5f, -0.5f,	-1.0f, 0.0f, 0.0f,		1.0f, 1.0f, // top-left
+	-0.5f, -0.5f, -0.5f,	-1.0f, 0.0f, 0.0f,		0.0f, 1.0f, // bottom-left
+	-0.5f, -0.5f, -0.5f,	-1.0f, 0.0f, 0.0f,		0.0f, 1.0f, // bottom-left
+	-0.5f, -0.5f,  0.5f,	-1.0f, 0.0f, 0.0f,		0.0f, 0.0f, // bottom-right
+	-0.5f,  0.5f,  0.5f,	-1.0f, 0.0f, 0.0f,		1.0f, 0.0f, // top-right
+	// Right face
+	 0.5f,  0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		1.0f, 0.0f, // top-left
+	 0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 1.0f, // bottom-right
+	 0.5f,  0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		1.0f, 1.0f, // top-right         
+	 0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 1.0f, // bottom-right
+	 0.5f,  0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		1.0f, 0.0f, // top-left
+	 0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,		0.0f, 0.0f, // bottom-left     
+	// Bottom face
+	-0.5f, -0.5f, -0.5f,	0.0f, -1.0f, 0.0f,		0.0f, 1.0f, // top-right
+	 0.5f, -0.5f, -0.5f,	0.0f, -1.0f, 0.0f,		1.0f, 1.0f, // top-left
+	 0.5f, -0.5f,  0.5f,	0.0f, -1.0f, 0.0f,		1.0f, 0.0f, // bottom-left
+	 0.5f, -0.5f,  0.5f,	0.0f, -1.0f, 0.0f,		1.0f, 0.0f, // bottom-left
+	-0.5f, -0.5f,  0.5f,	0.0f, -1.0f, 0.0f,		0.0f, 0.0f, // bottom-right
+	-0.5f, -0.5f, -0.5f,	0.0f, -1.0f, 0.0f,		0.0f, 1.0f, // top-right
+	// Top face
+	-0.5f,  0.5f, -0.5f,	0.0f, 1.0f, 0.0f,		0.0f, 1.0f, // top-left
+	 0.5f,  0.5f,  0.5f,	0.0f, 1.0f, 0.0f,		1.0f, 0.0f, // bottom-right
+	 0.5f,  0.5f, -0.5f,	0.0f, 1.0f, 0.0f,		1.0f, 1.0f, // top-right     
+	 0.5f,  0.5f,  0.5f,	0.0f, 1.0f, 0.0f,		1.0f, 0.0f, // bottom-right
+	-0.5f,  0.5f, -0.5f,	0.0f, 1.0f, 0.0f,		0.0f, 1.0f, // top-left
+	-0.5f,  0.5f,  0.5f,	0.0f, 1.0f, 0.0f,		0.0f, 0.0f  // bottom-left        
+};
+
+static float quadVertices[] = {
+	// positions   // texCoords
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		-1.0f, -1.0f,  0.0f, 0.0f,
+		1.0f, -1.0f,  1.0f, 0.0f,
+
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		1.0f, -1.0f,  1.0f, 0.0f,
+		1.0f,  1.0f,  1.0f, 1.0f
+};
 
 static Camera camera(glm::vec3(0.0f, 2.0f, 3.0f));
 
@@ -46,24 +101,18 @@ static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double off
 	camera.ProcessMouseScroll(offsetY);
 }
 
-int PractiseCubeMap_4_6::practise(const char* projectDir) {
-	std::cout << "PractiseCubeMap_4_6.practise() running..." << std::endl;
-	GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw cube map");
-	if (window == NULL) { return -1; }
+static int texureLoadCubmap(const char* projectDir, vector<string> images) {
 
-
-	//--------- prepare
-	//立方体贴图纹理
 	unsigned int textCubeMap;
 	glGenTextures(1, &textCubeMap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textCubeMap);  //绑定立方体纹理贴图
 	int width, height, nrChannels;
 	unsigned char* data;
 	//依顺序
-	for (unsigned int i = 0; i < skybox.images.size(); i++) {
+	for (unsigned int i = 0; i < images.size(); i++) {
 		char* imagePath;
-		if (!getChildPath(&imagePath, projectDir, skybox.images[i].c_str())) { return -1; }
-		
+		if (!getChildPath(&imagePath, projectDir, images[i].c_str())) { return -1; }
+
 		data = NULL;
 		data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
 		if (data == NULL) {
@@ -86,23 +135,70 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 
 		free(imagePath);
 	}
+	return textCubeMap;
+}
 
-	//glBindTexture(GL_TEXTURE_CUBE_MAP, 0);  //解绑立方体纹理贴图
+int PractiseCubeMap_4_6::practise(const char* projectDir) {
+	std::cout << "PractiseCubeMap_4_6.practise() running..." << std::endl;
+	GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "Draw cube map");
+	if (window == NULL) { return -1; }
 
+	//--------- prepare
+	//立方体贴图纹理
 	MyShader skyboxShader(projectDir, vertFile, fragFile);
 	skyboxShader.use();
+	int textCubeMap = 0;
+	if ((textCubeMap = texureLoadCubmap(projectDir, skybox.images)) <= 0) { return -1; }
 	skyboxShader.setInt("cubemap", 0);
 
 	GLuint skyVAO, skyVBO;
-	glGenVertexArrays(1, &skyVAO);
-	glGenBuffers(1, &skyVBO);
+	makeVAOVBO(&skyVAO, &skyVBO, skybox.skyboxVertices, sizeof(skybox.skyboxVertices), 3);
 
-	glBindVertexArray(skyVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, skyVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skybox.skyboxVertices), skybox.skyboxVertices, GL_STATIC_DRAW);
+	//箱子
+	MyShader boxShader(projectDir, vertFileCube, fragFileCube);
+	boxShader.use();
+	int texContainer = textureLoad(projectDir, imageFileContainer);
+	boxShader.setInt("texture_diffuse1", 0);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	GLuint boxVAO, boxVBO;
+	makeVAOVBO(&boxVAO, &boxVBO, cubeVertices, sizeof(cubeVertices), 8);
+
+	// 帧缓冲
+	GLuint framebufferobj;
+	glGenFramebuffers(1, &framebufferobj);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebufferobj);
+
+	GLuint framebufferTex;
+	glGenTextures(1, &framebufferTex);
+	glBindTexture(GL_TEXTURE_2D, framebufferTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, framebufferTex, 0);
+	std::cout << "attach texture to framebuffer." << std::endl;
+
+	GLuint renderbuffer;
+	glGenRenderbuffers(1, &renderbuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	glFramebufferRenderbuffer(GL_RENDERBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
+	std::cout << "attach renderbuffer to framebuffer." << std::endl;
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "ERROR::FRAMEBUFFER: framebuffer is not complete." << std::endl;
+		return -1;
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);  //解除帧缓冲的绑定
+
+	MyShader screenShader(projectDir, vertFileScreen, fragFileScreen);
+	screenShader.use();
+	screenShader.setInt("screen_texture", 0);
+
+	GLuint quadVAO, quadVBO;
+	makeVAOVBO(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
 
 	//--------- prepare done
 
@@ -111,10 +207,12 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 	glfwSetScrollCallback(window, mouse_scroll_callback);
 
 	glEnable(GL_DEPTH_TEST);  //深度缓冲
-	glDepthFunc(GL_LESS);
+	//glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);  //既需要保证天空盒子在值小于等于深度缓冲而不是小于时才通过深度测试
+	glDepthMask(GL_TRUE);  //允许深度写入
 
-	glEnable(GL_BLEND);  //透明混淆
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);  //透明混淆
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	while (!glfwWindowShouldClose(window)) {
 		double curFrame = glfwGetTime();
@@ -123,31 +221,70 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 
 		processInput(window);
 
+		//glBindFramebuffer(GL_FRAMEBUFFER, framebufferobj);
+		glEnable(GL_DEPTH_TEST);	
+		glDepthFunc(GL_LEQUAL);  //既需要保证天空盒子在值小于等于深度缓冲而不是小于时才通过深度测试
+		glDepthMask(GL_TRUE);  //允许深度写入
+
 		glClearColor(0.2, 0.2, 0.3, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//------ render
-		glDepthMask(GL_FALSE);  //禁止深度写入
-
-		skyboxShader.use();
-		glBindVertexArray(skyVAO);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, textCubeMap);
 
 		glm::mat4 view(1.0);
 		glm::mat4 projection(1.0);
-
-		//我们通过取4x4矩阵左上角的3x3矩阵来移除变换矩阵的位移部分。
-		//我们可以将观察矩阵转换为3x3矩阵（移除位移），再将其转换回4x4矩阵，来达到类似的效果。
-		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
 		projection = glm::perspective(glm::radians(camera.Zoom),
 			SMALL_SCREEN_WIDTH * 1.0f / SMALL_SCREEN_HEIGHT, 0.1f, 100.0f);
 
-		skyboxShader.setMat4("view", view);
-		skyboxShader.setMat4("projection", projection);
+		//------- box
+		glEnable(GL_CULL_FACE);
+		boxShader.use();
+		glBindVertexArray(boxVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texContainer);
+
+		view = glm::mat4(1.0);
+		view = camera.GetViewMatrix();
+		boxShader.setMat4("view", view);
+		boxShader.setMat4("projection", projection);
+		glm::mat4 model(1.0);
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+		boxShader.setMat4("model", model);
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		glDisable(GL_CULL_FACE);
+		//------- box done
+		
+		//------- skybox 
+		skyboxShader.use();
+		glBindVertexArray(skyVAO);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, textCubeMap);
+		
+		//我们通过取4x4矩阵左上角的3x3矩阵来移除变换矩阵的位移部分。
+		//我们可以将观察矩阵转换为3x3矩阵（移除位移），再将其转换回4x4矩阵，来达到类似的效果。
+		view = glm::mat4(1.0);
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+		
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+		
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		//------- skybox done
 
-		glDepthMask(GL_TRUE);  //允许深度写入
+		//TODO  there still has bug.
+		//render framebuffer texture to main screen
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//glDisable(GL_DEPTH_TEST);
+		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT);
+		//screenShader.use();
+		//glBindVertexArray(quadVAO);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, framebufferTex);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glBindVertexArray(0);
 
 		//------ render done
 

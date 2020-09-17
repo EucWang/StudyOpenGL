@@ -17,6 +17,13 @@ uniform mat4 projection;
 out vec3 textureDir;
 
 void main(){
-	gl_Position = projection * view * vec4(aPos, 1.0);
+
+	vec4 pos = projection * view * vec4(aPos, 1.0);
+	//这里让z分量一直等于w分量，在执行透视除法时， z分量会变成 w/w = 1.0. 
+	//这样最终的标准设备坐标将永远有一个等于1.0的z值， 既最大的深度值。
+	//也就是保证了 天空盒子的深度永远是最大的，
+	gl_Position = pos.xyww;
+
+
 	textureDir = aPos;
 }

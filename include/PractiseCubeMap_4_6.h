@@ -28,6 +28,15 @@ public:
 	const char* vertFile = "shader/shader_cube_map_test_4_6.vert";
 	const char* fragFile = "shader/shader_cube_map_test_4_6.frag";
 
+	const char* vertFileCube = "shader/shader_cube_map_test_4_6_box.vert";
+	const char* fragFileCube = "shader/shader_cube_map_test_4_6_box.frag";
+
+	//将帧缓冲的纹理写入到屏幕时,使用如下的着色器
+	const char* vertFileScreen = "shader/shader_cube_map_test_4_6_framebuffer.vert";
+	const char* fragFileScreen = "shader/shader_cube_map_test_4_6_framebuffer.frag";
+
+	const char* imageFileContainer = "images/container.jpg";
+
 	struct SkyBoxData skybox;
 
 	int practise(const char* projectDir);

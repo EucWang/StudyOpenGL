@@ -544,5 +544,17 @@
     <None Include="shader\shader_cube_map_test_4_6.vert">
       <Filter>shader</Filter>
     </None>
+    <None Include="shader\shader_cube_map_test_4_6_box.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_cube_map_test_4_6_box.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_cube_map_test_4_6_framebuffer.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_cube_map_test_4_6_framebuffer.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
