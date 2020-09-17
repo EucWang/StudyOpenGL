@@ -27,11 +27,13 @@
     <ClInclude Include="include\MyShader.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
+    <ClInclude Include="include\PractiseCubeMap_4_6.h" />
     <ClInclude Include="include\PractiseFaceCulling_4_4.h" />
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h" />
     <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
+    <ClInclude Include="include\skyBoxData.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\test.h" />
     <ClInclude Include="include\TestPractiseDepth28.h" />
@@ -41,6 +43,7 @@
   <ItemGroup>
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
+    <ClCompile Include="sample\PractiseCubeMap_4_6.cpp" />
     <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
@@ -125,6 +128,12 @@
     <Image Include="images\marble.jpg" />
     <Image Include="images\matrix.jpg" />
     <Image Include="images\metal.png" />
+    <Image Include="images\skybox\back.jpg" />
+    <Image Include="images\skybox\bottom.jpg" />
+    <Image Include="images\skybox\front.jpg" />
+    <Image Include="images\skybox\left.jpg" />
+    <Image Include="images\skybox\right.jpg" />
+    <Image Include="images\skybox\top.jpg" />
     <Image Include="images\wall.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +150,8 @@
     <None Include="shader\shader_blending_test29_outlining.frag" />
     <None Include="shader\shader_blending_test30.frag" />
     <None Include="shader\shader_blending_test30.vert" />
+    <None Include="shader\shader_cube_map_test_4_6.frag" />
+    <None Include="shader\shader_cube_map_test_4_6.vert" />
     <None Include="shader\shader_depth_test28.frag" />
     <None Include="shader\shader_depth_test28.vert" />
     <None Include="shader\shader_depth_test28_light.frag" />
