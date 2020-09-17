@@ -24,7 +24,7 @@ public:
 	MyShader(const char* projectDir, const char* vertexSubPath, const char* fragmentSubPath);
 
 	void use();
-
+	void deleteProgram() { glDeleteProgram(id); id = -1; }
 	// ------------------------------------------------------------------------
 	void setBool(const std::string& name, bool value)  const;
 	// ------------------------------------------------------------------------

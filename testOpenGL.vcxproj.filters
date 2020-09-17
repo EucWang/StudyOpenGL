@@ -72,6 +72,9 @@
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -219,6 +222,9 @@
       <Filter>sample</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -451,9 +457,6 @@
     <None Include="shader\shader_blending_test29_grass.frag">
       <Filter>shader</Filter>
     </None>
-    <None Include="images\Bee.glb">
-      <Filter>images</Filter>
-    </None>
     <None Include="shader\shader_blending_test30.frag">
       <Filter>shader</Filter>
     </None>
@@ -488,6 +491,21 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_frame_buffer_test_4_5_gray.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_kernel_test_4_5.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_kernel_test_4_5.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_kernel_frame_test_4_5.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_kernel_frame_test_4_5.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\shader_frame_buffer_kernel_handle_test_4_5.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

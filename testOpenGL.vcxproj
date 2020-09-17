@@ -29,6 +29,7 @@
     <ClInclude Include="include\PractiseBlending30.h" />
     <ClInclude Include="include\PractiseFaceCulling_4_4.h" />
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h" />
+    <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
     <ClInclude Include="include\stb_image.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="sample\PractiseBlending30.cpp" />
     <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp" />
+    <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -129,7 +131,6 @@
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
-    <None Include="images\Bee.glb" />
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="shader\shader_blending_test29.frag" />
@@ -148,11 +149,16 @@
     <None Include="shader\shader_faceculling_test4_4.vert" />
     <None Include="shader\shader_faceculling_test4_4_grass.frag" />
     <None Include="shader\shader_faceculling_test4_4_grass.vert" />
+    <None Include="shader\shader_frame_buffer_kernel_frame_test_4_5.frag" />
+    <None Include="shader\shader_frame_buffer_kernel_frame_test_4_5.vert" />
+    <None Include="shader\shader_frame_buffer_kernel_test_4_5.frag" />
+    <None Include="shader\shader_frame_buffer_kernel_test_4_5.vert" />
     <None Include="shader\shader_frame_buffer_test_4_5.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5.vert" />
     <None Include="shader\shader_frame_buffer_test_4_5_gray.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5_screen.frag" />
     <None Include="shader\shader_frame_buffer_test_4_5_screen.vert" />
+    <None Include="shader\shader_frame_buffer_kernel_handle_test_4_5.frag" />
     <None Include="shader\shader_light_test20.frag" />
     <None Include="shader\shader_light_test20.vert" />
     <None Include="shader\shader_light_test20_light.frag" />

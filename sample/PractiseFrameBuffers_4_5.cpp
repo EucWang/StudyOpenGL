@@ -1,6 +1,5 @@
 #include "PractiseFrameBuffers_4_5.h"
  
-
 static double deltaTime;
 static float lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH / 2, lastY = SMALL_SCREEN_HEIGHT / 2;
@@ -125,10 +124,10 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 	GLFWwindow * window = createGLWindow(SMALL_SCREEN_WIDTH, SMALL_SCREEN_HEIGHT, "practise frame buffer");
 	if (window == NULL) { return -1; }
 
-	MyShader shader(projectDir, vertFile, fragFile);
-	//MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);
-	//MyShader screenReverseColorShader(projectDir, vertFileScreen, fragFileReverseColor);
-	MyShader screenGrayShader(projectDir, vertFileScreen, fragFileGray);
+	MyShader shader(projectDir, vertFile, fragFile);  //往帧缓冲写入的shader
+	//MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);   //普通的没有处理的屏幕shader
+	//MyShader screenReverseColorShader(projectDir, vertFileScreen, fragFileReverseColor);   //反转颜色的屏幕的shader
+	MyShader screenGrayShader(projectDir, vertFileScreen, fragFileGray);   //将颜色置位灰度的屏幕shader
 
 	GLuint quadVAO, quadVBO;
 	makeVAOVBO(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
@@ -217,31 +216,34 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//glm::mat4 model2 = glm::mat4(1.0);
-		//model2 = glm::translate(model2, glm::vec3(-1.0f, 0.0f, 1.0f));
-		//model2 = glm::rotate(model2, (float)curFrame * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-		//shader.setMat4("model", model2);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//
-		//model2 = glm::mat4(1.0);
-		//model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, -1.0f));
-		////model2 = glm::rotate(model2, (float)curFrame * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-		//shader.setMat4("model", model2);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		glm::mat4 model2 = glm::mat4(1.0);
+		model2 = glm::translate(model2, glm::vec3(-1.0f, 0.0f, 1.0f));
+		model2 = glm::rotate(model2, (float)glfwGetTime() * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+		shader.setMat4("model", model2);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		model2 = glm::mat4(1.0);
+		model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, -1.0f));
+		model2 = glm::rotate(model2, (float)glfwGetTime() * glm::radians(12.0f), glm::vec3(0.0f, 1.2f, 0.0f));
+		shader.setMat4("model", model2);
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//渲染地板
 		glBindVertexArray(planeVAO);
 		glBindTexture(GL_TEXTURE_2D, planeTexture);
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
+		// 禁用深度缓冲, 因为屏幕是标准的二维像素,不需要深度缓冲
 		glDisable(GL_DEPTH_TEST);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);  //解除帧缓冲绑定
 
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		//--------------------------render to framebuffer
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  //清空屏幕颜色
+		glClear(GL_COLOR_BUFFER_BIT);         //清空颜色缓冲
+		//--------------------------render to framebuffer done
 
 		//------------------render framebuffer to default screen 
 		//screenshader.use();
@@ -249,9 +251,9 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		screenGrayShader.use();
 		glBindVertexArray(quadVAO);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+		glBindTexture(GL_TEXTURE_2D, texColorBuffer);  //将帧缓冲生成的纹理对象texColorBuffer写入到屏幕帧缓冲中
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		//------------------render  framebuffer to default screen
+		//------------------render framebuffer to default screen  done
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
