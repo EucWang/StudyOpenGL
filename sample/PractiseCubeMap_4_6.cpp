@@ -117,30 +117,31 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 	skyboxShader.use();
 	int textCubeMap = 0;
 	if ((textCubeMap = RenderUtil::texureLoadCubmap(projectDir, skybox.images)) <= 0) { return -1; }
-	skyboxShader.setInt("cubemap", 0);
+	skyboxShader.setInt("skybox", 0);
 
 	GLuint skyVAO, skyVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&skyVAO, &skyVBO, skybox.skyboxVertices, sizeof(skybox.skyboxVertices), 3);
 
 	//箱子
-	MyShader boxShader(projectDir, vertFileCube, fragFileCube);
+	MyShader boxShader(projectDir, vertFileReflect, fragFileReflect);
 	boxShader.use();
 	int texContainer = RenderUtil::textureLoad2D(projectDir, imageFileContainer);
-	boxShader.setInt("texture_diffuse1", 0);
+	//boxShader.setInt("texture_diffuse1", 0);
+	boxShader.setInt("skybox", 0);
 
 	GLuint boxVAO, boxVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&boxVAO, &boxVBO, cubeVertices, sizeof(cubeVertices), 8);
 
 	// 帧缓冲
-	GLuint framebufferobj, framebufferTex, renderbuffer;
-	RenderUtil::createFramebuffer(&framebufferobj, &framebufferTex, &renderbuffer);
-
-	MyShader screenShader(projectDir, vertFileScreen, fragFileScreen);
-	screenShader.use();
-	screenShader.setInt("screen_texture", 0);
-
-	GLuint quadVAO, quadVBO;
-	RenderUtil::makeVertexArrayAndBuffer(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
+	//GLuint framebufferobj, framebufferTex, renderbuffer;
+	//RenderUtil::createFramebuffer(&framebufferobj, &framebufferTex, &renderbuffer);
+	//
+	//MyShader screenShader(projectDir, vertFileScreen, fragFileScreen);
+	//screenShader.use();
+	//screenShader.setInt("screen_texture", 0);
+	//
+	//GLuint quadVAO, quadVBO;
+	//RenderUtil::makeVertexArrayAndBuffer(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
 
 	//--------- prepare done
 
@@ -148,13 +149,6 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 	glfwSetCursorPosCallback(window, mouse_move_callback);
 	glfwSetScrollCallback(window, mouse_scroll_callback);
 
-	//glEnable(GL_DEPTH_TEST);  //深度缓冲
-	//glDepthFunc(GL_LESS);
-	//glDepthFunc(GL_LEQUAL);  //既需要保证天空盒子在值小于等于深度缓冲而不是小于时才通过深度测试
-	//glDepthMask(GL_TRUE);  //允许深度写入
-
-	//glEnable(GL_BLEND);  //透明混淆
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_TRUE);  //允许深度写入
@@ -184,8 +178,9 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 		boxShader.use();
 		glEnable(GL_CULL_FACE);
 		glBindVertexArray(boxVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texContainer);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, texContainer);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, textCubeMap);
 		
 		view = glm::mat4(1.0);
 		view = camera.GetViewMatrix();
@@ -193,7 +188,9 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 		boxShader.setMat4("projection", projection);
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, (float)curFrame, glm::vec3(0.1f, 0.2f, 0.3f));
 		boxShader.setMat4("model", model);
+		boxShader.setVec3("cameraPos", camera.Position.x, camera.Position.y, camera.Position.z);
 		
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glDisable(GL_CULL_FACE);

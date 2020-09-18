@@ -23,6 +23,7 @@ struct SkyBoxData
 		"images/skybox/front.jpg"   //前    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 	};
 
+    //只有顶点的数据
     float skyboxVertices[36*3] = {
         // positions          
         -1.0f,  1.0f, -1.0f,  //背面6点

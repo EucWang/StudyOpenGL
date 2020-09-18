@@ -32,6 +32,9 @@ public:
 	const char* vertFileCube = "shader/shader_cube_map_test_4_6_box.vert";
 	const char* fragFileCube = "shader/shader_cube_map_test_4_6_box.frag";
 
+	const char* vertFileReflect = "shader/shader_cube_map_test_4_6_box_reflect.vert";
+	const char* fragFileReflect = "shader/shader_cube_map_test_4_6_box_reflect.frag";
+
 	//将帧缓冲的纹理写入到屏幕时,使用如下的着色器
 	const char* vertFileScreen = "shader/shader_cube_map_test_4_6_framebuffer.vert";
 	const char* fragFileScreen = "shader/shader_cube_map_test_4_6_framebuffer.frag";

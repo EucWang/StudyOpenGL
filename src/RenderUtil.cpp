@@ -207,6 +207,14 @@ void RenderUtil::makeVertexArrayAndBuffer(GLuint* vao, GLuint* vbo, const float*
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)(2 * sizeof(float)));
 	}
+	else if (layoutSize == 6) {
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, layoutSize * sizeof(float), (void*)(3 * sizeof(float)));
+
+	}
 	else if (layoutSize == 5 || layoutSize == 8) {
 		int len = layoutSize / 3;
 		std::cout << "len = " << len << std::endl;
