@@ -84,6 +84,9 @@
     <ClInclude Include="include\PractiseCubeMap_4_6.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\RenderUtil.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -238,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="sample\PractiseCubeMap_4_6.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderUtil.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
