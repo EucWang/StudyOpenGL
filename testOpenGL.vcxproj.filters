@@ -87,6 +87,9 @@
     <ClInclude Include="include\RenderUtil.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseAdvancedData_4_7.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -244,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="src\RenderUtil.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp">
+      <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -566,6 +572,15 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\shader_cube_map_test_4_6_box_reflect.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\vert_4_7_advanced_data.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\frag_4_7_advanced_data.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\frag_4_7_advanced_data_floor.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

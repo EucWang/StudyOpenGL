@@ -25,6 +25,7 @@
     <ClInclude Include="include\Mesh.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\MyShader.h" />
+    <ClInclude Include="include\PractiseAdvancedData_4_7.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
     <ClInclude Include="include\PractiseCubeMap_4_6.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="include\util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
     <ClCompile Include="sample\PractiseCubeMap_4_6.cpp" />
@@ -144,6 +146,8 @@
     <None Include="helper\smollSplitLightEdge.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
+    <None Include="shader\frag_4_7_advanced_data.frag" />
+    <None Include="shader\frag_4_7_advanced_data_floor.frag" />
     <None Include="shader\shader_blending_test29.frag" />
     <None Include="shader\shader_blending_test29.vert" />
     <None Include="shader\shader_blending_test29_grass.frag" />
@@ -208,6 +212,7 @@
     <None Include="shader\shader_light_test27.vert" />
     <None Include="shader\shader_light_test27_light.frag" />
     <None Include="shader\shader_light_test27_light.vert" />
+    <None Include="shader\vert_4_7_advanced_data.vert" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

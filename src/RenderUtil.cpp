@@ -175,7 +175,57 @@ int RenderUtil::createFramebuffer(GLuint* framebufferobj, GLuint* frametexture, 
 	return 1;
 }
 
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, 
+	const float* positions, const int positionsSize, const int arr1Offset,
+	const float* normals, int normalsSize, int arr2Offset,
+	const float* texCoords, int texCoordsSize, int arr3Offset) {
 
+	if (positions == NULL)	{
+		std::cout << "ERROR::RenderUtil::makeVertexArrayFromSubData():: the first param positions is null, that is not correct." << std::endl;
+		return;
+	}
+	if (normals == NULL) {
+		normals = 0;
+		arr2Offset = 0;
+	}
+	if (texCoords == NULL) {
+		texCoordsSize = 0;
+		arr3Offset = 0;
+	}
+
+	glGenVertexArrays(1, vao);
+	glGenBuffers(1, vbo);
+
+	glBindVertexArray(*vao);
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+	glBufferData(GL_ARRAY_BUFFER, positionsSize + normalsSize + texCoordsSize, nullptr, GL_STATIC_DRAW);
+
+	glBufferSubData(GL_ARRAY_BUFFER, 0, positionsSize, positions);
+
+	if (normals != NULL) {
+		glBufferSubData(GL_ARRAY_BUFFER, positionsSize, normalsSize, normals);
+	}
+
+	if	(texCoords != NULL) {
+		glBufferSubData(GL_ARRAY_BUFFER, positionsSize + normalsSize, texCoordsSize, texCoords);
+	}
+
+	glVertexAttribPointer(0, arr1Offset, GL_FLOAT, GL_FALSE, arr1Offset * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	if (normals != NULL) {
+		glVertexAttribPointer(1, arr2Offset, GL_FLOAT, GL_FALSE, arr2Offset * sizeof(float), (void*)(positionsSize));
+	}
+	glEnableVertexAttribArray(1);
+
+	if (texCoords != NULL) {
+		glVertexAttribPointer(2, arr3Offset, GL_FLOAT, GL_FALSE, arr3Offset * sizeof(float),
+			(void*)(positionsSize + normalsSize));
+		glEnableVertexAttribArray(2);
+	}
+
+	glBindVertexArray(0);
+}
 
 /// <summary>
 /// ´´½¨ VAO VBO 

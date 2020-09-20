@@ -19,6 +19,7 @@
 #include "PractiseFrameBuffers_4_5.h"
 #include "PractiseFrameBuffer_kernel_4_5.h"
 #include "PractiseCubeMap_4_6.h"
+#include "PractiseAdvancedData_4_7.h"
 
 using namespace std;
 
@@ -100,7 +101,8 @@ int main(int argc, char* argv[]) {
 
 	//PractiseFrameBuffer_kernel_4_5 practise = PractiseFrameBuffer_kernel_4_5();
 
-	PractiseCubeMap_4_6 practise = PractiseCubeMap_4_6();
+	//PractiseCubeMap_4_6 practise = PractiseCubeMap_4_6();
+	PractiseAdvancedData_4_7 practise = PractiseAdvancedData_4_7();
 	practise.practise(projectDir);
 
 	//free(debugDir);

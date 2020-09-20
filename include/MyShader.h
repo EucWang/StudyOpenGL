@@ -19,7 +19,7 @@ class MyShader {
 
 public:
 	unsigned int id;
-
+	
 	MyShader(const GLchar* vertexPath, const GLchar* fragmentPath);
 	MyShader(const char* projectDir, const char* vertexSubPath, const char* fragmentSubPath);
 

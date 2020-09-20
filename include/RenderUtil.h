@@ -77,6 +77,18 @@ public:
 	/// <param name="layoutSize"> vertex file layout size , must be values of 3/5/8</param>
 	void static makeVertexArrayAndBuffer(GLuint* vao, GLuint* vbo, const float* dataArr, int dataArrSize, int layoutSize);
 
+	void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+		const float* positions, const int positionSize, const int arr1Offset,
+		const float* normals, const int normalsSize, const int arr2Offset,
+		const float* texCoords, const int texCoordsSize, const int arr3Offset);
+
+	void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+		const float* positions, const int positionSize, const int arr1Offset,
+		const float* normals, const int normalsSize, const int arr2Offset);
+
+	//void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+	//	const float* positions, const int positionSize, const int arr1Offset,
+	//	const float* normals, const int normalsSize, const int arr2Offset);
 };
 
 #endif // !RENDER_H_
