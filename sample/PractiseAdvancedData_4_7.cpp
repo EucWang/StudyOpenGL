@@ -45,7 +45,7 @@ static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double off
 	camera.ProcessMouseScroll(offsetY);
 }
 
-void buffer_window_callback(GLFWwindow* window, int width, int height) {
+static void buffer_window_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 

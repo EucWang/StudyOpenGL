@@ -90,6 +90,9 @@
     <ClInclude Include="include\PractiseAdvancedData_4_7.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseAdvancedGLSL_4_8.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -249,6 +252,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseAdvancedGLSL_4_8.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -581,6 +587,12 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\frag_4_7_advanced_data_floor.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
