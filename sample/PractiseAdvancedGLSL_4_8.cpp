@@ -1,7 +1,7 @@
 #include "PractiseAdvancedGLSL_4_8.h"
 
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = DEFAULT_SCREEN_WIDTH / 2, lastY = DEFAULT_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 

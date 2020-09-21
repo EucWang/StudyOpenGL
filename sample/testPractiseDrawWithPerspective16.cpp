@@ -43,7 +43,7 @@ static int locUniformView;
 static int locUniformProjection;
 
 static float cameraSpeed = 0.0005;
-static float deltaTime;
+static double deltaTime;
 
 static float vertices[] = {
 	  -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -232,13 +232,13 @@ void useMatrix() {
 	 
 }
 
-static float lastFrame = 0.0f;
+static double lastFrame = 0.0;
 
 /**
 * 控制按键 W, S, A, D 方向 来 移动视角矩阵
 */
 void processInput(GLFWwindow* window) {
-	float currentTime = glfwGetTime();
+	double currentTime = glfwGetTime();
 	if (lastFrame > 0)	{
 		deltaTime = currentTime - lastFrame;
 	} else {

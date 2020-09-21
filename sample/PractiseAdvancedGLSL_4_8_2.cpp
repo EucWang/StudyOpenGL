@@ -1,8 +1,11 @@
 #include "PractiseAdvancedGLSL_4_8_2.h"
 
+//#include <glm/glm.hpp>
+//#include <glm/gtc/matrix_transform.hpp>
+//#include <glm/gtc/type_ptr.hpp>
 
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = DEFAULT_SCREEN_WIDTH / 2, lastY = DEFAULT_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 
@@ -136,27 +139,50 @@ int PractiseAdvancedGLSL_4_8_2::practise(string projectDir) {
 */
 int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 
-	GLFWwindow* window = RenderUtil::createWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, "Advanced GLSL gl_FrontFacing",
-		buffer_window_callback);
+	GLFWwindow* window = RenderUtil::createWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT,
+		"Advanced GLSL gl_FrontFacing", buffer_window_callback);
 	if (window == NULL) { return -1; }
 
 	//---------prepare
 	MyShader myshader(projectDir.c_str(), vertFile2, fragFile2);
 	GLuint VAO, VBO;
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, cubePosition, sizeof(cubePosition), 3,
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, 
+		cubePosition, sizeof(cubePosition), 3,
 		cubeTexCoords, sizeof(cubeTexCoords), 2);
-
-	//-----  Uniform 缓冲对象
-	GLuint UBO;
-	glGenBuffers(1, &UBO);
-	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 
 	int tex1 = RenderUtil::textureLoad2D(projectDir, imgFileMarble2);
 	int tex2 = RenderUtil::textureLoad2D(projectDir, imgFileMarbleInside);
+	int tex3 = RenderUtil::textureLoad2D(projectDir, imgFilePlane);
 
 	myshader.use();
 	myshader.setInt("texture_diffuse1", 0);
 	myshader.setInt("texture_inside", 1);
+
+	//-------------------
+	MyShader planeshader(projectDir.c_str(), vertFilePlane, fragFilePlane);
+	GLuint planeVAO, planeVBO;
+	RenderUtil::makeVertexArrayFromSubData(&planeVAO, &planeVBO,
+		planePosition, sizeof(planePosition), 3,
+		planeTexCoords, sizeof(planeTexCoords), 2);
+
+	planeshader.use();
+	planeshader.setInt("texture_diffuse1", 0);
+
+	//-------------------- Uniform缓冲矩阵 
+	glUniformBlockBinding(myshader.id,
+		glGetUniformBlockIndex(myshader.id, "Matrices"), 0);  //将箱子顶点着色器中的Uniform对象绑定到指定的绑定点0上
+
+	glUniformBlockBinding(planeshader.id,
+		glGetUniformBlockIndex(planeshader.id, "Matrices2"), 0); //将地面的顶点着色器中的Uniform缓冲对象绑定到指定的绑定点0上
+
+	GLuint UBO;
+	glGenBuffers(1, &UBO);
+	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	//glBindBufferBase(GL_UNIFORM_BUFFER, 0, UBO);
+	glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));  //及那个Uniform缓冲对象也绑定到指定的绑定点0上
+	//-------------------- Uniform缓冲矩阵 done
 
 	//---------prepare done
 
@@ -169,9 +195,10 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
+
 	while (!glfwWindowShouldClose(window)) {
 
-		double curFrame = glfwGetTime();
+		float curFrame = (float)glfwGetTime();
 		deltaTime = curFrame - lastFrame;
 		lastFrame = curFrame;
 
@@ -182,11 +209,21 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 		//glClear(GL_COLOR_BUFFER_BIT);
 
 		//-------------render
+
+		//--------视角、视窗矩阵
 		glm::mat4 view(1.0);
 		glm::mat4 projection(1.0);
 		view = camera.GetViewMatrix();
 		projection = glm::perspective(glm::radians(camera.Zoom), DEFAULT_SCREEN_WIDTH * 1.0f / DEFAULT_SCREEN_HEIGHT,
 			0.1f, 100.0f);
+		//--------视角、视窗矩阵 done
+
+		//----------更新Uniform缓冲对象中的数据
+		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(view));
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		//----------更新Uniform缓冲对象中的数据 done
 
 		myshader.use();
 		glBindVertexArray(VAO);
@@ -199,9 +236,21 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 
 		myshader.setMat4("model", model);
-		myshader.setMat4("view", view);
-		myshader.setMat4("projection", projection);
+		//myshader.setMat4("view", view);
+		//myshader.setMat4("projection", projection);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//---------------- 渲染地面
+		planeshader.use();
+		glBindVertexArray(planeVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, tex3);
+
+		glm::mat4 model2(1.0);
+		model2 = glm::translate(model2, glm::vec3(0.0f, -0.005f, 0.0f));
+		planeshader.setMat4("model", model2);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
 
 		//-------------render done
 

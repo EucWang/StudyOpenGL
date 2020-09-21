@@ -1,7 +1,7 @@
 #include "PractiseFrameBuffers_4_5.h"
  
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH / 2, lastY = SMALL_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 

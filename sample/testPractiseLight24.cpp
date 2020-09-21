@@ -34,7 +34,7 @@ static int shaderId, shaderLightId;
 static GLuint texture1, texture2;
 
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH / 2, lastY = SMALL_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 
@@ -353,5 +353,5 @@ void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY) {
-    camera.ProcessMouseScroll(offsetY);
+    camera.ProcessMouseScroll((float)offsetY);
 }

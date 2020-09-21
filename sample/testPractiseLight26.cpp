@@ -358,7 +358,7 @@ int practiseLight26(const char* projectDir) {
     glfwSetCursorPosCallback(window, mouse_move_callback);
 
     while (!glfwWindowShouldClose(window)) {
-        double curFrame = glfwGetTime();
+        float curFrame = (float)glfwGetTime();
         deltaTime = curFrame - lastFrame;
         lastFrame = curFrame;
 
@@ -525,7 +525,7 @@ void render() {
     for (int i = 0; i < 4; i++) {
         glm::mat4 model(1.0);
         model = glm::translate(model, pointLightPositions[i]);
-        model = glm::scale(model, glm::vec3(0.1));
+        model = glm::scale(model, glm::vec3(0.1f));
         glUniformMatrix4fv(glGetUniformLocation(shaderLightId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         glUniform3f(glGetUniformLocation(shaderLightId, "lightColor"), 
@@ -570,6 +570,6 @@ void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY) {
-    camera.ProcessMouseScroll(offsetY);
+    camera.ProcessMouseScroll((float)offsetY);
 }
 

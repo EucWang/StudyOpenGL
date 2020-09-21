@@ -56,16 +56,20 @@ int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName) {
 
 	stbi_set_flip_vertically_on_load(true);
 	unsigned char* data = stbi_load(imagePath, &width, &height, &channel, 0);
-	if (data == NULL) {
+	if (data == NULL || *data == NULL) {
 		std::cout << "textureLoadImg() load failed,  because stbi_load() failed." << std::endl;
 		stbi_image_free(data);
 		return -1;
 	}
 
-	GLenum format;
+	GLenum format = 0;
 	if (channel == 1) { format = GL_RED; }
 	else if (channel == 3) { format = GL_RGB; }
 	else if (channel == 4) { format = GL_RGBA; }
+	else {
+		std::cout << "channel is " << channel << ", then format is not right." << std::endl;
+		return -1;
+	}
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
@@ -79,7 +83,7 @@ int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName) {
 
 	stbi_image_free(data);
 	free(imagePath);
-
+	glBindTexture(GL_TEXTURE_2D, 0);
 	return textureId;
 
 }

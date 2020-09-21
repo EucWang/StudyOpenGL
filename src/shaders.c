@@ -91,11 +91,14 @@ bool textureLoadImg(const char * parentDir, const char * imgName, int rgbType) {
 		return FALSE;
 	}
 
-	GLenum format;
+	GLenum format = 0;
 	if (channel == 1) { format = GL_RED; }
 	else if (channel == 3) { format = GL_RGB; }
 	else if (channel == 4) { format = GL_RGBA; }
-
+	else {
+		printf("%s\n", "textureLoadImg() load failed, because format is not right.");
+		return -1;
+	}
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -135,11 +138,14 @@ int textureLoad(const char * parentDir, const char * imgName) {
 		return -1;
 	}
 
-	GLenum format;
+	GLenum format = 0 ;
 	if (channel == 1) { format = GL_RED; }
 	else if (channel == 3) { format = GL_RGB; }
 	else if (channel == 4) { format = GL_RGBA; }
-
+	else {
+		printf("%s\n", "textureLoad() load failed, because format is not right.");
+		return -1;
+	}
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -199,10 +205,14 @@ int textureLoad2(const char* parentDir, const char* imgName,
 		return -1;
 	}
 
-	GLenum format;
+	GLenum format = 0;
 	if (channel == 1) { format = GL_RED; }
 	else if (channel == 3) { format = GL_RGB; }
 	else if (channel == 4) { format = GL_RGBA; }
+	else {
+		printf("%s\n", "textureLoad2() load failed, because format is not right.");
+		return -1;
+	}
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
@@ -275,7 +285,7 @@ void makeVAOVBO(GLuint* vao, GLuint* vbo, const float* dataArr, int dataArrSize,
 	} else if(layoutSize == 5 || layoutSize == 8) {
 		int len = layoutSize / 3;
 		printf("len = %d", len);
-		for (size_t i = 0; i <= len; i++) {
+		for (int i = 0; i <= len; i++) {
 			glEnableVertexAttribArray(i);
 
 			int size = 3;

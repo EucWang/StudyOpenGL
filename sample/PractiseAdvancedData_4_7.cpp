@@ -1,7 +1,7 @@
 #include "PractiseAdvancedData_4_7.h"
 
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = DEFAULT_SCREEN_WIDTH / 2, lastY = DEFAULT_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 

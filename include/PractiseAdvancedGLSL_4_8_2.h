@@ -5,24 +5,55 @@
 
 #include "camera.h"
 #include "fileUtil.h"
-#include "mesh.h"
 #include "MyShader.h"
-#include "model.h"
 #include "RenderUtil.h"
+//#include "mesh.h"
+//#include "model.h"
 
 
-class PractiseAdvancedGLSL_4_8_2
-{
+class PractiseAdvancedGLSL_4_8_2 {
 public:
-
 	const char* vertFile = "shader/_4_8_advanced_glsl2.vert";
 	const char* fragFile = "shader/_4_8_advanced_glsl2.frag";
 
 	const char* vertFile2 = "shader/_4_8_advanced_glsl3.vert";
 	const char* fragFile2 = "shader/_4_8_advanced_glsl3.frag";
 
+	const char* vertFilePlane = "shader/_4_8_advanced_glsl3_2.vert";
+	const char* fragFilePlane = "shader/_4_8_advanced_glsl3_2.frag";
+
 	const char* imgFileMarble2 = "images/marble2.jpg";
 	const char* imgFileMarbleInside = "images/marble_inside.jpg";
+
+	const char* imgFilePlane = "images/plane2.jpg";
+
+	//地面的坐标
+	const float planePosition[6 * 3] = {
+		// (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). 
+		//this will cause the floor texture to repeat)
+		// positions        
+		 5.0f, -0.5f,  5.0f, 
+		-5.0f, -0.5f,  5.0f, 
+		-5.0f, -0.5f, -5.0f, 
+
+		 5.0f, -0.5f,  5.0f, 
+		-5.0f, -0.5f, -5.0f, 
+		 5.0f, -0.5f, -5.0f
+	};
+	//地面的纹理坐标
+	const float planeTexCoords[6 * 2] = {
+		// (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). 
+		//this will cause the floor texture to repeat)
+		// texture Coords
+		 2.0f, 0.0f,
+		 0.0f, 0.0f,
+		 0.0f, 2.0f,
+
+		 2.0f, 0.0f,
+		 0.0f, 2.0f,
+		 2.0f, 2.0f
+	};
+
 
 	const float cubePosition[36 * 3] = {
 		// Back face

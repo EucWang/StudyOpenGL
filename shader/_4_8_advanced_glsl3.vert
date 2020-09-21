@@ -3,8 +3,6 @@
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTexCoords;
 
-
-
 /**
 * Uniform缓冲对象(Uniform Buffer Object)的工具，它允许我们定义一系列在多个着色器中相同的全局Uniform变量。
 * 当使用Uniform缓冲对象的时候，我们只需要设置相关的uniform一次。
@@ -68,9 +66,7 @@ uniform mat4 model;
 声明了一个叫做VS_OUT的接口块，它打包了我们希望发送到下一个着色器中的所有输出变量。
 */
 out VS_OUT{
-
 	vec2 texCoords;
-
 } vs_out;
 
 void main(){

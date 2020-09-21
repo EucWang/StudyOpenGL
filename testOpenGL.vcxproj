@@ -138,6 +138,7 @@
     <Image Include="images\marble_inside.jpg" />
     <Image Include="images\matrix.jpg" />
     <Image Include="images\metal.png" />
+    <Image Include="images\plane2.jpg" />
     <Image Include="images\skybox\back.jpg" />
     <Image Include="images\skybox\bottom.jpg" />
     <Image Include="images\skybox\front.jpg" />
@@ -225,6 +226,8 @@
     <None Include="shader\_4_8_advanced_glsl2.vert" />
     <None Include="shader\_4_8_advanced_glsl3.frag" />
     <None Include="shader\_4_8_advanced_glsl3.vert" />
+    <None Include="shader\_4_8_advanced_glsl3_2.frag" />
+    <None Include="shader\_4_8_advanced_glsl3_2.vert" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

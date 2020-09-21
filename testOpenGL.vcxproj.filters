@@ -390,6 +390,9 @@
     <Image Include="images\marble2.jpg">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\plane2.jpg">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader\shader_light_test20.vert">
@@ -617,6 +620,12 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_8_advanced_glsl3.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl3_2.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl3_2.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

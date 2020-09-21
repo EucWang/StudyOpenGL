@@ -86,8 +86,8 @@ static char* imagesDir;
 
 static float cameraSpeed = 0.005f;  //控制按键时，view的镜头的移动速率
 
-static float deltaTime = 0.0f;   //当前帧与上一帧的时间差
-static float lastFrame = 0.0f;   //上一帧的时间
+static double deltaTime = 0.0;   //当前帧与上一帧的时间差
+static double lastFrame = 0.0;   //上一帧的时间
 
 static glm::mat4 model;     //模型矩阵   ，位置，角度
 static glm::mat4 view;        //视角矩阵  相机， 远近，左右
@@ -236,7 +236,7 @@ void render() {
 	//有些计算机可能会比其他的每秒绘制更多帧，也就是以更高的频率调用processInput函数。
 	//结果就是，根据配置的不同，有些人可能移动很快，而有些人会移动很慢。
 	//需要跟踪绘制每帧的时间差
-	float currentFrame = glfwGetTime();
+	double currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 

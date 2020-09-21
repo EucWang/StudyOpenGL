@@ -27,7 +27,7 @@ static GLuint VAO, VBO, lightVAO;
 static int shaderId, shaderLightId;
 
 static double deltaTime;
-static float lastFrame;
+static double lastFrame;
 static double lastX = SMALL_SCREEN_WIDTH / 2, lastY = SMALL_SCREEN_HEIGHT / 2;
 static bool isMouseFirstIn = true;
 
@@ -188,9 +188,9 @@ void render() {
     glUniform1f(glGetUniformLocation(shaderId, "material.shininess"),  32.0f);
     //设置光照的光亮材质
     glm::vec3 lightColor;
-    lightColor.x = sin(glfwGetTime()) * 2.0f;
-    lightColor.y = sin(glfwGetTime()) * 0.7f;
-    lightColor.z = sin(glfwGetTime()) * 1.3f;
+    lightColor.x = sin((float)glfwGetTime()) * 2.0f;
+    lightColor.y = sin((float)glfwGetTime()) * 0.7f;
+    lightColor.z = sin((float)glfwGetTime()) * 1.3f;
     glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);  // 降低影响
     glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);  // 降低影响
 
@@ -285,5 +285,5 @@ void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY) {
-    camera.ProcessMouseScroll(offsetY);
+    camera.ProcessMouseScroll((float)offsetY);
 }

@@ -117,7 +117,7 @@ int practiseLight22(const char * projectDir) {
     glfwSetScrollCallback(window, mouse_scroll_callback);
 
     while (!glfwWindowShouldClose(window)) {
-        double curFrame = glfwGetTime();
+        float curFrame = (float)glfwGetTime();
         deltaTime = curFrame - lastFrame;
         lastFrame = curFrame;
         
@@ -276,5 +276,5 @@ void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
 }
 
 void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY) {
-    camera.ProcessMouseScroll(offsetY);
+    camera.ProcessMouseScroll((float)offsetY);
 }
