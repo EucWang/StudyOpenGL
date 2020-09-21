@@ -175,6 +175,22 @@ int RenderUtil::createFramebuffer(GLuint* framebufferobj, GLuint* frametexture, 
 	return 1;
 }
 
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+	const float* positions, const int positionsSize, const int arr1Offset) {
+	makeVertexArrayFromSubData(vao, vbo,
+		positions, positionsSize, arr1Offset,
+		NULL, 0, 0);
+}
+
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+	const float* positions, const int positionsSize, const int arr1Offset,
+	const float* normals, int normalsSize, int arr2Offset) {
+	makeVertexArrayFromSubData(vao, vbo,
+		positions, positionsSize, arr1Offset,
+		normals, normalsSize, arr2Offset, NULL, 0, 0);
+
+}
+
 void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, 
 	const float* positions, const int positionsSize, const int arr1Offset,
 	const float* normals, int normalsSize, int arr2Offset,

@@ -27,6 +27,7 @@
     <ClInclude Include="include\MyShader.h" />
     <ClInclude Include="include\PractiseAdvancedData_4_7.h" />
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8.h" />
+    <ClInclude Include="include\PractiseAdvancedGLSL_4_8_2.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
     <ClInclude Include="include\PractiseCubeMap_4_6.h" />
@@ -46,6 +47,7 @@
   <ItemGroup>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8.cpp" />
+    <ClCompile Include="sample\PractiseAdvancedGLSL_4_8_2.cpp" />
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
     <ClCompile Include="sample\PractiseCubeMap_4_6.cpp" />
@@ -132,6 +134,8 @@
     <Image Include="images\grass.png" />
     <Image Include="images\lighting_maps_specular_color.png" />
     <Image Include="images\marble.jpg" />
+    <Image Include="images\marble2.jpg" />
+    <Image Include="images\marble_inside.jpg" />
     <Image Include="images\matrix.jpg" />
     <Image Include="images\metal.png" />
     <Image Include="images\skybox\back.jpg" />
@@ -217,6 +221,10 @@
     <None Include="shader\vert_4_7_advanced_data.vert" />
     <None Include="shader\_4_8_advanced_glsl.frag" />
     <None Include="shader\_4_8_advanced_glsl.vert" />
+    <None Include="shader\_4_8_advanced_glsl2.frag" />
+    <None Include="shader\_4_8_advanced_glsl2.vert" />
+    <None Include="shader\_4_8_advanced_glsl3.frag" />
+    <None Include="shader\_4_8_advanced_glsl3.vert" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

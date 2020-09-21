@@ -86,9 +86,9 @@ public:
 		const float* positions, const int positionSize, const int arr1Offset,
 		const float* normals, const int normalsSize, const int arr2Offset);
 
-	//void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
-	//	const float* positions, const int positionSize, const int arr1Offset,
-	//	const float* normals, const int normalsSize, const int arr2Offset);
+	void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+		const float* positions, const int positionsSize, const int arr1Offset);
+	 
 };
 
 #endif // !RENDER_H_

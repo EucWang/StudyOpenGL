@@ -93,6 +93,9 @@
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseAdvancedGLSL_4_8_2.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -257,6 +260,9 @@
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\PractiseAdvancedGLSL_4_8_2.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -377,6 +383,12 @@
     </Image>
     <Image Include="images\skybox\top.jpg">
       <Filter>images\skybox</Filter>
+    </Image>
+    <Image Include="images\marble_inside.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\marble2.jpg">
+      <Filter>images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -593,6 +605,18 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_8_advanced_glsl.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl2.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl2.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl3.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_8_advanced_glsl3.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

@@ -21,6 +21,7 @@
 #include "PractiseCubeMap_4_6.h"
 #include "PractiseAdvancedData_4_7.h"
 #include "PractiseAdvancedGLSL_4_8.h"
+#include "PractiseAdvancedGLSL_4_8_2.h"
 
 using namespace std;
 
@@ -104,8 +105,10 @@ int main(int argc, char* argv[]) {
 
 	//PractiseCubeMap_4_6 practise = PractiseCubeMap_4_6();
 	//PractiseAdvancedData_4_7 practise = PractiseAdvancedData_4_7();
-	PractiseAdvancedGLSL_4_8 practise = PractiseAdvancedGLSL_4_8();
-	practise.practise(projectDir);
+	//PractiseAdvancedGLSL_4_8 practise = PractiseAdvancedGLSL_4_8();
+	PractiseAdvancedGLSL_4_8_2 practise = PractiseAdvancedGLSL_4_8_2();
+	//practise.practise(projectDir);
+	practise.practise2(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);
