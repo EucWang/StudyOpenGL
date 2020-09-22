@@ -34,6 +34,7 @@
     <ClInclude Include="include\PractiseFaceCulling_4_4.h" />
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h" />
     <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
+    <ClInclude Include="include\PractiseGeometryShader_4_9.h" />
     <ClInclude Include="include\RenderUtil.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="sample\PractiseFaceCulling_4_4.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
+    <ClCompile Include="sample\PractiseGeometryShader_4_9.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -138,7 +140,6 @@
     <Image Include="images\marble_inside.jpg" />
     <Image Include="images\matrix.jpg" />
     <Image Include="images\metal.png" />
-    <Image Include="images\plane2.jpg" />
     <Image Include="images\skybox\back.jpg" />
     <Image Include="images\skybox\bottom.jpg" />
     <Image Include="images\skybox\front.jpg" />
@@ -228,6 +229,10 @@
     <None Include="shader\_4_8_advanced_glsl3.vert" />
     <None Include="shader\_4_8_advanced_glsl3_2.frag" />
     <None Include="shader\_4_8_advanced_glsl3_2.vert" />
+    <None Include="shader\_4_9_geometry_shader.frag" />
+    <None Include="shader\_4_9_geometry_shader.geom" />
+    <None Include="shader\_4_9_geometry_shader.vert" />
+    <None Include="shader\_4_9_geometry_shader2.geom" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

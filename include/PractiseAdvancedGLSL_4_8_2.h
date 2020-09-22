@@ -25,7 +25,7 @@ public:
 	const char* imgFileMarble2 = "images/marble2.jpg";
 	const char* imgFileMarbleInside = "images/marble_inside.jpg";
 
-	const char* imgFilePlane = "images/plane2.jpg";
+	const char* imgFilePlane = "images/metal.png";
 
 	//地面的坐标
 	const float planePosition[6 * 3] = {
