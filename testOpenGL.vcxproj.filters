@@ -22,6 +22,9 @@
     <Filter Include="images\skybox">
       <UniqueIdentifier>{b05ece03-a25f-4039-aed7-f1701c80f3bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="images\nanosuit">
+      <UniqueIdentifier>{da257f00-61b5-472f-9fb2-25b0074d00a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -97,6 +100,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\PractiseGeometryShader_4_9.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PractiseGeometryShader_4_9_2.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -269,6 +275,9 @@
     <ClCompile Include="sample\PractiseGeometryShader_4_9.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\PractiseGeometryShader_4_9_2.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -337,6 +346,9 @@
     <Text Include="shader\shader_light_test19_fragment_light.txt">
       <Filter>shader</Filter>
     </Text>
+    <Text Include="images\nanosuit\LICENSE.txt">
+      <Filter>images\nanosuit</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\awesomeface.png">
@@ -395,6 +407,57 @@
     </Image>
     <Image Include="images\marble2.jpg">
       <Filter>images</Filter>
+    </Image>
+    <Image Include="images\nanosuit\arm_dif.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\arm_showroom_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\arm_showroom_spec.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\body_dif.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\body_showroom_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\body_showroom_spec.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\glass_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\glass_dif.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\hand_dif.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\hand_showroom_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\hand_showroom_spec.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\helmet_diff.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\helmet_showroom_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\helmet_showroom_spec.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\leg_dif.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\leg_showroom_ddn.png">
+      <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\nanosuit\leg_showroom_spec.png">
+      <Filter>images\nanosuit</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -643,5 +706,31 @@
     <None Include="shader\_4_9_geometry_shader2.geom">
       <Filter>shader</Filter>
     </None>
+    <None Include="images\nanosuit\nanosuit.blend">
+      <Filter>images\nanosuit</Filter>
+    </None>
+    <None Include="images\nanosuit\nanosuit.mtl">
+      <Filter>images\nanosuit</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader.geom">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader2.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader2.frag">
+      <Filter>shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="images\nanosuit\nanosuit.obj">
+      <Filter>images\nanosuit</Filter>
+    </Object>
   </ItemGroup>
 </Project>

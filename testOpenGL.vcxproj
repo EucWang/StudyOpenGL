@@ -35,6 +35,7 @@
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h" />
     <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
     <ClInclude Include="include\PractiseGeometryShader_4_9.h" />
+    <ClInclude Include="include\PractiseGeometryShader_4_9_2.h" />
     <ClInclude Include="include\RenderUtil.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
     <ClCompile Include="sample\PractiseGeometryShader_4_9.cpp" />
+    <ClCompile Include="sample\PractiseGeometryShader_4_9_2.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -104,6 +106,7 @@
     <ClCompile Include="src\util.c" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="images\nanosuit\LICENSE.txt" />
     <Text Include="shader\shader_camera_test17_fragment.txt" />
     <Text Include="shader\shader_camera_test17_vertex.txt" />
     <Text Include="shader\shader_light_test18_fragment.txt" />
@@ -140,6 +143,23 @@
     <Image Include="images\marble_inside.jpg" />
     <Image Include="images\matrix.jpg" />
     <Image Include="images\metal.png" />
+    <Image Include="images\nanosuit\arm_dif.png" />
+    <Image Include="images\nanosuit\arm_showroom_ddn.png" />
+    <Image Include="images\nanosuit\arm_showroom_spec.png" />
+    <Image Include="images\nanosuit\body_dif.png" />
+    <Image Include="images\nanosuit\body_showroom_ddn.png" />
+    <Image Include="images\nanosuit\body_showroom_spec.png" />
+    <Image Include="images\nanosuit\glass_ddn.png" />
+    <Image Include="images\nanosuit\glass_dif.png" />
+    <Image Include="images\nanosuit\hand_dif.png" />
+    <Image Include="images\nanosuit\hand_showroom_ddn.png" />
+    <Image Include="images\nanosuit\hand_showroom_spec.png" />
+    <Image Include="images\nanosuit\helmet_diff.png" />
+    <Image Include="images\nanosuit\helmet_showroom_ddn.png" />
+    <Image Include="images\nanosuit\helmet_showroom_spec.png" />
+    <Image Include="images\nanosuit\leg_dif.png" />
+    <Image Include="images\nanosuit\leg_showroom_ddn.png" />
+    <Image Include="images\nanosuit\leg_showroom_spec.png" />
     <Image Include="images\skybox\back.jpg" />
     <Image Include="images\skybox\bottom.jpg" />
     <Image Include="images\skybox\front.jpg" />
@@ -152,6 +172,8 @@
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
+    <None Include="images\nanosuit\nanosuit.blend" />
+    <None Include="images\nanosuit\nanosuit.mtl" />
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="shader\frag_4_7_advanced_data.frag" />
@@ -229,11 +251,21 @@
     <None Include="shader\_4_8_advanced_glsl3.vert" />
     <None Include="shader\_4_8_advanced_glsl3_2.frag" />
     <None Include="shader\_4_8_advanced_glsl3_2.vert" />
+    <None Include="shader\_4_9_2_geometry_shader.frag" />
+    <None Include="shader\_4_9_2_geometry_shader.geom" />
+    <None Include="shader\_4_9_2_geometry_shader.vert" />
+    <None Include="shader\_4_9_2_geometry_shader2.frag" />
+    <None Include="shader\_4_9_2_geometry_shader2.vert" />
     <None Include="shader\_4_9_geometry_shader.frag" />
     <None Include="shader\_4_9_geometry_shader.geom" />
     <None Include="shader\_4_9_geometry_shader.vert" />
     <None Include="shader\_4_9_geometry_shader2.geom" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="images\nanosuit\nanosuit.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
