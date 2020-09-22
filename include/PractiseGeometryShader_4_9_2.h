@@ -19,10 +19,18 @@ public:
 	const char* fragFile = "shader/_4_9_2_geometry_shader.frag";
 	const char* geomFile = "shader/_4_9_2_geometry_shader.geom";
 
+
 	const char* modelFile = "images/nanosuit/nanosuit.obj";
+	
+	//纳米服第二个shader
+	const char* vertFile2 = "shader/_4_9_2_geometry_shader3.vert";
+	const char* fragFile2 = "shader/_4_9_2_geometry_shader3.frag";
+	const char* geomFile2 = "shader/_4_9_2_geometry_shader3.geom";
+
 
 	const char* vertFilePlane = "shader/_4_9_2_geometry_shader2.vert";
 	const char* fragFilePlane = "shader/_4_9_2_geometry_shader2.frag";
+
 
 	const char* planeFile = "images/metal.png";
 

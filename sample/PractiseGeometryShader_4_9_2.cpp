@@ -60,6 +60,9 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 	MyShader myshader(projectDir.c_str(), vertFile, fragFile, geomFile);
 	myshader.setInt("texture_diffuser1", 0);
 
+	MyShader myshader2(projectDir.c_str(), vertFile2, fragFile2, geomFile2);
+	myshader2.setInt("texture_diffuse1", 0);
+
 	char* modelPath;
 	if (!getChildPath(&modelPath, projectDir.c_str(), modelFile)){return -1; }
  	std::cout << "modelPath is :" << modelPath << std::endl;
@@ -78,6 +81,8 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 
 	int texPlane = RenderUtil::textureLoad2D(projectDir.c_str(), planeFile);
 
+	glUniformBlockBinding(myshader2.id, 
+		glGetUniformBlockIndex(myshader2.id, "Matrices3"), 0);
 	glUniformBlockBinding(myshader.id, 
 		glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
 	glUniformBlockBinding(planeshader.id,
@@ -122,13 +127,24 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		//-----------------render done
 
+		//------------------ 第一套纳米服
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		myshader.use();
 		myshader.setMat4("model", model);
+		myshader.setFloat("time", (float)curFrame);
 		nanoModel.draw(&myshader);
 
+		//------------------ 第二套纳米服
+		glm::mat4 model2(1.0f);
+		model2 = glm::translate(model2, glm::vec3(3.0f, -0.5f, 0.0f));
+		model2 = glm::scale(model2, glm::vec3(0.2f, 0.2f, 0.2f));
+		myshader2.use();
+		myshader2.setMat4("model", model2);
+		nanoModel.draw(&myshader2);
+
+		//------------------ 地面
 		planeshader.use();
 		glBindVertexArray(planeVAO);
 		glActiveTexture(GL_TEXTURE0);

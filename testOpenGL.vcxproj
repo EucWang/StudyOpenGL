@@ -256,6 +256,9 @@
     <None Include="shader\_4_9_2_geometry_shader.vert" />
     <None Include="shader\_4_9_2_geometry_shader2.frag" />
     <None Include="shader\_4_9_2_geometry_shader2.vert" />
+    <None Include="shader\_4_9_2_geometry_shader3.frag" />
+    <None Include="shader\_4_9_2_geometry_shader3.geom" />
+    <None Include="shader\_4_9_2_geometry_shader3.vert" />
     <None Include="shader\_4_9_geometry_shader.frag" />
     <None Include="shader\_4_9_geometry_shader.geom" />
     <None Include="shader\_4_9_geometry_shader.vert" />
