@@ -736,6 +736,12 @@
     <None Include="shader\_4_9_2_geometry_shader3.geom">
       <Filter>shader</Filter>
     </None>
+    <None Include="shader\_4_9_2_geometry_shader4.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_9_2_geometry_shader4.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="images\nanosuit\nanosuit.obj">

@@ -63,6 +63,9 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 	MyShader myshader2(projectDir.c_str(), vertFile2, fragFile2, geomFile2);
 	myshader2.setInt("texture_diffuse1", 0);
 
+	MyShader myshader3(projectDir.c_str(), vertFile3, fragFile3);
+	myshader3.setInt("texture_diffuse1", 0);
+
 	char* modelPath;
 	if (!getChildPath(&modelPath, projectDir.c_str(), modelFile)){return -1; }
  	std::cout << "modelPath is :" << modelPath << std::endl;
@@ -81,6 +84,8 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 
 	int texPlane = RenderUtil::textureLoad2D(projectDir.c_str(), planeFile);
 
+	glUniformBlockBinding(myshader3.id,
+		glGetUniformBlockIndex(myshader3.id, "Matrices4"), 0);
 	glUniformBlockBinding(myshader2.id, 
 		glGetUniformBlockIndex(myshader2.id, "Matrices3"), 0);
 	glUniformBlockBinding(myshader.id, 
@@ -143,6 +148,16 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 		myshader2.use();
 		myshader2.setMat4("model", model2);
 		nanoModel.draw(&myshader2);
+
+		//------------------ 第二套纳米服
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  //线框模式显示
+		glm::mat4 model3(1.0f);
+		model3 = glm::translate(model3, glm::vec3(3.0f, -0.5f, 0.0f));
+		model3 = glm::scale(model3, glm::vec3(0.2f, 0.2f, 0.2f));
+		myshader3.use();
+		myshader3.setMat4("model", model3);
+		nanoModel.draw(&myshader3);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);  //填充模式显示
 
 		//------------------ 地面
 		planeshader.use();

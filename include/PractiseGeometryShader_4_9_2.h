@@ -22,11 +22,14 @@ public:
 
 	const char* modelFile = "images/nanosuit/nanosuit.obj";
 	
-	//纳米服第二个shader
+	//纳米服第二个shader, 用于显示法线
 	const char* vertFile2 = "shader/_4_9_2_geometry_shader3.vert";
 	const char* fragFile2 = "shader/_4_9_2_geometry_shader3.frag";
 	const char* geomFile2 = "shader/_4_9_2_geometry_shader3.geom";
 
+	//纳米服第三个shader, 普通正常显示
+	const char* vertFile3 = "shader/_4_9_2_geometry_shader4.vert";
+	const char* fragFile3 = "shader/_4_9_2_geometry_shader4.frag";
 
 	const char* vertFilePlane = "shader/_4_9_2_geometry_shader2.vert";
 	const char* fragFilePlane = "shader/_4_9_2_geometry_shader2.frag";
