@@ -60,7 +60,7 @@ int PractiseGeometryShader_4_9::practise(string projectDir) {
 	MyShader myshader(projectDir.c_str(), vertFile, fragFile, geomFile2);
 
 	GLuint VAO, VBO;
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO,
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, false,
 		points, sizeof(points), 2,
 		pointsColor, sizeof(pointsColor), 3);
 

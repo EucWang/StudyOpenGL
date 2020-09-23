@@ -25,6 +25,9 @@
     <Filter Include="images\nanosuit">
       <UniqueIdentifier>{da257f00-61b5-472f-9fb2-25b0074d00a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="images\asteroid_belt">
+      <UniqueIdentifier>{8d49e263-1109-4581-837b-5bafa294fc9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -103,6 +106,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\PractiseGeometryShader_4_9_2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PractiseInstancing_4_10.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -278,6 +284,9 @@
     <ClCompile Include="sample\PractiseGeometryShader_4_9_2.cpp">
       <Filter>sample</Filter>
     </ClCompile>
+    <ClCompile Include="sample\PractiseInstancing_4_10.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -347,6 +356,15 @@
       <Filter>shader</Filter>
     </Text>
     <Text Include="images\nanosuit\LICENSE.txt">
+      <Filter>images\nanosuit</Filter>
+    </Text>
+    <Text Include="images\asteroid_belt\rock.obj">
+      <Filter>images\asteroid_belt</Filter>
+    </Text>
+    <Text Include="images\asteroid_belt\planet.obj">
+      <Filter>images\asteroid_belt</Filter>
+    </Text>
+    <Text Include="images\nanosuit\nanosuit.obj">
       <Filter>images\nanosuit</Filter>
     </Text>
   </ItemGroup>
@@ -458,6 +476,12 @@
     </Image>
     <Image Include="images\nanosuit\leg_showroom_spec.png">
       <Filter>images\nanosuit</Filter>
+    </Image>
+    <Image Include="images\asteroid_belt\planet_Quom1200.png">
+      <Filter>images\asteroid_belt</Filter>
+    </Image>
+    <Image Include="images\asteroid_belt\Rock-Texture-Surface.jpg">
+      <Filter>images\asteroid_belt</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -742,10 +766,32 @@
     <None Include="shader\_4_9_2_geometry_shader4.frag">
       <Filter>shader</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="images\nanosuit\nanosuit.obj">
-      <Filter>images\nanosuit</Filter>
-    </Object>
+    <None Include="shader\_4_10_instancing.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing2.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="images\asteroid_belt\planet.mtl">
+      <Filter>images\asteroid_belt</Filter>
+    </None>
+    <None Include="images\asteroid_belt\rock.mtl">
+      <Filter>images\asteroid_belt</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing4.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing4.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing3.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_10_instancing3.vert">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -36,6 +36,7 @@
     <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
     <ClInclude Include="include\PractiseGeometryShader_4_9.h" />
     <ClInclude Include="include\PractiseGeometryShader_4_9_2.h" />
+    <ClInclude Include="include\PractiseInstancing_4_10.h" />
     <ClInclude Include="include\RenderUtil.h" />
     <ClInclude Include="include\shaders.h" />
     <ClInclude Include="include\shaderSource.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
     <ClCompile Include="sample\PractiseGeometryShader_4_9.cpp" />
     <ClCompile Include="sample\PractiseGeometryShader_4_9_2.cpp" />
+    <ClCompile Include="sample\PractiseInstancing_4_10.cpp" />
     <ClCompile Include="sample\TestPractiseDepth28.cpp" />
     <ClCompile Include="sample\testPractiseLight18.cpp" />
     <ClCompile Include="sample\testDrawRectangle.c" />
@@ -131,6 +133,8 @@
     <Text Include="shader\shader_triangle_test8_vertex.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\asteroid_belt\planet_Quom1200.png" />
+    <Image Include="images\asteroid_belt\Rock-Texture-Surface.jpg" />
     <Image Include="images\awesomeface.png" />
     <Image Include="images\blending_transparent_window.png" />
     <Image Include="images\container.jpg" />
@@ -172,6 +176,8 @@
     <None Include="helper\lightAttenuation.md" />
     <None Include="helper\OpenGL_VRML_Materials.md" />
     <None Include="helper\smollSplitLightEdge.md" />
+    <None Include="images\asteroid_belt\planet.mtl" />
+    <None Include="images\asteroid_belt\rock.mtl" />
     <None Include="images\nanosuit\nanosuit.blend" />
     <None Include="images\nanosuit\nanosuit.mtl" />
     <None Include="packages.config" />
@@ -243,6 +249,13 @@
     <None Include="shader\shader_light_test27_light.frag" />
     <None Include="shader\shader_light_test27_light.vert" />
     <None Include="shader\vert_4_7_advanced_data.vert" />
+    <None Include="shader\_4_10_instancing.frag" />
+    <None Include="shader\_4_10_instancing.vert" />
+    <None Include="shader\_4_10_instancing2.vert" />
+    <None Include="shader\_4_10_instancing3.frag" />
+    <None Include="shader\_4_10_instancing3.vert" />
+    <None Include="shader\_4_10_instancing4.frag" />
+    <None Include="shader\_4_10_instancing4.vert" />
     <None Include="shader\_4_8_advanced_glsl.frag" />
     <None Include="shader\_4_8_advanced_glsl.vert" />
     <None Include="shader\_4_8_advanced_glsl2.frag" />
@@ -268,9 +281,18 @@
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="images\nanosuit\nanosuit.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </Object>
+    <Text Include="images\asteroid_belt\planet.obj">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Text>
+    <Text Include="images\asteroid_belt\rock.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="images\nanosuit\nanosuit.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

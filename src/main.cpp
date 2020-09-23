@@ -24,6 +24,7 @@
 #include "PractiseAdvancedGLSL_4_8_2.h"
 #include "PractiseGeometryShader_4_9.h"
 #include "PractiseGeometryShader_4_9_2.h"
+#include "PractiseInstancing_4_10.h"
 
 using namespace std;
 
@@ -113,8 +114,13 @@ int main(int argc, char* argv[]) {
 	//practise.practise2(projectDir);
 
 	//PractiseGeometryShader_4_9 practise = PractiseGeometryShader_4_9();
-	PractiseGeometryShader_4_9_2 practise = PractiseGeometryShader_4_9_2();
-	practise.practise(projectDir);
+	//PractiseGeometryShader_4_9_2 practise = PractiseGeometryShader_4_9_2();
+	
+	PractiseInstancing_4_10 practise = PractiseInstancing_4_10();
+	//practise.practise(projectDir);
+	//practise.practise2(projectDir);
+	//practise.practise3(projectDir);
+	practise.practise4(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);

@@ -58,7 +58,7 @@ int PractiseAdvancedGLSL_4_8::practise(string projectDir) {
 	MyShader myshader(projectDir.c_str(), vertFile, fragFile);
 
 	GLuint VAO, VBO;
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, cubePosition, sizeof(cubePosition),
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, false, cubePosition, sizeof(cubePosition),
 		3, 0, 0, 0, 0, 0, 0);
 
 	GLuint someVAO, someVBO;

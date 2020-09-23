@@ -40,6 +40,7 @@ public:
 	bool gammaCorrection;
 
 	Model(string const& path, bool gamma = false);
+	Model(const char* parentDir, const char* objFilePath, bool gamma = false);
 
 	void draw(MyShader* shader);
 

@@ -179,23 +179,23 @@ int RenderUtil::createFramebuffer(GLuint* framebufferobj, GLuint* frametexture, 
 	return 1;
 }
 
-void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, bool isnormal,
 	const float* positions, const int positionsSize, const int arr1Offset) {
-	makeVertexArrayFromSubData(vao, vbo,
+	makeVertexArrayFromSubData(vao, vbo, isnormal,
 		positions, positionsSize, arr1Offset,
 		NULL, 0, 0);
 }
 
-void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, bool isnormal,
 	const float* positions, const int positionsSize, const int arr1Offset,
 	const float* normals, int normalsSize, int arr2Offset) {
-	makeVertexArrayFromSubData(vao, vbo,
+	makeVertexArrayFromSubData(vao, vbo, isnormal,
 		positions, positionsSize, arr1Offset,
 		normals, normalsSize, arr2Offset, NULL, 0, 0);
 
 }
 
-void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, 
+void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, bool isnormal,
 	const float* positions, const int positionsSize, const int arr1Offset,
 	const float* normals, int normalsSize, int arr2Offset,
 	const float* texCoords, int texCoordsSize, int arr3Offset) {
@@ -212,6 +212,15 @@ void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
 		texCoordsSize = 0;
 		arr3Offset = 0;
 	}
+
+	int isNormalPos;
+	if (isnormal) {
+		isNormalPos = GL_TRUE;
+	}
+	else {
+		isNormalPos = GL_FALSE;
+	}
+	
 
 	glGenVertexArrays(1, vao);
 	glGenBuffers(1, vbo);
@@ -230,16 +239,16 @@ void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo,
 		glBufferSubData(GL_ARRAY_BUFFER, positionsSize + normalsSize, texCoordsSize, texCoords);
 	}
 
-	glVertexAttribPointer(0, arr1Offset, GL_FLOAT, GL_FALSE, arr1Offset * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, arr1Offset, GL_FLOAT, isNormalPos, arr1Offset * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	if (normals != NULL) {
-		glVertexAttribPointer(1, arr2Offset, GL_FLOAT, GL_FALSE, arr2Offset * sizeof(float), (void*)(positionsSize));
+		glVertexAttribPointer(1, arr2Offset, GL_FLOAT, isNormalPos, arr2Offset * sizeof(float), (void*)(positionsSize));
 	}
 	glEnableVertexAttribArray(1);
 
 	if (texCoords != NULL) {
-		glVertexAttribPointer(2, arr3Offset, GL_FLOAT, GL_FALSE, arr3Offset * sizeof(float),
+		glVertexAttribPointer(2, arr3Offset, GL_FLOAT, isNormalPos, arr3Offset * sizeof(float),
 			(void*)(positionsSize + normalsSize));
 		glEnableVertexAttribArray(2);
 	}

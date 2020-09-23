@@ -67,7 +67,7 @@ int PractiseAdvancedGLSL_4_8_2::practise(string projectDir) {
 	//---------prepare
 	MyShader myshader(projectDir.c_str(), vertFile, fragFile);
 	GLuint VAO, VBO;
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, cubePosition, sizeof(cubePosition), 3);
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, false, cubePosition, sizeof(cubePosition), 3);
 
 	//---------prepare done
 
@@ -146,7 +146,7 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 	//---------prepare
 	MyShader myshader(projectDir.c_str(), vertFile2, fragFile2);
 	GLuint VAO, VBO;
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, 
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, false,
 		cubePosition, sizeof(cubePosition), 3,
 		cubeTexCoords, sizeof(cubeTexCoords), 2);
 
@@ -161,7 +161,7 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 	//-------------------
 	MyShader planeshader(projectDir.c_str(), vertFilePlane, fragFilePlane);
 	GLuint planeVAO, planeVBO;
-	RenderUtil::makeVertexArrayFromSubData(&planeVAO, &planeVBO,
+	RenderUtil::makeVertexArrayFromSubData(&planeVAO, &planeVBO, false,
 		planePosition, sizeof(planePosition), 3,
 		planeTexCoords, sizeof(planeTexCoords), 2);
 

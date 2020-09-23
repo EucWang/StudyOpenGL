@@ -77,7 +77,7 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 	planeshader.setInt("texture_diffuse1", 0);
 
 	GLuint planeVAO, planeVBO;
-	RenderUtil::makeVertexArrayFromSubData(&planeVAO, &planeVBO,
+	RenderUtil::makeVertexArrayFromSubData(&planeVAO, &planeVBO, false,
 		planePosition, sizeof(planePosition), 3,
 		planeNormal, sizeof(planeNormal), 3,
 		planeTexCoords, sizeof(planeTexCoords), 2);

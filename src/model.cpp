@@ -62,6 +62,23 @@ unsigned int TextureFromFile(const char* path, const string& directory, bool gam
 
 	return textureID;
 }
+
+
+Model::Model(const char * parentDir, const char * objFilePath, bool gamma) : gammaCorrection(gamma) {
+	char* fullPath;
+	getChildPath(&fullPath, parentDir, objFilePath);
+	loadModel(fullPath);
+	std::cout << "Model loadModel() finished()." << std::endl;
+	std::cout << "Model meshes size is " << this->meshes.size() << std::endl;
+	for (int i = 0; i < this->meshes.size(); i++) {
+		std::cout << "index = " << i << "\n\tvertices.size = " << this->meshes[i].vertices.size() << std::endl;
+		std::cout << "\t indices.size = " << this->meshes[i].indices.size() << std::endl;
+		std::cout << "\t textures.size = " << this->meshes[i].textures.size() << std::endl;
+	}
+
+	std::cout << "Model textures size is " << this->textures_loaded.size() << std::endl;
+	free(fullPath);
+}
  
 
 Model::Model(string const& path, bool gamma) : gammaCorrection(gamma) {
@@ -101,7 +118,7 @@ void Model::loadModel(string const& path) {
 	string dir = path.substr(0, path.find_last_of('/'));
 	directory = string(dir);
 
-	processNode(scene->mRootNode, scene);
+ 	processNode(scene->mRootNode, scene);
 
 }
 

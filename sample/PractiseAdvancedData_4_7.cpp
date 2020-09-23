@@ -74,7 +74,7 @@ int PractiseAdvancedData_4_7::practise(string projectDir) {
 
 	GLuint VAO, VBO;
 	//RenderUtil::makeVertexArrayAndBuffer(&VAO, &VBO, cubeVertices, sizeof(cubeVertices), 8);
-	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, 
+	RenderUtil::makeVertexArrayFromSubData(&VAO, &VBO, false,
 		cubePosition, sizeof(cubePosition), 3,
 		cubeNormal, sizeof(cubeNormal), 3, 
 		cubeTexCoords, sizeof(cubeTexCoords), 2);
