@@ -69,6 +69,8 @@ public:
 
 	/// <summary>
 	/// 创建窗口
+	/// deprecated 
+	/// 已经废弃, 使用 WindowHelper类替代
 	/// </summary>
 	/// <param name="width">窗口宽度</param>
 	/// <param name="height">窗口高度</param>

@@ -114,6 +114,7 @@
     <ClInclude Include="include\PractiseAntiAliasing_4_11.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\WindowHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -292,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="sample\PractiseAntiAliasing_4_11.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\WindowHelper.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -809,6 +813,12 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_11_anti_aliasing2_grass.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing3.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing3.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

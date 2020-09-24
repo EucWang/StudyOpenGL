@@ -124,6 +124,7 @@ int main(int argc, char* argv[]) {
 	//practise.practise4(projectDir);
 
 	PractiseAntiAliasing_4_11 practise = PractiseAntiAliasing_4_11();
+	//practise.practise0(projectDir);
 	practise.practise(projectDir);
 
 	//free(debugDir);
