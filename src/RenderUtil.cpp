@@ -44,6 +44,11 @@ GLFWwindow* RenderUtil::createWindow(int width, int height, const char* title,
 /// <param name="imgName">图片子目录以及图片文件名称</param>
 /// <returns>  -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
 int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName) {
+	return textureLoad2D(parentDir, imgName, GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+}
+
+int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName,
+	int wrapS, int wrapT, int minFilter, int magFilter) {
 	unsigned int textureId;
 	glGenTextures(1, &textureId);
 
@@ -76,10 +81,10 @@ int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName) {
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
 
 	stbi_image_free(data);
 	free(imagePath);

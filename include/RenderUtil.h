@@ -51,6 +51,19 @@ public:
 	/// </summary>
 	/// <param name="parentDir">图片所在父级目录</param>
 	/// <param name="imgName">图片子目录以及图片文件名称</param>
+	/// <param name="wrapS">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);默认取值GL_REPEAT</param>
+	/// <param name="wrapT">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);默认取值GL_REPEAT</param>
+	/// <param name="minFilter">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter); 默认取值GL_LINEAR_MIPMAP_LINEAR</param>
+	/// <param name="magFilter">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAN_FILTER, magFilter); 默认取值GL_LINEAR</param>
+	/// <returns> -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
+	int static textureLoad2D(std::string parentDir, std::string imgName,
+		int wrapS, int wrapT, int minFilter, int magFilter);
+
+	/// <summary>
+	/// 加载2D图片纹理，
+	/// </summary>
+	/// <param name="parentDir">图片所在父级目录</param>
+	/// <param name="imgName">图片子目录以及图片文件名称</param>
 	/// <returns>  -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
 	int static textureLoad2D(std::string parentDir, std::string imgName);
 

@@ -28,6 +28,7 @@
     <ClInclude Include="include\PractiseAdvancedData_4_7.h" />
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8.h" />
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8_2.h" />
+    <ClInclude Include="include\PractiseAntiAliasing_4_11.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
     <ClInclude Include="include\PractiseCubeMap_4_6.h" />
@@ -51,6 +52,7 @@
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8.cpp" />
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8_2.cpp" />
+    <ClCompile Include="sample\PractiseAntiAliasing_4_11.cpp" />
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
     <ClCompile Include="sample\PractiseCubeMap_4_6.cpp" />
@@ -256,6 +258,10 @@
     <None Include="shader\_4_10_instancing3.vert" />
     <None Include="shader\_4_10_instancing4.frag" />
     <None Include="shader\_4_10_instancing4.vert" />
+    <None Include="shader\_4_11_anti_aliasing.frag" />
+    <None Include="shader\_4_11_anti_aliasing.vert" />
+    <None Include="shader\_4_11_anti_aliasing2_grass.frag" />
+    <None Include="shader\_4_11_anti_aliasing2_grass.vert" />
     <None Include="shader\_4_8_advanced_glsl.frag" />
     <None Include="shader\_4_8_advanced_glsl.vert" />
     <None Include="shader\_4_8_advanced_glsl2.frag" />

@@ -111,6 +111,9 @@
     <ClInclude Include="include\PractiseInstancing_4_10.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseAntiAliasing_4_11.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -285,6 +288,9 @@
       <Filter>sample</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseInstancing_4_10.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseAntiAliasing_4_11.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -791,6 +797,18 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_10_instancing3.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing2_grass.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing2_grass.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>
