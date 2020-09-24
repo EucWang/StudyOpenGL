@@ -16,8 +16,8 @@ using namespace std;
 class WindowHelper {
 public:
 	WindowHelper(const char* title="OpenGL Windows",
-		Camera camera=Camera(glm::vec3(0.0f, 1.0f, 4.0f)),
-		int antiAliasing = 0,
+		Camera camera=Camera(glm::vec3(0.0f, 2.0f, 3.0f)),
+		int antiAliasing = 4,
 		glm::vec3 bgColor= glm::vec3(0.2f, 0.3f, 0.3f),
 		int width = SMALL_WINDOW_SCREEN_WIDTH,
 		int height = SMALL_WINDOW_SCREEN_HEIGHT,
@@ -48,6 +48,10 @@ public:
 	/// 在 渲染的while循环中调用
 	/// </summary>
 	void calcProcessInput();
+
+	int getScreenWidth();
+
+	int getScreenHeight();
 
 private:
 	string mTitle;

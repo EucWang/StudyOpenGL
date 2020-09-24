@@ -266,6 +266,10 @@
     <None Include="shader\_4_11_anti_aliasing2_grass.vert" />
     <None Include="shader\_4_11_anti_aliasing3.frag" />
     <None Include="shader\_4_11_anti_aliasing3.vert" />
+    <None Include="shader\_4_11_anti_aliasing4.frag" />
+    <None Include="shader\_4_11_anti_aliasing4.vert" />
+    <None Include="shader\_4_11_anti_aliasing_screen.frag" />
+    <None Include="shader\_4_11_anti_aliasing_screen.vert" />
     <None Include="shader\_4_8_advanced_glsl.frag" />
     <None Include="shader\_4_8_advanced_glsl.vert" />
     <None Include="shader\_4_8_advanced_glsl2.frag" />

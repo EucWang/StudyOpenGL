@@ -236,3 +236,133 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 
 	return 1;
 }
+
+
+/// <summary>
+///  离屏多重采样缓冲
+///  帧缓冲
+/// </summary>
+/// <param name="projectDir"></param>
+/// <returns></returns>
+int PractiseAntiAliasing_4_11::practise1(string projectDir) {
+	WindowHelper window("sample of frame buffer and custom anti aliasing");
+	window.create();
+
+
+	MyShader myshader(projectDir.c_str(), vertFile3, fragFile3);
+	myshader.use();
+	myshader.setInt("texture_diffuse1", 0);
+
+	GLuint cubeVAO, cubeVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
+
+	int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
+
+	//--------uniform buffer
+	glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
+	GLuint UBO;
+	glGenBuffers(1, &UBO);
+	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));
+	//--------uniform buffer done
+
+	MyShader screenshader(projectDir.c_str(), vertFileScreen, fragFileScreen);
+	GLuint screenVAO, screenVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&screenVAO, &screenVBO, quadVertices, sizeof(quadVertices), 4);
+	screenshader.use();
+	screenshader.setInt("texture_screen", 0);
+	//---------frame buffer 帧缓冲
+	GLuint frameBuffer;
+	glGenFramebuffers(1, &frameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	//-------给帧缓冲附加上渲染输出的纹理
+	unsigned int texFrameBuffer;   //给frame buffer提供渲染输出的空白纹理
+	glGenTextures(1, &texFrameBuffer);
+	glBindTexture(GL_TEXTURE_2D, texFrameBuffer);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window.getScreenWidth(), window.getScreenHeight(),
+		0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texFrameBuffer, 0); //绑定framebuffer和texture
+	//------- 给帧缓冲附加上渲染缓冲
+	unsigned int renderBuffer;
+	glGenRenderbuffers(1, &renderBuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window.getScreenWidth(), window.getScreenHeight());
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
+	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+	//---------
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {  //检查帧缓冲是否创建成功
+		std::cout << "ERROR:FRAMEBUFFER::CREATE FAILED." << std::endl;
+		return -1;
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//---------frame buffer done
+
+	glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LESS);
+
+	while (!glfwWindowShouldClose(window.getWindow())) {
+		window.calcProcessInput();
+
+		//---------- render to frame buffer
+		glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+		glEnable(GL_DEPTH_TEST);
+		//glDepthFunc(GL_LESS);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		myshader.use();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texCube);
+
+		glm::mat4 view(1.0f);
+		glm::mat4 projection(1.0f);
+		view = window.getCamera().GetViewMatrix();
+		projection = glm::perspective(glm::radians(window.getCamera().Zoom), 
+			window.getScreenWidth() * 1.0f / window.getScreenHeight(), 0.1f, 100.0f);
+		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(view));
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		glm::mat4 model(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		myshader.setMat4("model", model);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//------------- render to frame buffer done
+
+		//------- render to screen
+		glDisable(GL_DEPTH_TEST);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		screenshader.use();
+		glBindVertexArray(screenVAO);
+		glBindTexture(GL_TEXTURE_2D, texFrameBuffer);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//------- render to screen
+
+		glfwSwapBuffers(window.getWindow());
+		glfwPollEvents();
+	}
+	glfwTerminate();
+	myshader.deleteProgram();
+	glDeleteVertexArrays(1, &cubeVAO);
+	glDeleteBuffers(1, &cubeVBO);
+	glDeleteBuffers(1, &UBO);
+
+	glDeleteFramebuffers(1, &frameBuffer);
+	glDeleteRenderbuffers(1, &renderBuffer);
+	glDeleteTextures(1, &texFrameBuffer);
+	screenshader.deleteProgram();
+	glDeleteVertexArrays(1, &screenVAO);
+	glDeleteBuffers(1, &screenVBO);
+}

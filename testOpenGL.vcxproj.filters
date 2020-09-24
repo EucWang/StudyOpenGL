@@ -384,9 +384,6 @@
     <Image Include="images\awesomeface.png">
       <Filter>images</Filter>
     </Image>
-    <Image Include="images\container.jpg">
-      <Filter>images</Filter>
-    </Image>
     <Image Include="images\wall.jpg">
       <Filter>images</Filter>
     </Image>
@@ -493,6 +490,9 @@
       <Filter>images\asteroid_belt</Filter>
     </Image>
     <Image Include="images\asteroid_belt\Rock-Texture-Surface.jpg">
+      <Filter>images\asteroid_belt</Filter>
+    </Image>
+    <Image Include="images\container.jpg">
       <Filter>images\asteroid_belt</Filter>
     </Image>
   </ItemGroup>
@@ -821,6 +821,18 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_11_anti_aliasing3.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing4.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing4.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing_screen.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_4_11_anti_aliasing_screen.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

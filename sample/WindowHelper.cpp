@@ -97,6 +97,15 @@ void (*WindowHelper::getProcessInput())(GLFWwindow*) {
 	return retVal;
 }
 
+int  WindowHelper::getScreenWidth() {
+	return this->mScreenWidth;
+}
+
+int  WindowHelper::getScreenHeight() {
+	return this->mScreenHeight;
+}
+
+
 void WindowHelper::calcDeltaTime() {
 
 	double curFrame = glfwGetTime();
