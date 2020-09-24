@@ -36,12 +36,18 @@ public:
 
 	/// <summary>
 	/// 返回processInput函数指针
+	/// 废弃, 使用calcProcessInput()方法代替,
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
 	void (*getProcessInput())(GLFWwindow*);
 
-	void calcDeltaTime();
+	/// <summary>
+	/// 计算绘制每一帧的间隔时间,
+	/// 然后设置 输入的上下左右(WSAD),用于控制Camera
+	/// 在 渲染的while循环中调用
+	/// </summary>
+	void calcProcessInput();
 
 private:
 	string mTitle;
@@ -53,6 +59,8 @@ private:
 	bool mResize = false;
 	glm::vec3 mBackgroundColor;
 	GLFWwindow* mWindow;
+
+	void calcDeltaTime();  //每一帧渲染时,计算绘制一帧的时间间隔
 
 	//double deltaTime;  //渲染两帧之间的时间间隔
 	//double lastFrame;  //上帧渲染的时间

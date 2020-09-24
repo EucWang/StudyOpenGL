@@ -114,7 +114,9 @@
     <ClInclude Include="include\PractiseAntiAliasing_4_11.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\WindowHelper.h" />
+    <ClInclude Include="include\WindowHelper.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">

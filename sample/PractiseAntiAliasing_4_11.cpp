@@ -30,16 +30,10 @@ int PractiseAntiAliasing_4_11::practise0(string projectDir) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	//glEnable(GL_MULTISAMPLE);
-
-	//windowHelper.run( [](){
-		
 	while (!glfwWindowShouldClose(windowHelper.getWindow())) {
-		//double curFrame = glfwGetTime();
-		//deltaTime = curFrame - lastFrame;
-		//lastFrame = curFrame;
-		windowHelper.calcDeltaTime();
-		windowHelper.getProcessInput()(windowHelper.getWindow());
+		//windowHelper.calcDeltaTime();
+		//windowHelper.getProcessInput()(windowHelper.getWindow());
+		windowHelper.calcProcessInput();
 	
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -188,9 +182,9 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 	glEnable(GL_MULTISAMPLE); //开启多重采样缓冲,抗锯齿
 
 	while (!glfwWindowShouldClose(windowHelper.getWindow())) {
-
-		windowHelper.calcDeltaTime();
-		windowHelper.getProcessInput()(windowHelper.getWindow());
+		//windowHelper.calcDeltaTime();
+		//windowHelper.getProcessInput()(windowHelper.getWindow());
+		windowHelper.calcProcessInput();
 
 		//-------------render
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

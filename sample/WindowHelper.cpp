@@ -87,6 +87,11 @@ WindowHelper::WindowHelper(const char* title,
 	localLastY = height / 2;
 }
 
+void WindowHelper::calcProcessInput() {
+	calcDeltaTime();
+	processInput(mWindow);
+}
+
 void (*WindowHelper::getProcessInput())(GLFWwindow*) {
 	void (*retVal)(GLFWwindow*) = processInput;
 	return retVal;
