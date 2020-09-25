@@ -14,8 +14,6 @@ static void buffer_window_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-//Camera WindowHelper::camera(glm::vec3(0.0f, 1.0f, 4.0f));
-
 static void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
@@ -33,8 +31,6 @@ static void processInput(GLFWwindow* window) {
 		localCamera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
 	}
 }
-
-
 
 static void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
 	if (isMouseFirstIn) {
@@ -59,14 +55,11 @@ static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double off
 WindowHelper::WindowHelper(const char* title,
 	Camera camera,
 	int antiAliasing,
-	glm::vec3 bgColor,
 	int width,
 	int height,
 	int majorVersion,
 	int minorVersion,
 	bool resize) {
-
-	this->mBackgroundColor = bgColor;
 
 	this->mTitle = string(title);
 
@@ -76,7 +69,6 @@ WindowHelper::WindowHelper(const char* title,
 
 	this->mScreenWidth = width;
 	this->mScreenHeight = height;
-	//this->mCamera = camera;
 	localCamera = camera;
 
 	this->mAntiAliasing = antiAliasing;
@@ -141,7 +133,8 @@ void WindowHelper::create() {
 		glfwWindowHint(GLFW_SAMPLES, this->mAntiAliasing);
 	}
 
-	mWindow = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, title, nullptr, nullptr);
+	//mWindow = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, title, nullptr, nullptr);
+	mWindow = glfwCreateWindow(mScreenWidth, mScreenHeight, title, nullptr, nullptr);
 	glfwMakeContextCurrent(mWindow);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -149,14 +142,15 @@ void WindowHelper::create() {
 		return;
 	}
 
-	glViewport(0, 0, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
+	//glViewport(0, 0, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
+	glViewport(0, 0, mScreenWidth, mScreenHeight);
 
 	glfwSetFramebufferSizeCallback(mWindow, buffer_window_callback);
 
 	glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	void (*GLFWcursorposfun)(GLFWwindow*, double, double);
-	GLFWcursorposfun = mouse_move_callback;
+	//void (*GLFWcursorposfun)(GLFWwindow*, double, double);
+	//GLFWcursorposfun = mouse_move_callback;
 
 	glfwSetCursorPosCallback(mWindow, mouse_move_callback);
 	glfwSetScrollCallback(mWindow, mouse_scroll_callback);
@@ -168,25 +162,26 @@ void WindowHelper::create() {
 	}
 }
 
-void WindowHelper::run(void (*render)(void)) {
-
-	while (!glfwWindowShouldClose(mWindow)) {
-		double curFrame = glfwGetTime();
-		deltaTime = curFrame - lastFrame;
-		lastFrame = curFrame;
-
-		processInput(mWindow);
-
-		glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		//------render 
-		render();
-		//------render done
-
-		glfwSwapBuffers(mWindow);
-		glfwPollEvents();
-	}
-
-	glfwTerminate();
-}
+//TODO 
+//void WindowHelper::run(void (*render)(void)) {
+//
+//	while (!glfwWindowShouldClose(mWindow)) {
+//		double curFrame = glfwGetTime();
+//		deltaTime = curFrame - lastFrame;
+//		lastFrame = curFrame;
+//
+//		processInput(mWindow);
+//
+//		glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
+//		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//		//------render 
+//		render();
+//		//------render done
+//
+//		glfwSwapBuffers(mWindow);
+//		glfwPollEvents();
+//	}
+//
+//	glfwTerminate();
+//}

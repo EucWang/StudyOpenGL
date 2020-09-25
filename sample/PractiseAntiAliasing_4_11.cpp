@@ -74,6 +74,90 @@ int PractiseAntiAliasing_4_11::practise0(string projectDir) {
 
 
 /// <summary>
+/// 
+/// 添加颜色缓冲/深度缓冲,颜色附件Attachment
+/// 附件是一个内存位置，它能够作为帧缓冲的一个缓冲，可以将它想象为一个图像。当创建一个附件的时候我们有两个选项：
+/// 纹理或渲染缓冲对象(Renderbuffer Object)。
+///
+/// 纹理附件,当把一个纹理附加到帧缓冲的时候，所有的渲染指令将会写入到这个纹理中，就想它是一个普通的颜色/深度或模板缓冲一样。
+///	使用纹理的优点是，所有渲染操作的结果将会被储存在一个纹理图像中，我们之后可以在着色器中很方便地使用它。
+/// </summary>
+/// <param name="texture"> out </param>
+static void make_texture_attach(unsigned int* texColorBuffer, int index, int width, int height) {
+	glGenTextures(1, texColorBuffer);
+	glBindTexture(GL_TEXTURE_2D, *texColorBuffer);
+	//主要的区别就是，我们将维度设置为了屏幕大小（尽管这不是必须的），并且我们给纹理的data参数传递了NULL。
+	//对于这个纹理，我们仅仅分配了内存而没有填充它。填充这个纹理将会在我们渲染到帧缓冲之后来进行。
+	//同样注意我们并不关心环绕方式或多级渐远纹理，我们在大多数情况下都不会需要它们。
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
+		0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glBindTexture(GL_TEXTURE_2D, 0);  //清空绑定
+
+	std::cout << "make_texture_attach : texture = " << *texColorBuffer << std::endl;
+}
+
+/// <summary>
+/// 生成一个渲染缓冲对象, 带深度和模板缓冲的
+/// </summary>
+/// <param name="rbo"></param>
+static void make_render_buffer_obj_attach(unsigned int* rbo, int width, int height) {
+	glGenRenderbuffers(1, rbo);   //创建渲染缓冲对象
+	glBindRenderbuffer(GL_RENDERBUFFER, *rbo);  //绑定渲染缓冲对象
+
+	//创建一个深度和模板渲染缓冲对象
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+
+	glBindRenderbuffer(GL_RENDERBUFFER, 0); //清理掉绑定
+
+	std::cout << "make_render_buffer_obj_attach() : renderBuffer = " << *rbo << std::endl;
+}
+
+static bool makeFramebuffer(unsigned int *framebuffer, 
+	unsigned int * texColorBuffer, 
+	unsigned int * renderBuffer,
+	int bufferWidth, int bufferHeight) {
+	//---------------------------------------------------------------------
+	//unsigned int framebuffer;   //一个帧缓冲对象
+	glGenFramebuffers(1, framebuffer);  //创建一个帧缓冲对象
+	glBindFramebuffer(GL_FRAMEBUFFER, *framebuffer);  //绑定帧缓冲对象 到 GL_FRAMEBUFFER
+	
+	//unsigned int texColorBuffer;  //一个空的纹理图像
+	make_texture_attach(texColorBuffer, 0, bufferWidth, bufferHeight);
+
+	//然后把这个创建好的纹理附加到帧缓冲上, 这就附加了颜色缓冲
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+		*texColorBuffer, 0);
+
+	//附加带深度和模板缓冲的纹理
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, SMALL_SCREEN_WIDTH,
+	//	SMALL_SCREEN_HEIGHT, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, 
+	//	GL_TEXTURE_2D, texture, 0);
+
+	//unsigned int renderBuffer;//渲染缓冲对象附件
+	make_render_buffer_obj_attach(renderBuffer, bufferWidth, bufferHeight);
+	//附加这个渲染缓冲对象
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *renderBuffer);
+
+	//检查帧缓冲是否完整
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "ERROR::FRAMEBUFFER: Framebuffer is not complete!" << std::endl;
+		return -1;
+	}
+	//解绑帧缓冲, 激活默认的窗口缓冲, 以便让主窗口能正常的渲染
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	std::cout << "makeFramebuffer() framebuffer = " << *framebuffer << std::endl;
+	return 1;
+	//---------------------------------------------------------------------
+}
+
+
+
+/// <summary>
 /// 通过草地来查看抗锯齿效果
 /// </summary>
 /// <param name="projectDir"></param>
@@ -237,7 +321,6 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 	return 1;
 }
 
-
 /// <summary>
 ///  离屏多重采样缓冲
 ///  帧缓冲
@@ -245,9 +328,9 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 /// <param name="projectDir"></param>
 /// <returns></returns>
 int PractiseAntiAliasing_4_11::practise1(string projectDir) {
-	WindowHelper window("sample of frame buffer and custom anti aliasing");
+	WindowHelper window("sample of frame buffer and custom anti aliasing", 
+		Camera(glm::vec3(0.0f, 1.0f, 4.0f)), 0);
 	window.create();
-
 
 	MyShader myshader(projectDir.c_str(), vertFile3, fragFile3);
 	myshader.use();
@@ -255,17 +338,16 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 
 	GLuint cubeVAO, cubeVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
-
 	int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
 
 	//--------uniform buffer
-	glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
-	GLuint UBO;
-	glGenBuffers(1, &UBO);
-	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));
+	//glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
+	//GLuint UBO;
+	//glGenBuffers(1, &UBO);
+	//glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	//glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	//glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));
 	//--------uniform buffer done
 
 	MyShader screenshader(projectDir.c_str(), vertFileScreen, fragFileScreen);
@@ -273,7 +355,7 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 	RenderUtil::makeVertexArrayAndBuffer(&screenVAO, &screenVBO, quadVertices, sizeof(quadVertices), 4);
 	screenshader.use();
 	screenshader.setInt("texture_screen", 0);
-	//---------frame buffer 帧缓冲
+	////---------frame buffer 帧缓冲
 	GLuint frameBuffer;
 	glGenFramebuffers(1, &frameBuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
@@ -281,28 +363,29 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 	unsigned int texFrameBuffer;   //给frame buffer提供渲染输出的空白纹理
 	glGenTextures(1, &texFrameBuffer);
 	glBindTexture(GL_TEXTURE_2D, texFrameBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window.getScreenWidth(), window.getScreenHeight(),
-		0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window.getScreenWidth(), window.getScreenHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texFrameBuffer, 0); //绑定framebuffer和texture
 	//------- 给帧缓冲附加上渲染缓冲
 	unsigned int renderBuffer;
 	glGenRenderbuffers(1, &renderBuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window.getScreenWidth(), window.getScreenHeight());
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
 	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
 	//---------
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {  //检查帧缓冲是否创建成功
 		std::cout << "ERROR:FRAMEBUFFER::CREATE FAILED." << std::endl;
 		return -1;
 	}
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	//---------frame buffer done
+	//std::cout << "screenWidth : " << window.getScreenWidth() << ", screenHeight : " << window.getScreenHeight() << std::endl;
+	//makeFramebuffer(&frameBuffer, &texFrameBuffer, &renderBuffer, window.getScreenWidth(), window.getScreenHeight());
 
 	glEnable(GL_DEPTH_TEST);
 	//glDepthFunc(GL_LESS);
@@ -311,41 +394,42 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 		window.calcProcessInput();
 
 		//---------- render to frame buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 		glEnable(GL_DEPTH_TEST);
+		glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 		//glDepthFunc(GL_LESS);
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		myshader.use();
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texCube);
 
 		glm::mat4 view(1.0f);
 		glm::mat4 projection(1.0f);
 		view = window.getCamera().GetViewMatrix();
 		projection = glm::perspective(glm::radians(window.getCamera().Zoom), 
 			window.getScreenWidth() * 1.0f / window.getScreenHeight(), 0.1f, 100.0f);
-		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(view));
-		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		//glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+		//glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(view));
+		//glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
+		//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		
+		myshader.use();
+		glBindVertexArray(cubeVAO);
+		//glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texCube);
 
-		glm::mat4 model(1.0);
+		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
 		myshader.setMat4("model", model);
+		myshader.setMat4("view", view);
+		myshader.setMat4("projection", projection);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//------------- render to frame buffer done
-
-		//------- render to screen
+		////------- render to screen
 		glDisable(GL_DEPTH_TEST);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
 		screenshader.use();
 		glBindVertexArray(screenVAO);
+		//glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texFrameBuffer);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		//------- render to screen
@@ -353,16 +437,20 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 		glfwSwapBuffers(window.getWindow());
 		glfwPollEvents();
 	}
+
 	glfwTerminate();
+
 	myshader.deleteProgram();
+	screenshader.deleteProgram();
 	glDeleteVertexArrays(1, &cubeVAO);
 	glDeleteBuffers(1, &cubeVBO);
-	glDeleteBuffers(1, &UBO);
+	//glDeleteBuffers(1, &UBO);
 
-	glDeleteFramebuffers(1, &frameBuffer);
 	glDeleteRenderbuffers(1, &renderBuffer);
 	glDeleteTextures(1, &texFrameBuffer);
-	screenshader.deleteProgram();
 	glDeleteVertexArrays(1, &screenVAO);
 	glDeleteBuffers(1, &screenVBO);
+	glDeleteFramebuffers(1, &frameBuffer);
+
+	return 1;
 }

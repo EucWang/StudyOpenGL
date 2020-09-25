@@ -18,7 +18,7 @@ public:
 	WindowHelper(const char* title="OpenGL Windows",
 		Camera camera=Camera(glm::vec3(0.0f, 2.0f, 3.0f)),
 		int antiAliasing = 4,
-		glm::vec3 bgColor= glm::vec3(0.2f, 0.3f, 0.3f),
+		//glm::vec3 bgColor= glm::vec3(0.2f, 0.3f, 0.3f),
 		int width = SMALL_WINDOW_SCREEN_WIDTH,
 		int height = SMALL_WINDOW_SCREEN_HEIGHT,
 		int majorVersion = 3,
@@ -32,7 +32,8 @@ public:
 
 	Camera getCamera();
 
-	void run(void (*render)(void));
+	//TODO
+	//void run(void (*render)(void));
 
 	/// <summary>
 	/// 返回processInput函数指针
@@ -61,26 +62,9 @@ private:
 	int mMajorVersion = 3;
 	int mMinorVersion = 3;
 	bool mResize = false;
-	glm::vec3 mBackgroundColor;
 	GLFWwindow* mWindow;
 
-	void calcDeltaTime();  //每一帧渲染时,计算绘制一帧的时间间隔
-
-	//double deltaTime;  //渲染两帧之间的时间间隔
-	//double lastFrame;  //上帧渲染的时间
-
-	//double lastX;  //临时变量
-	//double lastY;
-
-	//bool isMouseFirstIn = true;  //临时变量
-
-	//void processInput(GLFWwindow* window);
-
-	//void mouse_move_callback(GLFWwindow* window, double posX, double posY);
-
-	//void mouse_scroll_callback(GLFWwindow* window, double offsetX, double offsetY);
-
-	//void buffer_window_callback(GLFWwindow* window, int width, int height);
+	void calcDeltaTime();  //每一帧渲染时,计算绘制一帧的时间间隔 
 };
 
 #endif // !WINDOW_HELPER_H_

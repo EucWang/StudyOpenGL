@@ -125,9 +125,9 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 	if (window == NULL) { return -1; }
 
 	MyShader shader(projectDir, vertFile, fragFile);  //往帧缓冲写入的shader
-	//MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);   //普通的没有处理的屏幕shader
+	MyShader screenshader(projectDir, vertFileScreen, fragFileScreen);   //普通的没有处理的屏幕shader
 	//MyShader screenReverseColorShader(projectDir, vertFileScreen, fragFileReverseColor);   //反转颜色的屏幕的shader
-	MyShader screenGrayShader(projectDir, vertFileScreen, fragFileGray);   //将颜色置位灰度的屏幕shader
+	//MyShader screenGrayShader(projectDir, vertFileScreen, fragFileGray);   //将颜色置位灰度的屏幕shader
 
 	GLuint quadVAO, quadVBO;
 	makeVAOVBO(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
@@ -143,12 +143,12 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 
 	shader.use();
 	shader.setInt("texture1", 0);
-	//screenshader.use();
-	//screenshader.setInt("screenTexture", 0);
+	screenshader.use();
+	screenshader.setInt("screenTexture", 0);
 	//screenReverseColorShader.use();
 	//screenReverseColorShader.setInt("screenTexture", 0);
-	screenGrayShader.use();
-	screenGrayShader.setInt("screenTexture", 0);
+	//screenGrayShader.use();
+	//screenGrayShader.setInt("screenTexture", 0);
 
 	//---------------------------------------------------------------------
 	unsigned int framebuffer;   //一个帧缓冲对象
@@ -210,19 +210,19 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, cubTexture);
-		model = glm::mat4(1.0);
+		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 1.0f));
 		//model = glm::rotate(model, (float)curFrame * glm::radians(10.0f), glm::vec3(0.0f, 0.1f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		glm::mat4 model2 = glm::mat4(1.0);
+		glm::mat4 model2 = glm::mat4(1.0f);
 		model2 = glm::translate(model2, glm::vec3(-1.0f, 0.0f, 1.0f));
 		model2 = glm::rotate(model2, (float)glfwGetTime() * glm::radians(34.0f), glm::vec3(0.0f, 0.1f, 0.0f));
 		shader.setMat4("model", model2);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
-		model2 = glm::mat4(1.0);
+		model2 = glm::mat4(1.0f);
 		model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, -1.0f));
 		model2 = glm::rotate(model2, (float)glfwGetTime() * glm::radians(12.0f), glm::vec3(0.0f, 1.2f, 0.0f));
 		shader.setMat4("model", model2);
@@ -246,9 +246,9 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 		//--------------------------render to framebuffer done
 
 		//------------------render framebuffer to default screen 
-		//screenshader.use();
+		screenshader.use();
 		//screenReverseColorShader.use();
-		screenGrayShader.use();
+		//screenGrayShader.use();
 		glBindVertexArray(quadVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texColorBuffer);  //将帧缓冲生成的纹理对象texColorBuffer写入到屏幕帧缓冲中
@@ -283,7 +283,7 @@ int PractiseFrameBuffers_4_5::practise(const char * projectDir) {
 ///	使用纹理的优点是，所有渲染操作的结果将会被储存在一个纹理图像中，我们之后可以在着色器中很方便地使用它。
 /// </summary>
 /// <param name="texture"> out </param>
-void make_texture_attach(unsigned int * texColorBuffer, int index) {
+static void make_texture_attach(unsigned int * texColorBuffer, int index) {
 	glGenTextures(1, texColorBuffer);   
 	glBindTexture(GL_TEXTURE_2D, *texColorBuffer);
 	//主要的区别就是，我们将维度设置为了屏幕大小（尽管这不是必须的），并且我们给纹理的data参数传递了NULL。
@@ -308,7 +308,7 @@ void make_texture_attach(unsigned int * texColorBuffer, int index) {
 /// 生成一个渲染缓冲对象, 带深度和模板缓冲的
 /// </summary>
 /// <param name="rbo"></param>
-void make_render_buffer_obj_attach(unsigned int * rbo) {
+static void make_render_buffer_obj_attach(unsigned int * rbo) {
 	glGenRenderbuffers(1, rbo);   //创建渲染缓冲对象
 	glBindRenderbuffer(GL_RENDERBUFFER, *rbo);  //绑定渲染缓冲对象
 

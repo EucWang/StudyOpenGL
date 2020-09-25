@@ -5,10 +5,10 @@ layout (location = 1) in vec3 aNormal;
 layout (location = 2) in vec2 aTexCoords;
 
 uniform mat4 model;
-layout (std140) uniform Matrices {
-	mat4 view;
-	mat4 projection;
-};
+//layout (std140) uniform Matrices {
+uniform	mat4 view;
+uniform	mat4 projection;
+//};
 
 out VS_OUT{
 	vec2 texCoords;
