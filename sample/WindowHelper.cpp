@@ -8,7 +8,7 @@ static double localLastY = DEFAULT_SCREEN_HEIGHT / 2;
 
 static bool isMouseFirstIn = true;
 
-static Camera localCamera = Camera(glm::vec3(0.0f, 1.0f, 4.0f));
+static Camera localCamera = Camera(glm::vec3(0.0f, 2.0f, 4.0f));
 
 static void buffer_window_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
@@ -52,14 +52,29 @@ static void mouse_scroll_callback(GLFWwindow* window, double offsetX, double off
 	localCamera.ProcessMouseScroll(offsetY);
 }
 
-WindowHelper::WindowHelper(const char* title,
-	Camera camera,
-	int antiAliasing,
-	int width,
-	int height,
-	int majorVersion,
-	int minorVersion,
-	bool resize) {
+void (*WindowHelper::getMouseScrollCallbackFunc())(GLFWwindow*, double, double) {
+	void (*retVal)(GLFWwindow*, double, double) = mouse_scroll_callback;
+	return retVal;
+}
+
+void(*WindowHelper::getBufferWindowCallbackFunc())(GLFWwindow* window, int width, int height) {
+	void (*retVal)(GLFWwindow * window, int width, int height) = buffer_window_callback;
+	return retVal;
+}
+
+void(*WindowHelper::getMouseMoveCallbackFunc())(GLFWwindow*, double, double) {
+	void (*retVal)(GLFWwindow*, double, double) = mouse_move_callback;
+	return retVal;
+}
+
+void (*WindowHelper::getProcessInputFunc())(GLFWwindow*) {
+	void (*retVal)(GLFWwindow*) = processInput;
+	return retVal;
+}
+
+WindowHelper::WindowHelper(const char* title,	Camera camera,
+	int antiAliasing,	int width,	int height,
+	int majorVersion,	int minorVersion,	bool resize) {
 
 	this->mTitle = string(title);
 
@@ -82,11 +97,6 @@ WindowHelper::WindowHelper(const char* title,
 void WindowHelper::calcProcessInput() {
 	calcDeltaTime();
 	processInput(mWindow);
-}
-
-void (*WindowHelper::getProcessInput())(GLFWwindow*) {
-	void (*retVal)(GLFWwindow*) = processInput;
-	return retVal;
 }
 
 int  WindowHelper::getScreenWidth() {

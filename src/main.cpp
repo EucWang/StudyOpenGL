@@ -127,6 +127,7 @@ int main(int argc, char* argv[]) {
 	//practise.practise0(projectDir);
 	//practise.practise(projectDir);
 	practise.practise1(projectDir);
+	//practise.practise2(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);

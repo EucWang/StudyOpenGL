@@ -1,5 +1,27 @@
 #include "PractiseAntiAliasing_4_11.h"
 
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+static void processInput(GLFWwindow* window);
+//unsigned int loadTexture(const char* path);
+
+// settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+// camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = (float)SCR_WIDTH / 2.0;
+float lastY = (float)SCR_HEIGHT / 2.0;
+bool firstMouse = true;
+
+// timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+
 /// <summary>
 /// 普通场景, 离屏渲染, 而不是采用opengl默认的颜色缓冲的抗锯齿
 /// </summary>
@@ -72,7 +94,6 @@ int PractiseAntiAliasing_4_11::practise0(string projectDir) {
 	myshader.deleteProgram();
 }
 
-
 /// <summary>
 /// 
 /// 添加颜色缓冲/深度缓冲,颜色附件Attachment
@@ -117,8 +138,7 @@ static void make_render_buffer_obj_attach(unsigned int* rbo, int width, int heig
 }
 
 static bool makeFramebuffer(unsigned int *framebuffer, 
-	unsigned int * texColorBuffer, 
-	unsigned int * renderBuffer,
+	unsigned int * texColorBuffer, unsigned int * renderBuffer,
 	int bufferWidth, int bufferHeight) {
 	//---------------------------------------------------------------------
 	//unsigned int framebuffer;   //一个帧缓冲对象
@@ -154,8 +174,6 @@ static bool makeFramebuffer(unsigned int *framebuffer,
 	return 1;
 	//---------------------------------------------------------------------
 }
-
-
 
 /// <summary>
 /// 通过草地来查看抗锯齿效果
@@ -341,13 +359,13 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 	int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
 
 	//--------uniform buffer
-	//glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
-	//GLuint UBO;
-	//glGenBuffers(1, &UBO);
-	//glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-	//glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
-	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	//glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));
+	glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
+	GLuint UBO;
+	glGenBuffers(1, &UBO);
+	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glBindBufferRange(GL_UNIFORM_BUFFER, 0, UBO, 0, 2 * sizeof(glm::mat4));
 	//--------uniform buffer done
 
 	MyShader screenshader(projectDir.c_str(), vertFileScreen, fragFileScreen);
@@ -453,4 +471,198 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 	glDeleteFramebuffers(1, &frameBuffer);
 
 	return 1;
+}
+
+/// <summary>
+/// 帧缓冲
+/// </summary>
+/// <param name="projectDir"></param>
+/// <returns></returns>
+int PractiseAntiAliasing_4_11::practise2(string projectDir) {
+
+	//initialize and configure
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	GLFWwindow* window = glfwCreateWindow(SMALL_WINDOW_SCREEN_WIDTH, SMALL_WINDOW_SCREEN_HEIGHT, "learnOpenGL about framebuffer and anti aliasing", 0, 0);
+	if (window == NULL) {
+		std::cout << "Failed to create Window." << std::endl;
+		return -1;
+	}
+	glfwMakeContextCurrent(window);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetFramebufferSizeCallback(window, WindowHelper::getBufferWindowCallbackFunc());
+	glfwSetCursorPosCallback(window, WindowHelper::getMouseMoveCallbackFunc());
+	glfwSetScrollCallback(window, WindowHelper::getMouseScrollCallbackFunc());
+	//glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	//glfwSetCursorPosCallback(window, mouse_callback);
+	//glfwSetScrollCallback(window, scroll_callback);
+	
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return -1;
+	}
+	//const char* title = "learnOpenGL about framebuffer and anti aliasing";
+	//GLFWwindow * window = RenderUtil::createWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, title, framebuffer_size_callback);
+
+
+	MyShader myshader(projectDir.c_str(), vertFile3, fragFile3);
+	myshader.use();
+	myshader.setInt("texture_diffuse1", 0);
+
+	GLuint cubeVAO, cubeVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
+
+	GLuint quadVAO, quadVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
+
+	unsigned int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
+
+	MyShader screenshader(projectDir.c_str(), vertFileScreen, fragFileScreen);
+	screenshader.use();
+	screenshader.setInt("texture_screen", 0);
+
+	//----------------framebuffer
+	GLuint framebuffer;
+	glGenFramebuffers(1, &framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	//------create a color attachment texture
+	GLuint texColorbuffer;
+	glGenTextures(1, &texColorbuffer);
+	glBindTexture(GL_TEXTURE_2D, texColorbuffer);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SMALL_WINDOW_SCREEN_WIDTH, SMALL_WINDOW_SCREEN_HEIGHT,
+		0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorbuffer, 0);
+	//------create a renderbuffer object for depth and stencil attachment
+	GLuint rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 
+		SMALL_WINDOW_SCREEN_WIDTH,SMALL_WINDOW_SCREEN_HEIGHT);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+	//-----check if completed
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "ERROR::FRAMEBUFFER::Framebuffer is not complete!" << std::endl;
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//----------------framebuffer done
+	
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetCursorPosCallback(window, mouse_callback);
+	//glfwSetScrollCallback(window, scroll_callback);
+
+	glEnable(GL_DEPTH_TEST);
+
+	while (!glfwWindowShouldClose(window)) {
+		//double curFrame = glfwGetTime();
+		//deltaTime = curFrame - lastFrame;
+		//lastFrame = curFrame;
+		//processInput(window);
+		WindowHelper::calcDeltaTime();
+		WindowHelper::getProcessInputFunc()(window);
+
+		//------ render to custom framebuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+		glEnable(GL_DEPTH_TEST);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		myshader.use();
+		glm::mat4 model(1.0f);
+		glm::mat4 view(1.0f);
+		glm::mat4 projection(1.0f);
+		view = WindowHelper::getCamera().GetViewMatrix();
+		projection = glm::perspective(glm::radians(45.0f),
+			SMALL_WINDOW_SCREEN_WIDTH * 1.0f / SMALL_WINDOW_SCREEN_HEIGHT, 0.1f, 100.0f);
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.5f));
+
+		glBindVertexArray(cubeVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texCube);
+		myshader.setMat4("model", model);
+		myshader.setMat4("view", view);
+		myshader.setMat4("projection", projection);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//------ render to custom framebuffer done
+		
+		//------ render to default framebuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDisable(GL_DEPTH_TEST);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		screenshader.use();
+		glBindVertexArray(quadVAO);
+		glBindTexture(GL_TEXTURE_2D, texColorbuffer);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//------ render to default framebuffer done
+		
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	glDeleteVertexArrays(1, &cubeVAO);
+	//glDeleteVertexArrays(1, &quadVAO);
+	glDeleteBuffers(1, &cubeVBO);
+	//glDeleteBuffers(1, &quadVBO);
+	glfwTerminate();
+	return 1;
+}
+
+
+// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
+// ---------------------------------------------------------------------------------------------------------
+void processInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
+}
+
+// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	// make sure the viewport matches the new window dimensions; note that width and 
+	// height will be significantly larger than specified on retina displays.
+	glViewport(0, 0, width, height);
+}
+
+// glfw: whenever the mouse moves, this callback is called
+// -------------------------------------------------------
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (firstMouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstMouse = false;
+	}
+
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+	lastX = xpos;
+	lastY = ypos;
+
+	camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+// glfw: whenever the mouse scroll wheel scrolls, this callback is called
+// ----------------------------------------------------------------------
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera.ProcessMouseScroll(yoffset);
 }

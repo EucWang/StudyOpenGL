@@ -145,5 +145,13 @@ public:
 	/// <param name="projectDir"></param>
 	/// <returns></returns>
 	int practise1(string projectDir);
+
+
+	/// <summary>
+	///  Ö¡»º³å
+	/// </summary>
+	/// <param name="projectDir"></param>
+	/// <returns></returns>
+	int practise2(string projectDir);
 };
 

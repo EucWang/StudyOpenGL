@@ -30,7 +30,6 @@ public:
 
 	GLFWwindow* getWindow();
 
-	Camera getCamera();
 
 	//TODO
 	//void run(void (*render)(void));
@@ -41,14 +40,24 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	void (*getProcessInput())(GLFWwindow*);
+	static void (*getProcessInputFunc())(GLFWwindow*);
+
+	static void(*getMouseMoveCallbackFunc())(GLFWwindow*, double, double);
+
+	static void (*getMouseScrollCallbackFunc())(GLFWwindow*, double, double);
+
+	static void(*getBufferWindowCallbackFunc())(GLFWwindow* window, int width, int height);
+
+	static void calcDeltaTime(); //每一帧渲染时,计算绘制一帧的时间间隔 
+
+	static Camera getCamera();
 
 	/// <summary>
 	/// 计算绘制每一帧的间隔时间,
 	/// 然后设置 输入的上下左右(WSAD),用于控制Camera
 	/// 在 渲染的while循环中调用
 	/// </summary>
-	void calcProcessInput();
+	 void calcProcessInput();
 
 	int getScreenWidth();
 
@@ -64,7 +73,6 @@ private:
 	bool mResize = false;
 	GLFWwindow* mWindow;
 
-	void calcDeltaTime();  //每一帧渲染时,计算绘制一帧的时间间隔 
 };
 
 #endif // !WINDOW_HELPER_H_
