@@ -134,7 +134,7 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 
 	// Ö¡»º³å
 	//GLuint framebufferobj, framebufferTex, renderbuffer;
-	//RenderUtil::createFramebuffer(&framebufferobj, &framebufferTex, &renderbuffer);
+	//RenderUtil::makeFramebuffer(&framebufferobj, &framebufferTex, &renderbuffer, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 	//
 	//MyShader screenShader(projectDir, vertFileScreen, fragFileScreen);
 	//screenShader.use();

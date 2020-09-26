@@ -36,16 +36,36 @@ public:
 	/// <returns>返回天空盒子的3d纹理id, 返回小于0表示加载失败</returns>
 	int static texureLoadCubmap(const char* projectDir, vector<string> images);
 
-	/// <summary>
-	/// 创建 帧缓冲
-	/// 附件有 2d纹理和渲染缓冲
-	/// </summary>
-	/// <param name="framebufferobj"></param>
-	/// <param name="frametexture"></param>
-	/// <param name="renderbuffer"></param>
-	/// <returns>1表示成功,否则失败</returns>
-	int static createFramebuffer(GLuint* framebufferobj, GLuint* frametexture, GLuint* renderbuffer);
 
+	/// <summary>
+	/// 将带多重采样的帧缓冲 和 简单的帧缓冲 绑定
+	/// 在渲染循环中, 当多重采样帧缓冲 已经完成绘制之后,
+	///  将多重采样帧缓冲的 渲染结果 输出到 framebuffer这个普通帧缓冲中,
+	/// 以便传递给 屏幕的默认缓冲进行输出显示
+	/// </summary>
+	/// <param name="multisampleFramebuffer">带多重采样的帧缓冲 </param>
+	/// <param name="framebuffer">简单的帧缓冲,用于中间过渡的缓冲</param>
+	/// <param name="width">帧缓冲的宽度</param>
+	/// <param name="height">帧缓冲的高度</param>
+	/// <returns></returns>
+	static void blitFrameBuffer(unsigned int* multisampleFramebuffer,
+		unsigned int* intermediateFrameBuffer, int width, int height);
+
+	/// <summary>
+	/// 创建一个普通的一般的 帧缓冲
+	/// </summary>
+	/// <param name="framebuffer">帧缓冲</param>
+	/// <param name="texColorBuffer">纹理, 帧缓冲附件</param>
+	/// <param name="renderBuffer">渲染缓冲, 帧缓冲附件</param>
+	/// <param name="bufferWidth">宽度, 纹理和渲染缓冲的高度</param>
+	/// <param name="bufferHeight">宽度, 纹理和渲染缓冲的宽度</param>
+	/// <param name="sample">采样值, 0  : 不产生多重采样;
+	///								>0 : 创建带多重采样的帧缓冲,一般取值4</param>
+	/// <returns>是否创建的帧缓冲完整 取值1 : 完整;否则不完整</returns>
+	bool static makeFramebuffer(unsigned int* framebuffer,
+		unsigned int* texColorBuffer, unsigned int* renderBuffer,
+		int bufferWidth, int bufferHeight, int sample);
+	 
 	/// <summary>
 	/// 加载2D图片纹理，
 	/// </summary>

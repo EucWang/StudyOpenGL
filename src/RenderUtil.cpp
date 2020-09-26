@@ -144,44 +144,134 @@ int RenderUtil::texureLoadCubmap(const char* projectDir, vector<string> images) 
 }
 
 /// <summary>
-/// 创建 帧缓冲
-/// 附件有 2d纹理和渲染缓冲
+/// 
+/// 添加颜色缓冲/深度缓冲,颜色附件Attachment
+/// 附件是一个内存位置，它能够作为帧缓冲的一个缓冲，可以将它想象为一个图像。当创建一个附件的时候我们有两个选项：
+/// 纹理或渲染缓冲对象(Renderbuffer Object)。
+///
+/// 纹理附件,当把一个纹理附加到帧缓冲的时候，所有的渲染指令将会写入到这个纹理中，就想它是一个普通的颜色/深度或模板缓冲一样。
+///	使用纹理的优点是，所有渲染操作的结果将会被储存在一个纹理图像中，我们之后可以在着色器中很方便地使用它。
 /// </summary>
-/// <param name="framebufferobj"></param>
-/// <param name="frametexture"></param>
-/// <param name="renderbuffer"></param>
-/// <returns>1表示成功,否则失败</returns>
-int RenderUtil::createFramebuffer(GLuint* framebufferobj, GLuint* frametexture, GLuint* renderbuffer) {
+/// <param name="texture"> out </param>
+static void make_texture_attach(unsigned int* texColorBuffer, int index, int width, int height, int samples) {
+	glGenTextures(1, texColorBuffer);
 
-	glGenFramebuffers(1, framebufferobj);
-	glBindFramebuffer(GL_FRAMEBUFFER, *framebufferobj);
+	if (samples <= 0) {
+		glBindTexture(GL_TEXTURE_2D, *texColorBuffer);
+		//主要的区别就是，我们将维度设置为了屏幕大小（尽管这不是必须的），并且我们给纹理的data参数传递了NULL。
+		//对于这个纹理，我们仅仅分配了内存而没有填充它。填充这个纹理将会在我们渲染到帧缓冲之后来进行。
+		//同样注意我们并不关心环绕方式或多级渐远纹理，我们在大多数情况下都不会需要它们。
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
+			0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
-	glGenTextures(1, frametexture);
-	glBindTexture(GL_TEXTURE_2D, *frametexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, *frametexture, 0);
-	std::cout << "attach texture to framebuffer." << std::endl;
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glGenRenderbuffers(1, renderbuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, *renderbuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	glFramebufferRenderbuffer(GL_RENDERBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *renderbuffer);
-	std::cout << "attach renderbuffer to framebuffer." << std::endl;
+		glBindTexture(GL_TEXTURE_2D, 0);  //清空绑定
+	}else {
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, *texColorBuffer);
+		//最后一个参数为GL_TRUE，图像将会对每个纹理像素使用相同的样本位置以及相同数量的子采样点个数。
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB,
+			width, height, GL_TRUE);
 
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-		std::cout << "ERROR::FRAMEBUFFER: framebuffer is not complete." << std::endl;
-		return -1;
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);  //清空绑定
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);  //解除帧缓冲的绑定
-	std::cout << "createFramebuffer() success. [framebufferobj = " << *framebufferobj
-		<< ", frametexture = " << *frametexture
-		<< ", renderbuffer = " << *renderbuffer << "]" << std::endl;
-	return 1;
+	std::cout << "make_texture_attach : texture = " << *texColorBuffer << std::endl;
+}
+
+/// <summary>
+/// 生成一个渲染缓冲对象, 带深度和模板缓冲的
+/// </summary>
+/// <param name="rbo"></param>
+static void make_render_buffer_obj_attach(unsigned int* rbo, int width, int height, int samples) {
+	glGenRenderbuffers(1, rbo);   //创建渲染缓冲对象
+
+	glBindRenderbuffer(GL_RENDERBUFFER, *rbo);  //绑定渲染缓冲对象
+
+	if (samples <= 0) {
+		//创建一个深度和模板渲染缓冲对象
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+	} else {
+		glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_DEPTH24_STENCIL8,
+			width, height);
+	}
+	glBindRenderbuffer(GL_RENDERBUFFER, 0); //清理掉绑定
+
+	std::cout << "make_render_buffer_obj_attach() : renderBuffer = " << *rbo << std::endl;
+}
+
+
+void RenderUtil::blitFrameBuffer(unsigned int* multisampleFramebuffer,
+	unsigned int* intermediateFrameBuffer, int width, int height) {
+
+	//-------------- 将自定义的多重采样缓冲和 中间非多重采样缓冲连接
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, *multisampleFramebuffer);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, *intermediateFrameBuffer);
+	glBlitFramebuffer(0, 0, width, height,
+		0, 0, width, height,
+		GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+}
+
+/// <summary>
+/// 创建一个普通的一般的 帧缓冲
+/// </summary>
+/// <param name="framebuffer">帧缓冲</param>
+/// <param name="texColorBuffer">纹理, 帧缓冲附件</param>
+/// <param name="renderBuffer">渲染缓冲, 帧缓冲附件</param>
+/// <param name="bufferWidth">宽度, 纹理和渲染缓冲的高度</param>
+/// <param name="bufferHeight">宽度, 纹理和渲染缓冲的宽度</param>
+/// <returns></returns>
+bool RenderUtil::makeFramebuffer(unsigned int* framebuffer,
+	unsigned int* texColorBuffer, unsigned int* renderBuffer,
+	int bufferWidth, int bufferHeight, int samples) {
+
+	if (framebuffer == NULL) {
+		std::cout << "makeFramebuffer() failed. because parameter1 'framebuffer' is null." << std::endl;
+		return false;
+	}
+
+	//---------------------------------------------------------------------
+	//unsigned int framebuffer;   //一个帧缓冲对象
+	glGenFramebuffers(1, framebuffer);  //创建一个帧缓冲对象
+	glBindFramebuffer(GL_FRAMEBUFFER, *framebuffer);  //绑定帧缓冲对象 到 GL_FRAMEBUFFER
+
+	if (texColorBuffer != NULL) {
+		//unsigned int texColorBuffer;  //一个空的纹理图像
+		make_texture_attach(texColorBuffer, 0, bufferWidth, bufferHeight, samples);
+
+		if (samples <= 0) {
+			//然后把这个创建好的纹理附加到帧缓冲上, 这就附加了颜色缓冲
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+				*texColorBuffer, 0);
+		} else {
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE,
+				*texColorBuffer, 0);
+		}
+	}
+	//附加带深度和模板缓冲的纹理
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, SMALL_SCREEN_WIDTH,
+	//	SMALL_SCREEN_HEIGHT, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, 
+	//	GL_TEXTURE_2D, texture, 0);
+
+	//unsigned int renderBuffer;//渲染缓冲对象附件
+	if (renderBuffer != NULL) {
+		make_render_buffer_obj_attach(renderBuffer, bufferWidth, bufferHeight, samples);
+		//附加这个渲染缓冲对象
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, *renderBuffer);
+	}
+	//检查帧缓冲是否完整
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "ERROR::FRAMEBUFFER: Framebuffer is not complete!" << std::endl;
+		return false;
+	}
+	//解绑帧缓冲, 激活默认的窗口缓冲, 以便让主窗口能正常的渲染
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	std::cout << "makeFramebuffer() framebuffer = " << *framebuffer << std::endl;
+	return true;
+	//---------------------------------------------------------------------
 }
 
 void RenderUtil::makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, bool isnormal,
