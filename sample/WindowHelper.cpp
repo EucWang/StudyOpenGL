@@ -8,28 +8,82 @@ static double localLastY = DEFAULT_SCREEN_HEIGHT / 2;
 
 static bool isMouseFirstIn = true;
 
+static bool blinnKeyPressed = false;  //是否按下了B键
+static bool blinn = false;  //x
+
+static bool spotKeyPressed = false;   //是否按下了V键
+static bool spot = false;
+
 static Camera localCamera = Camera(glm::vec3(0.0f, 2.0f, 4.0f));
 
 static void buffer_window_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
+/// <summary>
+/// 处理单个的点击事件
+/// </summary>
+/// <param name="window"></param>
+/// <param name="key"></param>
+/// <param name="scancode"></param>
+/// <param name="action"></param>
+/// <param name="mods"></param>
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if (action == GLFW_PRESS) {
+		switch (key) {
+		case  GLFW_KEY_ESCAPE:
+			glfwSetWindowShouldClose(window, true);
+		break;
+		case GLFW_KEY_B:
+			if (!blinnKeyPressed) blinn = !blinn;
+			blinnKeyPressed = true;
+			break;
+		case GLFW_KEY_V:	
+			if (!spotKeyPressed) spot = !spot;
+			spotKeyPressed = true;
+			break;
+		default:
+			break;
+		}
+	}
+	else if (action == GLFW_RELEASE) {
+		switch (key) {
+		case GLFW_KEY_B:
+			blinnKeyPressed = false;
+			break;
+		case GLFW_KEY_V:
+			spotKeyPressed = false;
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+/// <summary>
+/// 在每一帧中处理键盘事件， 这个用于处理长时间连续的按键最好了
+/// </summary>
+/// <param name="window"></param>
 static void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+	} else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		localCamera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+	} else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 		localCamera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+	} else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		localCamera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
-	}
-	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+	} else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		localCamera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
 	}
+}
+
+bool WindowHelper::switchByClickKeyB() {
+	return blinn;
+}
+
+bool WindowHelper::switchByClickKeyV() {
+	return spot;
 }
 
 static void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
@@ -164,6 +218,7 @@ void WindowHelper::create() {
 
 	glfwSetCursorPosCallback(mWindow, mouse_move_callback);
 	glfwSetScrollCallback(mWindow, mouse_scroll_callback);
+	glfwSetKeyCallback(mWindow, key_callback);
 	//-----------------------------window done
 
 	//启用多重采样

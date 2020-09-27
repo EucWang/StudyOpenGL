@@ -117,6 +117,9 @@
     <ClInclude Include="include\WindowHelper.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseAdvancedLighting_5_1.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -298,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="sample\WindowHelper.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseAdvancedLighting_5_1.cpp">
+      <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -494,6 +500,9 @@
     </Image>
     <Image Include="images\container.jpg">
       <Filter>images\asteroid_belt</Filter>
+    </Image>
+    <Image Include="images\wood.png">
+      <Filter>images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -833,6 +842,27 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_4_11_anti_aliasing_screen.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting_screen.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting_screen.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting_plane.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting_plane.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_1_advanced_lighting_light.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

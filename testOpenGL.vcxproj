@@ -28,6 +28,7 @@
     <ClInclude Include="include\PractiseAdvancedData_4_7.h" />
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8.h" />
     <ClInclude Include="include\PractiseAdvancedGLSL_4_8_2.h" />
+    <ClInclude Include="include\PractiseAdvancedLighting_5_1.h" />
     <ClInclude Include="include\PractiseAntiAliasing_4_11.h" />
     <ClInclude Include="include\PractiseBlending29.h" />
     <ClInclude Include="include\PractiseBlending30.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8.cpp" />
     <ClCompile Include="sample\PractiseAdvancedGLSL_4_8_2.cpp" />
+    <ClCompile Include="sample\PractiseAdvancedLighting_5_1.cpp" />
     <ClCompile Include="sample\PractiseAntiAliasing_4_11.cpp" />
     <ClCompile Include="sample\PractiseBlending29.cpp" />
     <ClCompile Include="sample\PractiseBlending30.cpp" />
@@ -175,6 +177,7 @@
     <Image Include="images\skybox\right.jpg" />
     <Image Include="images\skybox\top.jpg" />
     <Image Include="images\wall.jpg" />
+    <Image Include="images\wood.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="helper\lightAttenuation.md" />
@@ -292,6 +295,13 @@
     <None Include="shader\_4_9_geometry_shader.geom" />
     <None Include="shader\_4_9_geometry_shader.vert" />
     <None Include="shader\_4_9_geometry_shader2.geom" />
+    <None Include="shader\_5_1_advanced_lighting.frag" />
+    <None Include="shader\_5_1_advanced_lighting.vert" />
+    <None Include="shader\_5_1_advanced_lighting_light.frag" />
+    <None Include="shader\_5_1_advanced_lighting_plane.frag" />
+    <None Include="shader\_5_1_advanced_lighting_plane.vert" />
+    <None Include="shader\_5_1_advanced_lighting_screen.frag" />
+    <None Include="shader\_5_1_advanced_lighting_screen.vert" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
   </ItemGroup>
   <ItemGroup>

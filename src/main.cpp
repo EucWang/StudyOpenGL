@@ -26,6 +26,7 @@
 #include "PractiseGeometryShader_4_9_2.h"
 #include "PractiseInstancing_4_10.h"
 #include "PractiseAntiAliasing_4_11.h"
+#include "PractiseAdvancedLighting_5_1.h"
 
 using namespace std;
 
@@ -123,11 +124,14 @@ int main(int argc, char* argv[]) {
 	//practise.practise3(projectDir);
 	//practise.practise4(projectDir);
 
-	PractiseAntiAliasing_4_11 practise = PractiseAntiAliasing_4_11();
+	//PractiseAntiAliasing_4_11 practise = PractiseAntiAliasing_4_11();
 	//practise.practise0(projectDir);
 	//practise.practise(projectDir);
-	practise.practise1(projectDir);
+	//practise.practise1(projectDir);
 	//practise.practise2(projectDir);
+
+	PractiseAdvancedLighting_5_1 practise = PractiseAdvancedLighting_5_1();
+	practise.practise(projectDir);
 
 	//free(debugDir);
 	//free(projectDir);

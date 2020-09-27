@@ -30,6 +30,18 @@ public:
 
 	GLFWwindow* getWindow();
 
+	/// <summary>
+	/// 是否使用冯氏光照
+	/// 预设的按键B， 第一次点击B键时， 返回true， 再次点击B键时，返回false
+	/// </summary>
+	bool switchByClickKeyB();
+
+	/// <summary>
+	/// 是否使用 手电筒
+	/// 预设按键V， 第一次点击V键时， 返回true， 再次点击V键时，返回false
+	/// </summary>
+	/// <returns></returns>
+	bool switchByClickKeyV();
 
 	//TODO
 	//void run(void (*render)(void));
