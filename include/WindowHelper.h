@@ -43,6 +43,12 @@ public:
 	/// <returns></returns>
 	bool switchByClickKeyV();
 
+	/// <summary>
+	/// 预设按键N， 第一次点击V键时， 返回true， 再次点击V键时，返回false
+	/// </summary>
+	/// <returns></returns>
+	bool switchByClickKeyN();
+
 	//TODO
 	//void run(void (*render)(void));
 

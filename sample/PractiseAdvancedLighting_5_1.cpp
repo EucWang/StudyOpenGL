@@ -75,7 +75,7 @@ int PractiseAdvancedLighting_5_1::practise(const char * projectDir) {
 		glBindTexture(GL_TEXTURE_2D, texCubeSpecular);
 		glBindVertexArray(cubeVAO);
 		glm::mat4 model(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(3.0f, 0.0f, 1.0f));
 		myshader.setMat4("model", model);
 		bool spot = helper.switchByClickKeyV();
 		std::cout << "spot : " << spot << std::endl;
@@ -93,7 +93,6 @@ int PractiseAdvancedLighting_5_1::practise(const char * projectDir) {
 		myshader.setVec3(("pointlight.ambient"), pointLightColors[0].x * 0.1f, pointLightColors[0].y * 0.1f, pointLightColors[0].z * 0.1f);
 		myshader.setVec3(("pointlight.diffuse"), pointLightColors[0].x, pointLightColors[0].y, pointLightColors[0].z);
 		myshader.setVec3(("pointlight.specular"), pointLightColors[0].x, pointLightColors[0].y, pointLightColors[0].z);
-
 		myshader.setFloat(("pointlight.constant"), pointLightColors[4].x);
 		myshader.setFloat(("pointlight.linear"), pointLightColors[4].y);
 		myshader.setFloat(("pointlight.quadratic"), pointLightColors[4].z);
@@ -129,6 +128,7 @@ int PractiseAdvancedLighting_5_1::practise(const char * projectDir) {
 		std::cout << "isBlinn = " << isBlinn << std::endl; 
 		planeshader.setBool("blinn", isBlinn);
 		planeshader.setBool("spot", helper.switchByClickKeyV());
+		planeshader.setBool("usePointLight", helper.switchByClickKeyN());
 
 		//¶¨Ïò¹â
 		planeshader.setVec3(("dirlight.ambient"), dirLightArgs[0].x, dirLightArgs[0].y, dirLightArgs[0].z);

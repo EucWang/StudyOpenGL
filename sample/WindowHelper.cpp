@@ -14,6 +14,9 @@ static bool blinn = false;  //x
 static bool spotKeyPressed = false;   //是否按下了V键
 static bool spot = false;
 
+static bool keyNPressed = false; //是否按下了N键
+static bool keyN = false;
+
 static Camera localCamera = Camera(glm::vec3(0.0f, 2.0f, 4.0f));
 
 static void buffer_window_callback(GLFWwindow* window, int width, int height) {
@@ -42,6 +45,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 			if (!spotKeyPressed) spot = !spot;
 			spotKeyPressed = true;
 			break;
+		case GLFW_KEY_N:
+			if (!keyNPressed) keyN = !keyN;
+			keyNPressed = true;
 		default:
 			break;
 		}
@@ -53,6 +59,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 			break;
 		case GLFW_KEY_V:
 			spotKeyPressed = false;
+			break;
+		case GLFW_KEY_N:
+			keyNPressed = false;
 			break;
 		default:
 			break;
@@ -84,6 +93,15 @@ bool WindowHelper::switchByClickKeyB() {
 
 bool WindowHelper::switchByClickKeyV() {
 	return spot;
+}
+
+
+/// <summary>
+/// 预设按键N， 第一次点击V键时， 返回true， 再次点击V键时，返回false
+/// </summary>
+/// <returns></returns>
+bool WindowHelper::switchByClickKeyN() {
+	return keyN;
 }
 
 static void mouse_move_callback(GLFWwindow* window, double posX, double posY) {
