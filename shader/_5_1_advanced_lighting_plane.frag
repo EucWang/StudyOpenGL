@@ -53,12 +53,15 @@ vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2
 
 //计算点光源对物体产生的颜色分量
 vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
-
-//计算聚光对物体产生的颜色分量
-vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
-
 ///计算点光源对物体产生的颜色分量  ， 采用Blinn-Phong着色模型
 vec3 calcPointLightBlinnPhong(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
+
+//计算聚光对物体产生的颜色分量  冯氏模型
+vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
+
+//计算聚光对物体产生的颜色分量 ， 采用Blinn-Phong着色模型
+vec3 calcSpotLightBlinnPhong(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
+
 
 uniform DirLight dirlight;
 uniform PointLight pointlight;
@@ -90,6 +93,7 @@ void main(){
 	}
 	if(spot){
 		result += calcSpotLight(spotlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
+		//result += calcSpotLightBlinnPhong(spotlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
 	}
 	fragColor = vec4(result, 1.0);
 }
@@ -113,6 +117,81 @@ vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2
 
 	//result = ambient + diffuse + specular;
 	result = ambient + diffuse;
+	return result;
+}
+
+//计算聚光对物体产生的颜色分量 ， 冯氏模型
+vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2) {
+	vec3 result;
+	
+	vec3 lightDir = normalize(slight.position - fragPos);
+	vec3 reflectLightDir = reflect(-lightDir, norm);
+	
+ 	vec3 ambient = slight.ambient * tex1;
+
+	float diff = max(dot(lightDir, norm), 0.0);
+	vec3 diffuse = slight.diffuse * (diff * tex1);
+	
+	float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
+	//float spec = pow(diff2, material.shininess);
+	float spec = pow(diff2, shininess);
+	vec3 specular = slight.specular * (spec * tex2);
+	
+	//聚光的切角
+	float theta = dot(lightDir, normalize(-slight.direction));  //光线到物体表面的向量与聚光的方向之间的夹角
+	float epsilon = slight.cutoff - slight.outerCutoff;
+	float intense = (theta - slight.outerCutoff) / epsilon;
+	float intensity = clamp(intense, 0.0, 1.0);
+
+	float distance = length(slight.position - fragPos);  //光到物体表面的距离
+	//光到物体表面的衰减量
+	float attenuation = 1.0 / (slight.constant + slight.linear * distance
+		+ slight.quadratic * (distance * distance));	
+
+	
+	//result = ambient + diffuse + specular;
+	result = ambient + diffuse;
+	result *= attenuation;
+	result *= intensity;
+
+	return result;
+}
+
+//计算聚光对物体产生的颜色分量 ， 冯氏模型
+vec3 calcSpotLightBlinnPhong(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2) {
+	vec3 result;
+	
+	vec3 lightDir = normalize(slight.position - fragPos);
+	//vec3 reflectLightDir = reflect(-lightDir, norm);
+	vec3 halfwayDir = normalize(lightDir + viewDir);
+	
+ 	vec3 ambient = slight.ambient * tex1;
+
+	float diff = max(dot(lightDir, norm), 0.0);
+	vec3 diffuse = slight.diffuse * (diff * tex1);
+	
+	//float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
+	float diff2 = max(dot(norm, halfwayDir), 0.0);
+	//float spec = pow(diff2, material.shininess);
+	float spec = pow(diff2, shininess);
+	vec3 specular = slight.specular * (spec * tex2);
+	
+	//聚光的切角
+	float theta = dot(lightDir, normalize(-slight.direction));  //光线到物体表面的向量与聚光的方向之间的夹角
+	float epsilon = slight.cutoff - slight.outerCutoff;
+	float intense = (theta - slight.outerCutoff) / epsilon;
+	float intensity = clamp(intense, 0.0, 1.0);
+
+	float distance = length(slight.position - fragPos);  //光到物体表面的距离
+	//光到物体表面的衰减量
+	float attenuation = 1.0 / (slight.constant + slight.linear * distance
+		+ slight.quadratic * (distance * distance));	
+	
+	//result = ambient + diffuse + specular;
+	result = ambient + diffuse;
+	result *= attenuation;
+	result *= intensity;
+
 	return result;
 }
 
@@ -169,42 +248,5 @@ vec3 calcPointLight(PointLight plight, vec3 norm, vec3 fragPos, vec3 viewDir, ve
 		+ plight.quadratic * (distance * distance));	
 
 	result *= attenuation;
-	return result;
-}
-
-//计算聚光对物体产生的颜色分量 ， 冯氏模型
-vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2) {
-	vec3 result;
-	
-	vec3 lightDir = normalize(slight.position - fragPos);
-	vec3 reflectLightDir = reflect(-lightDir, norm);
-	
- 	vec3 ambient = slight.ambient * tex1;
-
-	float diff = max(dot(lightDir, norm), 0.0);
-	vec3 diffuse = slight.diffuse * (diff * tex1);
-	
-	float diff2 = max(dot(reflectLightDir, viewDir), 0.0);
-	//float spec = pow(diff2, material.shininess);
-	float spec = pow(diff2, shininess);
-	vec3 specular = slight.specular * (spec * tex2);
-	
-	//聚光的切角
-	float theta = dot(lightDir, normalize(-slight.direction));  //光线到物体表面的向量与聚光的方向之间的夹角
-	float epsilon = slight.cutoff - slight.outerCutoff;
-	float intense = (theta - slight.outerCutoff) / epsilon;
-	float intensity = clamp(intense, 0.0, 1.0);
-
-	float distance = length(slight.position - fragPos);  //光到物体表面的距离
-	//光到物体表面的衰减量
-	float attenuation = 1.0 / (slight.constant + slight.linear * distance
-		+ slight.quadratic * (distance * distance));	
-
-	
-	//result = ambient + diffuse + specular;
-	result = ambient + diffuse;
-	result *= attenuation;
-	result *= intensity;
-
 	return result;
 }
