@@ -29,13 +29,20 @@ public:
 	const float planeVertices[6*8] = {
 		// (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). 
 		//this will cause the floor texture to repeat)
-		 5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
-		-5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
-		-5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
-		
-		 5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
-		-5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
-		 5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 2.0f
+		// 5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
+		//-5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+		//-5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
+		//
+		// 5.0f, -0.5f,  5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 0.0f,
+		//-5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  0.0f, 2.0f,
+		// 5.0f, -0.5f, -5.0f,  0.0f,  1.0f,  0.0f,  2.0f, 2.0f
+		  10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+		-10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
+		-10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
+
+		 10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+		-10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
+		 10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,  10.0f, 10.0f
 	};
 
 	//箱子的坐标法线纹理
@@ -111,10 +118,10 @@ public:
 	//点光源的6个数据
 	const glm::vec3 pointLightColors[5] = {
 		//glm::vec3(0.4f, 0.7f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
-		glm::vec3(0.9f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
-		glm::vec3(0.4f, 0.7f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
-		glm::vec3(0.4f, 0.7f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
-		glm::vec3(0.4f, 0.7f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
+		glm::vec3(0.25f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+		glm::vec3(0.50f),  //第二个点光源的 (ambient, diffuse, specular)  红色
+		glm::vec3(0.75f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
+		glm::vec3(1.0f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
 
 		//glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
 		glm::vec3(1.0f, 0.14f, 0.07f),   //constant,linear, quadratic
@@ -136,10 +143,10 @@ public:
 	const glm::vec2 spotlight_cutoff = glm::vec2(7.0f, 10.0f);  //聚光的切角和外切角
 
 	const glm::vec3 lightPos[4] = { 
-		glm::vec3(-1.0f, 1.0f, -3.0f), 
-		glm::vec3(-1.0f, 1.0f, -1.f), 
-		glm::vec3(-1.0f, 1.0f, 1.0f), 
-		glm::vec3(-1.0f, 1.0f, 3.0f)
+		  glm::vec3(-3.0f, 0.0f, 0.0f),
+	   glm::vec3(-1.0f, 0.0f, 0.0f),
+	   glm::vec3(1.0f, 0.0f, 0.0f),
+	   glm::vec3(3.0f, 0.0f, 0.0f)
 		//glm::vec3(3.0f, 1.0f, -3.0f), 
 		//glm::vec3(1.0f, 1.0f, -1.f), 
 		//glm::vec3(-1.0f, 1.0f, 1.0f), 

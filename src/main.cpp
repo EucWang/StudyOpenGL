@@ -35,12 +35,12 @@ using namespace std;
 static void testMovePos();
 static void testScale();
 
-//void showMatrix(glm::mat4  trans) {
-//	std::cout << "[ " << trans[0][0] << ",\t" << trans[0][1] << ",\t" << trans[0][2] << ",\t" << trans[0][3] << "," << std::endl
-//		<< " " << trans[1][0] << ",\t" << trans[1][1] << ",\t" << trans[1][2] << ",\t" << trans[1][3] << "," << std::endl
-//		<< " " << trans[2][0] << ",\t" << trans[2][1] << ",\t" << trans[2][2] << ",\t" << trans[2][3] << "," << std::endl
-//		<< " " << trans[3][0] << ",\t" << trans[3][1] << ",\t" << trans[3][2] << ",\t" << trans[3][3] << "]" << std::endl;
-//}
+static void showMatrix(glm::mat4  trans) {
+	std::cout << "[ " << trans[0][0] << ",\t" << trans[0][1] << ",\t" << trans[0][2] << ",\t" << trans[0][3] << "," << std::endl
+		<< " " << trans[1][0] << ",\t" << trans[1][1] << ",\t" << trans[1][2] << ",\t" << trans[1][3] << "," << std::endl
+		<< " " << trans[2][0] << ",\t" << trans[2][1] << ",\t" << trans[2][2] << ",\t" << trans[2][3] << "," << std::endl
+		<< " " << trans[3][0] << ",\t" << trans[3][1] << ",\t" << trans[3][2] << ",\t" << trans[3][3] << "]" << std::endl;
+}
 
 int main(int argc, char* argv[]) {
 
@@ -131,8 +131,8 @@ int main(int argc, char* argv[]) {
 	//practise.practise2(projectDir);
 
 	//PractiseAdvancedLighting_5_1 practise = PractiseAdvancedLighting_5_1();
-	//PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
-	PractiseGammaCorrection_5_2_2 practise = PractiseGammaCorrection_5_2_2();
+	PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
+	//PractiseGammaCorrection_5_2_2 practise = PractiseGammaCorrection_5_2_2();
 	practise.practise(projectDir);
 
 	//free(debugDir);

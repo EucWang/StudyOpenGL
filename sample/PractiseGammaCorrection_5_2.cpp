@@ -2,7 +2,7 @@
 
 
 int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
-	WindowHelper helper("Gamma Correction 5.2", Camera(glm::vec3(5.0f, 3.0f, 5.0f)), 0);
+	WindowHelper helper("Gamma Correction 5.2", Camera(glm::vec3(0.0f, 3.0f, 5.0f)), 0);
 	helper.create();
 
 	//----prepare data
@@ -19,7 +19,7 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 	GLuint texturePlaneSpecular = RenderUtil::textureLoad2D(projectDir, imgFileWoodSpecular, false);
 	planeshader.use();
 	planeshader.setInt("texture_diffuse1", 0);
-	planeshader.setInt("texture_specular11", 1);
+	planeshader.setInt("texture_specular1", 1);
 
 	//------- Uniform buffer
 	glUniformBlockBinding(planeshader.id, glGetUniformBlockIndex(planeshader.id, "Matrices"), 0);
@@ -51,13 +51,15 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	while (!glfwWindowShouldClose(helper.getWindow())) {
 		helper.calcProcessInput();
 
 		//--render to custom frame buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, customFrameBuffer);
-		glEnable(GL_DEPTH_TEST);
+		//glBindFramebuffer(GL_FRAMEBUFFER, customFrameBuffer);
+		//glEnable(GL_DEPTH_TEST);
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -73,20 +75,18 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-	
-
 		planeshader.use();
 		glBindVertexArray(planeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texturePlane);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texturePlaneSpecular);
+		//glActiveTexture(GL_TEXTURE1);
+		//glBindTexture(GL_TEXTURE_2D, texturePlaneSpecular);
 		///////////
 		//定向光
-		planeshader.setVec3(("dirlight.ambient"), dirLightArgs[0]);
-		planeshader.setVec3(("dirlight.diffuse"), dirLightArgs[1]);
-		planeshader.setVec3(("dirlight.specular"), dirLightArgs[2]);
-		planeshader.setVec3(("dirlight.direction"), dirLightArgs[3]);
+		//planeshader.setVec3(("dirlight.ambient"), dirLightArgs[0]);
+		//planeshader.setVec3(("dirlight.diffuse"), dirLightArgs[1]);
+		//planeshader.setVec3(("dirlight.specular"), dirLightArgs[2]);
+		//planeshader.setVec3(("dirlight.direction"), dirLightArgs[3]);
 		
 		//4个点光源
 		for (int i = 0; i < 4; i++) {
@@ -110,9 +110,10 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 			sprintf_s(quadratic, 25, "pointlights[%d].quadratic", i);
 
 			planeshader.setVec3(position, lightPos[i]);
-			planeshader.setVec3(ambient, pointLightColors[0].x * 0.1f, pointLightColors[0].y * 0.1f, pointLightColors[0].z * 0.1f);
-			planeshader.setVec3(diffuse, pointLightColors[0]);
-			planeshader.setVec3(specular, pointLightColors[0]);
+			planeshader.setVec3(ambient, pointLightColors[i].x * 0.1f, pointLightColors[i].y * 0.1f, pointLightColors[i].z * 0.1f);
+			planeshader.setVec3(diffuse, pointLightColors[i]);
+			planeshader.setVec3(specular, pointLightColors[i]);
+
 			planeshader.setFloat(constant, pointLightColors[4].x);
 			planeshader.setFloat(linear, pointLightColors[4].y);
 			planeshader.setFloat(quadratic, pointLightColors[4].z); 
@@ -132,14 +133,14 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 		//planeshader.setFloat(("spotlight.linear"), spotlightArgs[3].y);
 		//planeshader.setFloat(("spotlight.quadratic"), spotlightArgs[3].z);
 		//
-		//planeshader.setVec3("viewPos", helper.getCamera().Position);
+		planeshader.setVec3("viewPos", helper.getCamera().Position);
 		
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
 		planeshader.setMat4("model", model);
 		
 		//planeshader.setBool("useSpot", helper.switchByClickKeyV());
-		planeshader.setBool("useBlinn", helper.switchByClickKeyN());
+		//planeshader.setBool("useBlinn", helper.switchByClickKeyN());
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		lightshader.use();
@@ -150,28 +151,28 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 			model3 = glm::translate(model3, lightPos[i]);
 			model3 = glm::scale(model3, glm::vec3(0.1f, 0.1f, 0.1f));
 			lightshader.setMat4("model", model3);
-			lightshader.setVec3("lightColor", pointLightColors[0]);
+			lightshader.setVec3("lightColor", glm::vec3(1.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
 		//- render done
 		
-		RenderUtil::blitFrameBuffer(&customFrameBuffer, &intermediatedFrameBuffer,
-			helper.getScreenWidth(), helper.getScreenHeight());
+		//RenderUtil::blitFrameBuffer(&customFrameBuffer, &intermediatedFrameBuffer,
+		//	helper.getScreenWidth(), helper.getScreenHeight());
 		
 		//--render to custom frame buffer done
 
 		//-- render to default frame buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glDisable(GL_DEPTH_TEST);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		screenshader.use();
-		glBindVertexArray(screenVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, intermediatedTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//glDisable(GL_DEPTH_TEST);
+		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT);
+		//
+		//screenshader.use();
+		//glBindVertexArray(screenVAO);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, intermediatedTexture);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		//-- render to default frame buffer done
 
