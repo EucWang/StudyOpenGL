@@ -80,7 +80,8 @@ void main(){
 	vec3 norm = normalize(vs_in.fragNorm);
 	vec3 viewDir = normalize(viewPos - vs_in.fragPos);
 	
-	vec3 result = calcDirLight(dirlight, norm, viewDir, tex1, tex2);
+	vec3 result;
+	result = calcDirLight(dirlight, norm, viewDir, tex1, tex2);
 	
 	if(usePoint) {
 		if(!useBlinn){

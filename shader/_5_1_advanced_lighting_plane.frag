@@ -63,7 +63,6 @@ vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3
 //计算聚光对物体产生的颜色分量 ， 采用Blinn-Phong着色模型
 vec3 calcSpotLightBlinnPhong(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3 tex1, vec3 tex2);
 
-
 uniform DirLight dirlight;
 uniform PointLight pointlight;
 uniform SpotLight spotlight;
@@ -117,8 +116,8 @@ vec3 calcDirLight(DirLight dlight, vec3 norm, vec3 viewDir, vec3 tex1, vec3 tex2
 	float spec = pow(diff2, shininess);
 	vec3 specular = dlight.specular * (spec * tex2);
 
-	//result = ambient + diffuse + specular;
-	result = ambient + diffuse;
+	result = ambient + diffuse + specular;
+	//result = ambient + diffuse;
 	return result;
 }
 
@@ -151,8 +150,8 @@ vec3 calcSpotLight(SpotLight slight, vec3 norm, vec3 fragPos, vec3 viewDir, vec3
 		+ slight.quadratic * (distance * distance));	
 
 	
-	//result = ambient + diffuse + specular;
-	result = ambient + diffuse;
+	result = ambient + diffuse + specular;
+	//result = ambient + diffuse;
 	result *= attenuation;
 	result *= intensity;
 
@@ -189,8 +188,8 @@ vec3 calcSpotLightBlinnPhong(SpotLight slight, vec3 norm, vec3 fragPos, vec3 vie
 	float attenuation = 1.0 / (slight.constant + slight.linear * distance
 		+ slight.quadratic * (distance * distance));	
 	
-	//result = ambient + diffuse + specular;
-	result = ambient + diffuse;
+	result = ambient + diffuse + specular;
+	//result = ambient + diffuse;
 	result *= attenuation;
 	result *= intensity;
 

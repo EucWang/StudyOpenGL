@@ -73,14 +73,7 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-		lightshader.use();
-		glBindVertexArray(lightVAO);
-		glm::mat4 model3(1.0f);
-		model3 = glm::translate(model3, lightPos);
-		model3 = glm::scale(model3, glm::vec3(0.1f, 0.1f, 0.1f));
-		lightshader.setMat4("model", model3);
-		lightshader.setVec3("lightColor", pointLightColors[0]);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+	
 
 		planeshader.use();
 		glBindVertexArray(planeVAO);
@@ -120,18 +113,28 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 		planeshader.setFloat(("spotlight.linear"), spotlightArgs[3].y);
 		planeshader.setFloat(("spotlight.quadratic"), spotlightArgs[3].z);
 		
-		planeshader.setVec3("viewPos", helper.getCamera().Front);
-		//planeshader.setFloat("shininess", 64.0f);
+		planeshader.setVec3("viewPos", helper.getCamera().Position);
 		
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
 		planeshader.setMat4("model", model);
 		
+		bool usePoint = helper.switchByClickKeyB();
 		planeshader.setBool("useSpot", helper.switchByClickKeyV());
-		planeshader.setBool("usePoint", helper.switchByClickKeyB());
+		planeshader.setBool("usePoint", usePoint);
 		planeshader.setBool("useBlinn", helper.switchByClickKeyN());
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
+		if(usePoint) {
+			lightshader.use();
+			glBindVertexArray(lightVAO);
+			glm::mat4 model3(1.0f);
+			model3 = glm::translate(model3, lightPos);
+			model3 = glm::scale(model3, glm::vec3(0.1f, 0.1f, 0.1f));
+			lightshader.setMat4("model", model3);
+			lightshader.setVec3("lightColor", pointLightColors[0]);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		//- render done
 		
