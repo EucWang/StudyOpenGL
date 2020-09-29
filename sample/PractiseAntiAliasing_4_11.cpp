@@ -92,7 +92,7 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 	GLuint planeVAO, planeVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
 
-	int texPlane = RenderUtil::textureLoad2D(projectDir, imgFilePlane);
+	int texPlane = RenderUtil::textureLoad2D(projectDir, imgFilePlane, true);
 
 	MyShader shaderGrass(projectDir.c_str(), vertFileGrass, fragFileGrass);
 	shaderGrass.use();
@@ -101,7 +101,7 @@ int PractiseAntiAliasing_4_11::practise(string projectDir) {
 	GLuint grassVAO, grassVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&grassVAO, &grassVBO, grassVertices, sizeof(grassVertices), 5);
 
-	int texGrass = RenderUtil::textureLoad2D(projectDir, imgFileGrass, 
+	int texGrass = RenderUtil::textureLoad2D(projectDir, imgFileGrass, true,
 		GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
 
 	//---prepare uniform buffer
@@ -255,7 +255,7 @@ int PractiseAntiAliasing_4_11::practise1(string projectDir) {
 
 	GLuint cubeVAO, cubeVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
-	int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
+	int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube, true);
 
 	//--------uniform buffer
 	glUniformBlockBinding(myshader.id, glGetUniformBlockIndex(myshader.id, "Matrices"), 0);
@@ -416,7 +416,7 @@ int PractiseAntiAliasing_4_11::practise2(string projectDir) {
 	GLuint quadVAO, quadVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 4);
 
-	unsigned int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
+	unsigned int texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube, true);
 
 	MyShader screenshader(projectDir.c_str(), vertFileScreen, fragFileScreen);
 	screenshader.use();

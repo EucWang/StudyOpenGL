@@ -150,9 +150,9 @@ int PractiseAdvancedGLSL_4_8_2::practise2(string projectDir) {
 		cubePosition, sizeof(cubePosition), 3,
 		cubeTexCoords, sizeof(cubeTexCoords), 2);
 
-	int tex1 = RenderUtil::textureLoad2D(projectDir, imgFileMarble2);
-	int tex2 = RenderUtil::textureLoad2D(projectDir, imgFileMarbleInside);
-	int tex3 = RenderUtil::textureLoad2D(projectDir, imgFilePlane);
+	int tex1 = RenderUtil::textureLoad2D(projectDir, imgFileMarble2, true);
+	int tex2 = RenderUtil::textureLoad2D(projectDir, imgFileMarbleInside, true);
+	int tex3 = RenderUtil::textureLoad2D(projectDir, imgFilePlane, true);
 
 	myshader.use();
 	myshader.setInt("texture_diffuse1", 0);

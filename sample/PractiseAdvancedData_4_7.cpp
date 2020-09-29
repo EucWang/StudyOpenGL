@@ -67,10 +67,10 @@ int PractiseAdvancedData_4_7::practise(string projectDir) {
 
 	MyShader lightshader(projectDir.c_str(), vertFile.c_str(), fragFileLight.c_str());
 
-	int texContainer = RenderUtil::textureLoad2D(projectDir.c_str(), imgFileContainer);
-	int texContainerSpecular = RenderUtil::textureLoad2D(projectDir.c_str(), imgFileContainerSpecular);
+	int texContainer = RenderUtil::textureLoad2D(projectDir.c_str(), imgFileContainer, true);
+	int texContainerSpecular = RenderUtil::textureLoad2D(projectDir.c_str(), imgFileContainerSpecular, false);
 
-	int texFloor = RenderUtil::textureLoad2D(projectDir.c_str(), imgFilePlane);
+	int texFloor = RenderUtil::textureLoad2D(projectDir.c_str(), imgFilePlane, true);
 
 	GLuint VAO, VBO;
 	//RenderUtil::makeVertexArrayAndBuffer(&VAO, &VBO, cubeVertices, sizeof(cubeVertices), 8);

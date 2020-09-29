@@ -125,7 +125,7 @@ int PractiseCubeMap_4_6::practise(const char* projectDir) {
 	//Ïä×Ó
 	MyShader boxShader(projectDir, vertFileReflect, fragFileReflect);
 	boxShader.use();
-	int texContainer = RenderUtil::textureLoad2D(projectDir, imageFileContainer);
+	int texContainer = RenderUtil::textureLoad2D(projectDir, imageFileContainer, true);
 	//boxShader.setInt("texture_diffuse1", 0);
 	boxShader.setInt("skybox", 0);
 

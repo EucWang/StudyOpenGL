@@ -41,13 +41,16 @@ GLFWwindow* RenderUtil::createWindow(int width, int height, const char* title,
 /// 加载2D图片纹理，
 /// </summary>
 /// <param name="parentDir">图片所在父级目录</param>
-/// <param name="imgName">图片子目录以及图片文件名称</param>
+/// <param name="imgName">图片子目录以及图片文件名称</param>	
+/// <param name="isSRGB">diffuse纹理，这种为物体上色的纹理几乎都是在sRGB空间中的。
+/// 而为了获取光照参数的纹理，像specular贴图和法线贴图几乎都在线性空间中，
+/// 所以如果你把它们也配置为sRGB纹理的话，光照就坏掉了。指定sRGB纹理时要当心。</param>
 /// <returns>  -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
-int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName) {
-	return textureLoad2D(parentDir, imgName, GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName, bool isSRGB) {
+	return textureLoad2D(parentDir, imgName, isSRGB, GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
 }
 
-int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName,
+int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName, bool isSRGB,
 	int wrapS, int wrapT, int minFilter, int magFilter) {
 	unsigned int textureId;
 	glGenTextures(1, &textureId);
@@ -67,17 +70,33 @@ int RenderUtil::textureLoad2D(std::string parentDir, std::string imgName,
 		return -1;
 	}
 
-	GLenum format = 0;
+	GLenum format = 0, format2 = 0;
 	if (channel == 1) { format = GL_RED; }
-	else if (channel == 3) { format = GL_RGB; }
-	else if (channel == 4) { format = GL_RGBA; }
+	else if (channel == 3) { 
+		if (isSRGB) {
+			format = GL_SRGB;
+		}
+		else {
+			format = GL_RGB;
+		}
+		format2 = GL_RGB;
+	}
+	else if (channel == 4) {
+		if (isSRGB) {
+			format = GL_SRGB_ALPHA;
+		}
+		else {
+			format = GL_RGBA;
+		}
+		format2 = GL_RGBA;
+	}
 	else {
 		std::cout << "channel is " << channel << ", then format is not right." << std::endl;
 		return -1;
 	}
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format2, GL_UNSIGNED_BYTE, data);
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 

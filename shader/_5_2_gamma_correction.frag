@@ -1,5 +1,7 @@
 #version 330 core
 
+#define POINT_SIZE 4
+
 //全局的定向光
 struct DirLight {
 	vec3 direction;  //方向
@@ -63,14 +65,14 @@ uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_specular11;
 
 uniform DirLight dirlight;
-uniform PointLight pointlight;
-uniform SpotLight spotlight;
+uniform PointLight pointlights[POINT_SIZE];
+//uniform SpotLight spotlight;
 
 uniform vec3 viewPos;
 
 float shininess = 64.0;
-uniform bool useSpot;
-uniform bool usePoint;
+//uniform bool useSpot;
+//uniform bool usePoint;
 uniform bool useBlinn;
 
 void main(){
@@ -83,15 +85,17 @@ void main(){
 	vec3 result;
 	result = calcDirLight(dirlight, norm, viewDir, tex1, tex2);
 	
-	if(usePoint) {
-		if(!useBlinn){
-			result += calcPointLight(pointlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
-		}else {
-			result += calcPointLightBlinnPhong(pointlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
+	//if(usePoint) {
+		for(int i =0; i<POINT_SIZE;i++) {
+			if(!useBlinn){
+				result += calcPointLight(pointlights[i], norm, vs_in.fragPos, viewDir, tex1, tex2);
+			}else {
+				result += calcPointLightBlinnPhong(pointlights[i], norm, vs_in.fragPos, viewDir, tex1, tex2);
+			}
 		}
-	}
-	if(useSpot)
-		result += calcSpotLight(spotlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
+	//}
+	//if(useSpot)
+	//	result += calcSpotLight(spotlight, norm, vs_in.fragPos, viewDir, tex1, tex2);
 	
 	fragColor =vec4(result, 1.0);
 }

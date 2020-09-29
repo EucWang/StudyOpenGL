@@ -28,6 +28,7 @@
 #include "PractiseAntiAliasing_4_11.h"
 #include "PractiseAdvancedLighting_5_1.h"
 #include "PractiseGammaCorrection_5_2.h"
+#include "PractiseGammaCorrection_5_2_2.h"
 
 using namespace std;
 
@@ -130,7 +131,8 @@ int main(int argc, char* argv[]) {
 	//practise.practise2(projectDir);
 
 	//PractiseAdvancedLighting_5_1 practise = PractiseAdvancedLighting_5_1();
-	PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
+	//PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
+	PractiseGammaCorrection_5_2_2 practise = PractiseGammaCorrection_5_2_2();
 	practise.practise(projectDir);
 
 	//free(debugDir);

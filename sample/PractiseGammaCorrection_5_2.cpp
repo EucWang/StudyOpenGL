@@ -2,7 +2,7 @@
 
 
 int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
-	WindowHelper helper("Gamma Correction 5.2", Camera(glm::vec3(0.0f, 1.5f, 3.0f)), 0);
+	WindowHelper helper("Gamma Correction 5.2", Camera(glm::vec3(5.0f, 3.0f, 5.0f)), 0);
 	helper.create();
 
 	//----prepare data
@@ -15,8 +15,8 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 	GLuint planeVAO, planeVBO;
 	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
 
-	GLuint texturePlane = RenderUtil::textureLoad2D(projectDir, imgFileWood);
-	GLuint texturePlaneSpecular = RenderUtil::textureLoad2D(projectDir, imgFileWoodSpecular);
+	GLuint texturePlane = RenderUtil::textureLoad2D(projectDir, imgFileWood, true);
+	GLuint texturePlaneSpecular = RenderUtil::textureLoad2D(projectDir, imgFileWoodSpecular, false);
 	planeshader.use();
 	planeshader.setInt("texture_diffuse1", 0);
 	planeshader.setInt("texture_specular11", 1);
@@ -88,48 +88,66 @@ int PractiseGammaCorrection_5_2::practise(const char* projectDir) {
 		planeshader.setVec3(("dirlight.specular"), dirLightArgs[2]);
 		planeshader.setVec3(("dirlight.direction"), dirLightArgs[3]);
 		
-		//1个点光源
-		planeshader.setVec3(("pointlight.position"), lightPos);
-		planeshader.setVec3(("pointlight.ambient"), pointLightColors[0].x * 0.1f, pointLightColors[0].y * 0.1f, pointLightColors[0].z * 0.1f);
-		planeshader.setVec3(("pointlight.diffuse"), pointLightColors[0]);
-		planeshader.setVec3(("pointlight.specular"), pointLightColors[0]);
-		
-		planeshader.setFloat(("pointlight.constant"), pointLightColors[4].x);
-		planeshader.setFloat(("pointlight.linear"), pointLightColors[4].y);
-		planeshader.setFloat(("pointlight.quadratic"), pointLightColors[4].z);
-		
+		//4个点光源
+		for (int i = 0; i < 4; i++) {
+			char ambient[23]{ 0 };
+			char diffuse[23]{ 0 };
+			char specular[24]{ 0 };
+
+			char position[24]{ 0 };
+			char constant[24]{ 0 };
+			char linear[22]{ 0 };
+			char quadratic[25]{ 0 };
+
+			sprintf_s(ambient, 23, "pointlights[%d].ambient", i);
+			sprintf_s(diffuse, 23, "pointlights[%d].diffuse", i);
+			sprintf_s(specular, 24, "pointlights[%d].specular", i);
+
+			sprintf_s(position, 24, "pointlights[%d].position", i);
+
+			sprintf_s(constant, 24, "pointlights[%d].constant", i);
+			sprintf_s(linear, 22, "pointlights[%d].linear", i);
+			sprintf_s(quadratic, 25, "pointlights[%d].quadratic", i);
+
+			planeshader.setVec3(position, lightPos[i]);
+			planeshader.setVec3(ambient, pointLightColors[0].x * 0.1f, pointLightColors[0].y * 0.1f, pointLightColors[0].z * 0.1f);
+			planeshader.setVec3(diffuse, pointLightColors[0]);
+			planeshader.setVec3(specular, pointLightColors[0]);
+			planeshader.setFloat(constant, pointLightColors[4].x);
+			planeshader.setFloat(linear, pointLightColors[4].y);
+			planeshader.setFloat(quadratic, pointLightColors[4].z); 
+		}
 		//1个聚光
-		planeshader.setVec3(("spotlight.ambient"), spotlightArgs[0]);
-		planeshader.setVec3(("spotlight.diffuse"), spotlightArgs[1]);
-		planeshader.setVec3(("spotlight.specular"), spotlightArgs[2]);
-		
-		planeshader.setVec3(("spotlight.position"), helper.getCamera().Position);
-		planeshader.setVec3(("spotlight.direction"), helper.getCamera().Front);
-		
-		planeshader.setFloat(("spotlight.cutoff"), glm::cos(glm::radians(spotlight_cutoff.x)));
-		planeshader.setFloat(("spotlight.outCutoff"), glm::cos(glm::radians(spotlight_cutoff.y)));
-		
-		planeshader.setFloat(("spotlight.constant"), spotlightArgs[3].x);
-		planeshader.setFloat(("spotlight.linear"), spotlightArgs[3].y);
-		planeshader.setFloat(("spotlight.quadratic"), spotlightArgs[3].z);
-		
-		planeshader.setVec3("viewPos", helper.getCamera().Position);
+		//planeshader.setVec3(("spotlight.ambient"), spotlightArgs[0]);
+		//planeshader.setVec3(("spotlight.diffuse"), spotlightArgs[1]);
+		//planeshader.setVec3(("spotlight.specular"), spotlightArgs[2]);
+		//
+		//planeshader.setVec3(("spotlight.position"), helper.getCamera().Position);
+		//planeshader.setVec3(("spotlight.direction"), helper.getCamera().Front);
+		//
+		//planeshader.setFloat(("spotlight.cutoff"), glm::cos(glm::radians(spotlight_cutoff.x)));
+		//planeshader.setFloat(("spotlight.outCutoff"), glm::cos(glm::radians(spotlight_cutoff.y)));
+		//
+		//planeshader.setFloat(("spotlight.constant"), spotlightArgs[3].x);
+		//planeshader.setFloat(("spotlight.linear"), spotlightArgs[3].y);
+		//planeshader.setFloat(("spotlight.quadratic"), spotlightArgs[3].z);
+		//
+		//planeshader.setVec3("viewPos", helper.getCamera().Position);
 		
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
 		planeshader.setMat4("model", model);
 		
-		bool usePoint = helper.switchByClickKeyB();
-		planeshader.setBool("useSpot", helper.switchByClickKeyV());
-		planeshader.setBool("usePoint", usePoint);
+		//planeshader.setBool("useSpot", helper.switchByClickKeyV());
 		planeshader.setBool("useBlinn", helper.switchByClickKeyN());
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-		if(usePoint) {
-			lightshader.use();
-			glBindVertexArray(lightVAO);
+		lightshader.use();
+		glBindVertexArray(lightVAO);
+
+		for (int i = 0; i < 4; i++) {
 			glm::mat4 model3(1.0f);
-			model3 = glm::translate(model3, lightPos);
+			model3 = glm::translate(model3, lightPos[i]);
 			model3 = glm::scale(model3, glm::vec3(0.1f, 0.1f, 0.1f));
 			lightshader.setMat4("model", model3);
 			lightshader.setVec3("lightColor", pointLightColors[0]);

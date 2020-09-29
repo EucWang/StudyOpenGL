@@ -102,7 +102,7 @@ public:
 		//glm::vec3(0.5f, 0.5f, 0.5f),  //ambient
 		//glm::vec3(1.0f, 1.0f, 1.0f),     //diffuse
 		//glm::vec3(1.0f, 1.0f, 1.0f),     //specular
-		glm::vec3(0.2f, 0.2f, 0.2f),  //ambient
+		glm::vec3(0.05f, 0.05f, 0.05f),  //ambient
 		glm::vec3(0.4f, 0.4f, 0.4f),     //diffuse
 		glm::vec3(0.5f, 0.5f, 0.5f),     //specular
 		glm::vec3(-0.2f, -1.0f, -0.3f)   //direction
@@ -111,12 +111,14 @@ public:
 	//点光源的6个数据
 	const glm::vec3 pointLightColors[5] = {
 		//glm::vec3(0.4f, 0.7f, 0.1f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
-		glm::vec3(1.0f, 1.0f, 1.0f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
+		glm::vec3(0.9f),  //第一个点光源的 (ambient, diffuse, specular)  淡黄色
 		glm::vec3(0.4f, 0.7f, 0.1f),  //第二个点光源的 (ambient, diffuse, specular)  红色
 		glm::vec3(0.4f, 0.7f, 0.1f),   //第三个点光源的 (ambient, diffuse, specular)  黄色
 		glm::vec3(0.4f, 0.7f, 0.1f),  //第四个点光源的 (ambient, diffuse, specular)  蓝色
 
-		glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+		//glm::vec3(1.0f, 0.07f, 0.017f),   //constant,linear, quadratic
+		glm::vec3(1.0f, 0.14f, 0.07f),   //constant,linear, quadratic
+		//glm::vec3(1.0f, 0.22f, 0.20f),   //constant,linear, quadratic
 	};
 
 	//聚光的6个数据
@@ -133,7 +135,16 @@ public:
 
 	const glm::vec2 spotlight_cutoff = glm::vec2(7.0f, 10.0f);  //聚光的切角和外切角
 
-	const glm::vec3 lightPos = glm::vec3(2.0f, 0.5f, -2.0f);
+	const glm::vec3 lightPos[4] = { 
+		glm::vec3(-1.0f, 1.0f, -3.0f), 
+		glm::vec3(-1.0f, 1.0f, -1.f), 
+		glm::vec3(-1.0f, 1.0f, 1.0f), 
+		glm::vec3(-1.0f, 1.0f, 3.0f)
+		//glm::vec3(3.0f, 1.0f, -3.0f), 
+		//glm::vec3(1.0f, 1.0f, -1.f), 
+		//glm::vec3(-1.0f, 1.0f, 1.0f), 
+		//glm::vec3(-3.0f, 1.0f, 3.0f)
+	};
 	//-----------------------------------------------------------------<<<<<<<<<<<<<<
 
 

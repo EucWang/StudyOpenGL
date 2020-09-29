@@ -37,6 +37,7 @@
     <ClInclude Include="include\PractiseFrameBuffers_4_5.h" />
     <ClInclude Include="include\PractiseFrameBuffer_kernel_4_5.h" />
     <ClInclude Include="include\PractiseGammaCorrection_5_2.h" />
+    <ClInclude Include="include\PractiseGammaCorrection_5_2_2.h" />
     <ClInclude Include="include\PractiseGeometryShader_4_9.h" />
     <ClInclude Include="include\PractiseGeometryShader_4_9_2.h" />
     <ClInclude Include="include\PractiseInstancing_4_10.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="sample\PractiseFrameBuffers_4_5.cpp" />
     <ClCompile Include="sample\PractiseFrameBuffer_kernel_4_5.cpp" />
     <ClCompile Include="sample\PractiseGammaCorrection_5_2.cpp" />
+    <ClCompile Include="sample\PractiseGammaCorrection_5_2_2.cpp" />
     <ClCompile Include="sample\PractiseGeometryShader_4_9.cpp" />
     <ClCompile Include="sample\PractiseGeometryShader_4_9_2.cpp" />
     <ClCompile Include="sample\PractiseInstancing_4_10.cpp" />
@@ -305,6 +307,8 @@
     <None Include="shader\_5_1_advanced_lighting_plane.vert" />
     <None Include="shader\_5_1_advanced_lighting_screen.frag" />
     <None Include="shader\_5_1_advanced_lighting_screen.vert" />
+    <None Include="shader\_5_2_2_gamma_correction.frag" />
+    <None Include="shader\_5_2_2_gamma_correction.vert" />
     <None Include="shader\_5_2_gamma_correction.frag" />
     <None Include="shader\_5_2_gamma_correction.vert" />
     <None Include="shader\_5_2_gamma_correction_light.frag" />

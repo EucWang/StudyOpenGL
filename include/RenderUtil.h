@@ -71,12 +71,15 @@ public:
 	/// </summary>
 	/// <param name="parentDir">图片所在父级目录</param>
 	/// <param name="imgName">图片子目录以及图片文件名称</param>
+	/// <param name="isSRGB">diffuse纹理，这种为物体上色的纹理几乎都是在sRGB空间中的。
+	/// 而为了获取光照参数的纹理，像specular贴图和法线贴图几乎都在线性空间中，
+	/// 所以如果你把它们也配置为sRGB纹理的话，光照就坏掉了。指定sRGB纹理时要当心。</param>
 	/// <param name="wrapS">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);默认取值GL_REPEAT</param>
 	/// <param name="wrapT">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);默认取值GL_REPEAT</param>
 	/// <param name="minFilter">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter); 默认取值GL_LINEAR_MIPMAP_LINEAR</param>
 	/// <param name="magFilter">设置glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAN_FILTER, magFilter); 默认取值GL_LINEAR</param>
 	/// <returns> -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
-	int static textureLoad2D(std::string parentDir, std::string imgName,
+	int static textureLoad2D(std::string parentDir, std::string imgName, bool isSRGB,
 		int wrapS, int wrapT, int minFilter, int magFilter);
 
 	/// <summary>
@@ -84,8 +87,11 @@ public:
 	/// </summary>
 	/// <param name="parentDir">图片所在父级目录</param>
 	/// <param name="imgName">图片子目录以及图片文件名称</param>
+	/// <param name="isSRGB">diffuse纹理，这种为物体上色的纹理几乎都是在sRGB空间中的。
+	/// 而为了获取光照参数的纹理，像specular贴图和法线贴图几乎都在线性空间中，
+	/// 所以如果你把它们也配置为sRGB纹理的话，光照就坏掉了。指定sRGB纹理时要当心。</param>
 	/// <returns>  -1：表示加载失败， >=0 表示加载成功,返回图片纹理id</returns>
-	int static textureLoad2D(std::string parentDir, std::string imgName);
+	int static textureLoad2D(std::string parentDir, std::string imgName,bool isSRGB);
 
 	/// <summary>
 	/// 创建窗口

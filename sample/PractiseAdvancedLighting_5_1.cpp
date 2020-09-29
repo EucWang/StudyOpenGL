@@ -25,9 +25,9 @@ int PractiseAdvancedLighting_5_1::practise(const char * projectDir) {
 	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
 	RenderUtil::makeVertexArrayAndBuffer(&screenVAO, &screenVBO, quadVertices, sizeof(quadVertices), 4);
 
-	GLuint texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube);
-	GLuint texCubeSpecular = RenderUtil::textureLoad2D(projectDir, imgFileCubeSpecular);
-	GLuint texPlane = RenderUtil::textureLoad2D(projectDir, imgFilePlane);
+	GLuint texCube = RenderUtil::textureLoad2D(projectDir, imgFileCube, true);
+	GLuint texCubeSpecular = RenderUtil::textureLoad2D(projectDir, imgFileCubeSpecular, false);
+	GLuint texPlane = RenderUtil::textureLoad2D(projectDir, imgFilePlane, true);
 
 	GLuint msFBO, msTexFBO, msRenderFBO;
 	RenderUtil::makeFramebuffer(&msFBO, &msTexFBO, &msRenderFBO,

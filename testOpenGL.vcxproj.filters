@@ -123,6 +123,9 @@
     <ClInclude Include="include\PractiseGammaCorrection_5_2.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PractiseGammaCorrection_5_2_2.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\fileUtil.c">
@@ -309,6 +312,9 @@
       <Filter>sample</Filter>
     </ClCompile>
     <ClCompile Include="sample\PractiseGammaCorrection_5_2.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="sample\PractiseGammaCorrection_5_2_2.cpp">
       <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -884,6 +890,12 @@
       <Filter>shader</Filter>
     </None>
     <None Include="shader\_5_2_gamma_correction_light.frag">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_2_2_gamma_correction.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\_5_2_2_gamma_correction.frag">
       <Filter>shader</Filter>
     </None>
   </ItemGroup>

@@ -82,7 +82,7 @@ int PractiseGeometryShader_4_9_2::practise(string projectDir) {
 		planeNormal, sizeof(planeNormal), 3,
 		planeTexCoords, sizeof(planeTexCoords), 2);
 
-	int texPlane = RenderUtil::textureLoad2D(projectDir.c_str(), planeFile);
+	int texPlane = RenderUtil::textureLoad2D(projectDir.c_str(), planeFile, true);
 
 	glUniformBlockBinding(myshader3.id,
 		glGetUniformBlockIndex(myshader3.id, "Matrices4"), 0);
