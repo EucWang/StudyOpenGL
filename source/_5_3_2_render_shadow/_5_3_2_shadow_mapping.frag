@@ -2,8 +2,6 @@
 
 out vec4 fragColor;
 
-//in vec2 texCoords;
-
 void main(){
 	//
 }

@@ -34,6 +34,9 @@
     <Filter Include="source\_5_3_1_shadow_map">
       <UniqueIdentifier>{fdbf124d-407c-45fb-b714-147408c4dc9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_2_render_shadow">
+      <UniqueIdentifier>{734c681b-9c53-4239-9da5-bf4d819c6bd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -134,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_1_shadow_map\ShadowMapping.h">
       <Filter>source\_5_3_1_shadow_map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_2_render_shadow\RenderShadow.h">
+      <Filter>source\_5_3_2_render_shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_1_shadow_map\ShadowMapping.cpp">
       <Filter>source\_5_3_1_shadow_map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_2_render_shadow\RenderShadow.cpp">
+      <Filter>source\_5_3_2_render_shadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -921,6 +930,24 @@
     </None>
     <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_screen.frag">
       <Filter>source\_5_3_1_shadow_map</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\_5_3_2_shadow_mapping.vert">
+      <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\_5_3_2_shadow_mapping.frag">
+      <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\test_shadow_mapping.vert">
+      <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\test_shadow_mapping.frag">
+      <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\_5_3_2_shadow_render.vert">
+      <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_render_shadow\_5_3_2_shadow_render.frag">
+      <Filter>source\_5_3_2_render_shadow</Filter>
     </None>
   </ItemGroup>
 </Project>

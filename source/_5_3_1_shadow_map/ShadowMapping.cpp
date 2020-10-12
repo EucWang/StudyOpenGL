@@ -3,12 +3,12 @@
 #define SHADOW_WIDTH  1024
 #define SHADOW_HEIGHT 1024
 
-GLuint planeVAO, planeVBO;
-GLuint cubeVAO, cubeVBO;
-GLuint quadVAO, quadVBO;
+static GLuint planeVAO, planeVBO;
+static GLuint cubeVAO, cubeVBO;
+static GLuint quadVAO, quadVBO;
 
-GLfloat near_plane = 1.0f;
-GLfloat far_plane = 7.5;
+static GLfloat near_plane = 1.0f;
+static GLfloat far_plane = 7.5;
 
 int ShadowMapping::practise(const char * projectDir) {
 	std::cout << "ShadowMapping::practise()" << std::endl;
@@ -40,7 +40,7 @@ int ShadowMapping::practise(const char * projectDir) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFrameBuffer);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowFrameBuffer, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureShadow, 0);
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
