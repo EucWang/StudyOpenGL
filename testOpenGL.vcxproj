@@ -51,6 +51,7 @@
     <ClInclude Include="include\TestPractiseLight27.h" />
     <ClInclude Include="include\util.h" />
     <ClInclude Include="include\WindowHelper.h" />
+    <ClInclude Include="source\_5_3_1_shadow_map\ShadowMapping.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="sample\TestPractiseLight27.cpp" />
     <ClCompile Include="sample\testPractiseReadFile.c" />
     <ClCompile Include="sample\WindowHelper.cpp" />
+    <ClCompile Include="source\_5_3_1_shadow_map\ShadowMapping.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -314,6 +316,10 @@
     <None Include="shader\_5_2_gamma_correction_light.frag" />
     <None Include="shader\_5_2_gamma_correction_light.vert" />
     <None Include="shader_frame_buffer_test_4_5_reverse_color.frag" />
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_map.frag" />
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_map.vert" />
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_screen.frag" />
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_screen.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\asteroid_belt\planet.obj">

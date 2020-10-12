@@ -29,6 +29,7 @@
 #include "PractiseAdvancedLighting_5_1.h"
 #include "PractiseGammaCorrection_5_2.h"
 #include "PractiseGammaCorrection_5_2_2.h"
+#include "../source/_5_3_1_shadow_map/ShadowMapping.h"
 
 using namespace std;
 
@@ -131,8 +132,10 @@ int main(int argc, char* argv[]) {
 	//practise.practise2(projectDir);
 
 	//PractiseAdvancedLighting_5_1 practise = PractiseAdvancedLighting_5_1();
-	PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
+	//PractiseGammaCorrection_5_2 practise = PractiseGammaCorrection_5_2();
 	//PractiseGammaCorrection_5_2_2 practise = PractiseGammaCorrection_5_2_2();
+
+	ShadowMapping practise = ShadowMapping();
 	practise.practise(projectDir);
 
 	//free(debugDir);

@@ -28,6 +28,12 @@
     <Filter Include="images\asteroid_belt">
       <UniqueIdentifier>{8d49e263-1109-4581-837b-5bafa294fc9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{8d2e4be5-68cd-41ce-9a2f-b173337b48e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\_5_3_1_shadow_map">
+      <UniqueIdentifier>{fdbf124d-407c-45fb-b714-147408c4dc9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -125,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="include\PractiseGammaCorrection_5_2_2.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_1_shadow_map\ShadowMapping.h">
+      <Filter>source\_5_3_1_shadow_map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="sample\PractiseGammaCorrection_5_2_2.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_1_shadow_map\ShadowMapping.cpp">
+      <Filter>source\_5_3_1_shadow_map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -897,6 +909,18 @@
     </None>
     <None Include="shader\_5_2_2_gamma_correction.frag">
       <Filter>shader</Filter>
+    </None>
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_map.vert">
+      <Filter>source\_5_3_1_shadow_map</Filter>
+    </None>
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_map.frag">
+      <Filter>source\_5_3_1_shadow_map</Filter>
+    </None>
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_screen.vert">
+      <Filter>source\_5_3_1_shadow_map</Filter>
+    </None>
+    <None Include="source\_5_3_1_shadow_map\_5_3_1_depth_screen.frag">
+      <Filter>source\_5_3_1_shadow_map</Filter>
     </None>
   </ItemGroup>
 </Project>
