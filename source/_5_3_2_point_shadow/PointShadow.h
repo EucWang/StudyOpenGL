@@ -24,6 +24,7 @@ public:
     const char* fragFileLight = "source/_5_3_2_point_shadow/_5_3_2_light.frag";
 
 	const char* imgFileWood = "images/wood.png";
+    const char* imgFileWall = "images/wall.jpg";
 
     float cubeVertices[8 * 36] = {
         // back face
@@ -82,5 +83,5 @@ public:
 
     int practise(const char* projectDir);
 
-    void renderScene(const MyShader& shader);
+    void renderScene(const MyShader& shader, bool scene=false);
 };

@@ -24,34 +24,34 @@ float calcShadow(vec3 fragPos) {
 	//得到了fragment的位置与光的位置之间的不同的向量
 	vec3 fragToLight = fragPos - lightPos;
 
-	//float closestDepth = texture(depth_map, fragToLight).r;
-	//closestDepth *= far_plane;
-	float closestDepth = 0.0;
+	float closestDepth = texture(depth_map, fragToLight).r;
+	closestDepth *= far_plane;
+	//float closestDepth = 0.0;
 
 	float curDepth = length(fragToLight);
 
 	float bias = 0.05;
 	float samples = 4.0;
 	float offset = 0.1;
-	//float shadow = curDepth - bias > closestDepth ? 1.0 : 0.0;
-	float shadow = 0.0;
+	float shadow = curDepth - bias > closestDepth ? 1.0 : 0.0;
+	//float shadow = 0.0;
 	//这里我们根据样本的数量动态计算了纹理偏移量，我们在三个轴向采样三次，最后对子样本进行平均化。
 
 	//TODO samples设置为4.0，每个fragment我们会得到总共64个样本，这太多了！
 	//TODO需要优化
-	for(float x = -offset; x < offset; x += offset/(samples*0.5)) {
-		for(float y = -offset; y < offset; y += offset/(samples*0.5)) {
-			for(float z = -offset; z < offset; z += offset/(samples*0.5)) {
-				float closestDepth = texture(depth_map, fragToLight + vec3(x, y, z)).r;
-				closestDepth += far_plane;
-				if(curDepth - bias > closestDepth) {
-					shadow += 1.0;
-				}
-			}
-		}
-	}
+	//for(float x = -offset; x < offset; x += offset/(samples*0.5)) {
+	//	for(float y = -offset; y < offset; y += offset/(samples*0.5)) {
+	//		for(float z = -offset; z < offset; z += offset/(samples*0.5)) {
+	//			float closestDepth = texture(depth_map, fragToLight + vec3(x, y, z)).r;
+	//			closestDepth += far_plane;
+	//			if(curDepth - bias > closestDepth) {
+	//				shadow += 1.0;
+	//			}
+	//		}
+	//	}
+	//}
 
-	shadow /= (samples * samples * samples);
+	//shadow /= (samples * samples * samples);
 	return shadow;
 }
 

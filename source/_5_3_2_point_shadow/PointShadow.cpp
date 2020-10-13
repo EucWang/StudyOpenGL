@@ -8,6 +8,10 @@ static GLuint cubeVAO, cubeVBO;
 static float near_plane = 1.0f;
 static float far_plane = 25.0f;
 
+static int texWood;
+static int texWall;
+
+
 /// <summary>
 /// µ„π‚“ı”∞
 /// </summary>
@@ -51,7 +55,8 @@ int PointShadow::practise(const char * projectDir) {
 
 	MyShader shaderLight(projectDir, vertFileLight, fragFileLight);
 
-	int texWood = RenderUtil::textureLoad2D(projectDir, imgFileWood, false);
+	texWood = RenderUtil::textureLoad2D(projectDir, imgFileWood, false);
+	texWall = RenderUtil::textureLoad2D(projectDir, imgFileWall, false);
 
 	shaderRender.use();
 	shaderRender.setInt("diffuse_texture", 0);
@@ -133,7 +138,7 @@ int PointShadow::practise(const char * projectDir) {
 		shaderRender.setFloat("far_plane", far_plane);
 
 		//render scene
-		renderScene(shaderRender);
+		renderScene(shaderRender, true);
 
 
 		//----- render done
@@ -146,17 +151,25 @@ int PointShadow::practise(const char * projectDir) {
 }
 
 
-void PointShadow::renderScene(const MyShader& shader) {
+void PointShadow::renderScene(const MyShader& shader, bool scene) {
 	glBindVertexArray(cubeVAO);
 	glm::mat4 model(1.0f);
 	model = glm::scale(model, glm::vec3(5.0f));
 
 	glDisable(GL_CULL_FACE);
 	shader.setMat4("model", model);
+	if (scene){
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texWall);
+	}
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glEnable(GL_CULL_FACE);
 
+	if (scene) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texWood);
+	}
 	model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(4.0f, -3.5f, 0.0f));
 	model = glm::scale(model, glm::vec3(0.5f));
