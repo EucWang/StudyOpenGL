@@ -31,6 +31,7 @@
 #include "PractiseGammaCorrection_5_2_2.h"
 #include "../source/_5_3_1_shadow_map/ShadowMapping.h"
 #include "../source/_5_3_2_render_shadow/RenderShadow.h"
+#include "../source/_5_3_2_point_shadow/PointShadow.h"
 
 using namespace std;
 
@@ -137,7 +138,8 @@ int main(int argc, char* argv[]) {
 	//PractiseGammaCorrection_5_2_2 practise = PractiseGammaCorrection_5_2_2();
 
 	//ShadowMapping practise = ShadowMapping();
-	RenderShadow practise = RenderShadow();
+	//RenderShadow practise = RenderShadow();
+	PointShadow practise = PointShadow();
 	practise.practise(projectDir);
 
 	//free(debugDir);

@@ -37,6 +37,9 @@
     <Filter Include="source\_5_3_2_render_shadow">
       <UniqueIdentifier>{734c681b-9c53-4239-9da5-bf4d819c6bd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_2_point_shadow">
+      <UniqueIdentifier>{6dc69422-5d47-48c7-a618-bb2963ccc090}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -140,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_2_render_shadow\RenderShadow.h">
       <Filter>source\_5_3_2_render_shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_2_point_shadow\PointShadow.h">
+      <Filter>source\_5_3_2_point_shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_2_render_shadow\RenderShadow.cpp">
       <Filter>source\_5_3_2_render_shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_2_point_shadow\PointShadow.cpp">
+      <Filter>source\_5_3_2_point_shadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -948,6 +957,27 @@
     </None>
     <None Include="source\_5_3_2_render_shadow\_5_3_2_shadow_render.frag">
       <Filter>source\_5_3_2_render_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_shadow.vert">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_shadow.frag">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_shadow.geom">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_scene.vert">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_scene.frag">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_light.vert">
+      <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_2_point_shadow\_5_3_2_light.frag">
+      <Filter>source\_5_3_2_point_shadow</Filter>
     </None>
   </ItemGroup>
 </Project>
