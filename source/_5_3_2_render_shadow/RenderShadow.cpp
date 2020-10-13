@@ -25,7 +25,7 @@ int RenderShadow::practise(const char * projectDir) {
 	shader.setInt("diffuse_texture", 0);
 	shader.setInt("shadow_map", 1);
 
-	int textureWood = RenderUtil::textureLoad2D(projectDir, imgWood, true);
+	int textureWood = RenderUtil::textureLoad2D(projectDir, imgWood, false);
 
 	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
 	RenderUtil::makeVertexArrayAndBuffer(&cubeVAO, &cubeVBO, cubeVertices, sizeof(cubeVertices), 8);
@@ -41,8 +41,19 @@ int RenderShadow::practise(const char * projectDir) {
 		0, GL_DEPTH_COMPONENT,  GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	//让所有超出深度贴图的坐标的深度范围是1.0，这样超出的坐标将永远不在阴影之中。
+	//我们可以储存一个边框颜色，然后把深度贴图的纹理环绕选项设置为GL_CLAMP_TO_BORDER
+	//如果我们采样深度贴图0到1坐标范围以外的区域，纹理函数总会返回一个1.0的深度值，阴影值为0.0
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	GLfloat borderColor[] = {1.0, 1.0, 1.0, 1.0};
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFrameBuffer);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureShadow, 0);
@@ -65,31 +76,7 @@ int RenderShadow::practise(const char * projectDir) {
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 		shadowShader.use();
 		shadowShader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
-
-		//glBindVertexArray(planeVAO);
-		//glm::mat4 model(1.0f);
-		//model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
-		//shadowShader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		//
-		//glBindVertexArray(cubeVAO);
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.0f));
-		//model = glm::scale(model, glm::vec3(0.5f));
-		//shadowShader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(2.0f, 1.5f, 1.0f));
-		//model = glm::scale(model, glm::vec3(0.5f));
-		//shadowShader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, 3.0f));
-		//model = glm::scale(model, glm::vec3(0.25f));
-		//shadowShader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		 
 		renderScene(shadowShader);
 		//-------------
 		
@@ -119,32 +106,8 @@ int RenderShadow::practise(const char * projectDir) {
 		shader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
 		shader.setVec3("lightPos", lightPos);
-		shader.setVec3("viewPos", helper.getCamera().Front);
-
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
-		//shader.setMat4("model", model);
-		//glBindVertexArray(planeVAO);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		//
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.0f));
-		//model = glm::scale(model, glm::vec3(0.5f));
-		//shader.setMat4("model", model);
-		//glBindVertexArray(cubeVAO);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(2.0f, 1.5f, 1.0f));
-		//model = glm::scale(model, glm::vec3(0.5f));
-		//shader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//
-		//model = glm::mat4(1.0f);
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, 3.0f));
-		//model = glm::scale(model, glm::vec3(0.25f));
-		//shader.setMat4("model", model);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		shader.setVec3("viewPos", helper.getCamera().Position);
+		 
 		renderScene(shader);
 		//-------------
 
@@ -157,27 +120,34 @@ int RenderShadow::practise(const char * projectDir) {
 }
 
 void RenderShadow::renderScene(MyShader& shader) {
+
+	glDisable(GL_CULL_FACE);
+
 	glm::mat4 model(1.0f);
 	model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
 	shader.setMat4("model", model);
 	glBindVertexArray(planeVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
+
 	model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0f, 1.5f, 0.0f));
 	model = glm::scale(model, glm::vec3(0.5f));
 	shader.setMat4("model", model);
 	glBindVertexArray(cubeVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(2.0f, 1.5f, 1.0f));
+	model = glm::translate(model, glm::vec3(2.0f, 0.0f, 1.0f));
 	model = glm::scale(model, glm::vec3(0.5f));
 	shader.setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 3.0f));
+	model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 2.0f));
+	model = glm::rotate(model, glm::radians(60.0f), glm::normalize(glm::vec3(1.0f,0.0f,1.0f)));
 	model = glm::scale(model, glm::vec3(0.25f));
 	shader.setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);

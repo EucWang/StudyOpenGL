@@ -57,11 +57,33 @@ float calcShadow2(vec3 normal,  vec3 lightDir, vec4 fragPosLightSpace) {
 	//有一个偏移量的最大值0.05，和一个最小值0.005，它们是基于表面法线和光照方向的。
 	//这样像地板这样的表面几乎与光源垂直，得到的偏移就很小，而比如立方体的侧面这种表面得到的偏移就更大。
 	float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
-	float shadow = curDepth - bias > closestDepth ? 1.0 : 0.0;
 	
+	//float shadow = curDepth - bias > closestDepth ? 1.0 : 0.0;
+	//PCF算法(percentage-closer filtering), 这是一种多个不同过滤方式的组合,产生柔和阴影,解决阴影锯齿和硬边
+	//核心思想是从深度贴图中多次采样，每一次采样的纹理坐标都稍有不同。
+	float shadow = 0;
+	//textureSize返回一个给定采样器纹理的0级mipmap的vec2类型的宽和高。
+	//用1除以它返回一个单独纹理像素的大小，我们用以对纹理坐标进行偏移，确保每个新样本，来自不同的深度值。
+	vec2 texSize = 1.0 / textureSize(shadow_map, 0);
+	for(int x = -1; x <= 1; ++x) {
+		for(int y = -1; y <= 1; ++y) {  
+			//采样得到9个值，它们在投影坐标的x和y值的周围，为阴影阻挡进行测试，并最终通过样本的总数目将结果平均化。
+			float pcfDepth = texture(shadow_map, projCoords.xy + vec2(x, y) * texSize).r;
+			shadow += curDepth - bias > pcfDepth ? 1.0 : 0.0;
+		}
+	}
+	shadow /= 9.0;
+
+	// 只要投影向量的z坐标大于1.0，我们就把shadow的值强制设为0.0
+	// 当一个点比光的远平面还要远时，它的投影坐标的z坐标大于1.0。
+	// GL_CLAMP_TO_BORDER环绕方式不起作用，因为我们把坐标的z元素和深度贴图的值进行了对比；它总是为大于1.0的z返回true。
+	//这意味着，只有在深度贴图范围以内的被投影的fragment坐标才有阴影，所以任何超出范围的都将会没有阴影。
+	if(projCoords.z > 1.0) {
+		shadow = 0.0;
+	}
+
 	return shadow;// 检查当前片段是否在阴影中
 }
-
 
 void main(){
 
