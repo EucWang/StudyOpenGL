@@ -16,7 +16,10 @@ uniform vec3 viewPos;
 
 uniform float far_plane;
 
-vec3 lightColor = vec3(1.0);
+//是否应用阴影计算
+uniform bool hasShadow;
+
+vec3 lightColor = vec3(0.3);
 
 float calcShadow(vec3 fragPos) {
 	//我们已经将深度储存为fragment和光位置之间的距离了；我们这里采用相似的处理方式：
@@ -31,8 +34,8 @@ float calcShadow(vec3 fragPos) {
 	float curDepth = length(fragToLight);
 
 	float bias = 0.05;
-	float samples = 4.0;
-	float offset = 0.1;
+	//float samples = 4.0;
+	//float offset = 0.1;
 	float shadow = curDepth - bias > closestDepth ? 1.0 : 0.0;
 	//float shadow = 0.0;
 	//这里我们根据样本的数量动态计算了纹理偏移量，我们在三个轴向采样三次，最后对子样本进行平均化。
@@ -64,16 +67,16 @@ void main(){
 
 	vec3 halfwayDir = normalize(lightDir + viewDir);
 
+	//ambient
 	vec3 ambient = 0.3 * tex1;
-
+	//diffuse
 	float diff = max(dot(lightDir, norm), 0.0);
 	vec3 diffuse = diff * lightColor;
-
-	float spec = 0.0;
-	spec = pow(max(dot(norm, halfwayDir), 0.0), 64.0);
+	//specular 
+	float spec = pow(max(dot(norm, halfwayDir), 0.0), 64.0);
 	vec3 specular = spec * lightColor;
 	
-	float shadow = calcShadow(vs_in.fragPos);
+	float shadow = hasShadow ? calcShadow(vs_in.fragPos) : 0.0;
 	vec3 lighting = ( ambient + (1.0 - shadow) * (diffuse + specular) ) * tex1;
 
 	fragColor = vec4(lighting, 1.0f);
