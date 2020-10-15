@@ -57,7 +57,7 @@ int PointShadow::practise(const char * projectDir) {
 	MyShader shaderLight(projectDir, vertFileLight, fragFileLight);
 
 	texWood = RenderUtil::textureLoad2D(projectDir, imgFileWood, false, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
-	//texWall = RenderUtil::textureLoad2D(projectDir, imgFileWall, false);
+	texWall = RenderUtil::textureLoad2D(projectDir, imgFileWall, false);
 
 	shaderRender.use();
 	shaderRender.setInt("diffuse_texture", 0);
@@ -163,15 +163,17 @@ void PointShadow::renderScene(const MyShader& shader, bool scene) {
 	glDisable(GL_CULL_FACE);
 	shader.setBool("reverse_normals", true);
 	shader.setMat4("model", model);
-	//if (scene){
-	//	glActiveTexture(GL_TEXTURE0);
-	//	glBindTexture(GL_TEXTURE_2D, texWall);
-	//}
+	if (scene){
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texWall);
+	}
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glEnable(GL_CULL_FACE);
 	shader.setBool("reverse_normals", false);
-	
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texWood);
 	model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(4.0f, -3.5f, 0.0f));
 	model = glm::scale(model, glm::vec3(0.5f));
