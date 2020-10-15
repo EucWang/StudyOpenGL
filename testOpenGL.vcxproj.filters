@@ -40,6 +40,9 @@
     <Filter Include="source\_5_3_2_point_shadow">
       <UniqueIdentifier>{6dc69422-5d47-48c7-a618-bb2963ccc090}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_3_1_normal_map">
+      <UniqueIdentifier>{99ff296b-b1fd-42e1-a0f3-7f0b19bb0197}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -146,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_2_point_shadow\PointShadow.h">
       <Filter>source\_5_3_2_point_shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_3_1_normal_map\NormalMap.h">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +353,9 @@
     <ClCompile Include="source\_5_3_2_point_shadow\PointShadow.cpp">
       <Filter>source\_5_3_2_point_shadow</Filter>
     </ClCompile>
+    <ClCompile Include="source\_5_3_3_1_normal_map\NormalMap.cpp">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -547,6 +556,12 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\wood_specular.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\brickwall.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\brickwall_normal.jpg">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
@@ -978,6 +993,18 @@
     </None>
     <None Include="source\_5_3_2_point_shadow\_5_3_2_light.frag">
       <Filter>source\_5_3_2_point_shadow</Filter>
+    </None>
+    <None Include="source\_5_3_3_1_normal_map\_5_3_3_1_normal_map.vert">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_1_normal_map\_5_3_3_1_normal_map.frag">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_1_normal_map\_5_3_3_1_light.vert">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_1_normal_map\_5_3_3_1_light.frag">
+      <Filter>source\_5_3_3_1_normal_map</Filter>
     </None>
   </ItemGroup>
 </Project>

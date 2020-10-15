@@ -32,6 +32,7 @@
 #include "../source/_5_3_1_shadow_map/ShadowMapping.h"
 #include "../source/_5_3_2_render_shadow/RenderShadow.h"
 #include "../source/_5_3_2_point_shadow/PointShadow.h"
+#include "../source/_5_3_3_1_normal_map/NormalMap.h"
 
 using namespace std;
 
@@ -139,7 +140,9 @@ int main(int argc, char* argv[]) {
 
 	//ShadowMapping practise = ShadowMapping();
 	//RenderShadow practise = RenderShadow();
-	PointShadow practise = PointShadow();
+	//PointShadow practise = PointShadow();
+
+	NormalMap practise = NormalMap();
 	practise.practise(projectDir);
 
 	//free(debugDir);
