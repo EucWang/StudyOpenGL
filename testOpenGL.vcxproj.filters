@@ -43,6 +43,9 @@
     <Filter Include="source\_5_3_3_1_normal_map">
       <UniqueIdentifier>{99ff296b-b1fd-42e1-a0f3-7f0b19bb0197}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_3_2_normal_map">
+      <UniqueIdentifier>{d883134f-7c46-48a5-b0fe-0a367d00074b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_3_1_normal_map\NormalMap.h">
       <Filter>source\_5_3_3_1_normal_map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_3_2_normal_map\NormalMap2.h">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_3_1_normal_map\NormalMap.cpp">
       <Filter>source\_5_3_3_1_normal_map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_3_2_normal_map\NormalMap2.cpp">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1005,6 +1014,24 @@
     </None>
     <None Include="source\_5_3_3_1_normal_map\_5_3_3_1_light.frag">
       <Filter>source\_5_3_3_1_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render.vert">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render.frag">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_light.vert">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_light.frag">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.vert">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.frag">
+      <Filter>source\_5_3_3_2_normal_map</Filter>
     </None>
   </ItemGroup>
 </Project>
