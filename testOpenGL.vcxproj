@@ -56,6 +56,7 @@
     <ClInclude Include="source\_5_3_2_render_shadow\RenderShadow.h" />
     <ClInclude Include="source\_5_3_3_1_normal_map\NormalMap.h" />
     <ClInclude Include="source\_5_3_3_2_normal_map\NormalMap2.h" />
+    <ClInclude Include="source\_5_3_4_parallax_map\ParallaxMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="source\_5_3_2_render_shadow\RenderShadow.cpp" />
     <ClCompile Include="source\_5_3_3_1_normal_map\NormalMap.cpp" />
     <ClCompile Include="source\_5_3_3_2_normal_map\NormalMap2.cpp" />
+    <ClCompile Include="source\_5_3_4_parallax_map\ParallaxMap.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -157,6 +159,9 @@
     <Image Include="images\asteroid_belt\Rock-Texture-Surface.jpg" />
     <Image Include="images\awesomeface.png" />
     <Image Include="images\blending_transparent_window.png" />
+    <Image Include="images\bricks2.jpg" />
+    <Image Include="images\bricks2_disp.jpg" />
+    <Image Include="images\bricks2_normal.jpg" />
     <Image Include="images\brickwall.jpg" />
     <Image Include="images\brickwall_normal.jpg" />
     <Image Include="images\container.jpg" />
@@ -353,6 +358,8 @@
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render.vert" />
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.frag" />
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.vert" />
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag" />
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_render.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\asteroid_belt\planet.obj">

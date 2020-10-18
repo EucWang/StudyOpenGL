@@ -46,6 +46,9 @@
     <Filter Include="source\_5_3_3_2_normal_map">
       <UniqueIdentifier>{d883134f-7c46-48a5-b0fe-0a367d00074b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_4_parallax_map">
+      <UniqueIdentifier>{870d6a60-683c-4046-aaad-8837f9579ec6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_3_2_normal_map\NormalMap2.h">
       <Filter>source\_5_3_3_2_normal_map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_4_parallax_map\ParallaxMap.h">
+      <Filter>source\_5_3_4_parallax_map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +371,9 @@
     <ClCompile Include="source\_5_3_3_2_normal_map\NormalMap2.cpp">
       <Filter>source\_5_3_3_2_normal_map</Filter>
     </ClCompile>
+    <ClCompile Include="source\_5_3_4_parallax_map\ParallaxMap.cpp">
+      <Filter>source\_5_3_4_parallax_map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -571,6 +580,15 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\brickwall_normal.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bricks2.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bricks2_disp.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bricks2_normal.jpg">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
@@ -1032,6 +1050,12 @@
     </None>
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.frag">
       <Filter>source\_5_3_3_2_normal_map</Filter>
+    </None>
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_render.vert">
+      <Filter>source\_5_3_4_parallax_map</Filter>
+    </None>
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag">
+      <Filter>source\_5_3_4_parallax_map</Filter>
     </None>
   </ItemGroup>
 </Project>
