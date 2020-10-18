@@ -358,6 +358,8 @@
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render.vert" />
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.frag" />
     <None Include="source\_5_3_3_2_normal_map\_5_3_3_2_render2.vert" />
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_light.frag" />
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_light.vert" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.vert" />
   </ItemGroup>

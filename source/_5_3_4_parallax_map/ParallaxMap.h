@@ -18,12 +18,19 @@ public:
 	const char* vertFile = "source/_5_3_4_parallax_map/_5_3_4_render.vert";
 	const char* fragFile = "source/_5_3_4_parallax_map/_5_3_4_render.frag";
 
+    const char* vertFileLight = "source/_5_3_4_parallax_map/_5_3_4_light.vert";
+    const char* fragFileLight = "source/_5_3_4_parallax_map/_5_3_4_light.frag";
+
 	const char* imgFileBrick2 = "images/bricks2.jpg";
 	const char* imgFileBrickNormal2 = "images/bricks2_normal.jpg";
 	const char* imgFileBrickDisp2 = "images/bricks2_disp.jpg";
 
     const char* imgFileBrickWall = "images/brickwall.jpg";
     const char* imgFileBrickWallNormal = "images/brickwall_normal.jpg";
+
+    const char* imgFileToyBox = "images/toy_box_diffuse.png";
+    const char* imgFileToyBoxNormal = "images/toy_box_normal.png";
+    const char* imgFileToyBoxDisp = "images/toy_box_disp.png";
 
 
     float cubeVertices[8 * 36] = {
@@ -84,7 +91,7 @@ public:
     //normal
     glm::vec3 normal = glm::vec3(0.0f, 0.0f, 1.0f);
 
-    glm::vec3 lightPos = glm::vec3(0.5f, 1.0f, 0.3f);
+    glm::vec3 lightPos = glm::vec3(0.5f, 0.7f, 0.3f);
 
 	int practise(const char * projectDir);
 };

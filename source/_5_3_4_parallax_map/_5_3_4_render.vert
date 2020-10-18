@@ -4,6 +4,7 @@ layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
 layout (location = 2) in vec2 aTexCoords;
 layout (location = 3) in vec3 aTangent;
+layout (location = 4) in vec3 aBitangent;
 
 uniform mat4 view;
 uniform mat4 projection;
@@ -21,11 +22,17 @@ out VS_OUT {
 
 void main(){
 	vec3 fragPos = vec3(model * vec4(aPos, 1.0));
-	mat3 normalMatrix = transpose(inverse(mat3(model)));
+	
+	mat3 normalMatrix = mat3(model);
 	vec3 N = normalize(normalMatrix * aNormal);
 	vec3 T = normalize(normalMatrix * aTangent);
-	T = normalize(T - dot(T, N)*N);
-	vec3 B = cross(T, N);
+	vec3 B = normalize(normalMatrix * aBitangent);
+
+	//mat3 normalMatrix = transpose(inverse(mat3(model)));
+	//vec3 N = normalize(normalMatrix * aNormal);
+	//vec3 T = normalize(normalMatrix * aTangent);
+	//T = normalize(T - dot(T, N) * N);
+	//vec3 B = cross(T, N);
 
 	mat3 TBN = transpose(mat3(T,B, N));
 

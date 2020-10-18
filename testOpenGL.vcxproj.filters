@@ -1057,5 +1057,11 @@
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag">
       <Filter>source\_5_3_4_parallax_map</Filter>
     </None>
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_light.vert">
+      <Filter>source\_5_3_4_parallax_map</Filter>
+    </None>
+    <None Include="source\_5_3_4_parallax_map\_5_3_4_light.frag">
+      <Filter>source\_5_3_4_parallax_map</Filter>
+    </None>
   </ItemGroup>
 </Project>
