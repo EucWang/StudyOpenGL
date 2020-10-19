@@ -46,7 +46,7 @@ vec2 parallax_mapping2(vec2 texCoords, vec3 viewDir) {
 	//depth of current layerDepth
 	float curLayerDepth = 0.0;
 	//the amount to shift the texture coordinates per layer (from vector p)
-	vec2 p = viewDir.xy * height_scale;
+	vec2 p = viewDir.xy / viewDir.z * height_scale;
 	vec2 deltaTexCoords = p / numLayers;
 
 	//get initial values
@@ -62,9 +62,40 @@ vec2 parallax_mapping2(vec2 texCoords, vec3 viewDir) {
 		curLayerDepth += layerDepth;
 	}
 
-	return texCoords - curTexCoords;
+	return curTexCoords;
 }
 
+vec2 parallax_mapping3(vec2 texCoords, vec3 viewDir) {
+	float numLayers = mix(maxLayers, minLayers, abs(dot(vec3(0.0, 0.0, 1.0), viewDir)));
+	float layerDepth = 1.0 / numLayers;
+	float curLayerDepth = 0.0;
+	vec2 p = viewDir.xy / viewDir.z * height_scale;
+	vec2 deltaTexCoords = p / numLayers;
+
+	vec2 curTexCoords = texCoords;
+	float curDepthMapValue = texture(texture_depth, curTexCoords).r;
+
+
+	while(curLayerDepth < curDepthMapValue) {
+		curTexCoords -= deltaTexCoords;
+		curDepthMapValue = texture(texture_depth, curTexCoords).r;
+		curLayerDepth += layerDepth;
+	}
+
+	//get texture coordinates before collision for linear interpolation
+	vec2 prevTexCoords = curTexCoords + deltaTexCoords;
+
+	//get depth after and before collision for linear interpolation
+	float afterDepth = curDepthMapValue - curLayerDepth;
+	float beforeDepth = texture(texture_depth, prevTexCoords).r - curLayerDepth + layerDepth;
+	
+	//interpolation of texture coordinates
+	float weight = afterDepth / (afterDepth - beforeDepth);
+
+	vec2 finalTexCoords = prevTexCoords * weight + curTexCoords * (1.0 - weight);
+	
+	return finalTexCoords;
+}
 
 void main(){
 	vec3 lightDir = normalize(vs_in.tangnetLightPos - vs_in.tangentFragPos);
@@ -72,7 +103,7 @@ void main(){
 	vec3 halfwayDir = normalize(viewDir + lightDir );
 
 	//根据视角向量和 纹理坐标，从新计算，得到视察之后的 纹理坐标
-	vec2 texCoords = parallax_mapping(vs_in.texCoords, viewDir);
+	vec2 texCoords = parallax_mapping3(vs_in.texCoords, viewDir);
 	if(texCoords.x > 1.0 || texCoords.y > 1.0 || texCoords.x < 0.0 || texCoords.y < 0.0) {
 		discard;
 	}
