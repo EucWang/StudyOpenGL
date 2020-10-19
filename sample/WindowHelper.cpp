@@ -197,7 +197,7 @@ Camera WindowHelper::getCamera() {
 
 void WindowHelper::create() {
 	//-----------------------------window 
-	const char* title = "render with anti aliasing in custom frame buffer";
+	//const char* title = "render with anti aliasing in custom frame buffer";
 	//GLFWwindow * window = RenderUtil::createWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT,
 		//"render with anti aliasing in custom frame buffer.", buffer_window_callback);
 	glfwInit();
@@ -216,7 +216,7 @@ void WindowHelper::create() {
 	}
 
 	//mWindow = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, title, nullptr, nullptr);
-	mWindow = glfwCreateWindow(mScreenWidth, mScreenHeight, title, nullptr, nullptr);
+	mWindow = glfwCreateWindow(mScreenWidth, mScreenHeight, mTitle.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(mWindow);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {

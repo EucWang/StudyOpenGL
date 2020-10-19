@@ -35,6 +35,7 @@
 #include "../source/_5_3_3_1_normal_map/NormalMap.h"
 #include "../source/_5_3_3_2_normal_map/NormalMap2.h"
 #include "../source/_5_3_4_parallax_map/ParallaxMap.h"
+#include "../source/_5_3_5_hdr/PractiseHDR.h"
 
 using namespace std;
 
@@ -146,7 +147,8 @@ int main(int argc, char* argv[]) {
 
 	//NormalMap practise = NormalMap();
 	//NormalMap2 practise = NormalMap2();
-	ParallaxMap practise = ParallaxMap();
+	//ParallaxMap practise = ParallaxMap();
+	PractiseHDR practise = PractiseHDR();
 	practise.practise(projectDir);
 
 	//free(debugDir);

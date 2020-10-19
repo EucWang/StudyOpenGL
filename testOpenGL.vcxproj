@@ -57,6 +57,7 @@
     <ClInclude Include="source\_5_3_3_1_normal_map\NormalMap.h" />
     <ClInclude Include="source\_5_3_3_2_normal_map\NormalMap2.h" />
     <ClInclude Include="source\_5_3_4_parallax_map\ParallaxMap.h" />
+    <ClInclude Include="source\_5_3_5_hdr\PractiseHDR.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="source\_5_3_3_1_normal_map\NormalMap.cpp" />
     <ClCompile Include="source\_5_3_3_2_normal_map\NormalMap2.cpp" />
     <ClCompile Include="source\_5_3_4_parallax_map\ParallaxMap.cpp" />
+    <ClCompile Include="source\_5_3_5_hdr\PractiseHDR.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -362,6 +364,8 @@
     <None Include="source\_5_3_4_parallax_map\_5_3_4_light.vert" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.vert" />
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.frag" />
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\asteroid_belt\planet.obj">

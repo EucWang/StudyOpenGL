@@ -49,6 +49,9 @@
     <Filter Include="source\_5_3_4_parallax_map">
       <UniqueIdentifier>{870d6a60-683c-4046-aaad-8837f9579ec6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_5_hdr">
+      <UniqueIdentifier>{4205786b-9cab-4966-96d4-3dea65e61167}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -164,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_4_parallax_map\ParallaxMap.h">
       <Filter>source\_5_3_4_parallax_map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_5_hdr\PractiseHDR.h">
+      <Filter>source\_5_3_5_hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_4_parallax_map\ParallaxMap.cpp">
       <Filter>source\_5_3_4_parallax_map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_5_hdr\PractiseHDR.cpp">
+      <Filter>source\_5_3_5_hdr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1062,6 +1071,12 @@
     </None>
     <None Include="source\_5_3_4_parallax_map\_5_3_4_light.frag">
       <Filter>source\_5_3_4_parallax_map</Filter>
+    </None>
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.vert">
+      <Filter>source\_5_3_5_hdr</Filter>
+    </None>
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.frag">
+      <Filter>source\_5_3_5_hdr</Filter>
     </None>
   </ItemGroup>
 </Project>
