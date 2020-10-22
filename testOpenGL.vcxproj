@@ -364,6 +364,8 @@
     <None Include="source\_5_3_4_parallax_map\_5_3_4_light.vert" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.frag" />
     <None Include="source\_5_3_4_parallax_map\_5_3_4_render.vert" />
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_quad.frag" />
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_quad.vert" />
     <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.frag" />
     <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.vert" />
   </ItemGroup>

@@ -1078,5 +1078,11 @@
     <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.frag">
       <Filter>source\_5_3_5_hdr</Filter>
     </None>
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_quad.vert">
+      <Filter>source\_5_3_5_hdr</Filter>
+    </None>
+    <None Include="source\_5_3_5_hdr\_5_3_5_hdr_quad.frag">
+      <Filter>source\_5_3_5_hdr</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "PractiseHDR.h"
 
+static float exposure = 1.0f;
 
 int PractiseHDR::practise(const char* projectDir) {
 	std::cout << "PractiseHDR::practise() run" << std::endl;
@@ -11,8 +12,8 @@ int PractiseHDR::practise(const char* projectDir) {
 	GLuint hdrRenderBuffer;
 	glGenTextures(1, &hdrTexture);
 	glBindTexture(GL_TEXTURE_2D, hdrTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, helper.getScreenWidth(), helper.getScreenHeight(), 
-		0, GL_RGB, GL_FLOAT, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, helper.getScreenWidth(), helper.getScreenHeight(), 
+		0, GL_RGBA, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -33,6 +34,10 @@ int PractiseHDR::practise(const char* projectDir) {
 	myshader.use();
 	myshader.setInt("texture_diffuse", 0);
 
+	MyShader quadShader(projectDir, vertFileQuad, fragFileQuad);
+	quadShader.use();
+	quadShader.setInt("hdrBuffer", 0);
+
 	int texWood = RenderUtil::textureLoad2D(projectDir, imgFileWood, false);
 
 	// lighting info
@@ -51,23 +56,22 @@ int PractiseHDR::practise(const char* projectDir) {
 	lightColors.push_back(glm::vec3(0.0f, 0.1f, 0.0f));
 
 	GLuint planeVAO, planeVBO;
-	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, planeVertices, sizeof(planeVertices), 8);
+	RenderUtil::makeVertexArrayAndBuffer(&planeVAO, &planeVBO, cubeVertices, sizeof(cubeVertices), 8);
 
-
+	GLuint quadVAO, quadVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&quadVAO, &quadVBO, quadVertices, sizeof(quadVertices), 5);
 
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(helper.getWindow())) {
 		helper.calcProcessInput();
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, hdrFrameBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 view = helper.getCamera().GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(helper.getCamera().Zoom),
 			helper.getScreenWidth() * 1.0f / helper.getScreenHeight(), 0.1f, 100.0f);
-		glm::mat4 model(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -0.004f, 0.0f));
 
 		myshader.use();
 		glBindVertexArray(planeVAO);
@@ -76,14 +80,31 @@ int PractiseHDR::practise(const char* projectDir) {
 
 		myshader.setMat4("view", view);
 		myshader.setMat4("projection", projection);
-		myshader.setMat4("model", model);
 		//myshader.setVec3("lightPos", lightPos);
+		for (unsigned int i = 0; i < lightPositions.size(); i++) {
+			myshader.setVec3("lights[" + std::to_string(i) + "].lightPos", lightPositions[i]);
+			myshader.setVec3("lights[" + std::to_string(i) + "].lightColor", lightColors[i]);
+		}
 		myshader.setVec3("viewPos", helper.getCamera().Position);
 
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//render tunnel
+		glm::mat4 model(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 27.5f));
+		myshader.setMat4("model", model);
+		myshader.setInt("inverse_normals", helper.switchByClickKeyB());
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//TODO
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		quadShader.use();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, hdrTexture);
+		quadShader.setBool("hdr", helper.switchByClickKeyN());
+		quadShader.setFloat("exposure", exposure);
+		glBindVertexArray(quadVAO);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glfwSwapBuffers(helper.getWindow());
 		glfwPollEvents();

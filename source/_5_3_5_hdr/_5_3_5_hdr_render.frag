@@ -27,19 +27,24 @@ void main(){
 	vec3 norm = normalize(vs_in.fragNorm);
 	vec3 viewDir = normalize(viewPos - vs_in.fragPos);
 	
-	vec3 ambient = 0.3 * tex1;
+	vec3 ambient = 0.0 * tex1;
 
-	vec3 lighting;
+	vec3 lighting = vec3(0.0);
 	for(int i=0; i<16; i++) {
 		vec3 lightDir = normalize(lights[i].lightPos - vs_in.fragPos);
-		vec3 halfwayDir = normalize(lightDir + viewDir);
+		//vec3 halfwayDir = normalize(lightDir + viewDir);
 
 		float diff = max(dot(lightDir, norm), 0.0);
-		vec3 diffuse = diff * lights[i].lightColor;
+		vec3 diffuse = lights[i].lightColor * diff * tex1;
+		vec3 result = diffuse;
 
-		float spec = pow(max(dot(halfwayDir, norm), 0.0), shininess);
-		vec3 specular = spec * lights[i].lightColor;
-		lighting += (diffuse + specular);
+		//float spec = pow(max(dot(halfwayDir, norm), 0.0), shininess);
+		//vec3 specular = spec * lights[i].lightColor;
+		//lighting += (diffuse + specular);
+
+		float distance = length(vs_in.fragPos - lights[i].lightPos);
+		result *= 1.0 / (distance * distance);
+		lighting += result;
 	}
 	//fragColor = vec4(tex1, 1.0);
 	fragColor = vec4(ambient + lighting, 1.0);

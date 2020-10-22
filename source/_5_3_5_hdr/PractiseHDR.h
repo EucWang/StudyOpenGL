@@ -10,9 +10,11 @@ using namespace std;
 
 class PractiseHDR{
 public:
-
 	const char* vertFile = "source/_5_3_5_hdr/_5_3_5_hdr_render.vert";
 	const char* fragFile = "source/_5_3_5_hdr/_5_3_5_hdr_render.frag";
+
+    const char* vertFileQuad = "source/_5_3_5_hdr/_5_3_5_hdr_quad.vert";
+    const char* fragFileQuad = "source/_5_3_5_hdr/_5_3_5_hdr_quad.frag";
 
 	const char* imgFileWood = "images/wood.png";
 
@@ -79,8 +81,6 @@ public:
          1.0f,  1.0f, 0.0f,     1.0f, 1.0f,
          1.0f, -1.0f, 0.0f,     1.0f, 0.0f,
     };
-
-
 
     int practise(const char * projectDir);
 };
