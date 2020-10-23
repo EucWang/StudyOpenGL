@@ -52,6 +52,9 @@
     <Filter Include="source\_5_3_5_hdr">
       <UniqueIdentifier>{4205786b-9cab-4966-96d4-3dea65e61167}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_6_bloom">
+      <UniqueIdentifier>{c8351d95-4bce-4a18-aea2-a13f69a9cf37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -170,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_5_hdr\PractiseHDR.h">
       <Filter>source\_5_3_5_hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_6_bloom\Bloom.h">
+      <Filter>source\_5_3_6_bloom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_5_hdr\PractiseHDR.cpp">
       <Filter>source\_5_3_5_hdr</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_6_bloom\Bloom.cpp">
+      <Filter>source\_5_3_6_bloom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1083,6 +1092,12 @@
     </None>
     <None Include="source\_5_3_5_hdr\_5_3_5_hdr_quad.frag">
       <Filter>source\_5_3_5_hdr</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_bloom.vert">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_bloom.frag">
+      <Filter>source\_5_3_6_bloom</Filter>
     </None>
   </ItemGroup>
 </Project>
