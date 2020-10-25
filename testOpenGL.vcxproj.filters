@@ -1099,5 +1099,20 @@
     <None Include="source\_5_3_6_bloom\_5_3_6_bloom.frag">
       <Filter>source\_5_3_6_bloom</Filter>
     </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_light.vert">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_light.frag">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_quad.vert">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_quad.frag">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_6_bloom\_5_3_6_blur.frag">
+      <Filter>source\_5_3_6_bloom</Filter>
+    </None>
   </ItemGroup>
 </Project>

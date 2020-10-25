@@ -372,6 +372,11 @@
     <None Include="source\_5_3_5_hdr\_5_3_5_hdr_render.vert" />
     <None Include="source\_5_3_6_bloom\_5_3_6_bloom.frag" />
     <None Include="source\_5_3_6_bloom\_5_3_6_bloom.vert" />
+    <None Include="source\_5_3_6_bloom\_5_3_6_blur.frag" />
+    <None Include="source\_5_3_6_bloom\_5_3_6_light.frag" />
+    <None Include="source\_5_3_6_bloom\_5_3_6_light.vert" />
+    <None Include="source\_5_3_6_bloom\_5_3_6_quad.frag" />
+    <None Include="source\_5_3_6_bloom\_5_3_6_quad.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\asteroid_belt\planet.obj">
