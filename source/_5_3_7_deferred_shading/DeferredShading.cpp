@@ -4,7 +4,7 @@
 int DeferredShading::practise(const char* projectDir) {
 	std::cout << "DeferredShading::practise()" << std::endl;
 
-	WindowHelper helper("Deferred Shading", Camera(glm::vec3(0.0f, 0.0f, 3.0f)), 0);
+	WindowHelper helper("Deferred Shading", Camera(glm::vec3(0.0f, 1.5f, 3.0f)), 0);
 	helper.create();
 
 	MyShader shader(projectDir, vertFile, fragFile);
@@ -13,6 +13,8 @@ int DeferredShading::practise(const char* projectDir) {
 
 	GLuint VAO, VBO;
 	GLuint tex;
+
+	Model nanoModel(projectDir, modelFileNano);
 
 	RenderUtil::makeVertexArrayAndBuffer(&VAO, &VBO, planeVertices, sizeof(planeVertices), 8);
 	tex = RenderUtil::textureLoad2D(projectDir, imgFileWood, false);
@@ -38,6 +40,12 @@ int DeferredShading::practise(const char* projectDir) {
 		shader.setMat4("model", model);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		shader.setMat4("model", model);
+		nanoModel.draw(&shader);
 
 		glfwSwapBuffers(helper.getWindow());
 		glfwPollEvents();

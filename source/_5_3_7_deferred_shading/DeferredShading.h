@@ -3,6 +3,8 @@
 #include "WindowHelper.h"
 #include "MyShader.h"
 #include "RenderUtil.h"
+#include "mesh.h"
+#include "model.h"
 
 #include <iostream>
 #include <string>
@@ -15,6 +17,8 @@ public:
 	const char* fragFile = "source/_5_3_7_deferred_shading/_5_3_7_render.frag";
 
 	const char* imgFileWood = "images/wood.png";
+
+    const char* modelFileNano = "images/nanosuit/nanosuit.obj";
 
     float planeVertices[8 * 6] = {
         // positions            // normals         // texcoords
