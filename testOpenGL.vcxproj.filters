@@ -55,6 +55,9 @@
     <Filter Include="source\_5_3_6_bloom">
       <UniqueIdentifier>{c8351d95-4bce-4a18-aea2-a13f69a9cf37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_7_deferred_shading">
+      <UniqueIdentifier>{94060b69-bcb8-4dd5-aafa-5f7bb6718f9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -176,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_6_bloom\Bloom.h">
       <Filter>source\_5_3_6_bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_7_deferred_shading\DeferredShading.h">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_6_bloom\Bloom.cpp">
       <Filter>source\_5_3_6_bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_7_deferred_shading\DeferredShading.cpp">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1113,6 +1122,12 @@
     </None>
     <None Include="source\_5_3_6_bloom\_5_3_6_blur.frag">
       <Filter>source\_5_3_6_bloom</Filter>
+    </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_render.vert">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_render.frag">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
     </None>
   </ItemGroup>
 </Project>

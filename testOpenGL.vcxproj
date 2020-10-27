@@ -59,6 +59,7 @@
     <ClInclude Include="source\_5_3_4_parallax_map\ParallaxMap.h" />
     <ClInclude Include="source\_5_3_5_hdr\PractiseHDR.h" />
     <ClInclude Include="source\_5_3_6_bloom\Bloom.h" />
+    <ClInclude Include="source\_5_3_7_deferred_shading\DeferredShading.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\PractiseAdvancedData_4_7.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="source\_5_3_4_parallax_map\ParallaxMap.cpp" />
     <ClCompile Include="source\_5_3_5_hdr\PractiseHDR.cpp" />
     <ClCompile Include="source\_5_3_6_bloom\Bloom.cpp" />
+    <ClCompile Include="source\_5_3_7_deferred_shading\DeferredShading.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
     <ClCompile Include="src\glad.c" />
@@ -377,6 +379,8 @@
     <None Include="source\_5_3_6_bloom\_5_3_6_light.vert" />
     <None Include="source\_5_3_6_bloom\_5_3_6_quad.frag" />
     <None Include="source\_5_3_6_bloom\_5_3_6_quad.vert" />
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_render.frag" />
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_render.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="images\asteroid_belt\planet.obj">
