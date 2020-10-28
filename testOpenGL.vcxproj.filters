@@ -1129,5 +1129,17 @@
     <None Include="source\_5_3_7_deferred_shading\_5_3_7_render.frag">
       <Filter>source\_5_3_7_deferred_shading</Filter>
     </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_gbuffer_render.vert">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_gbuffer_render.frag">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_quad.vert">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
+    <None Include="source\_5_3_7_deferred_shading\_5_3_7_quad.frag">
+      <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
   </ItemGroup>
 </Project>
