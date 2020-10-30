@@ -4,7 +4,7 @@ in vec2 texCoords;
 
 uniform sampler2D gPosition;
 uniform sampler2D gNormal;
-uniform sampler2D gAlbedoSPec;
+uniform sampler2D gAlbedoSpec;
 
 struct Light {
 	vec3 pos;
@@ -14,7 +14,7 @@ struct Light {
 	float quadratic;
 } ;
 
-const int NR_LIGHTS = 32;
+const int NR_LIGHTS = 100;
 uniform Light lights[NR_LIGHTS];
 uniform vec3 viewPos;
 
@@ -24,10 +24,10 @@ void main() {
 	
 	vec3 fragPos = texture(gPosition, texCoords).rgb;
 	vec3 fragNorm = texture(gNormal, texCoords).rgb;
-	vec3 diffuse = texture(gAlbedoSPec, texCoords).rgb;
-	float specular = texture(gAlbedoSPec, texCoords).a;
+	vec3 fragDiffuse = texture(gAlbedoSpec, texCoords).rgb;
+	float fragSpecular = texture(gAlbedoSpec, texCoords).a;
 
-	vec3 lighting = diffuse * 0.1;// hard-coded ambient component
+	vec3 lighting = fragDiffuse * 0.1;// hard-coded ambient component
 	vec3 viewDir = normalize(viewPos - fragPos);
 
 	for(int i=0; i< NR_LIGHTS; i++){
@@ -35,12 +35,12 @@ void main() {
 
 		//diffuse
 		float diff = max(dot(fragNorm, lightDir), 0.0);
-		vec3 diffuse = diff * diffuse * lights[i].color;
+		vec3 diffuse = diff * fragDiffuse * lights[i].color;
 
 		//specular
 		vec3 halfwayDir = normalize(lightDir + viewDir);
 		float spec = pow(max(dot(fragNorm, halfwayDir), 0.0), shininess);
-		vec3 specular = lights[i].color * spec * specular;
+		vec3 specular = lights[i].color * spec * fragSpecular;
 
 		//attenuation
 		float distance = length(lights[i].pos - fragPos);

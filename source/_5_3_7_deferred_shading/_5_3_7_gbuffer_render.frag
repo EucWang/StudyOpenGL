@@ -24,5 +24,5 @@ void main(){
 	//存储漫反射的逐个片段颜色
 	gAlbedoSpec.rgb = texture(texture_diffuse1, vs_in.texCoords).rgb;
 	//存储镜面强度到gAlbedoSpec的alpha分量
-	gAlbedoSpec.a = texture(texture_specular1, vs_in.texCoords).r;
+	gAlbedoSpec.a = texture(texture_specular1, vs_in.texCoords).a;
 }
