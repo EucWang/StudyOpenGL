@@ -10,6 +10,10 @@ int DeferredShading::practise(const char* projectDir) {
 	WindowHelper helper("Deferred Shading", Camera(glm::vec3(1.0f, 1.5f, 8.0f)), 0);
 	helper.create();
 
+	MyShader lightShader(projectDir, vertFileLighting, fragFileLighting);
+	GLuint lightVAO, lightVBO;
+	RenderUtil::makeVertexArrayAndBuffer(&lightVAO, &lightVBO, cubeVertices, sizeof(cubeVertices), 8);
+
 	MyShader quadShader(projectDir, vertFileQuad, fragFileQuad);
 	quadShader.use();
 	quadShader.setInt("texture_diffuse", 0);
@@ -22,9 +26,9 @@ int DeferredShading::practise(const char* projectDir) {
 	//gbufferShader.setInt("texture_diffuse1", 0);
 	//gbufferShader.setInt("texture_specular1", 1);
 
-	//MyShader shader(projectDir, vertFile, fragFile);
-	//shader.use();
-	//shader.setInt("texture_diffuse", 0);
+	MyShader shader(projectDir, vertFile, fragFile);
+	shader.use();
+	shader.setInt("texture_diffuse", 0);
 
 	MyShader gbufferShaderLighting(projectDir, vertFileGBufferShading, fragFileGBufferShading);
 	gbufferShaderLighting.use();
@@ -52,7 +56,6 @@ int DeferredShading::practise(const char* projectDir) {
 		lightColors.push_back(glm::vec3(rColor, gColor, bColor));
 	}
 
-
 	GLuint VAO, VBO;
 	GLuint tex;
 
@@ -66,49 +69,49 @@ int DeferredShading::practise(const char* projectDir) {
 	glGenFramebuffers(1, &gFrameBuffer);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, gFrameBuffer);
-	glGenTextures(4, gTexture);
-	for (size_t i = 0; i < 3; i++){
-		glBindTexture(GL_TEXTURE_2D, gTexture[i]);
-		//我们使用RGB纹理来储存位置和法线的数据，因为每个对象只有三个分量；
-		//但是我们将颜色和镜面强度数据合并到一起，存储到一个单独的RGBA纹理里面，这样我们就不需要声明一个额外的颜色缓冲纹理了。
-		GLuint format1 = 0; 
-		if (i < 2) { format1 = GL_RGBA16F; 
-		} else { format1 = GL_RGBA; }
-		glTexImage2D(GL_TEXTURE_2D, 0, format1, helper.getScreenWidth(), helper.getScreenHeight(), 0,
-			GL_RGBA, GL_FLOAT, NULL);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glGenTextures(4, gTexture);
+		for (size_t i = 0; i < 3; i++){
+			glBindTexture(GL_TEXTURE_2D, gTexture[i]);
+			//我们使用RGB纹理来储存位置和法线的数据，因为每个对象只有三个分量；
+			//但是我们将颜色和镜面强度数据合并到一起，存储到一个单独的RGBA纹理里面，这样我们就不需要声明一个额外的颜色缓冲纹理了。
+			GLuint format1 = 0; 
+			if (i < 2) { format1 = GL_RGBA16F; 
+			} else { format1 = GL_RGBA; }
+			glTexImage2D(GL_TEXTURE_2D, 0, format1, helper.getScreenWidth(), helper.getScreenHeight(), 0,
+				GL_RGBA, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, gTexture[i], 0);
-	}
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, gTexture[i], 0);
+		}
 
-	GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-	glDrawBuffers(3, attachments);
-	GLuint gRenderBuffer;  //帧缓冲的渲染缓冲
-	glGenRenderbuffers(1, &gRenderBuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, gRenderBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, helper.getScreenWidth(), helper.getScreenHeight());
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, gRenderBuffer);
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-		std::cout << "Framebuffer not complete!" << std::endl;
-	}
+		GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+		glDrawBuffers(3, attachments);
+		GLuint gRenderBuffer;  //帧缓冲的渲染缓冲
+		glGenRenderbuffers(1, &gRenderBuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, gRenderBuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, helper.getScreenWidth(), helper.getScreenHeight());
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, gRenderBuffer);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+			std::cout << "Framebuffer not complete!" << std::endl;
+		}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(helper.getWindow())) {
 		helper.calcProcessInput();
 
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, gFrameBuffer);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glm::mat4 view = helper.getCamera().GetViewMatrix();
 			glm::mat4 projection = glm::perspective(glm::radians(helper.getCamera().Zoom),
 				helper.getScreenWidth() * 1.0f / helper.getScreenHeight(), 0.1f, 100.0f);
-
 			glm::mat4 model(1.0f);
 
 			gbufferShader.use();
@@ -126,11 +129,8 @@ int DeferredShading::practise(const char* projectDir) {
 		 
 			//------------------------------
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-
 		gbufferShaderLighting.use();
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, gTexture[0]);
@@ -149,23 +149,39 @@ int DeferredShading::practise(const char* projectDir) {
 		glBindVertexArray(quadVAO);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
+		// copy content of geometry's depth buffer to default framebuffer's depth buffer
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, gFrameBuffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-		glBlitFramebuffer(0, 0, helper.getScreenWidth(), helper.getScreenHeight(),
-			0, 0, helper.getScreenWidth(), helper.getScreenHeight(),
-			GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+			glBlitFramebuffer(0, 0, helper.getScreenWidth(), helper.getScreenHeight(),
+				0, 0, helper.getScreenWidth(), helper.getScreenHeight(),
+				GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		//glDisable(GL_DEPTH_TEST);
-		//
-		//glClear(GL_COLOR_BUFFER_BIT);
-		//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		//
-		//quadShader.use();
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, gTexture[2]);
-		//glBindVertexArray(quadVAO);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		// 3 . render lights on top of scene
+		lightShader.use();
+		lightShader.setMat4("view", view);
+		lightShader.setMat4("projection", projection);
+		for (unsigned int i = 0; i < lightPositions.size(); i++) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, lightPositions[i]);
+			model = glm::scale(model, glm::vec3(0.125f));
+			lightShader.setMat4("model", model);
+			lightShader.setVec3("lightColor", lightColors[i]);
+			glBindVertexArray(lightVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+
+		shader.use();
+		shader.setMat4("view", view);
+		shader.setMat4("projection", projection);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -0.003f, 0.0f));
+		shader.setMat4("model", model);
+		glBindVertexArray(VAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(helper.getWindow());
 		glfwPollEvents();
