@@ -39,6 +39,7 @@
 #include "../source/_5_3_6_bloom/Bloom.h"
 #include "../source/_5_3_7_deferred_shading/DeferredShading.h"
 #include "../source/_5_3_8_SSAO/PractiseSSAO.h"
+#include "../source/_6_1_PBR_Lighting/PractisePBR.h"
 
 using namespace std;
 
@@ -154,7 +155,8 @@ int main(int argc, char* argv[]) {
 	//PractiseHDR practise = PractiseHDR();
 	//Bloom practise = Bloom();
 	//DeferredShading practise = DeferredShading();
-	PractiseSSAO practise = PractiseSSAO();
+	//PractiseSSAO practise = PractiseSSAO();
+	PractisePBR practise = PractisePBR();
 	practise.practise(projectDir);
 
 	//free(debugDir);

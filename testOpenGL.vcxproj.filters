@@ -61,6 +61,9 @@
     <Filter Include="source\_5_3_8_SSAO">
       <UniqueIdentifier>{255912ac-60e0-4ac8-82da-02e53157aa22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_6_1_PBR_Lighting">
+      <UniqueIdentifier>{1215bda6-77c8-4d8e-9b6a-bae3f639f424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_8_SSAO\PractiseSSAO.h">
       <Filter>source\_5_3_8_SSAO</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_6_1_PBR_Lighting\PractisePBR.h">
+      <Filter>source\_6_1_PBR_Lighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +415,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_8_SSAO\PractiseSSAO.cpp">
       <Filter>source\_5_3_8_SSAO</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_6_1_PBR_Lighting\PractisePBR.cpp">
+      <Filter>source\_6_1_PBR_Lighting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1191,6 +1200,12 @@
     </None>
     <None Include="source\_5_3_8_SSAO\ssao_final_light.frag">
       <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_6_1_PBR_Lighting\pbr.vert">
+      <Filter>source\_6_1_PBR_Lighting</Filter>
+    </None>
+    <None Include="source\_6_1_PBR_Lighting\pbr.frag">
+      <Filter>source\_6_1_PBR_Lighting</Filter>
     </None>
   </ItemGroup>
 </Project>
