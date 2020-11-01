@@ -38,6 +38,7 @@
 #include "../source/_5_3_5_hdr/PractiseHDR.h"
 #include "../source/_5_3_6_bloom/Bloom.h"
 #include "../source/_5_3_7_deferred_shading/DeferredShading.h"
+#include "../source/_5_3_8_SSAO/PractiseSSAO.h"
 
 using namespace std;
 
@@ -152,7 +153,8 @@ int main(int argc, char* argv[]) {
 	//ParallaxMap practise = ParallaxMap();
 	//PractiseHDR practise = PractiseHDR();
 	//Bloom practise = Bloom();
-	DeferredShading practise = DeferredShading();
+	//DeferredShading practise = DeferredShading();
+	PractiseSSAO practise = PractiseSSAO();
 	practise.practise(projectDir);
 
 	//free(debugDir);

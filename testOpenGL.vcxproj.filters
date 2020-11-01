@@ -58,6 +58,9 @@
     <Filter Include="source\_5_3_7_deferred_shading">
       <UniqueIdentifier>{94060b69-bcb8-4dd5-aafa-5f7bb6718f9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_5_3_8_SSAO">
+      <UniqueIdentifier>{255912ac-60e0-4ac8-82da-02e53157aa22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -182,6 +185,9 @@
     </ClInclude>
     <ClInclude Include="source\_5_3_7_deferred_shading\DeferredShading.h">
       <Filter>source\_5_3_7_deferred_shading</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_5_3_8_SSAO\PractiseSSAO.h">
+      <Filter>source\_5_3_8_SSAO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="source\_5_3_7_deferred_shading\DeferredShading.cpp">
       <Filter>source\_5_3_7_deferred_shading</Filter>
+    </ClCompile>
+    <ClCompile Include="source\_5_3_8_SSAO\PractiseSSAO.cpp">
+      <Filter>source\_5_3_8_SSAO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1152,6 +1161,36 @@
     </None>
     <None Include="source\_5_3_7_deferred_shading\_5_3_7_deferred_light_box.frag">
       <Filter>source\_5_3_7_deferred_shading</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_render.vert">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_render.frag">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_gbuffer.vert">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_gbuffer.frag">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_quad.vert">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_quad.frag">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_blur.vert">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_blur.frag">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_final_light.vert">
+      <Filter>source\_5_3_8_SSAO</Filter>
+    </None>
+    <None Include="source\_5_3_8_SSAO\ssao_final_light.frag">
+      <Filter>source\_5_3_8_SSAO</Filter>
     </None>
   </ItemGroup>
 </Project>

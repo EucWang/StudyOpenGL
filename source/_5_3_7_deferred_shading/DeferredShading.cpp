@@ -4,6 +4,21 @@
 static const float linear = 0.7;
 static const float quadratic = 1.8;
 
+/// <summary>
+/// 计算光体积的半径 
+/// </summary>
+/// <param name="lightColor"></param>
+/// <returns>返回光体积半径, 它会返回一个大概在1.0到5.0范围内的半径值，它取决于光的最大强度。</returns>
+static float getLightRadius(glm::vec3 lightColor) {
+	GLfloat constant = 1.0;
+	GLfloat linear = 0.7;
+	GLfloat quadratic = 1.8;
+	GLfloat lightMax = std::fmaxf(std::fmaxf(lightColor.r, lightColor.g), lightColor.b);
+	GLfloat radius = ( -linear +
+		std::sqrtf(linear * linear - 4 * quadratic * (constant - (256.0/5.0) * lightMax))
+		) / (2 * quadratic);
+	return radius;
+}
 
 int DeferredShading::practise(const char* projectDir) {
 	std::cout << "DeferredShading::practise()" << std::endl;
@@ -45,7 +60,7 @@ int DeferredShading::practise(const char* projectDir) {
 	for (unsigned int i = 0; i < NR_LIGHTS; i++)
 	{
 		// calculate slightly random offsets  
-		float xPos = ((rand() % 100) / 100.0) * 10.0 - 5.0;
+		float xPos = ((rand() % 100) / 100.0) * 30.0 - 15.0;
 		float yPos = 0;
 		while (yPos <= 0) {
 			yPos = ((rand() % 100) / 100.0) * 10.0 - 5.0;
@@ -175,6 +190,8 @@ int DeferredShading::practise(const char* projectDir) {
 			// update attenuation parameters and calculate radius
 			gbufferShaderLighting.setFloat("lights[" + std::to_string(i) + "].linear", linear);
 			gbufferShaderLighting.setFloat("lights[" + std::to_string(i) + "].quadratic", quadratic);
+
+			gbufferShaderLighting.setFloat("lights[" + std::to_string(i) + "].radius", getLightRadius(lightColors[i]));
 		}
 		gbufferShaderLighting.setVec3("viewPos", helper.getCamera().Position);
 		glBindVertexArray(quadVAO);
