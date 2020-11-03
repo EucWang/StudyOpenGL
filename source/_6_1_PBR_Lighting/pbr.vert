@@ -20,5 +20,6 @@ void main(){
 
 	vs_out.texCoords = aTexCoords;
 	vs_out.worldPos = vec3(model * vec4(aPos, 1.0));
-	vs_out.fragNorm = mat3(transpose(inverse(model))) * aNormal;
+	//vs_out.fragNorm = mat3(transpose(inverse(model))) * aNormal;
+	vs_out.fragNorm = mat3(model) * aNormal;
 }

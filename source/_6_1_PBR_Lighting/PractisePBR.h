@@ -91,5 +91,32 @@ public:
 
 	WindowHelper* helper;
 
+    glm::vec3 lightPos[4] = {
+        glm::vec3(-10.0f, 10.0f, 10.0f),
+        glm::vec3(10.0f, 10.0f, 10.0f),
+        glm::vec3(-10.0f, -10.0f, 10.0f),
+        glm::vec3(10.0f, -10.0f, 10.0f),
+    };
+    glm::vec3 lightColor[4] = {
+        glm::vec3(300.0f, 300.0f, 300.0f),
+        glm::vec3(300.0f, 300.0f, 300.0f),
+        glm::vec3(300.0f, 300.0f, 300.0f),
+        glm::vec3(300.0f, 300.0f, 300.0f),
+    };
+    int nrRows = 7;     //7ÐÐ7ÁÐµÄÇò
+    int nrColumn = 7;
+    float spacing = 2.5;
+
 	int practise(const char * projectDir);
+
+
+    const unsigned int X_SEGMENTS = 64;
+    const unsigned int Y_SEGMENTS = 64;
+    const float PI = 3.14159265359;
+    unsigned int sphereVAO = 0;
+    unsigned int sphereVBO, sphereEBO;
+    unsigned int indexCount;
+
+    //äÖÈ¾Ô²Çò
+    void renderSphere();
 };
