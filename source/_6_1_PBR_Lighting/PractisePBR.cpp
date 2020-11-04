@@ -33,6 +33,7 @@ int PractisePBR::practise(const char* projectDir) {
 		planeshader->setVec3("cameraPos", helper->getCamera().Position);
 		planeshader->setVec3("albedo", glm::vec3(0.5f, 0.0f, 0.0f));
 		planeshader->setFloat("ao", 1.0f);
+		planeshader->setBool("useGamma", helper->switchByClickKeyB());
 
 		//glActiveTexture(GL_TEXTURE0);
 		//glBindTexture(GL_TEXTURE_2D, texPlane);
@@ -64,13 +65,13 @@ int PractisePBR::practise(const char* projectDir) {
 		// this looks a bit off as we use the same shader, but it'll make their positions obvious and 
 		// keeps the codeprint small.
 		for (unsigned int i = 0; i < sizeof(lightPos) / sizeof(lightPos[0]); i++) {
-			glm::vec3 newPos = lightPos[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
-			newPos = lightPos[i];
-			planeshader->setVec3("lightPos[" + std::to_string(i) + "]", newPos);
+			//glm::vec3 newPos = lightPos[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
+			//newPos = lightPos[i];
+			planeshader->setVec3("lightPos[" + std::to_string(i) + "]", lightPos[i]);
 			planeshader->setVec3("lightColor[" + std::to_string(i) + "]", lightColor[i]);
 		
 			model = glm::mat4(1.0f);
-			model = glm::translate(model, newPos);
+			model = glm::translate(model, lightPos[i]);
 			model = glm::scale(model, glm::vec3(0.5f));
 			planeshader->setMat4("model", model);
 			renderSphere();

@@ -97,6 +97,8 @@ public:
         glm::vec3(-10.0f, -10.0f, 10.0f),
         glm::vec3(10.0f, -10.0f, 10.0f),
     };
+
+    //这里的光照颜色不一样呢
     glm::vec3 lightColor[4] = {
         glm::vec3(300.0f, 300.0f, 300.0f),
         glm::vec3(300.0f, 300.0f, 300.0f),

@@ -61,6 +61,7 @@
     <ClInclude Include="source\_5_3_6_bloom\Bloom.h" />
     <ClInclude Include="source\_5_3_7_deferred_shading\DeferredShading.h" />
     <ClInclude Include="source\_5_3_8_SSAO\PractiseSSAO.h" />
+    <ClInclude Include="source\_6_1_2_PBR_Lighting\PractisePBRLighting2.h" />
     <ClInclude Include="source\_6_1_PBR_Lighting\PractisePBR.h" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +126,7 @@
     <ClCompile Include="source\_5_3_6_bloom\Bloom.cpp" />
     <ClCompile Include="source\_5_3_7_deferred_shading\DeferredShading.cpp" />
     <ClCompile Include="source\_5_3_8_SSAO\PractiseSSAO.cpp" />
+    <ClCompile Include="source\_6_1_2_PBR_Lighting\PractisePBRLighting2.cpp" />
     <ClCompile Include="source\_6_1_PBR_Lighting\PractisePBR.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\fileUtil.c" />
@@ -201,6 +203,31 @@
     <Image Include="images\nanosuit\leg_dif.png" />
     <Image Include="images\nanosuit\leg_showroom_ddn.png" />
     <Image Include="images\nanosuit\leg_showroom_spec.png" />
+    <Image Include="images\pbr\gold\albedo.png" />
+    <Image Include="images\pbr\gold\ao.png" />
+    <Image Include="images\pbr\gold\metallic.png" />
+    <Image Include="images\pbr\gold\normal.png" />
+    <Image Include="images\pbr\gold\roughness.png" />
+    <Image Include="images\pbr\grass\albedo.png" />
+    <Image Include="images\pbr\grass\ao.png" />
+    <Image Include="images\pbr\grass\metallic.png" />
+    <Image Include="images\pbr\grass\normal.png" />
+    <Image Include="images\pbr\grass\roughness.png" />
+    <Image Include="images\pbr\plastic\albedo.png" />
+    <Image Include="images\pbr\plastic\ao.png" />
+    <Image Include="images\pbr\plastic\metallic.png" />
+    <Image Include="images\pbr\plastic\normal.png" />
+    <Image Include="images\pbr\plastic\roughness.png" />
+    <Image Include="images\pbr\rusted_iron\albedo.png" />
+    <Image Include="images\pbr\rusted_iron\ao.png" />
+    <Image Include="images\pbr\rusted_iron\metallic.png" />
+    <Image Include="images\pbr\rusted_iron\normal.png" />
+    <Image Include="images\pbr\rusted_iron\roughness.png" />
+    <Image Include="images\pbr\wall\albedo.png" />
+    <Image Include="images\pbr\wall\ao.png" />
+    <Image Include="images\pbr\wall\metallic.png" />
+    <Image Include="images\pbr\wall\normal.png" />
+    <Image Include="images\pbr\wall\roughness.png" />
     <Image Include="images\skybox\back.jpg" />
     <Image Include="images\skybox\bottom.jpg" />
     <Image Include="images\skybox\front.jpg" />
@@ -403,6 +430,8 @@
     <None Include="source\_5_3_8_SSAO\ssao_quad.vert" />
     <None Include="source\_5_3_8_SSAO\ssao_render.frag" />
     <None Include="source\_5_3_8_SSAO\ssao_render.vert" />
+    <None Include="source\_6_1_2_PBR_Lighting\pbr_render.frag" />
+    <None Include="source\_6_1_2_PBR_Lighting\pbr_render.vert" />
     <None Include="source\_6_1_PBR_Lighting\pbr.frag" />
     <None Include="source\_6_1_PBR_Lighting\pbr.vert" />
   </ItemGroup>
