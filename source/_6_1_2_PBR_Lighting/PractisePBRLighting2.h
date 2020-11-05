@@ -21,8 +21,6 @@ public:
 
 	MyShader* myshader;
 
-	GLuint sphereVAO, sphereVBO;
-
     glm::vec3 lightPos[4] = {
         glm::vec3(-10.0f, 10.0f, 10.0f),
         glm::vec3(10.0f, 10.0f, 10.0f),
@@ -44,6 +42,11 @@ public:
     const unsigned int X_SEGMENTS = 64;
     const unsigned int Y_SEGMENTS = 64;
     const float PI = 3.14159265359;
+
+    unsigned int sphereVAO = 0;
+    unsigned int sphereIndexCount = 0;
+    
+    void createSphereData();
 
 	int practise(const char * projectDir);
 };
