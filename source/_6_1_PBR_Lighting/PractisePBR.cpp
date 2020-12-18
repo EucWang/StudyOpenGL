@@ -63,9 +63,10 @@ int PractisePBR::practise(const char* projectDir) {
 		// render light source (simply re-render sphere at light positions)
 		// this looks a bit off as we use the same shader, but it'll make their positions obvious and 
 		// keeps the codeprint small.
-		for (unsigned int i = 0; i < sizeof(lightPos) / sizeof(lightPos[0]); i++) {
-			glm::vec3 newPos = lightPos[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
-			newPos = lightPos[i];
+		//for (unsigned int i = 0; i < sizeof(lightPos) / sizeof(lightPos[0]); i++) {
+		for (unsigned int i = 0; i < 4; i++) {
+			//glm::vec3 newPos = lightPos[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
+			glm::vec3 newPos = lightPos[i];
 			planeshader->setVec3("lightPos[" + std::to_string(i) + "]", newPos);
 			planeshader->setVec3("lightColor[" + std::to_string(i) + "]", lightColor[i]);
 		
