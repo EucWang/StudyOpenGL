@@ -33,6 +33,7 @@ int PractisePBR::practise(const char* projectDir) {
 		planeshader->setVec3("cameraPos", helper->getCamera().Position);
 		planeshader->setVec3("albedo", glm::vec3(0.5f, 0.0f, 0.0f));
 		planeshader->setFloat("ao", 1.0f);
+		planeshader->setBool("useGamma", helper->switchByClickKeyB());
 
 		//glActiveTexture(GL_TEXTURE0);
 		//glBindTexture(GL_TEXTURE_2D, texPlane);
@@ -68,10 +69,11 @@ int PractisePBR::practise(const char* projectDir) {
 			//glm::vec3 newPos = lightPos[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
 			glm::vec3 newPos = lightPos[i];
 			planeshader->setVec3("lightPos[" + std::to_string(i) + "]", newPos);
+
 			planeshader->setVec3("lightColor[" + std::to_string(i) + "]", lightColor[i]);
 		
 			model = glm::mat4(1.0f);
-			model = glm::translate(model, newPos);
+			model = glm::translate(model, lightPos[i]);
 			model = glm::scale(model, glm::vec3(0.5f));
 			planeshader->setMat4("model", model);
 			renderSphere();

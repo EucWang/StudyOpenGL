@@ -15,13 +15,15 @@ uniform vec3 albedo;     //albedo参数, 反照率
 uniform float ao;          // ao 环境光遮蔽
 
 uniform float metallic;   //金属度
-uniform float roughtness;  //粗糙度
+uniform float roughness;  //粗糙度
 
 float PI = 3.14159265359;
 
 vec3 Lo = vec3(0.0);
 uniform vec3 lightPos[4];
 uniform vec3 lightColor[4];
+
+uniform bool useGamma;
 
 /// Trowbridge-Reitz GGX 正态分布函数
 ///这里的a 相当于 roughtness * roughtness 
@@ -100,8 +102,8 @@ void main(){
 		//我们会根据表面的金属性来改变F0这个值， 并且在原来的F0和反射率中插值计算F0。
 		
 		//cook-torrance brdf
-		float NDF = DistributionGGX(N, H, roughtness);
-		float G = GeometrySmith(N, V, L, roughtness);
+		float NDF = DistributionGGX(N, H, roughness);
+		float G = GeometrySmith(N, V, L, roughness);
 		float HdotV = max(dot(H, V), 0.0);
 		vec3 F = fresnelSchlick(HdotV, F0);
 
@@ -127,8 +129,10 @@ void main(){
 	//需要在着色器最后做伽马矫正。
 	//在伽马矫正之前我们采用色调映射使Lo从LDR的值映射为HDR的值。
 	//这里采用的色调映射方法为Reinhard 操作
-	color = color / (color + vec3(1.0));
-	color = pow(color, vec3(1.0/2.2));
+	if(useGamma) {
+		color = color / (color + vec3(1.0));
+		color = pow(color, vec3(1.0/2.2));
+	}
 
 	fragColor = vec4(color, 1.0);
 

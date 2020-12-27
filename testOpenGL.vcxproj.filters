@@ -64,6 +64,27 @@
     <Filter Include="source\_6_1_PBR_Lighting">
       <UniqueIdentifier>{1215bda6-77c8-4d8e-9b6a-bae3f639f424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\_6_1_2_PBR_Lighting">
+      <UniqueIdentifier>{57c1e490-185e-4b08-9c2c-b2cb7ed6fd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr">
+      <UniqueIdentifier>{24f3d2e2-640d-407c-b2ec-829a935ec3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr\gold">
+      <UniqueIdentifier>{92a39c75-638c-4d55-96a0-4ef15396ea2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr\grass">
+      <UniqueIdentifier>{d18526f6-66d7-45fb-b82b-8d39a1f587bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr\plastic">
+      <UniqueIdentifier>{6a0c8bc8-7326-4da3-b4b8-f52c399ce21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr\rusted_iron">
+      <UniqueIdentifier>{f49c3d38-8f44-4508-80ab-876703923611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\pbr\wall">
+      <UniqueIdentifier>{d9dfe5f9-3303-4fe6-9d1a-87789b47ac1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fileUtil.h">
@@ -194,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="source\_6_1_PBR_Lighting\PractisePBR.h">
       <Filter>source\_6_1_PBR_Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="source\_6_1_2_PBR_Lighting\PractisePBRLighting2.h">
+      <Filter>source\_6_1_2_PBR_Lighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,6 +443,9 @@
     <ClCompile Include="source\_6_1_PBR_Lighting\PractisePBR.cpp">
       <Filter>source\_6_1_PBR_Lighting</Filter>
     </ClCompile>
+    <ClCompile Include="source\_6_1_2_PBR_Lighting\PractisePBRLighting2.cpp">
+      <Filter>source\_6_1_2_PBR_Lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\shader_perspective_test12_fragment.txt">
@@ -635,6 +662,81 @@
     </Image>
     <Image Include="images\bricks2_normal.jpg">
       <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pbr\gold\albedo.png">
+      <Filter>images\pbr\gold</Filter>
+    </Image>
+    <Image Include="images\pbr\gold\ao.png">
+      <Filter>images\pbr\gold</Filter>
+    </Image>
+    <Image Include="images\pbr\gold\metallic.png">
+      <Filter>images\pbr\gold</Filter>
+    </Image>
+    <Image Include="images\pbr\gold\normal.png">
+      <Filter>images\pbr\gold</Filter>
+    </Image>
+    <Image Include="images\pbr\gold\roughness.png">
+      <Filter>images\pbr\gold</Filter>
+    </Image>
+    <Image Include="images\pbr\grass\albedo.png">
+      <Filter>images\pbr\grass</Filter>
+    </Image>
+    <Image Include="images\pbr\grass\ao.png">
+      <Filter>images\pbr\grass</Filter>
+    </Image>
+    <Image Include="images\pbr\grass\metallic.png">
+      <Filter>images\pbr\grass</Filter>
+    </Image>
+    <Image Include="images\pbr\grass\normal.png">
+      <Filter>images\pbr\grass</Filter>
+    </Image>
+    <Image Include="images\pbr\grass\roughness.png">
+      <Filter>images\pbr\grass</Filter>
+    </Image>
+    <Image Include="images\pbr\wall\albedo.png">
+      <Filter>images\pbr\wall</Filter>
+    </Image>
+    <Image Include="images\pbr\wall\ao.png">
+      <Filter>images\pbr\wall</Filter>
+    </Image>
+    <Image Include="images\pbr\wall\metallic.png">
+      <Filter>images\pbr\wall</Filter>
+    </Image>
+    <Image Include="images\pbr\wall\normal.png">
+      <Filter>images\pbr\wall</Filter>
+    </Image>
+    <Image Include="images\pbr\wall\roughness.png">
+      <Filter>images\pbr\wall</Filter>
+    </Image>
+    <Image Include="images\pbr\rusted_iron\albedo.png">
+      <Filter>images\pbr\rusted_iron</Filter>
+    </Image>
+    <Image Include="images\pbr\rusted_iron\ao.png">
+      <Filter>images\pbr\rusted_iron</Filter>
+    </Image>
+    <Image Include="images\pbr\rusted_iron\metallic.png">
+      <Filter>images\pbr\rusted_iron</Filter>
+    </Image>
+    <Image Include="images\pbr\rusted_iron\normal.png">
+      <Filter>images\pbr\rusted_iron</Filter>
+    </Image>
+    <Image Include="images\pbr\rusted_iron\roughness.png">
+      <Filter>images\pbr\rusted_iron</Filter>
+    </Image>
+    <Image Include="images\pbr\plastic\albedo.png">
+      <Filter>images\pbr\plastic</Filter>
+    </Image>
+    <Image Include="images\pbr\plastic\ao.png">
+      <Filter>images\pbr\plastic</Filter>
+    </Image>
+    <Image Include="images\pbr\plastic\metallic.png">
+      <Filter>images\pbr\plastic</Filter>
+    </Image>
+    <Image Include="images\pbr\plastic\normal.png">
+      <Filter>images\pbr\plastic</Filter>
+    </Image>
+    <Image Include="images\pbr\plastic\roughness.png">
+      <Filter>images\pbr\plastic</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -1206,6 +1308,12 @@
     </None>
     <None Include="source\_6_1_PBR_Lighting\pbr.frag">
       <Filter>source\_6_1_PBR_Lighting</Filter>
+    </None>
+    <None Include="source\_6_1_2_PBR_Lighting\pbr_render.vert">
+      <Filter>source\_6_1_2_PBR_Lighting</Filter>
+    </None>
+    <None Include="source\_6_1_2_PBR_Lighting\pbr_render.frag">
+      <Filter>source\_6_1_2_PBR_Lighting</Filter>
     </None>
   </ItemGroup>
 </Project>
