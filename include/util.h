@@ -14,6 +14,8 @@ float getFVal();
 
 float getFValCos();
 
+
+
 #ifdef __cplusplus
 }
 #endif

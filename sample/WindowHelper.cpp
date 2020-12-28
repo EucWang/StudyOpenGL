@@ -243,6 +243,7 @@ void WindowHelper::create() {
 	if (this->mAntiAliasing > 0) {
 		glEnable(GL_MULTISAMPLE);
 	}
+	RenderUtil::glCheckError();
 }
 
 //TODO 

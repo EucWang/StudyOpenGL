@@ -10,11 +10,15 @@
 #include <stb_image.h>
 
 #include "fileUtil.h"
+#include <gl/GL.h>
 
 using namespace std;
 
 #define DEFAULT_SCREEN_WIDTH 800
 #define DEFAULT_SCREEN_HEIGHT 640
+
+//
+//#define glCheckError() glCheckError_(__FILE__, __LINE__)
 
 class RenderUtil {
 
@@ -129,7 +133,8 @@ public:
 
 	void static makeVertexArrayFromSubData(GLuint* vao, GLuint* vbo, bool isnormal,
 		const float* positions, const int positionsSize, const int arr1Offset);
-	 
+
+	GLenum static  glCheckError(const char* file=__FILE__, int line=__LINE__);
 };
 
 #endif // !RENDER_H_

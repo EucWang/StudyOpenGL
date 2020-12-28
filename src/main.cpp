@@ -157,8 +157,8 @@ int main(int argc, char* argv[]) {
 	//Bloom practise = Bloom();
 	//DeferredShading practise = DeferredShading();
 	//PractiseSSAO practise = PractiseSSAO();
-	//PractisePBR practise = PractisePBR();
-	PractisePBRLighting2 practise = PractisePBRLighting2();
+	PractisePBR practise = PractisePBR();
+	//PractisePBRLighting2 practise = PractisePBRLighting2();
 	practise.practise(projectDir);
 
 	//free(debugDir);

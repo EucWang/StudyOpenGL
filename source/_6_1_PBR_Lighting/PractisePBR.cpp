@@ -15,6 +15,8 @@ int PractisePBR::practise(const char* projectDir) {
 	int texPlane = RenderUtil::textureLoad2D(projectDir, imgFilePlane, false);
 
 	glEnable(GL_DEPTH_TEST);
+	RenderUtil::glCheckError();
+	std::cout << "glCheckError() done." << std::endl;
 	while (!glfwWindowShouldClose(helper->getWindow())) {
 		helper->calcProcessInput();
 
